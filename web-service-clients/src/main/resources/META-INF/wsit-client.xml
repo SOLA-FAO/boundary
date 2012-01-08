@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <definitions 
+ xmlns="http://schemas.xmlsoap.org/wsdl/" 
+ xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="mainclientconfig" 
+ >
+    <import location="casemanagement-service.xml" namespace="http://webservices.sola.org/casemanagement"/>
+    <import location="referencedata-service.xml" namespace="http://webservices.sola.org/referencedata"/>
+    <import location="search-service.xml" namespace="http://webservices.sola.org/search"/>
+    <import location="cadastre-service.xml" namespace="http://webservices.sola.org/cadastre"/>
+    <import location="digitalarchive-service.xml" namespace="http://webservices.sola.org/digitalarchive"/>
+    <!--import location="spatial-service.xml" namespace="http://webservices.sola.org/spatial"/ -->
+    <import location="administrative-service.xml" namespace="http://webservices.sola.org/administrative"/>
+    <import location="system-service.xml" namespace="http://webservices.sola.org/system"/>
+    <import location="admin-service.xml" namespace="http://webservices.sola.org/admin"/>
+</definitions>

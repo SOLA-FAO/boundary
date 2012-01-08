@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <definitions 
+ xmlns="http://schemas.xmlsoap.org/wsdl/" 
+ xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="cadastre-service" targetNamespace="http%3A%2F%2Fwebservices.sola.org%2Fcadastre" xmlns:tns="http%3A%2F%2Fwebservices.sola.org%2Fcadastre" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:fi="http://java.sun.com/xml/ns/wsit/2006/09/policy/fastinfoset/service" xmlns:tcp="http://java.sun.com/xml/ns/wsit/2006/09/policy/soaptcp/service" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:sc="http://schemas.sun.com/2006/03/wss/server" xmlns:wspp="http://java.sun.com/xml/ns/wsit/policy" 
+ >
+    <message name="SpiltParcel"/>
+    <message name="SpiltParcelResponse"/>
+    <message name="SaveSplitParcel"/>
+    <message name="SaveSplitParcelResponse"/>
+    <message name="SearchProperty"/>
+    <message name="SearchPropertyResponse"/>
+    <message name="SOLAFault"/>
+    <message name="UnhandledFault"/>
+    <portType name="Cadastre">
+        <operation name="SpiltParcel">
+            <input message="tns:SpiltParcel"/>
+            <output message="tns:SpiltParcelResponse"/>
+        </operation>
+        <operation name="SaveSplitParcel">
+            <input message="tns:SaveSplitParcel"/>
+            <output message="tns:SaveSplitParcelResponse"/>
+        </operation>
+        <operation name="SearchProperty">
+            <input message="tns:SearchProperty"/>
+            <output message="tns:SearchPropertyResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+        </operation>
+    </portType>
+    <binding name="CadastrePortBinding" type="tns:Cadastre">
+        <wsp:PolicyReference URI="#CadastrePortBindingPolicy"/>
+        <operation name="SpiltParcel">
+            <input>
+                <wsp:PolicyReference URI="#CadastrePortBinding_SpiltParcel_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#CadastrePortBinding_SpiltParcel_Output_Policy"/>
+            </output>
+        </operation>
+        <operation name="SaveSplitParcel">
+            <input>
+                <wsp:PolicyReference URI="#CadastrePortBinding_SpiltParcel_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#CadastrePortBinding_SpiltParcel_Output_Policy"/>
+            </output>
+        </operation>
+        <operation name="SearchProperty">
+            <input>
+                <wsp:PolicyReference URI="#CadastrePortBinding_SpiltParcel_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#CadastrePortBinding_SpiltParcel_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+        </operation>
+    </binding>
+    <service name="cadastre-service">
+        <port name="CadastrePort" binding="tns:CadastrePortBinding"/>
+    </service>
+    <wsp:Policy wsu:Id="CadastrePortBindingPolicy">
+        <wsp:ExactlyOne>
+            <wsp:All>
+                <wsam:Addressing wsp:Optional="false"/>
+                <sp:SymmetricBinding>
+                    <wsp:Policy>
+                        <sp:ProtectionToken>
+                            <wsp:Policy>
+                                <sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/Never">
+                                    <wsp:Policy>
+                                        <sp:WssX509V3Token10/>
+                                        <sp:RequireIssuerSerialReference/>
+                                    </wsp:Policy>
+                                </sp:X509Token>
+                            </wsp:Policy>
+                        </sp:ProtectionToken>
+                        <sp:Layout>
+                            <wsp:Policy>
+                                <sp:Strict/>
+                            </wsp:Policy>
+                        </sp:Layout>
+                        <sp:IncludeTimestamp/>
+                        <sp:OnlySignEntireHeadersAndBody/>
+                        <sp:AlgorithmSuite>
+                            <wsp:Policy>
+                                <sp:Basic128/>
+                            </wsp:Policy>
+                        </sp:AlgorithmSuite>
+                    </wsp:Policy>
+                </sp:SymmetricBinding>
+                <sp:Wss11>
+                    <wsp:Policy>
+                        <sp:MustSupportRefIssuerSerial/>
+                        <sp:MustSupportRefThumbprint/>
+                        <sp:MustSupportRefEncryptedKey/>
+                    </wsp:Policy>
+                </sp:Wss11>
+                <sp:SignedEncryptedSupportingTokens>
+                    <wsp:Policy>
+                        <sp:UsernameToken sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+                            <wsp:Policy>
+                                <sp:WssUsernameToken10/>
+                            </wsp:Policy>
+                        </sp:UsernameToken>
+                    </wsp:Policy>
+                </sp:SignedEncryptedSupportingTokens>
+                <sc:KeyStore wspp:visibility="private" location="keystore.jks" type="JKS" storepass="changeit" alias="xws-security-server"/>
+            </wsp:All>
+        </wsp:ExactlyOne>
+    </wsp:Policy>
+    <wsp:Policy wsu:Id="CadastrePortBinding_SpiltParcel_Input_Policy">
+        <wsp:ExactlyOne>
+            <wsp:All>
+                <sp:EncryptedParts>
+                    <sp:Body/>
+                </sp:EncryptedParts>
+                <sp:SignedParts>
+                    <sp:Body/>
+                    <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing"/>
+                    <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing"/>
+                    <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing"/>
+                    <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing"/>
+                    <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing"/>
+                    <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing"/>
+                    <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing"/>
+                    <sp:Header Name="AckRequested" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
+                    <sp:Header Name="SequenceAcknowledgement" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
+                    <sp:Header Name="Sequence" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
+                    <sp:Header Name="CreateSequence" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
+                </sp:SignedParts>
+            </wsp:All>
+        </wsp:ExactlyOne>
+    </wsp:Policy>
+    <wsp:Policy wsu:Id="CadastrePortBinding_SpiltParcel_Output_Policy">
+        <wsp:ExactlyOne>
+            <wsp:All>
+                <sp:EncryptedParts>
+                    <sp:Body/>
+                </sp:EncryptedParts>
+                <sp:SignedParts>
+                    <sp:Body/>
+                    <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing"/>
+                    <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing"/>
+                    <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing"/>
+                    <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing"/>
+                    <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing"/>
+                    <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing"/>
+                    <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing"/>
+                    <sp:Header Name="AckRequested" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
+                    <sp:Header Name="SequenceAcknowledgement" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
+                    <sp:Header Name="Sequence" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
+                    <sp:Header Name="CreateSequence" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
+                </sp:SignedParts>
+            </wsp:All>
+        </wsp:ExactlyOne>
+    </wsp:Policy>
+</definitions>
