@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -28,13 +28,21 @@
 package org.sola.services.boundary.ws;
 
 import java.util.List;
+import javax.annotation.Resource;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
+import javax.xml.ws.WebServiceContext;
+import org.sola.common.RolesConstants;
 import org.sola.services.boundary.transferobjects.referencedata.ApplicationActionTypeTO;
 import org.sola.services.boundary.transferobjects.referencedata.ApplicationStatusTypeTO;
 import org.sola.services.boundary.transferobjects.referencedata.AvailabilityStatusTO;
 import org.sola.services.boundary.transferobjects.referencedata.BaUnitTypeTO;
+import org.sola.services.boundary.transferobjects.referencedata.BrSeverityTypeTO;
+import org.sola.services.boundary.transferobjects.referencedata.BrTechnicalTypeTO;
+import org.sola.services.boundary.transferobjects.referencedata.BrValidationTargetTypeTO;
 import org.sola.services.boundary.transferobjects.referencedata.CadastreObjectTypeTO;
 import org.sola.services.boundary.transferobjects.referencedata.ChangeStatusTypeTO;
 import org.sola.services.common.faults.FaultUtility;
@@ -88,7 +96,12 @@ import org.sola.services.ejb.source.businesslogic.SourceEJBLocal;
 import org.sola.services.ejb.source.repository.entities.AvailabilityStatus;
 import org.sola.services.ejb.source.repository.entities.PresentationFormType;
 import org.sola.services.ejb.source.repository.entities.SourceType;
+import org.sola.services.ejb.system.businesslogic.SystemEJBLocal;
+import org.sola.services.ejb.system.repository.entities.BrSeverityType;
+import org.sola.services.ejb.system.repository.entities.BrTechnicalType;
+import org.sola.services.ejb.system.repository.entities.BrValidationTargetType;
 import org.sola.services.ejb.transaction.businesslogic.TransactionEJBLocal;
+import org.sola.services.ejb.transaction.repository.entities.RegistrationStatusType;
 
 @WebService(serviceName = "referencedata-service", targetNamespace = ServiceConstants.REF_DATA_WS_NAMESPACE)
 public class ReferenceData extends AbstractWebService {
@@ -105,6 +118,10 @@ public class ReferenceData extends AbstractWebService {
     CadastreEJBLocal cadastreEJB;
     @EJB
     TransactionEJBLocal transactionEJB;
+    @EJB
+    SystemEJBLocal systemEJB;
+    @Resource
+    private WebServiceContext wsContext;
 
     /** Dummy method to check the web service instance is working */
     @WebMethod(operationName = "CheckConnection")
@@ -238,9 +255,9 @@ public class ReferenceData extends AbstractWebService {
             cleanUp();
         }
     }
-    
+
     @WebMethod(operationName = "GetRequestCategoryTypes")
-    public List<RequestCategoryTypeTO> GetRequestCategoryTypes(String languageCode) 
+    public List<RequestCategoryTypeTO> GetRequestCategoryTypes(String languageCode)
             throws SOLAFault, UnhandledFault {
         try {
             //initialize();
@@ -689,6 +706,64 @@ public class ReferenceData extends AbstractWebService {
         }
     }
 
+    @WebMethod(operationName = "GetBrTechnicalTypes")
+    public List<BrTechnicalTypeTO> GetBrTechnicalTypes(@WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault {
+        final Object[] params = {languageCode};
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                String languageCode = params[0] == null ? null : params[0].toString();
+                result[0] = GenericTranslator.toTOList(systemEJB.getCodeEntityList(
+                        BrTechnicalType.class, languageCode), BrTechnicalTypeTO.class);
+            }
+        });
+
+        return (List<BrTechnicalTypeTO>) result[0];
+    }
+
+    @WebMethod(operationName = "GetBrValidationTargetTypes")
+    public List<BrValidationTargetTypeTO> GetBrValidationTargetTypes(@WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault {
+        final Object[] params = {languageCode};
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                String languageCode = params[0] == null ? null : params[0].toString();
+                result[0] = GenericTranslator.toTOList(systemEJB.getCodeEntityList(
+                        BrValidationTargetType.class, languageCode), BrValidationTargetTypeTO.class);
+            }
+        });
+
+        return (List<BrValidationTargetTypeTO>) result[0];
+    }
+    
+    @WebMethod(operationName = "GetBrSeverityTypes")
+    public List<BrSeverityTypeTO> GetBrSeverityTypes(@WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault {
+        final Object[] params = {languageCode};
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                String languageCode = params[0] == null ? null : params[0].toString();
+                result[0] = GenericTranslator.toTOList(systemEJB.getCodeEntityList(
+                        BrSeverityType.class, languageCode), BrSeverityTypeTO.class);
+            }
+        });
+
+        return (List<BrSeverityTypeTO>) result[0];
+    }
+    
+    @RolesAllowed(RolesConstants.ADMIN_MANAGE_REFDATA)
     @WebMethod(operationName = "saveReferenceData")
     public AbstractCodeTO saveReferenceData(AbstractCodeTO refDataTO)
             throws SOLAFault, UnhandledFault {
@@ -782,12 +857,28 @@ public class ReferenceData extends AbstractWebService {
                     codeEntity = sourceEJB.getCodeEntity(PresentationFormType.class, refDataTO.getCode());
                     codeEntity = GenericTranslator.fromTO(refDataTO, PresentationFormType.class, codeEntity);
                     sourceEJB.saveCodeEntity(codeEntity);
+                } else if (refDataTO instanceof RegistrationStatusTypeTO) {
+                    codeEntity = transactionEJB.getCodeEntity(RegistrationStatusType.class, refDataTO.getCode());
+                    codeEntity = GenericTranslator.fromTO(refDataTO, RegistrationStatusType.class, codeEntity);
+                    transactionEJB.saveCodeEntity(codeEntity);
+                } else if (refDataTO instanceof BrSeverityTypeTO) {
+                    codeEntity = systemEJB.getCodeEntity(BrSeverityType.class, refDataTO.getCode());
+                    codeEntity = GenericTranslator.fromTO(refDataTO, BrSeverityType.class, codeEntity);
+                    systemEJB.saveCodeEntity(codeEntity);
+                } else if (refDataTO instanceof BrTechnicalTypeTO) {
+                    codeEntity = systemEJB.getCodeEntity(BrTechnicalType.class, refDataTO.getCode());
+                    codeEntity = GenericTranslator.fromTO(refDataTO, BrTechnicalType.class, codeEntity);
+                    systemEJB.saveCodeEntity(codeEntity);
+                } else if (refDataTO instanceof BrValidationTargetTypeTO) {
+                    codeEntity = systemEJB.getCodeEntity(BrValidationTargetType.class, refDataTO.getCode());
+                    codeEntity = GenericTranslator.fromTO(refDataTO, BrValidationTargetType.class, codeEntity);
+                    systemEJB.saveCodeEntity(codeEntity);
                 }
 
                 result = GenericTranslator.toTO(codeEntity, refDataTO.getClass());
                 commitTransaction();
                 return result;
-                
+
             } finally {
                 rollbackTransaction();
             }

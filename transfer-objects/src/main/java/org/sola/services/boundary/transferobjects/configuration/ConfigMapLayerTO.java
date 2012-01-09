@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -44,7 +44,7 @@ public class ConfigMapLayerTO extends AbstractTO {
     private String pojoStructure;
     private String shapeLocation;
     private String style;
-    private String usedFor;
+    private String title;
 
     public String getId() {
         return id;
@@ -117,13 +117,13 @@ public class ConfigMapLayerTO extends AbstractTO {
     public void setStyle(String style) {
         this.style = style;
     }
-    
-    public String getUsedFor() {
-        return usedFor;
+
+    public String getTitle() {
+        return title;
     }
 
-    public void setUsedFor(String usedFor) {
-        this.usedFor = usedFor;
+    public void setTitle(String title) {
+        this.title = title;
     }
-    
+      
 }

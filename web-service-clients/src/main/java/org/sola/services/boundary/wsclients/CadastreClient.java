@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -33,8 +33,8 @@ package org.sola.services.boundary.wsclients;
 import java.util.List;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.transferobjects.ValidationResult;
-import org.sola.webservices.transferobjects.cadastre.CadastreChangeTO;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectTO;
+import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
 
 /**
  *
@@ -54,9 +54,9 @@ public interface CadastreClient extends AbstractWSClient {
 
     List<CadastreObjectTO> getCadastreObjectsByService(String serviceId); 
 
-    List<ValidationResult> saveCadastreChange(CadastreChangeTO cadastreChangeTO);
+    List<ValidationResult> saveTransactionCadastreChange(TransactionCadastreChangeTO cadastreChangeTO);
 
-    CadastreChangeTO getCadastreChange(String serviceId);
+    TransactionCadastreChangeTO getTransactionCadastreChange(String serviceId);
 
     List<CadastreObjectTO> getCadastreObjects(List<String> Ids); 
 }

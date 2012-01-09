@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -31,6 +31,7 @@ import java.util.List;
 import javax.xml.namespace.QName;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientExceptionType;
+import org.sola.webservices.admin.BrTO;
 import org.sola.webservices.admin.LanguageTO;
 import org.sola.webservices.transferobjects.security.GroupSummaryTO;
 import org.sola.webservices.transferobjects.security.GroupTO;
@@ -275,6 +276,41 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
                     f.getFaultInfo());
         } catch (Throwable t) {
             throw processException(SERVICE_NAME + "getLanguages", t);
+        }
+    }
+
+    @Override
+    public BrTO getBr(String id, String lang) throws WebServiceClientException {
+        try {
+            return getPort().getBr(id, lang);
+        } catch (SOLAFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    f.getFaultInfo());
+        } catch (UnhandledFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    f.getFaultInfo());
+        } catch (Throwable t) {
+            throw processException(SERVICE_NAME + "getBr", t);
+        }
+    }
+
+    @Override
+    public BrTO getBr(String id) throws WebServiceClientException {
+        return getBr(id, getLanguageCode());
+    }
+    
+    @Override
+    public BrTO saveBr(BrTO brTO) throws WebServiceClientException {
+        try {
+            return getPort().saveBr(brTO);
+        } catch (SOLAFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    f.getFaultInfo());
+        } catch (UnhandledFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    f.getFaultInfo());
+        } catch (Throwable t) {
+            throw processException(SERVICE_NAME + "saveBr", t);
         }
     }
 }

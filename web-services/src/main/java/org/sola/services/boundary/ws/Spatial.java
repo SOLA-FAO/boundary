@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -27,10 +27,10 @@
  */
 package org.sola.services.boundary.ws;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import org.sola.services.boundary.transferobjects.configuration.ConfigMapLayerTO;
@@ -41,14 +41,9 @@ import org.sola.services.common.faults.SOLAFault;
 import org.sola.services.common.faults.UnhandledFault;
 import org.sola.services.common.webservices.AbstractWebService;
 import org.sola.services.ejb.search.businesslogic.SearchEJBLocal;
-import org.sola.services.ejb.search.repository.ConfigMapLayer;
-import org.sola.services.ejb.search.repository.Setting;
-import org.sola.services.ejb.search.spatial.Query;
+import org.sola.services.ejb.search.repository.entities.ConfigMapLayer;
 import org.sola.services.ejb.search.spatial.QueryForNavigation;
-import org.sola.services.ejb.search.spatial.QueryForSelect;
-import org.sola.services.ejb.search.spatial.RequestForSelection;
 import org.sola.services.ejb.search.spatial.ResultForNavigationInfo;
-import org.sola.services.ejb.search.spatial.ResultForSelectionInfo;
 
 /**
  *
@@ -61,13 +56,14 @@ public class Spatial extends AbstractWebService {
     SearchEJBLocal searchEJB;
 
     @WebMethod(operationName = "GetMapDefinition")
-    public MapDefinitionTO getMapDefinition()
+    public MapDefinitionTO getMapDefinition( @WebParam(name = "languageCode") String languageCode)
             throws SOLAFault, UnhandledFault {
         try {
-            HashMap<String, String> mapSettings = this.searchEJB.getSettingList("Setting.getForMap");
-            List<ConfigMapLayer> configMapLayerList = this.searchEJB.getConfigMapLayerList();
+            HashMap<String, String> mapSettings = this.searchEJB.getMapSettingList();
+            List<ConfigMapLayer> configMapLayerList = this.searchEJB.getConfigMapLayerList(languageCode);
             MapDefinitionTO mapDefinition = new MapDefinitionTO();
             mapDefinition.setSrid(Integer.parseInt(mapSettings.get("map-srid")));
+            mapDefinition.setWktOfCrs(mapSettings.get("wkt-of-crs"));
             mapDefinition.setWest(Double.parseDouble(mapSettings.get("map-west")));
             mapDefinition.setSouth(Double.parseDouble(mapSettings.get("map-south")));
             mapDefinition.setEast(Double.parseDouble(mapSettings.get("map-east")));
@@ -86,7 +82,7 @@ public class Spatial extends AbstractWebService {
                 configMapLayerTO.setShapeLocation(configMapLayer.getShapeLocation());
                 configMapLayerTO.setStyle(configMapLayer.getStyle());
                 configMapLayerTO.setTypeCode(configMapLayer.getTypeCode());
-                configMapLayerTO.setUsedFor(configMapLayer.getUsedFor());
+                configMapLayerTO.setTitle(configMapLayer.getTitle());
                 configMapLayerTO.setWmsLayers(configMapLayer.getWmsLayers());
                 configMapLayerTO.setWmsUrl(configMapLayer.getWmsUrl());
                 mapDefinition.getLayers().add(configMapLayerTO);

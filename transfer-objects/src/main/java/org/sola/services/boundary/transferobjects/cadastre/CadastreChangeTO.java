@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -41,17 +41,17 @@ import org.sola.services.common.contracts.AbstractTO;
  */
 public class CadastreChangeTO extends AbstractTO{
     String fromServiceId;
-    List<CadastreObjectTO> newCadastreObjectList = new ArrayList<CadastreObjectTO>();
+    List<CadastreObjectTO> cadastreObjectList = new ArrayList<CadastreObjectTO>();
     List<SurveyPointTO> surveyPointList = new ArrayList<SurveyPointTO>();
     List<String> targetCadastreObjectIdList = new ArrayList<String>();
     List<String> sourceIdList = new ArrayList<String>();
 
-    public List<CadastreObjectTO> getNewCadastreObjectList() {
-        return newCadastreObjectList;
+    public List<CadastreObjectTO> getCadastreObjectList() {
+        return cadastreObjectList;
     }
 
-    public void setNewCadastreObjectList(List<CadastreObjectTO> newCadastreObjectList) {
-        this.newCadastreObjectList = newCadastreObjectList;
+    public void setCadastreObjectList(List<CadastreObjectTO> CadastreObjectList) {
+        this.cadastreObjectList = CadastreObjectList;
     }
 
     public String getFromServiceId() {

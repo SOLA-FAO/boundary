@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -36,8 +36,10 @@ import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.casemanagement.AddressTO;
 import org.sola.webservices.transferobjects.casemanagement.ApplicationTO;
+import org.sola.webservices.transferobjects.casemanagement.BrReportTO;
 import org.sola.webservices.transferobjects.casemanagement.PartySummaryTO;
 import org.sola.webservices.transferobjects.casemanagement.PartyTO;
+import org.sola.webservices.transferobjects.casemanagement.ServiceTO;
 import org.sola.webservices.transferobjects.casemanagement.SourceTO;
 
 /**
@@ -55,6 +57,8 @@ public interface CaseManagementClient extends AbstractWSClient {
     ApplicationTO createApplication(ApplicationTO application) throws WebServiceClientException;
 
     AddressTO getAddress(String id) throws WebServiceClientException;
+    
+    List<BrReportTO> getAllBrs() throws WebServiceClientException;
 
     List<PartySummaryTO> getAgents() throws WebServiceClientException;
 
@@ -63,8 +67,6 @@ public interface CaseManagementClient extends AbstractWSClient {
     PartyTO getParty(String id) throws WebServiceClientException;
 
     ApplicationTO saveApplication(ApplicationTO application) throws WebServiceClientException;
-    
-    PartyTO createParty(PartyTO party) throws WebServiceClientException;
     
     PartyTO saveParty(PartyTO party) throws WebServiceClientException;
 
@@ -120,4 +122,5 @@ public interface CaseManagementClient extends AbstractWSClient {
     List<ValidationResult> applicationActionResubmit(
             String applicationId, int rowVersion) throws WebServiceClientException;
     
+    ServiceTO saveInformationService(ServiceTO service) throws WebServiceClientException;
 }

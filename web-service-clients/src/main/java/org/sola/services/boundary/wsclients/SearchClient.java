@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -33,6 +33,7 @@ package org.sola.services.boundary.wsclients;
 
 import java.util.List;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
+import org.sola.webservices.search.GenericResult;
 import org.sola.webservices.search.QueryForSelect;
 import org.sola.webservices.search.ResultForSelectionInfo;
 import org.sola.webservices.transferobjects.search.ApplicationSearchParamsTO;
@@ -46,6 +47,11 @@ import org.sola.webservices.transferobjects.search.UserSearchAdvancedResultTO;
 import org.sola.webservices.transferobjects.search.UserSearchParamsTO;
 import org.sola.webservices.transferobjects.search.UserSearchResultTO;
 import org.sola.webservices.transferobjects.search.ApplicationLogResultTO;
+import org.sola.webservices.transferobjects.search.BaUnitSearchParamsTO;
+import org.sola.webservices.transferobjects.search.BaUnitSearchResultTO;
+import org.sola.webservices.transferobjects.search.BrSearchParamsTO;
+import org.sola.webservices.transferobjects.search.BrSearchResultTO;
+import org.sola.webservices.transferobjects.search.CadastreObjectSearchResultTO;
 
 /**
  * Interface for the Search Service. Implemented by {@linkplain SearchClientImpl}
@@ -76,4 +82,13 @@ public interface SearchClient extends AbstractWSClient {
     List<UserSearchAdvancedResultTO> searchUsers(UserSearchParamsTO searchParams) throws WebServiceClientException;
 
     List<ApplicationLogResultTO> getApplicationLog(String applicationId); 
+    
+    List<BrSearchResultTO> searchBr(BrSearchParamsTO searchParams) throws WebServiceClientException;
+    
+    List<BaUnitSearchResultTO> searchBaUnit(BaUnitSearchParamsTO searchParams) throws WebServiceClientException;
+    
+    List<CadastreObjectSearchResultTO> searchCadastreObjects(
+            String searchBy, String searchString) throws WebServiceClientException;
+    
+    GenericResult test() throws WebServiceClientException;
 }

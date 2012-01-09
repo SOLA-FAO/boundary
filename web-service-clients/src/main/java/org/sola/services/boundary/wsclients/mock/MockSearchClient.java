@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -35,10 +35,16 @@ import java.util.ArrayList;
 import java.util.List;
 import org.sola.services.boundary.wsclients.SearchClient;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
+import org.sola.webservices.search.GenericResult;
 import org.sola.webservices.search.QueryForSelect;
 import org.sola.webservices.search.ResultForSelectionInfo;
 import org.sola.webservices.transferobjects.search.ApplicationSearchParamsTO;
 import org.sola.webservices.transferobjects.search.ApplicationSearchResultTO;
+import org.sola.webservices.transferobjects.search.BaUnitSearchParamsTO;
+import org.sola.webservices.transferobjects.search.BaUnitSearchResultTO;
+import org.sola.webservices.transferobjects.search.BrSearchParamsTO;
+import org.sola.webservices.transferobjects.search.BrSearchResultTO;
+import org.sola.webservices.transferobjects.search.CadastreObjectSearchResultTO;
 import org.sola.webservices.transferobjects.search.PartySearchParamsTO;
 import org.sola.webservices.transferobjects.search.PartySearchResultTO;
 import org.sola.webservices.transferobjects.search.PropertyVerifierTO;
@@ -160,5 +166,25 @@ public class MockSearchClient extends AbstractMockWSClient implements SearchClie
     public List<ApplicationLogResultTO> getApplicationLog(String applicationId) throws WebServiceClientException {
         List<ApplicationLogResultTO> defaultResponse = new ArrayList<ApplicationLogResultTO>();
         return getManager().getResponse(GET_APPLICATION_LOG, List.class, defaultResponse);
+    }
+
+    @Override
+    public List<BrSearchResultTO> searchBr(BrSearchParamsTO searchParams) throws WebServiceClientException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public GenericResult test() throws WebServiceClientException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<BaUnitSearchResultTO> searchBaUnit(BaUnitSearchParamsTO searchParams) throws WebServiceClientException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<CadastreObjectSearchResultTO> searchCadastreObjects(String searchBy, String searchString) throws WebServiceClientException {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

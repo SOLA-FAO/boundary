@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -34,8 +34,10 @@ import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.casemanagement.AddressTO;
 import org.sola.webservices.transferobjects.casemanagement.ApplicationTO;
+import org.sola.webservices.transferobjects.casemanagement.BrReportTO;
 import org.sola.webservices.transferobjects.casemanagement.PartySummaryTO;
 import org.sola.webservices.transferobjects.casemanagement.PartyTO;
+import org.sola.webservices.transferobjects.casemanagement.ServiceTO;
 import org.sola.webservices.transferobjects.casemanagement.SourceTO;
 
 /**
@@ -56,6 +58,7 @@ public class MockCaseManagementClient extends AbstractMockWSClient implements Ca
     public static final String CREATE_APPLICATION = SERVICE_NAME + "createApplication";
     public static final String SAVE_APPLICATION = SERVICE_NAME + "saveApplication";
     public static final String GET_ADDRESS = SERVICE_NAME + "getAddress";
+    public static final String GET_BRREPORT = SERVICE_NAME + "getBrReport";
     public static final String GET_APPLICATION = SERVICE_NAME + "getApplication";
     public static final String GET_PARTY = SERVICE_NAME + "getParty";
     public static final String GET_APPLICATION_SERVICES = SERVICE_NAME + "getApplicationServices";
@@ -100,7 +103,14 @@ public class MockCaseManagementClient extends AbstractMockWSClient implements Ca
         defaultResponse.setId(id);
         return getManager().getResponse(GET_ADDRESS, AddressTO.class, defaultResponse, id);
     }
-
+    
+      /** @return default = new BrReportTO with id set */
+    @Override
+    public List<BrReportTO> getAllBrs() {
+        List<BrReportTO> defaultResponse = new ArrayList<BrReportTO>();
+        return getManager().getResponse(GET_BRREPORT, List.class, defaultResponse);
+    }
+    
     /** @return default = new ApplicationTO with id set */
     @Override
     public ApplicationTO getApplication(String id) {
@@ -130,16 +140,6 @@ public class MockCaseManagementClient extends AbstractMockWSClient implements Ca
         ApplicationTO defaultResponse = application;
         return getManager().getResponse(CALCULATE_FEE, ApplicationTO.class, defaultResponse,
                 application);
-    }
-
-    /** @return default = application */
-    @Override
-    public PartyTO createParty(PartyTO party) {
-        PartyTO defaultResponse = party;
-        return getManager().getResponse(CREATE_APPLICATION, PartyTO.class, defaultResponse,
-                party);
-//    TODO return getManager().getResponse(CREATE_PARTY, PartyTO.class, defaultResponse,
-//                party);    
     }
 
     @Override
@@ -259,5 +259,10 @@ public class MockCaseManagementClient extends AbstractMockWSClient implements Ca
     public List<ValidationResult> applicationActionResubmit(
             String applicationId, int rowVersion) throws WebServiceClientException {
         return new ArrayList<ValidationResult>();
+    }
+
+    @Override
+    public ServiceTO saveInformationService(ServiceTO service) throws WebServiceClientException {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -37,6 +37,7 @@ import org.sola.services.common.contracts.AbstractTO;
  */
 public class MapDefinitionTO extends AbstractTO {
     private int srid = -1;
+    private String wktOfCrs;
     private List<ConfigMapLayerTO> layers = new ArrayList<ConfigMapLayerTO>();
     private double east = -1;
     private double west = -1;
@@ -62,6 +63,14 @@ public class MapDefinitionTO extends AbstractTO {
         this.srid = srid;
     }
 
+    public String getWktOfCrs() {
+        return wktOfCrs;
+    }
+
+    public void setWktOfCrs(String wktOfCrs) {
+        this.wktOfCrs = wktOfCrs;
+    }
+    
     /**
      * @return the layers
      */

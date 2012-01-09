@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -30,7 +30,17 @@ package org.sola.services.boundary.transferobjects.search;
 import org.sola.services.boundary.transferobjects.cadastre.PartySummaryTO;
 
 public class PartySearchResultTO extends PartySummaryTO {
+    private boolean rightHolder;
+    
     public PartySearchResultTO(){
         super();
+    }
+
+    public boolean isRightHolder() {
+        return rightHolder;
+    }
+
+    public void setRightHolder(boolean rightHolder) {
+        this.rightHolder = rightHolder;
     }
 }

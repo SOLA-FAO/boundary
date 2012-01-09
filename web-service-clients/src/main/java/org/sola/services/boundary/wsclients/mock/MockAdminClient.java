@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.sola.services.boundary.wsclients.AdminClient;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
+import org.sola.webservices.admin.BrTO;
 import org.sola.webservices.admin.LanguageTO;
 import org.sola.webservices.transferobjects.security.GroupSummaryTO;
 import org.sola.webservices.transferobjects.security.GroupTO;
@@ -146,5 +147,20 @@ public class MockAdminClient extends AbstractMockWSClient implements AdminClient
     @Override
     public List<LanguageTO> getLanguages(String lang) throws WebServiceClientException {
         return new ArrayList<LanguageTO>();
+    }
+
+    @Override
+    public BrTO getBr(String id, String lang) throws WebServiceClientException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public BrTO getBr(String id) throws WebServiceClientException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public BrTO saveBr(BrTO brTO) throws WebServiceClientException {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

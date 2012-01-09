@@ -5,11 +5,11 @@
     <parent>
         <artifactId>sola-boundary</artifactId>
         <groupId>org.sola.services</groupId>
-        <version>alpha</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
     <groupId>org.sola.services.boundary</groupId>
     <artifactId>sola-web-service-clients</artifactId>
-    <version>alpha</version>
+    <version>1.0-SNAPSHOT</version>
     <name>Boundary Web Service Clients</name>
     <url>http://maven.apache.org</url>
     <build>
@@ -183,7 +183,7 @@
         <dependency>
             <groupId>org.sola.common</groupId>
             <artifactId>sola-messaging</artifactId>
-            <version>${project.version}</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <repositories>

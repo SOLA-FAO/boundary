@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -28,14 +28,17 @@
 package org.sola.services.boundary.ws;
 
 import java.util.List;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import javax.xml.ws.WebServiceContext;
 import org.sola.common.MappingManager;
 import org.sola.services.boundary.transferobjects.cadastre.CadastreChangeTO;
 import org.sola.services.boundary.transferobjects.cadastre.CadastreObjectTO;
 import org.sola.services.boundary.transferobjects.cadastre.PropertySummaryTO;
+import org.sola.services.boundary.transferobjects.transaction.TransactionCadastreChangeTO;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.br.ValidationResult;
 import org.sola.services.common.contracts.GenericTranslator;
@@ -48,6 +51,9 @@ import org.sola.services.common.faults.SOLAFault;
 import org.sola.services.common.faults.UnhandledFault;
 import org.sola.services.common.webservices.AbstractWebService;
 import org.sola.services.ejb.cadastre.repository.entities.CadastreChange;
+import org.sola.services.ejb.transaction.businesslogic.TransactionEJBLocal;
+import org.sola.services.ejb.transaction.repository.entities.TransactionCadastreChange;
+import org.sola.services.ejb.transaction.repository.entities.TransactionType;
 
 /**
  *
@@ -58,6 +64,13 @@ public class Cadastre extends AbstractWebService {
 
    @EJB
    private CadastreEJBLocal cadastreEJB;
+   
+   @EJB
+   private TransactionEJBLocal transactionEJB;
+   
+   @Resource
+   private WebServiceContext wsContext;
+
 
 //    @EJB // Annotate a setter so the EJB can be manually created and injected for Unit Testing
 //    public void setSpatialUnit(SpatialUnitEJB spatialUnit) {
@@ -166,55 +179,41 @@ public class Cadastre extends AbstractWebService {
         }
     }
 
-    @WebMethod(operationName = "saveCadastreChange")
-    public List<ValidationResult> saveCadastreChange(
-            @WebParam(name = "cadastreChangeTO") CadastreChangeTO cadastreChangeTO,
+    @WebMethod(operationName = "SaveCadastreChange")
+    public List<ValidationResult> SaveTransactionCadastreChange(
+            @WebParam(name = "transactionCadastreChangeTO") 
+                    TransactionCadastreChangeTO transactionCadastreChangeTO,
             @WebParam(name = "languageCode") String languageCode)
             throws SOLAValidationFault, OptimisticLockingFault, 
             SOLAFault, UnhandledFault, SOLAAccessFault {
-        try {
-            try {
-                beginTransaction();
-                CadastreChange cadastreChange = new CadastreChange();
-                MappingManager.getMapper().map(cadastreChangeTO, cadastreChange);
-                List<ValidationResult> result = 
-                        cadastreEJB.saveCadastreChange(cadastreChange, languageCode);
-                commitTransaction();
-                return result;
-            } finally {
-                rollbackTransaction();
-            }
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            
-            if (fault.getClass() == SOLAAccessFault.class) {
-                throw (SOLAAccessFault) fault;
-            }
-            
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
 
-            if (fault.getClass() == OptimisticLockingFault.class) {
-                throw (OptimisticLockingFault) fault;
-            }
+        final TransactionCadastreChangeTO transactionTO  = transactionCadastreChangeTO;
+        final String languageCodeTmp  = languageCode;
+        final Object[] result = {null};
 
-            if (fault.getClass() == SOLAValidationFault.class) {
-                throw (SOLAValidationFault) fault;
+        runUpdateMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                TransactionCadastreChange transactionCadastreChange = GenericTranslator.fromTO(
+                        transactionTO, TransactionCadastreChange.class, null);
+                result[0] = transactionEJB.saveTransaction(
+                        transactionCadastreChange, TransactionType.CADASTRE_CHANGE, languageCodeTmp);
             }
-            throw (UnhandledFault) fault;
-        } finally {
-            cleanUp();
-        }
+        });
+
+        return (List<ValidationResult>) result[0];
     }
 
     @WebMethod(operationName = "GetCadastreChange")
-    public CadastreChangeTO GetCadastreChange(
+    public TransactionCadastreChangeTO GetTransactionCadastreChange(
             @WebParam(name = "serviceId") String serviceId)
             throws SOLAFault, UnhandledFault {
         try {
             return GenericTranslator.toTO(
-                    cadastreEJB.getCadastreChange(serviceId), CadastreChangeTO.class);
+                    transactionEJB.getTransactionByServiceId(serviceId, false, TransactionCadastreChange.class),
+                    TransactionCadastreChangeTO.class);
+                    //cadastreEJB.getCadastreChange(serviceId), CadastreChangeTO.class);
         } catch (Throwable t) {
             Throwable fault = FaultUtility.ProcessException(t);
             if (fault.getClass() == SOLAFault.class) {

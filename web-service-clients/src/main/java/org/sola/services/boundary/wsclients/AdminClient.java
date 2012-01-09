@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -29,6 +29,7 @@ package org.sola.services.boundary.wsclients;
 
 import java.util.List;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
+import org.sola.webservices.admin.BrTO;
 import org.sola.webservices.admin.LanguageTO;
 import org.sola.webservices.transferobjects.security.GroupSummaryTO;
 import org.sola.webservices.transferobjects.security.GroupTO;
@@ -70,4 +71,10 @@ public interface AdminClient extends AbstractWSClient {
     List<LanguageTO> getLanguages() throws WebServiceClientException;
     
     List<LanguageTO> getLanguages(String lang) throws WebServiceClientException;
+    
+    BrTO getBr(String id, String lang) throws WebServiceClientException;
+    
+    BrTO getBr(String id) throws WebServiceClientException;
+    
+    BrTO saveBr(BrTO brTO) throws WebServiceClientException;
 }

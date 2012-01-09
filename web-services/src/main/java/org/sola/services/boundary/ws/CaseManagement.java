@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -35,6 +35,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
+import org.sola.services.boundary.transferobjects.casemanagement.ServiceTO;
 import org.sola.services.boundary.transferobjects.casemanagement.SourceTO;
 import org.sola.services.common.br.ValidationResult;
 import org.sola.services.common.faults.FaultUtility;
@@ -48,8 +49,10 @@ import org.sola.services.ejb.application.businesslogic.ApplicationEJBLocal;
 import org.sola.services.ejb.application.repository.entities.Application;
 import org.sola.services.boundary.transferobjects.casemanagement.ApplicationLogTO;
 import org.sola.services.boundary.transferobjects.casemanagement.ApplicationTO;
+import org.sola.services.boundary.transferobjects.casemanagement.BrReportTO;
 import org.sola.services.common.contracts.GenericTranslator;
 import org.sola.services.common.webservices.AbstractWebService;
+import org.sola.services.ejb.application.repository.entities.Service;
 import org.sola.services.ejb.party.businesslogic.PartyEJBLocal;
 import org.sola.services.boundary.transferobjects.casemanagement.PartySummaryTO;
 import org.sola.services.boundary.transferobjects.casemanagement.PartyTO;
@@ -57,6 +60,7 @@ import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.faults.SOLAAccessFault;
 import org.sola.services.ejb.party.repository.entities.Party;
 import org.sola.services.ejb.source.businesslogic.SourceEJBLocal;
+import org.sola.services.ejb.system.businesslogic.SystemEJBLocal;
 
 /**
  *
@@ -73,6 +77,8 @@ public class CaseManagement extends AbstractWebService {
     private AddressEJBLocal addressEJB;
     @EJB
     private SourceEJBLocal sourceEJB;
+    @EJB
+    private SystemEJBLocal systemEJB;
     @Resource
     private WebServiceContext wsContext;
 
@@ -108,7 +114,7 @@ public class CaseManagement extends AbstractWebService {
 
     @WebMethod(operationName = "SaveApplication")
     public ApplicationTO SaveApplication(@WebParam(name = "application") ApplicationTO application)
-            throws SOLAFault, UnhandledFault, OptimisticLockingFault, 
+            throws SOLAFault, UnhandledFault, OptimisticLockingFault,
             SOLAValidationFault, SOLAAccessFault {
 
         final Object[] params = {application};
@@ -130,30 +136,6 @@ public class CaseManagement extends AbstractWebService {
         });
 
         return (ApplicationTO) result[0];
-    }
-
-    @WebMethod(operationName = "CreateParty")
-    public PartyTO CreateParty(@WebParam(name = "party") PartyTO party)
-            throws SOLAFault, UnhandledFault {
-
-        final Object[] params = {party};
-        final Object[] result = {null};
-
-        runGeneralMethod(wsContext, new Runnable() {
-
-            @Override
-            public void run() {
-                PartyTO party = (PartyTO) params[0];
-                if (party != null) {
-                    Party newParty = partyEJB.createParty(
-                            GenericTranslator.fromTO(party, Party.class,
-                            partyEJB.getParty(party.getId())));
-                    result[0] = GenericTranslator.toTO(newParty, PartyTO.class);
-                }
-            }
-        });
-
-        return (PartyTO) result[0];
     }
 
     @WebMethod(operationName = "SaveParty")
@@ -188,7 +170,8 @@ public class CaseManagement extends AbstractWebService {
             // initialize()
             try {
                 beginTransaction();
-                AddressTO result = null; GenericTranslator.toTO(addressEJB.getAddress(id),
+                AddressTO result = null;
+                GenericTranslator.toTO(addressEJB.getAddress(id),
                         AddressTO.class);
                 commitTransaction();
 
@@ -352,18 +335,18 @@ public class CaseManagement extends AbstractWebService {
             cleanUp();
         }
     }
-    
+
     @WebMethod(operationName = "AttachSourceToTransaction")
     public SourceTO AttachSourceToTransaction(
             @WebParam(name = "serviceId") String serviceId,
             @WebParam(name = "sourceId") String sourceId,
-             @WebParam(name = "languageCode") String languageCode)
+            @WebParam(name = "languageCode") String languageCode)
             throws SOLAValidationFault, OptimisticLockingFault, SOLAFault, UnhandledFault {
         try {
             try {
                 beginTransaction();
                 SourceTO result = GenericTranslator.toTO(
-                        sourceEJB.attachSourceToTransaction(serviceId, sourceId, languageCode), 
+                        sourceEJB.attachSourceToTransaction(serviceId, sourceId, languageCode),
                         SourceTO.class);
                 commitTransaction();
                 return result;
@@ -386,7 +369,7 @@ public class CaseManagement extends AbstractWebService {
             throw (UnhandledFault) fault;
         } finally {
             cleanUp();
-        }        
+        }
     }
 
     @WebMethod(operationName = "DettachSourceFromTransaction")
@@ -418,7 +401,7 @@ public class CaseManagement extends AbstractWebService {
             throw (UnhandledFault) fault;
         } finally {
             cleanUp();
-        }        
+        }
     }
 
     @WebMethod(operationName = "GetSourcesByServiceId")
@@ -450,7 +433,7 @@ public class CaseManagement extends AbstractWebService {
             cleanUp();
         }
     }
-    
+
     @WebMethod(operationName = "GetSourcesByIds")
     public List<SourceTO> GetSourcesByIds(
             @WebParam(name = "sourceIds") List<String> sourceIds) throws SOLAFault, UnhandledFault {
@@ -479,14 +462,14 @@ public class CaseManagement extends AbstractWebService {
 
     @WebMethod(operationName = "ServiceActionComplete")
     public List<ValidationResult> ServiceActionComplete(
-            @WebParam(name = "serviceId") String serviceId, 
-            @WebParam(name = "languageCode") String languageCode, 
+            @WebParam(name = "serviceId") String serviceId,
+            @WebParam(name = "languageCode") String languageCode,
             @WebParam(name = "rowVersion") int rowVersion)
             throws SOLAFault, UnhandledFault, SOLAAccessFault,
             OptimisticLockingFault, SOLAValidationFault {
 
-        final String serviceIdTmp  = serviceId;
-        final String languageCodeTmp  = languageCode;
+        final String serviceIdTmp = serviceId;
+        final String languageCodeTmp = languageCode;
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
@@ -501,17 +484,17 @@ public class CaseManagement extends AbstractWebService {
 
         return (List<ValidationResult>) result[0];
     }
-    
+
     @WebMethod(operationName = "ServiceActionCancel")
     public List<ValidationResult> ServiceActionCancel(
-            @WebParam(name = "serviceId") String serviceId, 
-            @WebParam(name = "languageCode") String languageCode, 
+            @WebParam(name = "serviceId") String serviceId,
+            @WebParam(name = "languageCode") String languageCode,
             @WebParam(name = "rowVersion") int rowVersion)
             throws SOLAFault, UnhandledFault, SOLAAccessFault,
             OptimisticLockingFault, SOLAValidationFault {
 
-        final String serviceIdTmp  = serviceId;
-        final String languageCodeTmp  = languageCode;
+        final String serviceIdTmp = serviceId;
+        final String languageCodeTmp = languageCode;
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
@@ -529,14 +512,14 @@ public class CaseManagement extends AbstractWebService {
 
     @WebMethod(operationName = "ServiceActionRevert")
     public List<ValidationResult> ServiceActionRevert(
-            @WebParam(name = "serviceId") String serviceId, 
-            @WebParam(name = "languageCode") String languageCode, 
+            @WebParam(name = "serviceId") String serviceId,
+            @WebParam(name = "languageCode") String languageCode,
             @WebParam(name = "rowVersion") int rowVersion)
             throws SOLAFault, UnhandledFault, SOLAAccessFault,
             OptimisticLockingFault, SOLAValidationFault {
 
-        final String serviceIdTmp  = serviceId;
-        final String languageCodeTmp  = languageCode;
+        final String serviceIdTmp = serviceId;
+        final String languageCodeTmp = languageCode;
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
@@ -554,14 +537,14 @@ public class CaseManagement extends AbstractWebService {
 
     @WebMethod(operationName = "ServiceActionStart")
     public List<ValidationResult> ServiceActionStart(
-            @WebParam(name = "serviceId") String serviceId, 
-            @WebParam(name = "languageCode") String languageCode, 
+            @WebParam(name = "serviceId") String serviceId,
+            @WebParam(name = "languageCode") String languageCode,
             @WebParam(name = "rowVersion") int rowVersion)
             throws SOLAFault, UnhandledFault, SOLAAccessFault,
             OptimisticLockingFault, SOLAValidationFault {
 
-        final String serviceIdTmp  = serviceId;
-        final String languageCodeTmp  = languageCode;
+        final String serviceIdTmp = serviceId;
+        final String languageCodeTmp = languageCode;
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
@@ -579,14 +562,14 @@ public class CaseManagement extends AbstractWebService {
 
     @WebMethod(operationName = "ApplicationActionWithdraw")
     public List<ValidationResult> ApplicationActionWithdraw(
-            @WebParam(name = "applicationId") String applicationId, 
-            @WebParam(name = "languageCode") String languageCode, 
+            @WebParam(name = "applicationId") String applicationId,
+            @WebParam(name = "languageCode") String languageCode,
             @WebParam(name = "rowVersion") int rowVersion)
             throws SOLAFault, UnhandledFault, SOLAAccessFault,
             OptimisticLockingFault, SOLAValidationFault {
 
-        final String applicationIdTmp  = applicationId;
-        final String languageCodeTmp  = languageCode;
+        final String applicationIdTmp = applicationId;
+        final String languageCodeTmp = languageCode;
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
@@ -604,14 +587,14 @@ public class CaseManagement extends AbstractWebService {
 
     @WebMethod(operationName = "ApplicationActionCancel")
     public List<ValidationResult> ApplicationActionCancel(
-            @WebParam(name = "applicationId") String applicationId, 
-            @WebParam(name = "languageCode") String languageCode, 
+            @WebParam(name = "applicationId") String applicationId,
+            @WebParam(name = "languageCode") String languageCode,
             @WebParam(name = "rowVersion") int rowVersion)
             throws SOLAFault, UnhandledFault, SOLAAccessFault,
             OptimisticLockingFault, SOLAValidationFault {
 
-        final String applicationIdTmp  = applicationId;
-        final String languageCodeTmp  = languageCode;
+        final String applicationIdTmp = applicationId;
+        final String languageCodeTmp = languageCode;
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
@@ -629,14 +612,14 @@ public class CaseManagement extends AbstractWebService {
 
     @WebMethod(operationName = "ApplicationActionRequisition")
     public List<ValidationResult> ApplicationActionRequisition(
-            @WebParam(name = "applicationId") String applicationId, 
-            @WebParam(name = "languageCode") String languageCode, 
+            @WebParam(name = "applicationId") String applicationId,
+            @WebParam(name = "languageCode") String languageCode,
             @WebParam(name = "rowVersion") int rowVersion)
             throws SOLAFault, UnhandledFault, SOLAAccessFault,
             OptimisticLockingFault, SOLAValidationFault {
 
-        final String applicationIdTmp  = applicationId;
-        final String languageCodeTmp  = languageCode;
+        final String applicationIdTmp = applicationId;
+        final String languageCodeTmp = languageCode;
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
@@ -654,14 +637,14 @@ public class CaseManagement extends AbstractWebService {
 
     @WebMethod(operationName = "ApplicationActionValidate")
     public List<ValidationResult> ApplicationActionValidate(
-            @WebParam(name = "applicationId") String applicationId, 
-            @WebParam(name = "languageCode") String languageCode, 
+            @WebParam(name = "applicationId") String applicationId,
+            @WebParam(name = "languageCode") String languageCode,
             @WebParam(name = "rowVersion") int rowVersion)
             throws SOLAFault, UnhandledFault, SOLAAccessFault,
             OptimisticLockingFault, SOLAValidationFault {
 
-        final String applicationIdTmp  = applicationId;
-        final String languageCodeTmp  = languageCode;
+        final String applicationIdTmp = applicationId;
+        final String languageCodeTmp = languageCode;
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
@@ -679,14 +662,14 @@ public class CaseManagement extends AbstractWebService {
 
     @WebMethod(operationName = "ApplicationActionApprove")
     public List<ValidationResult> ApplicationActionApprove(
-            @WebParam(name = "applicationId") String applicationId, 
-            @WebParam(name = "languageCode") String languageCode, 
+            @WebParam(name = "applicationId") String applicationId,
+            @WebParam(name = "languageCode") String languageCode,
             @WebParam(name = "rowVersion") int rowVersion)
             throws SOLAFault, UnhandledFault, SOLAAccessFault,
             OptimisticLockingFault, SOLAValidationFault {
 
-        final String applicationIdTmp  = applicationId;
-        final String languageCodeTmp  = languageCode;
+        final String applicationIdTmp = applicationId;
+        final String languageCodeTmp = languageCode;
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
@@ -704,14 +687,14 @@ public class CaseManagement extends AbstractWebService {
 
     @WebMethod(operationName = "ApplicationActionArchive")
     public List<ValidationResult> ApplicationActionArchive(
-            @WebParam(name = "applicationId") String applicationId, 
-            @WebParam(name = "languageCode") String languageCode, 
+            @WebParam(name = "applicationId") String applicationId,
+            @WebParam(name = "languageCode") String languageCode,
             @WebParam(name = "rowVersion") int rowVersion)
             throws SOLAFault, UnhandledFault, SOLAAccessFault,
             OptimisticLockingFault, SOLAValidationFault {
 
-        final String applicationIdTmp  = applicationId;
-        final String languageCodeTmp  = languageCode;
+        final String applicationIdTmp = applicationId;
+        final String languageCodeTmp = languageCode;
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
@@ -729,14 +712,14 @@ public class CaseManagement extends AbstractWebService {
 
     @WebMethod(operationName = "ApplicationActionDespatch")
     public List<ValidationResult> ApplicationActionDespatch(
-            @WebParam(name = "applicationId") String applicationId, 
-            @WebParam(name = "languageCode") String languageCode, 
+            @WebParam(name = "applicationId") String applicationId,
+            @WebParam(name = "languageCode") String languageCode,
             @WebParam(name = "rowVersion") int rowVersion)
             throws SOLAFault, UnhandledFault, SOLAAccessFault,
             OptimisticLockingFault, SOLAValidationFault {
 
-        final String applicationIdTmp  = applicationId;
-        final String languageCodeTmp  = languageCode;
+        final String applicationIdTmp = applicationId;
+        final String languageCodeTmp = languageCode;
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
@@ -754,14 +737,14 @@ public class CaseManagement extends AbstractWebService {
 
     @WebMethod(operationName = "ApplicationActionLapse")
     public List<ValidationResult> ApplicationActionLapse(
-            @WebParam(name = "applicationId") String applicationId, 
-            @WebParam(name = "languageCode") String languageCode, 
+            @WebParam(name = "applicationId") String applicationId,
+            @WebParam(name = "languageCode") String languageCode,
             @WebParam(name = "rowVersion") int rowVersion)
             throws SOLAFault, UnhandledFault, SOLAAccessFault,
             OptimisticLockingFault, SOLAValidationFault {
 
-        final String applicationIdTmp  = applicationId;
-        final String languageCodeTmp  = languageCode;
+        final String applicationIdTmp = applicationId;
+        final String languageCodeTmp = languageCode;
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
@@ -776,17 +759,17 @@ public class CaseManagement extends AbstractWebService {
 
         return (List<ValidationResult>) result[0];
     }
-    
+
     @WebMethod(operationName = "ApplicationActionUnassign")
     public List<ValidationResult> ApplicationActionUnassign(
-            @WebParam(name = "applicationId") String applicationId, 
-            @WebParam(name = "languageCode") String languageCode, 
+            @WebParam(name = "applicationId") String applicationId,
+            @WebParam(name = "languageCode") String languageCode,
             @WebParam(name = "rowVersion") int rowVersion)
             throws SOLAFault, UnhandledFault, SOLAAccessFault,
             OptimisticLockingFault, SOLAValidationFault {
 
-        final String applicationIdTmp  = applicationId;
-        final String languageCodeTmp  = languageCode;
+        final String applicationIdTmp = applicationId;
+        final String languageCodeTmp = languageCode;
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
@@ -804,16 +787,16 @@ public class CaseManagement extends AbstractWebService {
 
     @WebMethod(operationName = "ApplicationActionAssign")
     public List<ValidationResult> ApplicationActionAssign(
-            @WebParam(name = "applicationId") String applicationId, 
-            @WebParam(name = "userId") String userId, 
-            @WebParam(name = "languageCode") String languageCode, 
+            @WebParam(name = "applicationId") String applicationId,
+            @WebParam(name = "userId") String userId,
+            @WebParam(name = "languageCode") String languageCode,
             @WebParam(name = "rowVersion") int rowVersion)
             throws SOLAFault, UnhandledFault, SOLAAccessFault,
             OptimisticLockingFault, SOLAValidationFault {
 
-        final String applicationIdTmp  = applicationId;
-        final String userIdTmp  = userId;
-        final String languageCodeTmp  = languageCode;
+        final String applicationIdTmp = applicationId;
+        final String userIdTmp = userId;
+        final String languageCodeTmp = languageCode;
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
@@ -828,17 +811,17 @@ public class CaseManagement extends AbstractWebService {
 
         return (List<ValidationResult>) result[0];
     }
-    
+
     @WebMethod(operationName = "ApplicationActionResubmit")
     public List<ValidationResult> ApplicationActionResubmit(
-            @WebParam(name = "applicationId") String applicationId, 
-            @WebParam(name = "languageCode") String languageCode, 
+            @WebParam(name = "applicationId") String applicationId,
+            @WebParam(name = "languageCode") String languageCode,
             @WebParam(name = "rowVersion") int rowVersion)
             throws SOLAFault, UnhandledFault, SOLAAccessFault,
             OptimisticLockingFault, SOLAValidationFault {
 
-        final String applicationIdTmp  = applicationId;
-        final String languageCodeTmp  = languageCode;
+        final String applicationIdTmp = applicationId;
+        final String languageCodeTmp = languageCode;
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
@@ -852,5 +835,62 @@ public class CaseManagement extends AbstractWebService {
         });
 
         return (List<ValidationResult>) result[0];
+    }
+
+    @WebMethod(operationName = "GetAllBrs")
+    public List<BrReportTO> GetAllBrs() throws SOLAFault, UnhandledFault {
+        try {
+            // initialize()
+            try {
+                beginTransaction();
+                List<BrReportTO> result = GenericTranslator.toTOList(systemEJB.getAllBrs(),
+                        BrReportTO.class);
+                commitTransaction();
+
+                return result;
+            } finally {
+                rollbackTransaction();
+            }
+        } catch (Throwable t) {
+            Throwable fault = FaultUtility.ProcessException(t);
+
+
+            if (fault.getClass() == SOLAFault.class) {
+
+                throw (SOLAFault) fault;
+            }
+            throw (UnhandledFault) fault;
+        } finally {
+            cleanUp();
+        }
+    }
+
+    @WebMethod(operationName = "SaveInformationService")
+    public ServiceTO SaveInformationService(
+            @WebParam(name = "service") ServiceTO service,
+            @WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault,
+            OptimisticLockingFault, SOLAValidationFault {
+
+        final String languageCodeTmp = languageCode;
+        final ServiceTO serviceTmp = service;
+        final Object[] result = {null};
+
+        runUpdateMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                ServiceTO service = serviceTmp;
+                String languageCode = languageCodeTmp;
+                if (service != null) {
+                    Service serverResult = applicationEJB.saveInformationService(
+                            GenericTranslator.fromTO(service, Service.class, null),
+                            languageCode);
+                    result[0] = GenericTranslator.toTO(serverResult, ServiceTO.class);
+                }
+            }
+        });
+
+        return (ServiceTO) result[0];
     }
 }

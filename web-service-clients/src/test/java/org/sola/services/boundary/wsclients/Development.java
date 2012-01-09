@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -36,7 +36,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.sola.webservices.search.GenericResult;
 import org.sola.webservices.transferobjects.casemanagement.ApplicationTO;
+import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
 
 /**
  *
@@ -66,6 +68,7 @@ public class Development {
      * Check that a valid connection can be made to the web service. Also includes failure tests 
      */
     @Test
+    @Ignore
     public void testGetCaseManagementMethods() {
         System.out.println("test different case management methods for development");
 
@@ -102,8 +105,31 @@ public class Development {
 
         System.out.println("test GetCadastreObjectByParts");
         System.out.println("Validate result:" + result.getCadastreObjectByParts("Lot 59 32488").size());
+        
+        System.out.println("test getTransactionCadastreChange");
+        TransactionCadastreChangeTO obj = result.getTransactionCadastreChange("4086");
+        System.out.println("Result: " + obj.toString());
     }        
     
+    @Test
+    //@Ignore
+    public void testSearch() {
+        System.out.println("test search");
+
+        // Valid service connection
+        System.out.println("Valid Service Connection - Case Management");
+        String url = "http://localhost:8080/sola/webservices/search-service?wsdl";
+        SearchClient result = WSClientFactory.getSearchClient(url);
+        result.setCredentials("test", "test".toCharArray());
+        System.out.print("Checking connection:");
+                System.out.println(result.checkConnection());
+
+                GenericResult res = result.test();
+        System.out.println("test");
+        System.out.println("result:" + res);
+        
+    }        
+
     @Ignore
     @Test
     public void testAdministrative() {

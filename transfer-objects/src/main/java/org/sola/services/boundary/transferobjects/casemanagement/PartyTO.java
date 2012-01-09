@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -49,6 +49,7 @@ public class PartyTO extends AbstractIdTO {
     private String typeCode;
     private String genderCode;
     private List<PartyRoleTO> roleList;
+    private boolean rightHolder;
     
     private AddressTO address;
 
@@ -198,7 +199,12 @@ public class PartyTO extends AbstractIdTO {
         }
         roleList.add(role);
     }
-    
-    
-    
+
+    public boolean isRightHolder() {
+        return rightHolder;
+    }
+
+    public void setRightHolder(boolean rightHolder) {
+        this.rightHolder = rightHolder;
+    }
 }

@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -33,6 +33,9 @@ import org.sola.webservices.transferobjects.AbstractCodeTO;
 import org.sola.webservices.transferobjects.referencedata.ApplicationActionTypeTO;
 import org.sola.webservices.transferobjects.referencedata.ApplicationStatusTypeTO;
 import org.sola.webservices.transferobjects.referencedata.BaUnitTypeTO;
+import org.sola.webservices.transferobjects.referencedata.BrSeverityTypeTO;
+import org.sola.webservices.transferobjects.referencedata.BrTechnicalTypeTO;
+import org.sola.webservices.transferobjects.referencedata.BrValidationTargetTypeTO;
 import org.sola.webservices.transferobjects.referencedata.CadastreObjectTypeTO;
 import org.sola.webservices.transferobjects.referencedata.ChangeStatusTypeTO;
 import org.sola.webservices.transferobjects.referencedata.CommunicationTypeTO;
@@ -147,5 +150,17 @@ public interface ReferenceDataClient extends AbstractWSClient {
     
     List<CadastreObjectTypeTO> getCadastreObjectTypes(String lang) throws WebServiceClientException;
     
-    AbstractCodeTO saveReferenceData(AbstractCodeTO refDataTO);
+    AbstractCodeTO saveReferenceData(AbstractCodeTO refDataTO) throws WebServiceClientException;
+    
+    List<BrTechnicalTypeTO> getBrTechnicalTypes() throws WebServiceClientException;
+    
+    List<BrTechnicalTypeTO> getBrTechnicalTypes(String lang) throws WebServiceClientException;
+    
+    List<BrValidationTargetTypeTO> getBrValidationTargetTypes() throws WebServiceClientException;
+    
+    List<BrValidationTargetTypeTO> getBrValidationTargetTypes(String lang) throws WebServiceClientException;
+    
+    List<BrSeverityTypeTO> getBrSeverityTypes() throws WebServiceClientException;
+    
+    List<BrSeverityTypeTO> getBrSeverityTypes(String lang) throws WebServiceClientException;
 }

@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -28,24 +28,31 @@
 package org.sola.services.boundary.ws;
 
 import java.util.List;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.xml.ws.WebServiceContext;
 import org.sola.common.SOLAException;
 import org.sola.common.messaging.ServiceMessage;
 import org.sola.services.boundary.transferobjects.security.RoleTO;
 import org.sola.services.boundary.transferobjects.security.GroupSummaryTO;
 import org.sola.services.boundary.transferobjects.security.GroupTO;
 import org.sola.services.boundary.transferobjects.security.UserTO;
+import org.sola.services.boundary.transferobjects.system.BrTO;
 import org.sola.services.boundary.transferobjects.system.LanguageTO;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.contracts.GenericTranslator;
 import org.sola.services.common.faults.FaultUtility;
+import org.sola.services.common.faults.OptimisticLockingFault;
 import org.sola.services.common.faults.SOLAAccessFault;
 import org.sola.services.common.faults.SOLAFault;
+import org.sola.services.common.faults.SOLAValidationFault;
 import org.sola.services.common.faults.UnhandledFault;
 import org.sola.services.common.webservices.AbstractWebService;
+import org.sola.services.ejb.system.businesslogic.SystemEJBLocal;
+import org.sola.services.ejb.system.repository.entities.Br;
 import org.sola.services.ejbs.admin.businesslogic.AdminEJBLocal;
 import org.sola.services.ejbs.admin.businesslogic.repository.entities.Group;
 import org.sola.services.ejbs.admin.businesslogic.repository.entities.Role;
@@ -59,6 +66,11 @@ public class Admin extends AbstractWebService {
 
     @EJB
     AdminEJBLocal adminEJB;
+    @EJB
+    SystemEJBLocal systemEJB;
+    
+    @Resource
+    private WebServiceContext wsContext;
 
     /** Dummy method to check the web service instance is working. */
     @WebMethod(operationName = "CheckConnection")
@@ -386,5 +398,46 @@ public class Admin extends AbstractWebService {
         } finally {
             cleanUp();
         }
+    }
+    
+    @WebMethod(operationName = "GetBr")
+    public BrTO GetBr(@WebParam(name = "id") String id, @WebParam(name = "lang") String lang)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+        final Object[] params = {id, lang};
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                String id = params[0] == null ? null : params[0].toString();
+                String languageCode = params[1] == null ? null : params[1].toString();
+                result[0] = GenericTranslator.toTO(systemEJB.getBr(
+                        id, languageCode), BrTO.class);
+            }
+        });
+
+        return (BrTO) result[0];
+    }
+    
+    @WebMethod(operationName = "SaveBr")
+    public BrTO SaveBr(@WebParam(name = "br") BrTO br)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault, OptimisticLockingFault, SOLAValidationFault {
+        final Object[] params = {br};
+        final Object[] result = {null};
+
+        runUpdateMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                BrTO brTO =(BrTO)params[0];
+                Br br = systemEJB.getBr(brTO.getId(), null);
+                result[0] = GenericTranslator.toTO(
+                        systemEJB.saveBr(GenericTranslator.fromTO(brTO, Br.class, br)), 
+                        BrTO.class);
+            }
+        });
+
+        return (BrTO) result[0];
     }
 }

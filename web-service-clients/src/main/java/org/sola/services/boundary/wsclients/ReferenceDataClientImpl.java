@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -39,6 +39,9 @@ import org.sola.webservices.transferobjects.AbstractCodeTO;
 import org.sola.webservices.transferobjects.referencedata.ApplicationActionTypeTO;
 import org.sola.webservices.transferobjects.referencedata.ApplicationStatusTypeTO;
 import org.sola.webservices.transferobjects.referencedata.BaUnitTypeTO;
+import org.sola.webservices.transferobjects.referencedata.BrSeverityTypeTO;
+import org.sola.webservices.transferobjects.referencedata.BrTechnicalTypeTO;
+import org.sola.webservices.transferobjects.referencedata.BrValidationTargetTypeTO;
 import org.sola.webservices.transferobjects.referencedata.CadastreObjectTypeTO;
 import org.sola.webservices.transferobjects.referencedata.ChangeStatusTypeTO;
 import org.sola.webservices.transferobjects.referencedata.CommunicationTypeTO;
@@ -526,6 +529,66 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
                     f.getFaultInfo());
         } catch (Throwable t) {
             throw processException(SERVICE_NAME + "getRequestCategoryTypes", t);
+        }
+    }
+
+    @Override
+    public List<BrTechnicalTypeTO> getBrTechnicalTypes() throws WebServiceClientException {
+        return getBrTechnicalTypes(getLanguageCode());
+    }
+
+    @Override
+    public List<BrTechnicalTypeTO> getBrTechnicalTypes(String lang) throws WebServiceClientException {
+        try {
+            return getPort().getBrTechnicalTypes(lang);
+        } catch (SOLAFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    f.getFaultInfo());
+        } catch (UnhandledFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    f.getFaultInfo());
+        } catch (Throwable t) {
+            throw processException(SERVICE_NAME + "getBrTechnicalTypes", t);
+        }
+    }
+
+    @Override
+    public List<BrValidationTargetTypeTO> getBrValidationTargetTypes() throws WebServiceClientException {
+        return getBrValidationTargetTypes(getLanguageCode());
+    }
+
+    @Override
+    public List<BrValidationTargetTypeTO> getBrValidationTargetTypes(String lang) throws WebServiceClientException {
+        try {
+            return getPort().getBrValidationTargetTypes(lang);
+        } catch (SOLAFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    f.getFaultInfo());
+        } catch (UnhandledFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    f.getFaultInfo());
+        } catch (Throwable t) {
+            throw processException(SERVICE_NAME + "getBrValidationTargetTypes", t);
+        }
+    }
+
+    @Override
+    public List<BrSeverityTypeTO> getBrSeverityTypes() throws WebServiceClientException {
+        return getBrSeverityTypes(getLanguageCode());
+    }
+
+    @Override
+    public List<BrSeverityTypeTO> getBrSeverityTypes(String lang) throws WebServiceClientException {
+        try {
+            return getPort().getBrSeverityTypes(lang);
+        } catch (SOLAFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    f.getFaultInfo());
+        } catch (UnhandledFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    f.getFaultInfo());
+        } catch (Throwable t) {
+            throw processException(SERVICE_NAME + "getBrSeverityTypes", t);
         }
     }
 }

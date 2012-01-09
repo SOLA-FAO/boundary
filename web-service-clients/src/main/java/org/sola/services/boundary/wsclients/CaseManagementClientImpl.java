@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -43,7 +43,9 @@ import org.sola.webservices.transferobjects.casemanagement.PartySummaryTO;
 import org.sola.webservices.transferobjects.casemanagement.AddressTO;
 import org.sola.webservices.transferobjects.casemanagement.ApplicationLogTO;
 import org.sola.webservices.transferobjects.casemanagement.ApplicationTO;
+import org.sola.webservices.transferobjects.casemanagement.BrReportTO;
 import org.sola.webservices.transferobjects.casemanagement.PartyTO;
+import org.sola.webservices.transferobjects.casemanagement.ServiceTO;
 import org.sola.webservices.transferobjects.casemanagement.SourceTO;
 
 /**
@@ -112,6 +114,22 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
     }
 
     @Override
+    public List<BrReportTO> getAllBrs() throws WebServiceClientException {
+        try {
+           List<BrReportTO> result = getPort().getAllBrs();
+            return result;
+        } catch (SOLAFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    f.getFaultInfo());
+        } catch (UnhandledFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    f.getFaultInfo());
+        } catch (Throwable t) {
+            throw processException(SERVICE_NAME + "getBrReport", t);
+        }
+    }
+    
+      @Override
     public AddressTO getAddress(String id) throws WebServiceClientException {
         try {
             AddressTO result = getPort().getAddress(id);
@@ -188,23 +206,6 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
                     f.getFaultInfo());
         } catch (Throwable t) {
             throw processException(SERVICE_NAME + "calculateFee", t);
-        }
-    }
-
-    @Override
-    public PartyTO createParty(PartyTO party)
-            throws WebServiceClientException {
-        try {
-            PartyTO result = getPort().createParty(party);
-            return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "createParty", t);
         }
     }
 
@@ -681,4 +682,30 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
             throw processException(SERVICE_NAME + "applicationActionWithdraw", t);
         }
     }
+    
+    @Override
+     public ServiceTO saveInformationService(ServiceTO service) throws WebServiceClientException{
+        try {
+            return getPort().saveInformationService(
+                    service, this.getLanguageCode());
+        } catch (SOLAAccessFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
+                    f.getFaultInfo());
+        } catch (SOLAValidationFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
+                    f.getFaultInfo());
+        } catch (OptimisticLockingFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
+                    f.getFaultInfo());
+        } catch (SOLAFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    f.getFaultInfo());
+        } catch (UnhandledFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    f.getFaultInfo());
+        } catch (Throwable t) {
+            throw processException(SERVICE_NAME + "saveInformationService", t);
+        }        
+    }
+
 }

@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -34,6 +34,9 @@ import org.sola.webservices.transferobjects.AbstractCodeTO;
 import org.sola.webservices.transferobjects.referencedata.ApplicationActionTypeTO;
 import org.sola.webservices.transferobjects.referencedata.ApplicationStatusTypeTO;
 import org.sola.webservices.transferobjects.referencedata.BaUnitTypeTO;
+import org.sola.webservices.transferobjects.referencedata.BrSeverityTypeTO;
+import org.sola.webservices.transferobjects.referencedata.BrTechnicalTypeTO;
+import org.sola.webservices.transferobjects.referencedata.BrValidationTargetTypeTO;
 import org.sola.webservices.transferobjects.referencedata.CadastreObjectTypeTO;
 import org.sola.webservices.transferobjects.referencedata.ChangeStatusTypeTO;
 import org.sola.webservices.transferobjects.referencedata.CommunicationTypeTO;
@@ -359,6 +362,36 @@ public class MockReferenceDataClient extends AbstractMockWSClient implements Ref
 
     @Override
     public List<RequestCategoryTypeTO> getRequestCategoryTypes(String lang) throws WebServiceClientException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<BrTechnicalTypeTO> getBrTechnicalTypes() throws WebServiceClientException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<BrTechnicalTypeTO> getBrTechnicalTypes(String lang) throws WebServiceClientException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<BrValidationTargetTypeTO> getBrValidationTargetTypes() throws WebServiceClientException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<BrValidationTargetTypeTO> getBrValidationTargetTypes(String lang) throws WebServiceClientException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<BrSeverityTypeTO> getBrSeverityTypes() throws WebServiceClientException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<BrSeverityTypeTO> getBrSeverityTypes(String lang) throws WebServiceClientException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

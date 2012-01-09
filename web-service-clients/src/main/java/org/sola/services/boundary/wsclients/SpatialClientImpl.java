@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -92,7 +92,7 @@ public class SpatialClientImpl extends AbstractWSClientImpl implements SpatialCl
     @Override
     public MapDefinitionTO getMapDefinition() throws WebServiceClientException{
         try {
-            return getPort().getMapDefinition();
+            return getPort().getMapDefinition(this.getLanguageCode());
         } catch (SOLAFault f) {
             throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
                     f.getFaultInfo());

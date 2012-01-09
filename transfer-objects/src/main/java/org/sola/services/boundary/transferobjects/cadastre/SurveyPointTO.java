@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -39,7 +39,6 @@ import org.sola.services.common.contracts.AbstractVersionedTO;
  */
 public class SurveyPointTO extends AbstractVersionedTO {
     
-    private String transactionId;
     private String id;
     private boolean boundary;
     private byte[] geom;
@@ -75,13 +74,5 @@ public class SurveyPointTO extends AbstractVersionedTO {
 
     public void setOriginalGeom(byte[] originalGeom) {
         this.originalGeom = originalGeom;
-    }
-
-    public String getTransactionId() {
-        return transactionId;
-    }
-
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
     }
 }

@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -31,12 +31,17 @@ import java.util.List;
 import javax.xml.namespace.QName;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientExceptionType;
+import org.sola.webservices.search.GenericResult;
 import org.sola.webservices.search.QueryForSelect;
 import org.sola.webservices.search.ResultForSelectionInfo;
 import org.sola.webservices.search.SOLAFault;
 import org.sola.webservices.search.Search;
 import org.sola.webservices.search.SearchService;
 import org.sola.webservices.search.UnhandledFault;
+import org.sola.webservices.transferobjects.search.BaUnitSearchParamsTO;
+import org.sola.webservices.transferobjects.search.BaUnitSearchResultTO;
+import org.sola.webservices.transferobjects.search.BrSearchParamsTO;
+import org.sola.webservices.transferobjects.search.BrSearchResultTO;
 import org.sola.webservices.transferobjects.search.PropertyVerifierTO;
 import org.sola.webservices.transferobjects.search.ApplicationSearchParamsTO;
 import org.sola.webservices.transferobjects.search.ApplicationSearchResultTO;
@@ -48,6 +53,7 @@ import org.sola.webservices.transferobjects.search.UserSearchAdvancedResultTO;
 import org.sola.webservices.transferobjects.search.UserSearchParamsTO;
 import org.sola.webservices.transferobjects.search.UserSearchResultTO;
 import org.sola.webservices.transferobjects.search.ApplicationLogResultTO;
+import org.sola.webservices.transferobjects.search.CadastreObjectSearchResultTO;
 
 /**
  * Implementation class for the {@linkplain SearchClient} interface. 
@@ -150,6 +156,9 @@ public class SearchClientImpl extends AbstractWSClientImpl implements SearchClie
     public List<ResultForSelectionInfo> select(List<QueryForSelect> queries)
             throws WebServiceClientException {
         try {
+            for(QueryForSelect query:queries){
+                query.setLocale(this.getLanguageCode());
+            }
             List<ResultForSelectionInfo> result = getPort().select(queries);
             return result;
         } catch (SOLAFault f) {
@@ -244,6 +253,66 @@ public class SearchClientImpl extends AbstractWSClientImpl implements SearchClie
                     f.getFaultInfo());
         } catch (Throwable t) {
             throw processException(SERVICE_NAME + "getApplicationLog", t);
+        }
+    }
+
+    @Override
+    public List<BrSearchResultTO> searchBr(BrSearchParamsTO searchParams) throws WebServiceClientException {
+        try {
+            return getPort().searchBr(searchParams, getLanguageCode());
+        } catch (SOLAFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    f.getFaultInfo());
+        } catch (UnhandledFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    f.getFaultInfo());
+        } catch (Throwable t) {
+            throw processException(SERVICE_NAME + "searchBr", t);
+        }
+    }
+
+    @Override
+    public List<CadastreObjectSearchResultTO> searchCadastreObjects(
+            String searchBy, String searchString) throws WebServiceClientException {
+        try {
+            return getPort().searchCadastreObjects(searchBy, searchString);
+        } catch (SOLAFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    f.getFaultInfo());
+        } catch (UnhandledFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    f.getFaultInfo());
+        } catch (Throwable t) {
+            throw processException(SERVICE_NAME + "searchCadastreObjects", t);
+        }
+    }
+
+    public GenericResult test() throws WebServiceClientException {
+        try {
+            return getPort().test(getLanguageCode());
+        } catch (SOLAFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    f.getFaultInfo());
+        } catch (UnhandledFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    f.getFaultInfo());
+        } catch (Throwable t) {
+            throw processException(SERVICE_NAME + "searchBr", t);
+        }
+    }
+
+    @Override
+    public List<BaUnitSearchResultTO> searchBaUnit(BaUnitSearchParamsTO searchParams) throws WebServiceClientException {
+        try {
+            return getPort().searchBaUnit(searchParams);
+        } catch (SOLAFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    f.getFaultInfo());
+        } catch (UnhandledFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    f.getFaultInfo());
+        } catch (Throwable t) {
+            throw processException(SERVICE_NAME + "searchBaUnit", t);
         }
     }
 }

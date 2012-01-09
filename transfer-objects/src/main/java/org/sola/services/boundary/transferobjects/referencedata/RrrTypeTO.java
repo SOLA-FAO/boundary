@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -31,28 +31,12 @@ import org.sola.services.common.contracts.AbstractCodeTO;
 
 public class RrrTypeTO extends AbstractCodeTO {
     private String rrrGroupTypeCode;
-    private Boolean isPrimary;
-    private Boolean shareCheck;
-    private Boolean partyRequired;
+    private boolean primary;
+    private boolean shareCheck;
+    private boolean partyRequired;
     
     public RrrTypeTO() {
         super();
-    }
-
-    public Boolean getIsPrimary() {
-        return isPrimary;
-    }
-
-    public void setIsPrimary(Boolean isPrimary) {
-        this.isPrimary = isPrimary;
-    }
-
-    public Boolean getPartyRequired() {
-        return partyRequired;
-    }
-
-    public void setPartyRequired(Boolean partyRequired) {
-        this.partyRequired = partyRequired;
     }
 
     public String getRrrGroupTypeCode() {
@@ -63,12 +47,27 @@ public class RrrTypeTO extends AbstractCodeTO {
         this.rrrGroupTypeCode = rrrGroupTypeCode;
     }
 
-    public Boolean getShareCheck() {
+    public boolean isPrimary() {
+        return primary;
+    }
+
+    public void setPrimary(boolean primary) {
+        this.primary = primary;
+    }
+
+    public boolean isPartyRequired() {
+        return partyRequired;
+    }
+
+    public void setPartyRequired(boolean partyRequired) {
+        this.partyRequired = partyRequired;
+    }
+
+    public boolean isShareCheck() {
         return shareCheck;
     }
 
-    public void setShareCheck(Boolean shareCheck) {
+    public void setShareCheck(boolean shareCheck) {
         this.shareCheck = shareCheck;
     }
-    
 }

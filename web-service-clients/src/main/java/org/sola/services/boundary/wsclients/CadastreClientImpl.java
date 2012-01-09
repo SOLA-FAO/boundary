@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2011 - Food and Agriculture Organization of the United Nations (FAO).
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -42,8 +42,8 @@ import org.sola.webservices.cadastre.SOLAFault;
 import org.sola.webservices.cadastre.SOLAValidationFault;
 import org.sola.webservices.cadastre.UnhandledFault;
 import org.sola.webservices.transferobjects.ValidationResult;
-import org.sola.webservices.transferobjects.cadastre.CadastreChangeTO;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectTO;
+import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
 
 /**
  *
@@ -142,10 +142,11 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
     }
 
     @Override
-    public List<ValidationResult>  saveCadastreChange(CadastreChangeTO cadastreChangeTO)
+    public List<ValidationResult>  saveTransactionCadastreChange(
+            TransactionCadastreChangeTO transactionCadastreChangeTO)
             throws WebServiceClientException {
         try {
-            return getPort().saveCadastreChange(cadastreChangeTO, this.getLanguageCode());
+            return getPort().saveCadastreChange(transactionCadastreChangeTO, this.getLanguageCode());
         } catch (SOLAAccessFault f) {
             throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
                     f.getFaultInfo());
@@ -167,7 +168,7 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
     }
     
     @Override
-    public CadastreChangeTO getCadastreChange(String serviceId)
+    public TransactionCadastreChangeTO getTransactionCadastreChange(String serviceId)
             throws WebServiceClientException {
         try {
             return getPort().getCadastreChange(serviceId);
