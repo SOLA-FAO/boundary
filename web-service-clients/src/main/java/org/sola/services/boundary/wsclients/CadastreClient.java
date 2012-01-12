@@ -59,4 +59,5 @@ public interface CadastreClient extends AbstractWSClient {
     TransactionCadastreChangeTO getTransactionCadastreChange(String serviceId);
 
     List<CadastreObjectTO> getCadastreObjects(List<String> Ids); 
+    
 }
