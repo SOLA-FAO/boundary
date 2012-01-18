@@ -44,6 +44,8 @@ import javax.xml.ws.soap.SOAPFaultException;
 import org.sola.common.messaging.ServiceMessage;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientExceptionType;
+import org.sola.webservices.casemanagement.SOLAFault;
+import org.sola.webservices.casemanagement.UnhandledFault;
 
 /**
  * Implementation class for the {@linkplain AbstractWSClient} interface. Also provides common

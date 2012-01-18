@@ -42,6 +42,7 @@ import org.sola.webservices.cadastre.SOLAFault;
 import org.sola.webservices.cadastre.SOLAValidationFault;
 import org.sola.webservices.cadastre.UnhandledFault;
 import org.sola.webservices.transferobjects.ValidationResult;
+import org.sola.webservices.transferobjects.cadastre.CadastreObjectNodeTO;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
 
@@ -198,5 +199,39 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
             throw processException(SERVICE_NAME + "getCadastreObjects", t);
         }
 
+    }
+
+    @Override
+    public CadastreObjectNodeTO getCadastreObjectNode(
+            double xMin, double yMin, double xMax, double yMax, int srid)
+    throws WebServiceClientException{
+        try {
+            return getPort().getCadastreObjectNode(xMin, yMin, xMax, yMax, srid);
+        } catch (SOLAFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    f.getFaultInfo());
+        } catch (UnhandledFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    f.getFaultInfo());
+        } catch (Throwable t) {
+            throw processException(SERVICE_NAME + "getCadastreObjects", t);
+        }
+    }
+
+    @Override
+    public CadastreObjectNodeTO getCadastreObjectNodePotential(
+            double xMin, double yMin, double xMax, double yMax, int srid)
+    throws WebServiceClientException{
+        try {
+            return getPort().getCadastreObjectNodePotential(xMin, yMin, xMax, yMax, srid);
+        } catch (SOLAFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    f.getFaultInfo());
+        } catch (UnhandledFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    f.getFaultInfo());
+        } catch (Throwable t) {
+            throw processException(SERVICE_NAME + "getCadastreObjects", t);
+        }
     }
 }

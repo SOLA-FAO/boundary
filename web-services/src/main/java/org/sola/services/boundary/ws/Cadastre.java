@@ -267,4 +267,32 @@ public class Cadastre extends AbstractWebService {
 
         return (CadastreObjectNodeTO) result[0];
     }
+
+    @WebMethod(operationName = "GetCadastreObjectNodePotential")
+    public CadastreObjectNodeTO GetCadastreObjectNodePotential(
+            @WebParam(name = "xMin") double xMin, 
+            @WebParam(name = "yMin") double yMin,
+            @WebParam(name = "xMax") double xMax, 
+            @WebParam(name = "yMax") double yMax,
+            @WebParam(name = "srid") int srid)
+            throws SOLAFault, UnhandledFault {
+        final double xMinTmp  = xMin;
+        final double yMinTmp  = yMin;
+        final double xMaxTmp  = xMax;
+        final double yMaxTmp  = yMax;
+        final int sridTmp  = srid;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] =  GenericTranslator.toTO(cadastreEJB.getCadastreObjectNodePotential(
+                        xMinTmp, yMinTmp, xMaxTmp, yMaxTmp, sridTmp),
+                        CadastreObjectNodeTO.class);
+                        }
+        });
+
+        return (CadastreObjectNodeTO) result[0];
+    }
 }
