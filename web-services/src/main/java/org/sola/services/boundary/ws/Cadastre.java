@@ -36,6 +36,7 @@ import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
 import org.sola.common.MappingManager;
 import org.sola.services.boundary.transferobjects.cadastre.CadastreChangeTO;
+import org.sola.services.boundary.transferobjects.cadastre.CadastreObjectNodeTO;
 import org.sola.services.boundary.transferobjects.cadastre.CadastreObjectTO;
 import org.sola.services.boundary.transferobjects.cadastre.PropertySummaryTO;
 import org.sola.services.boundary.transferobjects.transaction.TransactionCadastreChangeTO;
@@ -50,7 +51,6 @@ import org.sola.services.common.faults.FaultUtility;
 import org.sola.services.common.faults.SOLAFault;
 import org.sola.services.common.faults.UnhandledFault;
 import org.sola.services.common.webservices.AbstractWebService;
-import org.sola.services.ejb.cadastre.repository.entities.CadastreChange;
 import org.sola.services.ejb.transaction.businesslogic.TransactionEJBLocal;
 import org.sola.services.ejb.transaction.repository.entities.TransactionCadastreChange;
 import org.sola.services.ejb.transaction.repository.entities.TransactionType;
@@ -238,5 +238,61 @@ public class Cadastre extends AbstractWebService {
             }
             throw (UnhandledFault) fault;
         }
+    }
+
+    @WebMethod(operationName = "GetCadastreObjectNode")
+    public CadastreObjectNodeTO GetCadastreObjectNode(
+            @WebParam(name = "xMin") double xMin, 
+            @WebParam(name = "yMin") double yMin,
+            @WebParam(name = "xMax") double xMax, 
+            @WebParam(name = "yMax") double yMax,
+            @WebParam(name = "srid") int srid)
+            throws SOLAFault, UnhandledFault {
+        final double xMinTmp  = xMin;
+        final double yMinTmp  = yMin;
+        final double xMaxTmp  = xMax;
+        final double yMaxTmp  = yMax;
+        final int sridTmp  = srid;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] =  GenericTranslator.toTO(cadastreEJB.getCadastreObjectNode(
+                        xMinTmp, yMinTmp, xMaxTmp, yMaxTmp, sridTmp),
+                        CadastreObjectNodeTO.class);
+                        }
+        });
+
+        return (CadastreObjectNodeTO) result[0];
+    }
+
+    @WebMethod(operationName = "GetCadastreObjectNodePotential")
+    public CadastreObjectNodeTO GetCadastreObjectNodePotential(
+            @WebParam(name = "xMin") double xMin, 
+            @WebParam(name = "yMin") double yMin,
+            @WebParam(name = "xMax") double xMax, 
+            @WebParam(name = "yMax") double yMax,
+            @WebParam(name = "srid") int srid)
+            throws SOLAFault, UnhandledFault {
+        final double xMinTmp  = xMin;
+        final double yMinTmp  = yMin;
+        final double xMaxTmp  = xMax;
+        final double yMaxTmp  = yMax;
+        final int sridTmp  = srid;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] =  GenericTranslator.toTO(cadastreEJB.getCadastreObjectNodePotential(
+                        xMinTmp, yMinTmp, xMaxTmp, yMaxTmp, sridTmp),
+                        CadastreObjectNodeTO.class);
+                        }
+        });
+
+        return (CadastreObjectNodeTO) result[0];
     }
 }

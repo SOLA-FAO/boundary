@@ -33,6 +33,7 @@ package org.sola.services.boundary.wsclients;
 import java.util.List;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.transferobjects.ValidationResult;
+import org.sola.webservices.transferobjects.cadastre.CadastreObjectNodeTO;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
 
@@ -59,4 +60,10 @@ public interface CadastreClient extends AbstractWSClient {
     TransactionCadastreChangeTO getTransactionCadastreChange(String serviceId);
 
     List<CadastreObjectTO> getCadastreObjects(List<String> Ids); 
+ 
+    CadastreObjectNodeTO getCadastreObjectNode(
+            double xMin, double yMin, double xMax, double yMax, int srid);
+
+    CadastreObjectNodeTO getCadastreObjectNodePotential(
+            double xMin, double yMin, double xMax, double yMax, int srid);
 }
