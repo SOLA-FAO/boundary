@@ -81,17 +81,12 @@
         </dependency>
         <dependency>
             <groupId>org.sola.services.ejbs</groupId>
-            <artifactId>sola-digital-archive</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.sola.services.ejbs</groupId>
             <artifactId>sola-administrative</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.sola.services.ejbs</groupId>
-            <artifactId>sola-transaction</artifactId>
+            <artifactId>sola-digital-archive</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

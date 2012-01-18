@@ -27,6 +27,8 @@
  */
 package org.sola.services.boundary.wsclients;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.namespace.QName;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientExceptionType;
@@ -124,6 +126,21 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
             return result;
         } catch (Throwable t) {
             throw processException(SERVICE_NAME + "checkConnection", t);
+        }
+    }
+
+    @Override
+    public List<BaUnitTO> getBaUnitsByServiceId(String serviceId) throws WebServiceClientException {
+        try {
+            return getPort().getBaUnitsByServiceId(serviceId);
+        } catch (SOLAFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    f.getFaultInfo());
+        } catch (UnhandledFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    f.getFaultInfo());
+        } catch (Throwable t) {
+            throw processException(SERVICE_NAME + "getBaUnitsByServiceId", t);
         }
     }
     

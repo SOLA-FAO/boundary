@@ -27,14 +27,19 @@
  */
 package org.sola.services.boundary.ws;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import javax.xml.ws.WebServiceContext;
 import org.sola.services.boundary.transferobjects.administrative.BaUnitTO;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.contracts.GenericTranslator;
 import org.sola.services.common.faults.FaultUtility;
+import org.sola.services.common.faults.SOLAAccessFault;
 import org.sola.services.common.faults.SOLAFault;
 import org.sola.services.common.faults.UnhandledFault;
 import org.sola.services.common.webservices.AbstractWebService;
@@ -43,6 +48,8 @@ import org.sola.services.ejb.administrative.businesslogic.AdministrativeEJBLocal
 import org.sola.services.ejb.administrative.repository.entities.BaUnit;
 import org.sola.services.ejb.cadastre.businesslogic.CadastreEJBLocal;
 import org.sola.services.ejb.source.businesslogic.SourceEJBLocal;
+import org.sola.services.ejb.transaction.businesslogic.TransactionEJBLocal;
+import org.sola.services.ejb.transaction.repository.entities.TransactionBasic;
 
 /** Boundary class to expose {@link AdministrativeEJB} methods.*/
 @WebService(serviceName = "administrative-service", targetNamespace = ServiceConstants.ADMINISTRATIVE_WS_NAMESPACE)
@@ -54,17 +61,21 @@ public class Administrative extends AbstractWebService {
     private CadastreEJBLocal cadastreEJB;
     @EJB
     private SourceEJBLocal sourceEJB;
-    
+    @EJB
+    private TransactionEJBLocal transactionEJB;
+    @Resource
+    private WebServiceContext wsContext;
+
     /** Dummy method to check the web service instance is working */
-   @WebMethod(operationName = "CheckConnection")
-    public boolean CheckConnection(){
+    @WebMethod(operationName = "CheckConnection")
+    public boolean CheckConnection() {
         return true;
     }
-   
-   @WebMethod(operationName = "CreateBaUnit")
+
+    @WebMethod(operationName = "CreateBaUnit")
     public BaUnitTO CreateBaUnit(
-           @WebParam(name="serviceId") String serviceId,
-           @WebParam(name = "baUnitTO") BaUnitTO baUnitTO)
+            @WebParam(name = "serviceId") String serviceId,
+            @WebParam(name = "baUnitTO") BaUnitTO baUnitTO)
             throws SOLAFault, UnhandledFault {
         try {
             //initialize();
@@ -94,10 +105,10 @@ public class Administrative extends AbstractWebService {
             cleanUp();
         }
     }
-   
+
     @WebMethod(operationName = "SaveBaUnit")
     public BaUnitTO SaveBaUnit(
-            @WebParam(name="serviceId") String serviceId,
+            @WebParam(name = "serviceId") String serviceId,
             @WebParam(name = "baUnitTO") BaUnitTO baUnitTO)
             throws SOLAFault, UnhandledFault {
         try {
@@ -129,7 +140,7 @@ public class Administrative extends AbstractWebService {
             cleanUp();
         }
     }
-    
+
     @WebMethod(operationName = "GetBaUnitById")
     public BaUnitTO GetBaUnitById(@WebParam(name = "id") String id)
             throws SOLAFault, UnhandledFault {
@@ -155,18 +166,42 @@ public class Administrative extends AbstractWebService {
             cleanUp();
         }
     }
-    
+
+    @WebMethod(operationName = "getBaUnitsByServiceId")
+    public List<BaUnitTO> getBaUnitsByServiceId(@WebParam(name = "serviceId") String serviceId)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] params = {serviceId};
+        final Object[] result = {new ArrayList<BaUnitTO>()};
+
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                String serviceId = (String) params[0];
+                if (serviceId != null) {
+                    TransactionBasic transaction = transactionEJB.getTransactionByServiceId(serviceId, false, TransactionBasic.class);
+                    if (transaction != null) {
+                        List<BaUnit> baUnits = administrativeEJB.getBaUnitsByTransactionId(transaction.getId());
+                        result[0] = GenericTranslator.toTOList(baUnits, BaUnitTO.class);
+                    }
+                }
+            }
+        });
+        return (List<BaUnitTO>) result[0];
+    }
+
     @WebMethod(operationName = "GetBaUnitByCode")
     public BaUnitTO GetBaUnitByCode(
-                        @WebParam(name = "nameFirstpart") String nameFirstpart, 
-                        @WebParam(name = "nameLastpart") String nameLastpart)
-                        throws SOLAFault, UnhandledFault {
+            @WebParam(name = "nameFirstpart") String nameFirstpart,
+            @WebParam(name = "nameLastpart") String nameLastpart)
+            throws SOLAFault, UnhandledFault {
         try {
             //initialize();
             try {
                 beginTransaction();
                 BaUnitTO result = GenericTranslator.toTO(
-                        administrativeEJB.getBaUnitByCode(nameFirstpart, 
+                        administrativeEJB.getBaUnitByCode(nameFirstpart,
                         nameLastpart), BaUnitTO.class);
                 commitTransaction();
                 return result;

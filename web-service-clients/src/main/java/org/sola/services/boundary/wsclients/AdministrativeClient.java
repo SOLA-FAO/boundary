@@ -27,6 +27,7 @@
  */
 package org.sola.services.boundary.wsclients;
 
+import java.util.List;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.transferobjects.administrative.BaUnitTO;
 
@@ -42,4 +43,5 @@ public interface AdministrativeClient extends AbstractWSClient {
     
     BaUnitTO GetBaUnitByCode(String nameFirstpart,  String nameLastpart) 
             throws WebServiceClientException;
+    List<BaUnitTO> getBaUnitsByServiceId(String serviceId) throws WebServiceClientException;
 }
