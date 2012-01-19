@@ -45,6 +45,7 @@ import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectNodeTO;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
+import org.sola.webservices.transferobjects.transaction.TransactionCadastreRedefinitionTO;
 
 /**
  *
@@ -232,6 +233,32 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
                     f.getFaultInfo());
         } catch (Throwable t) {
             throw processException(SERVICE_NAME + "getCadastreObjects", t);
+        }
+    }
+
+    @Override
+    public List<ValidationResult>  saveTransactionCadastreRedefinition(
+            TransactionCadastreRedefinitionTO transactionTO)
+            throws WebServiceClientException {
+        try {
+            return getPort().saveCadastreRedefinition(transactionTO, this.getLanguageCode());
+        } catch (SOLAAccessFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
+                    f.getFaultInfo());
+        } catch (SOLAValidationFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
+                    f.getFaultInfo());
+        } catch (OptimisticLockingFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
+                    f.getFaultInfo());
+        } catch (SOLAFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    f.getFaultInfo());
+        } catch (UnhandledFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    f.getFaultInfo());
+        } catch (Throwable t) {
+            throw processException(SERVICE_NAME + "saveTransactionCadastreRedefinition", t);
         }
     }
 }

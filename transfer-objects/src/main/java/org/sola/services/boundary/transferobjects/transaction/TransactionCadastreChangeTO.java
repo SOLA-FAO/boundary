@@ -38,7 +38,7 @@ import org.sola.services.boundary.transferobjects.cadastre.SurveyPointTO;
 
 /**
  *
- * @author manoku
+ * @author Elton Manoku
  */
 public class TransactionCadastreChangeTO extends TransactionTO {
 

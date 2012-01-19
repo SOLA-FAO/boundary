@@ -29,35 +29,43 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+package org.sola.services.boundary.transferobjects.transaction;
 
-package org.sola.services.boundary.transferobjects.cadastre;
-
-import java.io.Serializable;
 import java.util.List;
+import org.sola.services.boundary.transferobjects.cadastre.CadastreObjectNodeTargetTO;
+import org.sola.services.boundary.transferobjects.cadastre.CadastreObjectTargetRedefinitionTO;
 
 /**
  *
- * @author soladev
+ * @author Elton Manoku
  */
-public class SaveSplitParcelReqTO implements Serializable{
+public class TransactionCadastreRedefinitionTO extends TransactionTO {
 
-    private List<ParcelGeometryTO> parcelGeometries;
+    private List<TransactionSourceTO> transactionSourceList;
+    private List<CadastreObjectNodeTargetTO> cadastreObjectNodeTargetList;
+    private List<CadastreObjectTargetRedefinitionTO> cadastreObjectTargetList;
 
-    public SaveSplitParcelReqTO() {
-        super();
+    public List<TransactionSourceTO> getTransactionSourceList() {
+        return transactionSourceList;
     }
 
-    public SaveSplitParcelReqTO(List<ParcelGeometryTO> parcelGeometries) {
-        super();
-        this.parcelGeometries = parcelGeometries;
+    public void setTransactionSourceList(List<TransactionSourceTO> transactionSourceList) {
+        this.transactionSourceList = transactionSourceList;
     }
 
-    public List<ParcelGeometryTO> getParcelGeometries() {
-        return parcelGeometries;
+    public List<CadastreObjectNodeTargetTO> getCadastreObjectNodeTargetList() {
+        return cadastreObjectNodeTargetList;
     }
 
-    public void setParcelGeometries(List<ParcelGeometryTO> parcelGeometries) {
-        this.parcelGeometries = parcelGeometries;
+    public void setCadastreObjectNodeTargetList(List<CadastreObjectNodeTargetTO> cadastreObjectNodeTargetList) {
+        this.cadastreObjectNodeTargetList = cadastreObjectNodeTargetList;
     }
 
+    public List<CadastreObjectTargetRedefinitionTO> getCadastreObjectTargetList() {
+        return cadastreObjectTargetList;
+    }
+
+    public void setCadastreObjectTargetList(List<CadastreObjectTargetRedefinitionTO> cadastreObjectTargetList) {
+        this.cadastreObjectTargetList = cadastreObjectTargetList;
+    }
 }

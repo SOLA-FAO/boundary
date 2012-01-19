@@ -29,44 +29,30 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.sola.services.boundary.transferobjects.cadastre;
-
-import java.io.Serializable;
 
 /**
  *
- * @author soladev
+ * @author Elton Manoku
  */
-public class ParcelGeometryTO implements Serializable {
+public class CadastreObjectTargetRedefinitionTO extends CadastreObjectTargetTO{
 
-    public ParcelGeometryTO() {
-        super();
+    private byte[] geomPolygon;
+    private byte[] geomPolygonCurrent;
+
+    public byte[] getGeomPolygon() {
+        return geomPolygon;
     }
 
-    public ParcelGeometryTO(String label, String geometry) {
-        super(); 
-        this.label = label;
-        this.geometry = geometry;
+    public void setGeomPolygon(byte[] geomPolygon) {
+        this.geomPolygon = geomPolygon;
     }
 
-    private String label;
-    private String geometry;
-
-    public String getGeometry() {
-        return geometry;
+    public byte[] getGeomPolygonCurrent() {
+        return geomPolygonCurrent;
     }
 
-    public void setGeometry(String geometry) {
-        this.geometry = geometry;
+    public void setGeomPolygonCurrent(byte[] geomPolygonCurrent) {
+        this.geomPolygonCurrent = geomPolygonCurrent;
     }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
 }

@@ -36,6 +36,7 @@ import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectNodeTO;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
+import org.sola.webservices.transferobjects.transaction.TransactionCadastreRedefinitionTO;
 
 /**
  *
@@ -66,4 +67,7 @@ public interface CadastreClient extends AbstractWSClient {
 
     CadastreObjectNodeTO getCadastreObjectNodePotential(
             double xMin, double yMin, double xMax, double yMax, int srid);
+
+    List<ValidationResult> saveTransactionCadastreRedefinition(
+            TransactionCadastreRedefinitionTO transactionTO);
 }

@@ -40,6 +40,7 @@ import org.sola.services.boundary.transferobjects.cadastre.CadastreObjectNodeTO;
 import org.sola.services.boundary.transferobjects.cadastre.CadastreObjectTO;
 import org.sola.services.boundary.transferobjects.cadastre.PropertySummaryTO;
 import org.sola.services.boundary.transferobjects.transaction.TransactionCadastreChangeTO;
+import org.sola.services.boundary.transferobjects.transaction.TransactionCadastreRedefinitionTO;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.br.ValidationResult;
 import org.sola.services.common.contracts.GenericTranslator;
@@ -53,6 +54,7 @@ import org.sola.services.common.faults.UnhandledFault;
 import org.sola.services.common.webservices.AbstractWebService;
 import org.sola.services.ejb.transaction.businesslogic.TransactionEJBLocal;
 import org.sola.services.ejb.transaction.repository.entities.TransactionCadastreChange;
+import org.sola.services.ejb.transaction.repository.entities.TransactionCadastreRedefinition;
 import org.sola.services.ejb.transaction.repository.entities.TransactionType;
 
 /**
@@ -294,5 +296,32 @@ public class Cadastre extends AbstractWebService {
         });
 
         return (CadastreObjectNodeTO) result[0];
+    }
+
+    @WebMethod(operationName = "SaveCadastreRedefinition")
+    public List<ValidationResult> SaveCadastreRedefinition(
+            @WebParam(name = "transactionCadastreRedefinitionTO") 
+                    TransactionCadastreRedefinitionTO transactionTO,
+            @WebParam(name = "languageCode") String languageCode)
+            throws SOLAValidationFault, OptimisticLockingFault, 
+            SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final TransactionCadastreRedefinitionTO transactionTOTmp  = transactionTO;
+        final String languageCodeTmp  = languageCode;
+        final Object[] result = {null};
+
+        runUpdateMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                TransactionCadastreRedefinition transactionCadastreRedefinition = 
+                        GenericTranslator.fromTO(
+                        transactionTOTmp, TransactionCadastreRedefinition.class, null);
+                result[0] = transactionEJB.saveTransaction(transactionCadastreRedefinition, 
+                        TransactionType.REDEFINE_CADASTRE, languageCodeTmp);
+            }
+        });
+
+        return (List<ValidationResult>) result[0];
     }
 }
