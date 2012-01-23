@@ -70,4 +70,6 @@ public interface CadastreClient extends AbstractWSClient {
 
     List<ValidationResult> saveTransactionCadastreRedefinition(
             TransactionCadastreRedefinitionTO transactionTO);
+
+    TransactionCadastreRedefinitionTO getTransactionCadastreRedefinition(String serviceId);
 }

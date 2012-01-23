@@ -215,7 +215,6 @@ public class Cadastre extends AbstractWebService {
             return GenericTranslator.toTO(
                     transactionEJB.getTransactionByServiceId(serviceId, false, TransactionCadastreChange.class),
                     TransactionCadastreChangeTO.class);
-                    //cadastreEJB.getCadastreChange(serviceId), CadastreChangeTO.class);
         } catch (Throwable t) {
             Throwable fault = FaultUtility.ProcessException(t);
             if (fault.getClass() == SOLAFault.class) {
@@ -323,5 +322,23 @@ public class Cadastre extends AbstractWebService {
         });
 
         return (List<ValidationResult>) result[0];
+    }
+
+    @WebMethod(operationName = "GetCadastreRedefinition")
+    public TransactionCadastreRedefinitionTO GetTransactionCadastreRedefinition(
+            @WebParam(name = "serviceId") String serviceId)
+            throws SOLAFault, UnhandledFault {
+        try {
+            return GenericTranslator.toTO(
+                    transactionEJB.getTransactionByServiceId(
+                        serviceId, false, TransactionCadastreRedefinition.class),
+                    TransactionCadastreRedefinitionTO.class);
+        } catch (Throwable t) {
+            Throwable fault = FaultUtility.ProcessException(t);
+            if (fault.getClass() == SOLAFault.class) {
+                throw (SOLAFault) fault;
+            }
+            throw (UnhandledFault) fault;
+        }
     }
 }
