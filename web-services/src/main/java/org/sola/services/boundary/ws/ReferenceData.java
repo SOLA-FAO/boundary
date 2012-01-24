@@ -39,6 +39,7 @@ import org.sola.common.RolesConstants;
 import org.sola.services.boundary.transferobjects.referencedata.ApplicationActionTypeTO;
 import org.sola.services.boundary.transferobjects.referencedata.ApplicationStatusTypeTO;
 import org.sola.services.boundary.transferobjects.referencedata.AvailabilityStatusTO;
+import org.sola.services.boundary.transferobjects.referencedata.BaUnitRelTypeTO;
 import org.sola.services.boundary.transferobjects.referencedata.BaUnitTypeTO;
 import org.sola.services.boundary.transferobjects.referencedata.BrSeverityTypeTO;
 import org.sola.services.boundary.transferobjects.referencedata.BrTechnicalTypeTO;
@@ -73,6 +74,7 @@ import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.contracts.AbstractCodeTO;
 import org.sola.services.common.repository.entities.AbstractCodeEntity;
 import org.sola.services.ejb.administrative.businesslogic.AdministrativeEJBLocal;
+import org.sola.services.ejb.administrative.repository.entities.BaUnitRelType;
 import org.sola.services.ejb.administrative.repository.entities.BaUnitType;
 import org.sola.services.ejb.administrative.repository.entities.MortgageType;
 import org.sola.services.ejb.administrative.repository.entities.RrrGroupType;
@@ -763,6 +765,25 @@ public class ReferenceData extends AbstractWebService {
         return (List<BrSeverityTypeTO>) result[0];
     }
     
+    @WebMethod(operationName = "getBaUnitRelTypes")
+    public List<BaUnitRelTypeTO> getBaUnitRelTypes(@WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault {
+        final Object[] params = {languageCode};
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                String languageCode = params[0] == null ? null : params[0].toString();
+                result[0] = GenericTranslator.toTOList(administrativeEJB.getCodeEntityList(
+                        BaUnitRelType.class, languageCode), BaUnitRelTypeTO.class);
+            }
+        });
+
+        return (List<BaUnitRelTypeTO>) result[0];
+    }
+    
     @RolesAllowed(RolesConstants.ADMIN_MANAGE_REFDATA)
     @WebMethod(operationName = "saveReferenceData")
     public AbstractCodeTO saveReferenceData(AbstractCodeTO refDataTO)
@@ -873,6 +894,10 @@ public class ReferenceData extends AbstractWebService {
                     codeEntity = systemEJB.getCodeEntity(BrValidationTargetType.class, refDataTO.getCode());
                     codeEntity = GenericTranslator.fromTO(refDataTO, BrValidationTargetType.class, codeEntity);
                     systemEJB.saveCodeEntity(codeEntity);
+                } else if (refDataTO instanceof BaUnitRelTypeTO) {
+                    codeEntity = administrativeEJB.getCodeEntity(BaUnitRelType.class, refDataTO.getCode());
+                    codeEntity = GenericTranslator.fromTO(refDataTO, BaUnitRelType.class, codeEntity);
+                    administrativeEJB.saveCodeEntity(codeEntity);
                 }
 
                 result = GenericTranslator.toTO(codeEntity, refDataTO.getClass());
