@@ -261,4 +261,20 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
             throw processException(SERVICE_NAME + "saveTransactionCadastreRedefinition", t);
         }
     }
+
+    @Override
+    public TransactionCadastreRedefinitionTO getTransactionCadastreRedefinition(String serviceId)
+            throws WebServiceClientException {
+        try {
+            return getPort().getCadastreRedefinition(serviceId);
+        } catch (SOLAFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    f.getFaultInfo());
+        } catch (UnhandledFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    f.getFaultInfo());
+        } catch (Throwable t) {
+            throw processException(SERVICE_NAME + "getTransactionCadastreRedefinition", t);
+        }
+    }
 }
