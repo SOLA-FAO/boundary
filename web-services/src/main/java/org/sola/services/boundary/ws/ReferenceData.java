@@ -765,8 +765,8 @@ public class ReferenceData extends AbstractWebService {
         return (List<BrSeverityTypeTO>) result[0];
     }
     
-    @WebMethod(operationName = "getBaUnitRelTypes")
-    public List<BaUnitRelTypeTO> getBaUnitRelTypes(@WebParam(name = "languageCode") String languageCode)
+    @WebMethod(operationName = "GetBaUnitRelTypes")
+    public List<BaUnitRelTypeTO> GetBaUnitRelTypes(@WebParam(name = "languageCode") String languageCode)
             throws SOLAFault, UnhandledFault {
         final Object[] params = {languageCode};
         final Object[] result = {null};

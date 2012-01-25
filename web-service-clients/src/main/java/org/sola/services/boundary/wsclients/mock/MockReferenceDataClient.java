@@ -33,6 +33,7 @@ import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.transferobjects.AbstractCodeTO;
 import org.sola.webservices.transferobjects.referencedata.ApplicationActionTypeTO;
 import org.sola.webservices.transferobjects.referencedata.ApplicationStatusTypeTO;
+import org.sola.webservices.transferobjects.referencedata.BaUnitRelTypeTO;
 import org.sola.webservices.transferobjects.referencedata.BaUnitTypeTO;
 import org.sola.webservices.transferobjects.referencedata.BrSeverityTypeTO;
 import org.sola.webservices.transferobjects.referencedata.BrTechnicalTypeTO;
@@ -392,6 +393,16 @@ public class MockReferenceDataClient extends AbstractMockWSClient implements Ref
 
     @Override
     public List<BrSeverityTypeTO> getBrSeverityTypes(String lang) throws WebServiceClientException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<BaUnitRelTypeTO> getBaUnitRelTypes(String lang) throws WebServiceClientException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<BaUnitRelTypeTO> getBaUnitRelTypes() throws WebServiceClientException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

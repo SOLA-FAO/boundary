@@ -38,6 +38,7 @@ import org.sola.webservices.referencedata.ReferencedataService;
 import org.sola.webservices.transferobjects.AbstractCodeTO;
 import org.sola.webservices.transferobjects.referencedata.ApplicationActionTypeTO;
 import org.sola.webservices.transferobjects.referencedata.ApplicationStatusTypeTO;
+import org.sola.webservices.transferobjects.referencedata.BaUnitRelTypeTO;
 import org.sola.webservices.transferobjects.referencedata.BaUnitTypeTO;
 import org.sola.webservices.transferobjects.referencedata.BrSeverityTypeTO;
 import org.sola.webservices.transferobjects.referencedata.BrTechnicalTypeTO;
@@ -590,5 +591,25 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
         } catch (Throwable t) {
             throw processException(SERVICE_NAME + "getBrSeverityTypes", t);
         }
+    }
+
+    @Override
+    public List<BaUnitRelTypeTO> getBaUnitRelTypes(String lang) throws WebServiceClientException {
+        try {
+            return getPort().getBaUnitRelTypes(lang);
+        } catch (SOLAFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    f.getFaultInfo());
+        } catch (UnhandledFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    f.getFaultInfo());
+        } catch (Throwable t) {
+            throw processException(SERVICE_NAME + "getBaUnitRelTypes", t);
+        }
+    }
+
+    @Override
+    public List<BaUnitRelTypeTO> getBaUnitRelTypes() throws WebServiceClientException {
+        return getBaUnitRelTypes(getLanguageCode());
     }
 }
