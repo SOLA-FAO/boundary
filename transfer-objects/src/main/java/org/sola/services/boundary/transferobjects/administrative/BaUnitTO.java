@@ -47,6 +47,7 @@ public class BaUnitTO extends AbstractIdTO {
     private List<SourceTO> sourceList;
     private List<RelatedBaUnitInfoTO> childBaUnits;
     private List<RelatedBaUnitInfoTO> parentBaUnits;
+    private String pendingActionCode;
     
     public BaUnitTO(){
         super();
@@ -167,6 +168,14 @@ public class BaUnitTO extends AbstractIdTO {
 
     public void setLocked(boolean locked) {
         this.locked = locked;
+    }
+
+    public String getPendingActionCode() {
+        return pendingActionCode;
+    }
+
+    public void setPendingActionCode(String pendingActionCode) {
+        this.pendingActionCode = pendingActionCode;
     }
     
 }
