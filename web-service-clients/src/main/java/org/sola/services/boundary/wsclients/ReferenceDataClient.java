@@ -32,6 +32,7 @@ import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.transferobjects.AbstractCodeTO;
 import org.sola.webservices.transferobjects.referencedata.ApplicationActionTypeTO;
 import org.sola.webservices.transferobjects.referencedata.ApplicationStatusTypeTO;
+import org.sola.webservices.transferobjects.referencedata.BaUnitRelTypeTO;
 import org.sola.webservices.transferobjects.referencedata.BaUnitTypeTO;
 import org.sola.webservices.transferobjects.referencedata.BrSeverityTypeTO;
 import org.sola.webservices.transferobjects.referencedata.BrTechnicalTypeTO;
@@ -163,4 +164,8 @@ public interface ReferenceDataClient extends AbstractWSClient {
     List<BrSeverityTypeTO> getBrSeverityTypes() throws WebServiceClientException;
     
     List<BrSeverityTypeTO> getBrSeverityTypes(String lang) throws WebServiceClientException;
+    
+    List<BaUnitRelTypeTO> getBaUnitRelTypes(String lang) throws WebServiceClientException;
+    
+    List<BaUnitRelTypeTO> getBaUnitRelTypes() throws WebServiceClientException;
 }

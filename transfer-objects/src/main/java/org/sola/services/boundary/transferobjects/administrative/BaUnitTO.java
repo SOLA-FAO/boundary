@@ -45,8 +45,8 @@ public class BaUnitTO extends AbstractIdTO {
     private List<BaUnitNotationTO> baUnitNotationList;
     private List<CadastreObjectTO> cadastreObjectList;
     private List<SourceTO> sourceList;
-    private List<BaUnitBasicTO> childBaUnits;
-    private List<BaUnitBasicTO> parentBaUnits;
+    private List<RelatedBaUnitInfoTO> childBaUnits;
+    private List<RelatedBaUnitInfoTO> parentBaUnits;
     
     public BaUnitTO(){
         super();
@@ -129,19 +129,19 @@ public class BaUnitTO extends AbstractIdTO {
         this.sourceList = sourceList;
     }
 
-    public List<BaUnitBasicTO> getChildBaUnits() {
+    public List<RelatedBaUnitInfoTO> getChildBaUnits() {
         return childBaUnits;
     }
 
-    public void setChildBaUnits(List<BaUnitBasicTO> childBaUnits) {
+    public void setChildBaUnits(List<RelatedBaUnitInfoTO> childBaUnits) {
         this.childBaUnits = childBaUnits;
     }
 
-    public List<BaUnitBasicTO> getParentBaUnits() {
+    public List<RelatedBaUnitInfoTO> getParentBaUnits() {
         return parentBaUnits;
     }
 
-    public void setParentBaUnits(List<BaUnitBasicTO> parentBaUnits) {
+    public void setParentBaUnits(List<RelatedBaUnitInfoTO> parentBaUnits) {
         this.parentBaUnits = parentBaUnits;
     }
     
