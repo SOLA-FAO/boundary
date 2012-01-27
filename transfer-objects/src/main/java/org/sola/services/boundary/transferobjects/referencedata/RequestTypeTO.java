@@ -37,7 +37,7 @@ public class RequestTypeTO extends AbstractCodeTO {
     private String requestCategoryCode;
     private int nrPropertiesRequired;
     private String notationTemplate;
-    private String rrrTypeActionCode;
+    private String typeActionCode;
     private String rrrTypeCode;
     private List<RequestTypeSourceTypeTO> sourceTypeCodes;
     private BigDecimal baseFee;
@@ -80,12 +80,12 @@ public class RequestTypeTO extends AbstractCodeTO {
         this.notationTemplate = notationTemplate;
     }
 
-    public String getRrrTypeActionCode() {
-        return rrrTypeActionCode;
+    public String getTypeActionCode() {
+        return typeActionCode;
     }
 
-    public void setRrrTypeActionCode(String rrrTypeActionCode) {
-        this.rrrTypeActionCode = rrrTypeActionCode;
+    public void setTypeActionCode(String typeActionCode) {
+        this.typeActionCode = typeActionCode;
     }
 
     public String getRrrTypeCode() {
