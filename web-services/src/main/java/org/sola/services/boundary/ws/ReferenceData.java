@@ -69,7 +69,7 @@ import org.sola.services.boundary.transferobjects.referencedata.SourceBaUnitRela
 import org.sola.services.boundary.transferobjects.referencedata.SourceTypeTO;
 import org.sola.services.boundary.transferobjects.referencedata.RrrTypeTO;
 import org.sola.services.boundary.transferobjects.referencedata.RrrGroupTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.RrrTypeActionTO;
+import org.sola.services.boundary.transferobjects.referencedata.TypeActionTO;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.contracts.AbstractCodeTO;
 import org.sola.services.common.repository.entities.AbstractCodeEntity;
@@ -84,7 +84,7 @@ import org.sola.services.ejb.application.repository.entities.ApplicationActionTy
 import org.sola.services.ejb.application.repository.entities.ApplicationStatusType;
 import org.sola.services.ejb.application.repository.entities.RequestCategoryType;
 import org.sola.services.ejb.application.repository.entities.RequestType;
-import org.sola.services.ejb.application.repository.entities.RrrTypeAction;
+import org.sola.services.ejb.application.repository.entities.TypeAction;
 import org.sola.services.ejb.application.repository.entities.ServiceActionType;
 import org.sola.services.ejb.application.repository.entities.ServiceStatusType;
 import org.sola.services.ejb.cadastre.businesslogic.CadastreEJBLocal;
@@ -682,16 +682,16 @@ public class ReferenceData extends AbstractWebService {
         }
     }
 
-    @WebMethod(operationName = "GetRrrTypeActions")
-    public List<RrrTypeActionTO> GetRrrTypeActions(String languageCode)
+    @WebMethod(operationName = "GetTypeActions")
+    public List<TypeActionTO> GetTypeActions(String languageCode)
             throws SOLAFault, UnhandledFault {
         try {
             //  initialize();
             try {
                 beginTransaction();
-                List<RrrTypeActionTO> result = GenericTranslator.toTOList(
-                        applicationEJB.getRrrTypeActions(languageCode),
-                        RrrTypeActionTO.class);
+                List<TypeActionTO> result = GenericTranslator.toTOList(
+                        applicationEJB.getTypeActions(languageCode),
+                        TypeActionTO.class);
                 commitTransaction();
                 return result;
             } finally {
@@ -850,9 +850,9 @@ public class ReferenceData extends AbstractWebService {
                     codeEntity = applicationEJB.getCodeEntity(RequestType.class, refDataTO.getCode());
                     codeEntity = GenericTranslator.fromTO(refDataTO, RequestType.class, codeEntity);
                     applicationEJB.saveCodeEntity(codeEntity);
-                } else if (refDataTO instanceof RrrTypeActionTO) {
-                    codeEntity = applicationEJB.getCodeEntity(RrrTypeAction.class, refDataTO.getCode());
-                    codeEntity = GenericTranslator.fromTO(refDataTO, RrrTypeAction.class, codeEntity);
+                } else if (refDataTO instanceof TypeActionTO) {
+                    codeEntity = applicationEJB.getCodeEntity(TypeAction.class, refDataTO.getCode());
+                    codeEntity = GenericTranslator.fromTO(refDataTO, TypeAction.class, codeEntity);
                     applicationEJB.saveCodeEntity(codeEntity);
                 } else if (refDataTO instanceof ServiceActionTypeTO) {
                     codeEntity = applicationEJB.getCodeEntity(ServiceActionType.class, refDataTO.getCode());

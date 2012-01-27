@@ -50,7 +50,7 @@ import org.sola.webservices.transferobjects.referencedata.RegistrationStatusType
 import org.sola.webservices.transferobjects.referencedata.RequestCategoryTypeTO;
 import org.sola.webservices.transferobjects.referencedata.RequestTypeTO;
 import org.sola.webservices.transferobjects.referencedata.RrrGroupTypeTO;
-import org.sola.webservices.transferobjects.referencedata.RrrTypeActionTO;
+import org.sola.webservices.transferobjects.referencedata.TypeActionTO;
 import org.sola.webservices.transferobjects.referencedata.RrrTypeTO;
 import org.sola.webservices.transferobjects.referencedata.ServiceActionTypeTO;
 import org.sola.webservices.transferobjects.referencedata.ServiceStatusTypeTO;
@@ -256,7 +256,7 @@ public class MockReferenceDataClient extends AbstractMockWSClient implements Ref
     }
 
     @Override
-    public List<RrrTypeActionTO> getRrrTypeActions() throws WebServiceClientException {
+    public List<TypeActionTO> getTypeActions() throws WebServiceClientException {
         return getManager().getResponse(GET_RRR_TYPE_ACTIONS, List.class,
                 MockTOFactory.createRrrTypeActions());
     }
@@ -337,7 +337,7 @@ public class MockReferenceDataClient extends AbstractMockWSClient implements Ref
     }
 
     @Override
-    public List<RrrTypeActionTO> getRrrTypeActions(String lang) throws WebServiceClientException {
+    public List<TypeActionTO> getTypeActions(String lang) throws WebServiceClientException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

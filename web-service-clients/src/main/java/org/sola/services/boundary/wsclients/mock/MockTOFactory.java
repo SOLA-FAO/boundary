@@ -53,7 +53,7 @@ import org.sola.webservices.transferobjects.referencedata.RequestTypeTO;
 import org.sola.webservices.transferobjects.referencedata.ServiceStatusTypeTO;
 import org.sola.webservices.transferobjects.referencedata.SourceTypeTO;
 import org.sola.webservices.transferobjects.referencedata.RrrGroupTypeTO;
-import org.sola.webservices.transferobjects.referencedata.RrrTypeActionTO;
+import org.sola.webservices.transferobjects.referencedata.TypeActionTO;
 import org.sola.webservices.transferobjects.referencedata.RrrTypeTO;
 import org.sola.webservices.transferobjects.referencedata.SourceBaUnitRelationTypeTO;
 import org.sola.webservices.transferobjects.security.GroupTO;
@@ -291,11 +291,11 @@ public class MockTOFactory {
     }
     
     /** Creates a default rrr type actions. */
-    public static List<RrrTypeActionTO> createRrrTypeActions(){
-        List<RrrTypeActionTO> result = new ArrayList<RrrTypeActionTO>();
-        result.add(createCode(RrrTypeActionTO.class, "new", 
+    public static List<TypeActionTO> createRrrTypeActions(){
+        List<TypeActionTO> result = new ArrayList<TypeActionTO>();
+        result.add(createCode(TypeActionTO.class, "new", 
                 "New"));
-        result.add(createCode(RrrTypeActionTO.class, "cancel" , 
+        result.add(createCode(TypeActionTO.class, "cancel" , 
                 "Cancel"));
         
         return result;

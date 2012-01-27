@@ -29,8 +29,8 @@ package org.sola.services.boundary.transferobjects.referencedata;
 
 import org.sola.services.common.contracts.AbstractCodeTO;
 
-public class RrrTypeActionTO extends AbstractCodeTO {
-    public RrrTypeActionTO(){
+public class TypeActionTO extends AbstractCodeTO {
+    public TypeActionTO(){
         super();
     }
 }

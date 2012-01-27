@@ -55,7 +55,7 @@ import org.sola.webservices.transferobjects.referencedata.RegistrationStatusType
 import org.sola.webservices.transferobjects.referencedata.RequestCategoryTypeTO;
 import org.sola.webservices.transferobjects.referencedata.RequestTypeTO;
 import org.sola.webservices.transferobjects.referencedata.RrrGroupTypeTO;
-import org.sola.webservices.transferobjects.referencedata.RrrTypeActionTO;
+import org.sola.webservices.transferobjects.referencedata.TypeActionTO;
 import org.sola.webservices.transferobjects.referencedata.RrrTypeTO;
 import org.sola.webservices.transferobjects.referencedata.ServiceActionTypeTO;
 import org.sola.webservices.transferobjects.referencedata.ServiceStatusTypeTO;
@@ -479,14 +479,14 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
     }
 
     @Override
-    public List<RrrTypeActionTO> getRrrTypeActions() throws WebServiceClientException {
-        return getRrrTypeActions(getLanguageCode());
+    public List<TypeActionTO> getTypeActions() throws WebServiceClientException {
+        return getTypeActions(getLanguageCode());
     }
     
     @Override
-    public List<RrrTypeActionTO> getRrrTypeActions(String lang) throws WebServiceClientException {
+    public List<TypeActionTO> getTypeActions(String lang) throws WebServiceClientException {
         try {
-            return getPort().getRrrTypeActions(lang);
+            return getPort().getTypeActions(lang);
         } catch (SOLAFault f) {
             throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
                     f.getFaultInfo());
@@ -494,7 +494,7 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
             throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
                     f.getFaultInfo());
         } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getRrrTypeActions", t);
+            throw processException(SERVICE_NAME + "getTypeActions", t);
         }
     }
 
