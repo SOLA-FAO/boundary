@@ -141,6 +141,46 @@ public class Administrative extends AbstractWebService {
         }
     }
 
+    @WebMethod(operationName = "terminateBaUnit")
+    public BaUnitTO terminateBaUnit(@WebParam(name = "baUnitId") String baUnitId,
+            @WebParam(name = "serviceId") String serviceId)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] params = {baUnitId, serviceId};
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                String baUnitId = (String) params[0];
+                String serviceId = (String) params[1];
+                BaUnit baUnit = administrativeEJB.terminateBaUnit(baUnitId, serviceId);
+                result[0] = GenericTranslator.toTO(baUnit, BaUnitTO.class);
+            }
+        });
+        return (BaUnitTO) result[0];
+    }
+
+    @WebMethod(operationName = "cancelBaUnitTermination")
+    public BaUnitTO cancelBaUnitTermination(@WebParam(name = "baUnitId") String baUnitId)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] params = {baUnitId};
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                String baUnitId = (String) params[0];
+                BaUnit baUnit = administrativeEJB.cancelBaUnitTermination(baUnitId);
+                result[0] = GenericTranslator.toTO(baUnit, BaUnitTO.class);
+            }
+        });
+        return (BaUnitTO) result[0];
+    }
+    
     @WebMethod(operationName = "GetBaUnitById")
     public BaUnitTO GetBaUnitById(@WebParam(name = "id") String id)
             throws SOLAFault, UnhandledFault {

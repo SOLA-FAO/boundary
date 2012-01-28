@@ -143,5 +143,35 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
             throw processException(SERVICE_NAME + "getBaUnitsByServiceId", t);
         }
     }
+
+    @Override
+    public BaUnitTO cancelBaUnitTermination(String baUnitId) throws WebServiceClientException {
+        try {
+            return getPort().cancelBaUnitTermination(baUnitId);
+        } catch (SOLAFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    f.getFaultInfo());
+        } catch (UnhandledFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    f.getFaultInfo());
+        } catch (Throwable t) {
+            throw processException(SERVICE_NAME + "cancelBaUnitTermination", t);
+        }
+    }
+
+    @Override
+    public BaUnitTO terminateBaUnit(String baUnitId, String serviceId) throws WebServiceClientException {
+        try {
+            return getPort().terminateBaUnit(baUnitId, serviceId);
+        } catch (SOLAFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    f.getFaultInfo());
+        } catch (UnhandledFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    f.getFaultInfo());
+        } catch (Throwable t) {
+            throw processException(SERVICE_NAME + "terminateBaUnit", t);
+        }
+    }
     
 }
