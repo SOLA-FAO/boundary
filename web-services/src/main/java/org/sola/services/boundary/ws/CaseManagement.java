@@ -341,7 +341,7 @@ public class CaseManagement extends AbstractWebService {
             @WebParam(name = "serviceId") String serviceId,
             @WebParam(name = "sourceId") String sourceId,
             @WebParam(name = "languageCode") String languageCode)
-            throws SOLAValidationFault, OptimisticLockingFault, SOLAFault, UnhandledFault {
+            throws SOLAValidationFault, OptimisticLockingFault, SOLAFault, UnhandledFault, SOLAAccessFault {
         try {
             try {
                 beginTransaction();
@@ -363,8 +363,10 @@ public class CaseManagement extends AbstractWebService {
                 throw (OptimisticLockingFault) fault;
             }
             if (fault.getClass() == SOLAValidationFault.class) {
-
                 throw (SOLAValidationFault) fault;
+            }
+            if (fault.getClass() == SOLAAccessFault.class) {
+                throw (SOLAAccessFault) fault;
             }
             throw (UnhandledFault) fault;
         } finally {
