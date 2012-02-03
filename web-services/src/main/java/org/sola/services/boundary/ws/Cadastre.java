@@ -90,40 +90,80 @@ public class Cadastre extends AbstractWebService {
             @WebParam(name = "nameFirstPart") String nameFirstPart, 
             @WebParam(name = "nameLastPart") String nameLastPart)
             throws SOLAFault, UnhandledFault {
-        try {
-            try {
-                beginTransaction();
-                PropertySummaryTO result = null;
-                commitTransaction();
-                return result;
-            } finally {
-                rollbackTransaction();
-            }
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        }
+    
+          //     FLOSS - 813 0        
+            final String nameFirstPartTmp  = nameFirstPart;
+            final String nameLastPartTmp  =  nameLastPart;
+            final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] =  PropertySummaryTO.class;
+                        }
+        });
+
+        return (PropertySummaryTO) result[0];
+        
+        
+        
+//        try {
+//            try {
+//                beginTransaction();
+//                PropertySummaryTO result = null;
+//                commitTransaction();
+//                return result;
+//            } finally {
+//                rollbackTransaction();
+//            }
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        }
+   
+    
     }
 
     @WebMethod(operationName = "GetCadastreObjectByParts")
     public List<CadastreObjectTO> GetCadastreObjectByParts(
             @WebParam(name = "searchString") String searchString)
             throws SOLAFault, UnhandledFault {
-        try {
-                List<CadastreObjectTO> result = GenericTranslator.toTOList(
-                        cadastreEJB.getCadastreObjectByParts(searchString),
+   
+        //     FLOSS - 813 1        
+            final String searchStringTmp  = searchString;
+            final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] =  GenericTranslator.toTOList(
+                        cadastreEJB.getCadastreObjectByParts(searchStringTmp),
                         CadastreObjectTO.class);
-                return result;
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        }
+                        }
+        });
+
+        return (List<CadastreObjectTO>) result[0];
+        
+        
+//        try {
+//                List<CadastreObjectTO> result = GenericTranslator.toTOList(
+//                        cadastreEJB.getCadastreObjectByParts(searchString),
+//                        CadastreObjectTO.class);
+//                return result;
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        }
+    
+    
     }
 
     @WebMethod(operationName = "GetCadastreObjectByPoint")
@@ -132,53 +172,112 @@ public class Cadastre extends AbstractWebService {
             @WebParam(name = "y") double y,
             @WebParam(name = "srid") int srid)
             throws SOLAFault, UnhandledFault {
-        try {
-                return GenericTranslator.toTO(
-                        cadastreEJB.getCadastreObjectByPoint(x,y,srid),
+       
+          
+         //     FLOSS - 813 2        
+            final double xTmp  = x;
+            final double yTmp  = y;
+            final int    sridTmp  = srid;
+            final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] =  GenericTranslator.toTO(
+                        cadastreEJB.getCadastreObjectByPoint(xTmp,yTmp,sridTmp),
                         CadastreObjectTO.class);
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        }
+                        }
+        });
+
+        return (CadastreObjectTO) result[0];
+        
+        
+        
+//        try {
+//                return GenericTranslator.toTO(
+//                        cadastreEJB.getCadastreObjectByPoint(x,y,srid),
+//                        CadastreObjectTO.class);
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        }
     }
 
     @WebMethod(operationName = "GetCadastreObjectsByBaUnit")
     public List<CadastreObjectTO> GetCadastreObjectsByBaUnit(
             @WebParam(name = "baUnitId") String baUnitId)
             throws SOLAFault, UnhandledFault {
-        try {
-                List<CadastreObjectTO> result = GenericTranslator.toTOList(
-                        cadastreEJB.getCadastreObjectsByBaUnit(baUnitId),
+      //     FLOSS - 813 3        
+            final String baUnitIdTmp  = baUnitId;
+            final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] =  GenericTranslator.toTOList(
+                        cadastreEJB.getCadastreObjectsByBaUnit(baUnitIdTmp),
                         CadastreObjectTO.class);
-                return result;
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        }
+                        }
+        });
+
+        return (List<CadastreObjectTO>) result[0];
+        
+        
+//        try {
+//                List<CadastreObjectTO> result = GenericTranslator.toTOList(
+//                        cadastreEJB.getCadastreObjectsByBaUnit(baUnitId),
+//                        CadastreObjectTO.class);
+//                return result;
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        }
     }
 
     @WebMethod(operationName = "GetCadastreObjectsByService")
     public List<CadastreObjectTO> GetCadastreObjectsByService(
             @WebParam(name = "serviceId") String serviceId)
             throws SOLAFault, UnhandledFault {
-        try {
-                List<CadastreObjectTO> result = GenericTranslator.toTOList(
-                        cadastreEJB.getCadastreObjectsByService(serviceId),
+       
+          //     FLOSS - 813 4        
+            final String serviceIdTmp  = serviceId;
+            final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] =  GenericTranslator.toTOList(
+                        cadastreEJB.getCadastreObjectsByService(serviceIdTmp),
                         CadastreObjectTO.class);
-                return result;
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        }
+                        }
+        });
+
+        return (List<CadastreObjectTO>) result[0];
+    
+        
+        
+        
+//        try {
+//                List<CadastreObjectTO> result = GenericTranslator.toTOList(
+//                        cadastreEJB.getCadastreObjectsByService(serviceId),
+//                        CadastreObjectTO.class);
+//                return result;
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        }
     }
 
     @WebMethod(operationName = "SaveCadastreChange")
@@ -186,6 +285,7 @@ public class Cadastre extends AbstractWebService {
             @WebParam(name = "transactionCadastreChangeTO") 
                     TransactionCadastreChangeTO transactionCadastreChangeTO,
             @WebParam(name = "languageCode") String languageCode)
+            
             throws SOLAValidationFault, OptimisticLockingFault, 
             SOLAFault, UnhandledFault, SOLAAccessFault {
 
@@ -211,34 +311,72 @@ public class Cadastre extends AbstractWebService {
     public TransactionCadastreChangeTO GetTransactionCadastreChange(
             @WebParam(name = "serviceId") String serviceId)
             throws SOLAFault, UnhandledFault {
-        try {
-            return GenericTranslator.toTO(
-                    transactionEJB.getTransactionByServiceId(serviceId, false, TransactionCadastreChange.class),
+    
+        //     FLOSS - 813 5        
+            final String serviceIdTmp  = serviceId;
+            final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] =  GenericTranslator.toTO(
+                    transactionEJB.getTransactionByServiceId(serviceIdTmp, false, TransactionCadastreChange.class),
                     TransactionCadastreChangeTO.class);
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        }
+                        }
+        });
+
+        return (TransactionCadastreChangeTO) result[0];
+    
+               
+//        try {
+//            return GenericTranslator.toTO(
+//                    transactionEJB.getTransactionByServiceId(serviceId, false, TransactionCadastreChange.class),
+//                    TransactionCadastreChangeTO.class);
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        }
+    
     }
 
     @WebMethod(operationName = "GetCadastreObjects")
     public List<CadastreObjectTO> GetCadastreObjects(
             @WebParam(name = "ids") List<String> Ids)
             throws SOLAFault, UnhandledFault {
-        try {
-                List<CadastreObjectTO> result = GenericTranslator.toTOList(
-                        cadastreEJB.getCadastreObjects(Ids), CadastreObjectTO.class);
-                return result;
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        }
+          
+        //     FLOSS - 813 6        
+            final List<String> IdsTmp  = Ids;
+            final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] =  GenericTranslator.toTOList(
+                        cadastreEJB.getCadastreObjects(IdsTmp), CadastreObjectTO.class);
+                        }
+        });
+
+        return (List<CadastreObjectTO>) result[0];
+        
+        
+//        try {
+//                List<CadastreObjectTO> result = GenericTranslator.toTOList(
+//                        cadastreEJB.getCadastreObjects(Ids), CadastreObjectTO.class);
+//                return result;
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        }
+    
+    
     }
 
     @WebMethod(operationName = "GetCadastreObjectNode")
@@ -328,17 +466,40 @@ public class Cadastre extends AbstractWebService {
     public TransactionCadastreRedefinitionTO GetTransactionCadastreRedefinition(
             @WebParam(name = "serviceId") String serviceId)
             throws SOLAFault, UnhandledFault {
-        try {
-            return GenericTranslator.toTO(
+        
+         //     FLOSS - 813 7        
+            final String serviceIdTmp  = serviceId;
+            final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] =  GenericTranslator.toTO(
                     transactionEJB.getTransactionByServiceId(
-                        serviceId, false, TransactionCadastreRedefinition.class),
+                        serviceIdTmp, false, TransactionCadastreRedefinition.class),
                     TransactionCadastreRedefinitionTO.class);
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        }
+                        }
+        });
+
+        return (TransactionCadastreRedefinitionTO) result[0];
+    
+      
+        
+//        try {
+//            return GenericTranslator.toTO(
+//                    transactionEJB.getTransactionByServiceId(
+//                        serviceId, false, TransactionCadastreRedefinition.class),
+//                    TransactionCadastreRedefinitionTO.class);
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        }
+//        
+        
+        
     }
 }
