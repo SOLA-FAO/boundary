@@ -38,7 +38,6 @@ import javax.xml.ws.WebServiceContext;
 import org.sola.services.boundary.transferobjects.casemanagement.ServiceTO;
 import org.sola.services.boundary.transferobjects.casemanagement.SourceTO;
 import org.sola.services.common.br.ValidationResult;
-import org.sola.services.common.faults.FaultUtility;
 import org.sola.services.common.faults.OptimisticLockingFault;
 import org.sola.services.common.faults.SOLAFault;
 import org.sola.services.common.faults.SOLAValidationFault;
