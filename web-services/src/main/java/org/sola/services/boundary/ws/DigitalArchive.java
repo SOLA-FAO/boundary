@@ -28,10 +28,12 @@
 package org.sola.services.boundary.ws;
 
 import java.util.List;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.xml.ws.WebServiceContext;
 import org.sola.services.boundary.transferobjects.digitalarchive.DocumentBinaryTO;
 import org.sola.services.boundary.transferobjects.digitalarchive.DocumentTO;
 import org.sola.services.boundary.transferobjects.digitalarchive.FileBinaryTO;
@@ -55,6 +57,8 @@ public class DigitalArchive extends AbstractWebService {
 
     @EJB
     private DigitalArchiveEJBLocal digitalArchiveEJB;
+    @Resource
+    private WebServiceContext wsContext;
 
     /** Dummy method to check the web service instance is working */
    @WebMethod(operationName = "CheckConnection")
@@ -70,16 +74,34 @@ public class DigitalArchive extends AbstractWebService {
      * @throws UnhandledFault  
      */
     @WebMethod(operationName = "GetDocument")
-    public DocumentBinaryTO GetDocument(@WebParam(name = "documentId") String documentId) throws SOLAFault, UnhandledFault {
-        try {
-            return GenericTranslator.toTO(digitalArchiveEJB.getDocument(documentId), DocumentBinaryTO.class);
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        }
+    public DocumentBinaryTO GetDocument(@WebParam(name = "documentId") String documentId) 
+    throws SOLAFault, UnhandledFault {
+         //     FLOSS - 813 0       
+         
+         final String documentIdTmp = documentId;
+         final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] =  GenericTranslator.toTO(digitalArchiveEJB.getDocument(documentIdTmp), 
+                             DocumentBinaryTO.class);
+                        }
+        });
+
+        return (DocumentBinaryTO) result[0];
+        
+        
+//        try {
+//            return GenericTranslator.toTO(digitalArchiveEJB.getDocument(documentId), DocumentBinaryTO.class);
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        }
     }
 
     /**
@@ -90,33 +112,54 @@ public class DigitalArchive extends AbstractWebService {
      * @throws UnhandledFault
      * @throws OptimisticLockingFault
      */
+    
+//    TODO  
     @WebMethod(operationName = "SaveDocument")
     public DocumentTO SaveDocument(@WebParam(name = "documentTO") DocumentTO documentTO)
             throws SOLAFault, UnhandledFault, OptimisticLockingFault {
-        try {
-            try {
-                beginTransaction();
-                
-                Document document = digitalArchiveEJB.saveDocument(GenericTranslator.fromTO(documentTO,
-                        Document.class, digitalArchiveEJB.getDocument(documentTO.getId())));
-                DocumentTO result = GenericTranslator.toTO(document, DocumentTO.class);
-                
-                commitTransaction();
-                return result;
-                
-            } finally {
-                rollbackTransaction();
-            }
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            if (fault.getClass() == OptimisticLockingFault.class) {
-                throw (OptimisticLockingFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        }
+       
+            //     FLOSS - 813 01       
+         
+         final DocumentTO documentTOTmp = documentTO;
+         final Object[] result = {null};
+  
+         runDocumentMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                Document document = digitalArchiveEJB.saveDocument(GenericTranslator.fromTO(documentTOTmp,
+                        Document.class, digitalArchiveEJB.getDocument(documentTOTmp.getId())));
+                result[0] =  GenericTranslator.toTO(document, DocumentTO.class);
+                        }
+        });
+
+        return (DocumentTO) result[0];
+        
+        
+//        try {
+//            try {
+//                beginTransaction();
+//                
+//                Document document = digitalArchiveEJB.saveDocument(GenericTranslator.fromTO(documentTO,
+//                        Document.class, digitalArchiveEJB.getDocument(documentTO.getId())));
+//                DocumentTO result = GenericTranslator.toTO(document, DocumentTO.class);
+//                
+//                commitTransaction();
+//                return result;
+//                
+//            } finally {
+//                rollbackTransaction();
+//            }
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            if (fault.getClass() == OptimisticLockingFault.class) {
+//                throw (OptimisticLockingFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        }
     }
 
     /**
@@ -129,27 +172,44 @@ public class DigitalArchive extends AbstractWebService {
     @WebMethod(operationName = "CreateDocument")
     public DocumentTO CreateDocument(@WebParam(name = "documentTO") DocumentBinaryTO documentBinaryTO)
             throws SOLAFault, UnhandledFault {
-        try {
-            try {
-                beginTransaction();
-                
+         //     FLOSS - 813 1       
+         
+         final DocumentBinaryTO documentBinaryTOTmp = documentBinaryTO;
+         final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
                 Document document = digitalArchiveEJB.createDocument(GenericTranslator
-                        .fromTO(documentBinaryTO, Document.class, null));
-                DocumentTO result = GenericTranslator.toTO(document, DocumentTO.class);
-                
-                commitTransaction();
-                return result;
-                
-            } finally {
-                rollbackTransaction();
-            }
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        }
+                        .fromTO(documentBinaryTOTmp, Document.class, null));
+                result[0] =  GenericTranslator.toTO(document, DocumentTO.class);
+                        }
+        });
+
+        return (DocumentTO) result[0];
+        
+//        try {
+//            try {
+//                beginTransaction();
+//                
+//                Document document = digitalArchiveEJB.createDocument(GenericTranslator
+//                        .fromTO(documentBinaryTO, Document.class, null));
+//                DocumentTO result = GenericTranslator.toTO(document, DocumentTO.class);
+//                
+//                commitTransaction();
+//                return result;
+//                
+//            } finally {
+//                rollbackTransaction();
+//            }
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        }
     }
 
     /**
@@ -163,27 +223,45 @@ public class DigitalArchive extends AbstractWebService {
     @WebMethod(operationName = "CreateDocumentFromServer")
     public DocumentTO CreateDocumentFromServer(@WebParam(name = "documentTO") DocumentTO documentTO,
             @WebParam(name = "fileName") String fileName) throws SOLAFault, UnhandledFault {
-        try {
-            try {
-                beginTransaction();
-                
+        //     FLOSS - 813 2       
+         
+         final DocumentTO documentTOTmp = documentTO;
+         final String fileNameTmp = fileName;
+         final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
                 Document document = digitalArchiveEJB.createDocument(GenericTranslator
-                        .fromTO(documentTO, Document.class, null), fileName);
-                DocumentTO result = GenericTranslator.toTO(document, DocumentTO.class);
-                
-                commitTransaction();
-                return result;
-                
-            } finally {
-                rollbackTransaction();
-            }
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        }
+                        .fromTO(documentTOTmp, Document.class, null), fileNameTmp);
+                result[0] =  GenericTranslator.toTO(document, DocumentTO.class);
+                        }
+        });
+
+        return (DocumentTO) result[0];
+        
+//        try {
+//            try {
+//                beginTransaction();
+//                
+//                Document document = digitalArchiveEJB.createDocument(GenericTranslator
+//                        .fromTO(documentTO, Document.class, null), fileName);
+//                DocumentTO result = GenericTranslator.toTO(document, DocumentTO.class);
+//                
+//                commitTransaction();
+//                return result;
+//                
+//            } finally {
+//                rollbackTransaction();
+//            }
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        }
     }
 
     /**
@@ -196,15 +274,31 @@ public class DigitalArchive extends AbstractWebService {
     @WebMethod(operationName = "GetFileBinary")
     public FileBinaryTO GetFileBinary(@WebParam(name = "fileName") String fileName)
         throws SOLAFault, UnhandledFault{
-        try {
-            return GenericTranslator.toTO(digitalArchiveEJB.getFileBinary(fileName), FileBinaryTO.class);
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        }
+       
+            //     FLOSS - 813 3       
+         
+         final String fileNameTmp = fileName;
+         final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] =  GenericTranslator.toTO(digitalArchiveEJB.getFileBinary(fileNameTmp), FileBinaryTO.class);
+                        }
+        });
+
+        return (FileBinaryTO) result[0];
+       
+//        try {
+//            return GenericTranslator.toTO(digitalArchiveEJB.getFileBinary(fileName), FileBinaryTO.class);
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        }
     }
 
     /**
@@ -217,16 +311,30 @@ public class DigitalArchive extends AbstractWebService {
     @WebMethod(operationName = "GetFileThumbnail")
     public FileBinaryTO GetFileThumbnail(@WebParam(name = "fileName") String fileName) 
             throws SOLAFault, UnhandledFault{
-        
-        try {
-            return GenericTranslator.toTO(digitalArchiveEJB.getFileThumbnail(fileName), FileBinaryTO.class);
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        }
+         //     FLOSS - 813 4       
+         
+         final String fileNameTmp = fileName;
+         final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] =  GenericTranslator.toTO(digitalArchiveEJB.getFileThumbnail(fileNameTmp), FileBinaryTO.class);
+                        }
+        });
+
+        return (FileBinaryTO) result[0];
+       
+//        try {
+//            return GenericTranslator.toTO(digitalArchiveEJB.getFileThumbnail(fileName), FileBinaryTO.class);
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        }
     }
 
     /**
@@ -237,15 +345,29 @@ public class DigitalArchive extends AbstractWebService {
      */
     @WebMethod(operationName = "GetAllFiles")
     public List<FileInfoTO> GetAllFiles() throws SOLAFault, UnhandledFault{
-        try {
-            return GenericTranslator.toTOList(digitalArchiveEJB.getAllFiles(), FileInfoTO.class);
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        }
+        
+         //     FLOSS - 813 5      
+         
+         final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] =  GenericTranslator.toTOList(digitalArchiveEJB.getAllFiles(), FileInfoTO.class);
+                        }
+        });
+
+        return (List<FileInfoTO>) result[0];
+//        try {
+//            return GenericTranslator.toTOList(digitalArchiveEJB.getAllFiles(), FileInfoTO.class);
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        }
     }
 
     /**
@@ -258,15 +380,30 @@ public class DigitalArchive extends AbstractWebService {
     @WebMethod(operationName = "DeleteFile")
     public boolean DeleteFile(@WebParam(name = "fileName") String fileName) 
             throws SOLAFault, UnhandledFault{
-        try {
-            return digitalArchiveEJB.deleteFile(fileName);
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        }
+        
+         //     FLOSS - 813 6       
+         
+         final String fileNameTmp = fileName;
+         final boolean[] result = {true};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] =  digitalArchiveEJB.deleteFile(fileNameTmp);
+                        }
+        });
+
+        return  result[0];
+//        try {
+//            return digitalArchiveEJB.deleteFile(fileName);
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        }
     }
 
     /**

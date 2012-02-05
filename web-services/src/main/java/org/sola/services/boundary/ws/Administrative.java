@@ -77,33 +77,54 @@ public class Administrative extends AbstractWebService {
             @WebParam(name = "serviceId") String serviceId,
             @WebParam(name = "baUnitTO") BaUnitTO baUnitTO)
             throws SOLAFault, UnhandledFault {
-        try {
-            //initialize();
-            try {
-                BaUnitTO result = null;
-                if (baUnitTO != null) {
-                    beginTransaction();
-                    BaUnit newBaUnit = administrativeEJB.createBaUnit(
-                            serviceId,
-                            GenericTranslator.fromTO(baUnitTO, BaUnit.class,
-                            administrativeEJB.getBaUnitById(baUnitTO.getId())));
-                    result = GenericTranslator.toTO(newBaUnit, BaUnitTO.class);
-                    commitTransaction();
-                }
-                return result;
+            
+               //     FLOSS - 813 0       
+        final String serviceIdTmp = serviceId;  
+        final BaUnitTO baUnitTOTmp = baUnitTO;  
+        final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
 
-            } finally {
-                rollbackTransaction();
-            }
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        } finally {
-            cleanUp();
-        }
+            @Override
+            public void run() {
+                BaUnit newBaUnit = administrativeEJB.createBaUnit(
+                            serviceIdTmp,
+                            GenericTranslator.fromTO(baUnitTOTmp, BaUnit.class,
+                            administrativeEJB.getBaUnitById(baUnitTOTmp.getId())));
+                result[0] =  GenericTranslator.toTO(newBaUnit, BaUnitTO.class);
+                        }
+        });
+
+        return (BaUnitTO) result[0];
+        
+        
+//        try {
+//            //initialize();
+//            try {
+//                BaUnitTO result = null;
+//                if (baUnitTO != null) {
+//                    beginTransaction();
+//                    BaUnit newBaUnit = administrativeEJB.createBaUnit(
+//                            serviceId,
+//                            GenericTranslator.fromTO(baUnitTO, BaUnit.class,
+//                            administrativeEJB.getBaUnitById(baUnitTO.getId())));
+//                    result = GenericTranslator.toTO(newBaUnit, BaUnitTO.class);
+//                    commitTransaction();
+//                }
+//                return result;
+//
+//            } finally {
+//                rollbackTransaction();
+//            }
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        } finally {
+//            cleanUp();
+//        }
     }
 
     @WebMethod(operationName = "SaveBaUnit")
@@ -111,34 +132,56 @@ public class Administrative extends AbstractWebService {
             @WebParam(name = "serviceId") String serviceId,
             @WebParam(name = "baUnitTO") BaUnitTO baUnitTO)
             throws SOLAFault, UnhandledFault {
-        try {
-            //initialize();
-            try {
-                BaUnitTO result = null;
-                if (baUnitTO != null) {
-                    beginTransaction();
-                    // TODO: Implement row version control
-                    BaUnit newBaUnit = administrativeEJB.saveBaUnit(
-                            serviceId,
-                            GenericTranslator.fromTO(baUnitTO, BaUnit.class,
-                            administrativeEJB.getBaUnitById(baUnitTO.getId())));
-                    result = GenericTranslator.toTO(newBaUnit, BaUnitTO.class);
-                    commitTransaction();
-                }
-                return result;
+       
+                //     FLOSS - 813 1       
+        final String serviceIdTmp = serviceId;  
+        final BaUnitTO baUnitTOTmp = baUnitTO;  
+        final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
 
-            } finally {
-                rollbackTransaction();
-            }
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        } finally {
-            cleanUp();
-        }
+            @Override
+            public void run() {
+                if (baUnitTOTmp != null) {
+                    BaUnit newBaUnit = administrativeEJB.saveBaUnit(
+                            serviceIdTmp,
+                            GenericTranslator.fromTO(baUnitTOTmp, BaUnit.class,
+                            administrativeEJB.getBaUnitById(baUnitTOTmp.getId())));
+                   result[0] =  GenericTranslator.toTO(newBaUnit, BaUnitTO.class);
+                        }
+               }
+        });
+
+        return (BaUnitTO) result[0];
+       
+//        try {
+//            //initialize();
+//            try {
+//                BaUnitTO result = null;
+//                if (baUnitTO != null) {
+//                    beginTransaction();
+//                    // TODO: Implement row version control
+//                    BaUnit newBaUnit = administrativeEJB.saveBaUnit(
+//                            serviceId,
+//                            GenericTranslator.fromTO(baUnitTO, BaUnit.class,
+//                            administrativeEJB.getBaUnitById(baUnitTO.getId())));
+//                    result = GenericTranslator.toTO(newBaUnit, BaUnitTO.class);
+//                    commitTransaction();
+//                }
+//                return result;
+//
+//            } finally {
+//                rollbackTransaction();
+//            }
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        } finally {
+//            cleanUp();
+//        }
     }
 
     @WebMethod(operationName = "terminateBaUnit")
@@ -184,27 +227,42 @@ public class Administrative extends AbstractWebService {
     @WebMethod(operationName = "GetBaUnitById")
     public BaUnitTO GetBaUnitById(@WebParam(name = "id") String id)
             throws SOLAFault, UnhandledFault {
-        try {
-            //initialize();
-            try {
-                beginTransaction();
-                BaUnitTO result = GenericTranslator.toTO(
-                        administrativeEJB.getBaUnitById(id), BaUnitTO.class);
-                commitTransaction();
-                return result;
+        //     FLOSS - 813 3       
+        final String idTmp = id;  
+        final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
 
-            } finally {
-                rollbackTransaction();
-            }
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        } finally {
-            cleanUp();
-        }
+            @Override
+            public void run() {
+                  result[0] =  GenericTranslator.toTO(
+                        administrativeEJB.getBaUnitById(idTmp), BaUnitTO.class);
+                        }
+        });
+
+        return (BaUnitTO) result[0];
+       
+//        try {
+//            //initialize();
+//            try {
+//                beginTransaction();
+//                BaUnitTO result = GenericTranslator.toTO(
+//                        administrativeEJB.getBaUnitById(id), BaUnitTO.class);
+//                commitTransaction();
+//                return result;
+//
+//            } finally {
+//                rollbackTransaction();
+//            }
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        } finally {
+//            cleanUp();
+//        }
     }
 
     @WebMethod(operationName = "getBaUnitsByServiceId")
@@ -236,27 +294,45 @@ public class Administrative extends AbstractWebService {
             @WebParam(name = "nameFirstpart") String nameFirstpart,
             @WebParam(name = "nameLastpart") String nameLastpart)
             throws SOLAFault, UnhandledFault {
-        try {
-            //initialize();
-            try {
-                beginTransaction();
-                BaUnitTO result = GenericTranslator.toTO(
-                        administrativeEJB.getBaUnitByCode(nameFirstpart,
-                        nameLastpart), BaUnitTO.class);
-                commitTransaction();
-                return result;
+        
+         //     FLOSS - 813 4       
+        final String nameFirstpartTmp = nameFirstpart;  
+        final String nameLastpartTmp = nameLastpart; 
+        final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
 
-            } finally {
-                rollbackTransaction();
-            }
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        } finally {
-            cleanUp();
-        }
+            @Override
+            public void run() {
+                  result[0] =  GenericTranslator.toTO(
+                        administrativeEJB.getBaUnitByCode(nameFirstpartTmp,
+                        nameLastpartTmp), BaUnitTO.class);
+                        }
+        });
+
+        return (BaUnitTO) result[0];
+       
+//        try {
+//            //initialize();
+//            try {
+//                beginTransaction();
+//                BaUnitTO result = GenericTranslator.toTO(
+//                        administrativeEJB.getBaUnitByCode(nameFirstpart,
+//                        nameLastpart), BaUnitTO.class);
+//                commitTransaction();
+//                return result;
+//
+//            } finally {
+//                rollbackTransaction();
+//            }
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        } finally {
+//            cleanUp();
+//        }
     }
 }

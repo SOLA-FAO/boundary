@@ -29,10 +29,12 @@ package org.sola.services.boundary.ws;
 
 import java.util.HashMap;
 import java.util.List;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
+import javax.xml.ws.WebServiceContext;
 import org.sola.services.boundary.transferobjects.configuration.ConfigMapLayerTO;
 import org.sola.services.boundary.transferobjects.configuration.MapDefinitionTO;
 import org.sola.services.common.ServiceConstants;
@@ -54,13 +56,23 @@ public class Spatial extends AbstractWebService {
 
     @EJB
     SearchEJBLocal searchEJB;
-
+    @Resource
+    private WebServiceContext wsContext;
+//TODO 
     @WebMethod(operationName = "GetMapDefinition")
     public MapDefinitionTO getMapDefinition( @WebParam(name = "languageCode") String languageCode)
-            throws SOLAFault, UnhandledFault {
-        try {
-            HashMap<String, String> mapSettings = this.searchEJB.getMapSettingList();
-            List<ConfigMapLayer> configMapLayerList = this.searchEJB.getConfigMapLayerList(languageCode);
+            throws UnhandledFault, SOLAFault {
+        //     FLOSS - 813 1       
+            
+            final Object[] result = {null};
+            final String languageCodeTmp = languageCode;
+       
+            runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+            HashMap<String, String> mapSettings = searchEJB.getMapSettingList();
+            List<ConfigMapLayer> configMapLayerList = searchEJB.getConfigMapLayerList(languageCodeTmp);
             MapDefinitionTO mapDefinition = new MapDefinitionTO();
             mapDefinition.setSrid(Integer.parseInt(mapSettings.get("map-srid")));
             mapDefinition.setWktOfCrs(mapSettings.get("wkt-of-crs"));
@@ -87,15 +99,51 @@ public class Spatial extends AbstractWebService {
                 configMapLayerTO.setWmsUrl(configMapLayer.getWmsUrl());
                 mapDefinition.getLayers().add(configMapLayerTO);
             }
-            return mapDefinition;
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        } finally {
-        }
+                result[0] =  mapDefinition;
+                        }
+        });
+
+        return (MapDefinitionTO) result[0];
+//        
+        
+//        try {
+//            HashMap<String, String> mapSettings = this.searchEJB.getMapSettingList();
+//            List<ConfigMapLayer> configMapLayerList = this.searchEJB.getConfigMapLayerList(languageCode);
+//            MapDefinitionTO mapDefinition = new MapDefinitionTO();
+//            mapDefinition.setSrid(Integer.parseInt(mapSettings.get("map-srid")));
+//            mapDefinition.setWktOfCrs(mapSettings.get("wkt-of-crs"));
+//            mapDefinition.setWest(Double.parseDouble(mapSettings.get("map-west")));
+//            mapDefinition.setSouth(Double.parseDouble(mapSettings.get("map-south")));
+//            mapDefinition.setEast(Double.parseDouble(mapSettings.get("map-east")));
+//            mapDefinition.setNorth(Double.parseDouble(mapSettings.get("map-north")));
+//            mapDefinition.setSnapTolerance(Double.parseDouble(mapSettings.get("map-tolerance")));
+//            mapDefinition.setSurveyPointShiftRuralArea(
+//                    Double.parseDouble(mapSettings.get("map-shift-tolerance-rural")));
+//            mapDefinition.setSurveyPointShiftUrbanArea(
+//                    Double.parseDouble(mapSettings.get("map-shift-tolerance-urban")));
+//            for (ConfigMapLayer configMapLayer : configMapLayerList) {
+//                ConfigMapLayerTO configMapLayerTO = new ConfigMapLayerTO();
+//                configMapLayerTO.setId(configMapLayer.getId());
+//                configMapLayerTO.setPojoQueryName(configMapLayer.getPojoQueryName());
+//                configMapLayerTO.setPojoQueryNameForSelect(configMapLayer.getPojoQueryNameForSelect());
+//                configMapLayerTO.setPojoStructure(configMapLayer.getPojoStructure());
+//                configMapLayerTO.setShapeLocation(configMapLayer.getShapeLocation());
+//                configMapLayerTO.setStyle(configMapLayer.getStyle());
+//                configMapLayerTO.setTypeCode(configMapLayer.getTypeCode());
+//                configMapLayerTO.setTitle(configMapLayer.getTitle());
+//                configMapLayerTO.setWmsLayers(configMapLayer.getWmsLayers());
+//                configMapLayerTO.setWmsUrl(configMapLayer.getWmsUrl());
+//                mapDefinition.getLayers().add(configMapLayerTO);
+//            }
+//            return mapDefinition;
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        } finally {
+//        }
     }
 
     /** Dummy method to check the web service instance is working */
@@ -103,19 +151,34 @@ public class Spatial extends AbstractWebService {
     public boolean CheckConnection() {
         return true;
     }
-
+// TODO
     @WebMethod(operationName = "GetSpatialForNavigation")
     public ResultForNavigationInfo GetSpatialForNavigation(QueryForNavigation spatialQuery)
             throws SOLAFault, UnhandledFault {
-        try {
-            return this.searchEJB.getSpatialResult(spatialQuery);
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        } finally {
-        }
+          //     FLOSS - 813 1       
+            
+            final Object[] result = {null};
+            final QueryForNavigation spatialQueryTmp = spatialQuery;
+       
+            runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] =  searchEJB.getSpatialResult(spatialQueryTmp);
+                        }
+        });
+
+        return (ResultForNavigationInfo) result[0];
+//        
+//        try {
+//            return this.searchEJB.getSpatialResult(spatialQuery);
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        } finally {
+//        }
     }
 }

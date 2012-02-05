@@ -92,242 +92,415 @@ public class Search extends AbstractWebService {
     public PropertyVerifierTO VerifyApplicationProperty(
             @WebParam(name = "firstPart") String firstPart,
             @WebParam(name = "lastPart") String lastPart) throws SOLAFault, UnhandledFault {
-        try {
-            // initialize();
-            try {
-                beginTransaction();
+       
+         
+          //     FLOSS - 813 0       
+            final String firstPartTmp = firstPart;
+            final String lastPartTmp = lastPart;
+            final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
 
+            @Override
+            public void run() {
                 PropertyVerifier propertyVerifier =
-                        searchEJB.getPropertyVerifier(firstPart, lastPart);
-                PropertyVerifierTO result = GenericTranslator.toTO(
+                        searchEJB.getPropertyVerifier(firstPartTmp, lastPartTmp);
+                result[0] =  GenericTranslator.toTO(
                         propertyVerifier, PropertyVerifierTO.class);
-                commitTransaction();
-                return result;
-            } finally {
-                rollbackTransaction();
-            }
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        } finally {
-            //cleanUp();
-        }
+                        }
+        });
+
+        return (PropertyVerifierTO) result[0];
+        
+//        try {
+//            // initialize();
+//            try {
+//                beginTransaction();
+//
+//                PropertyVerifier propertyVerifier =
+//                        searchEJB.getPropertyVerifier(firstPart, lastPart);
+//                PropertyVerifierTO result = GenericTranslator.toTO(
+//                        propertyVerifier, PropertyVerifierTO.class);
+//                commitTransaction();
+//                return result;
+//            } finally {
+//                rollbackTransaction();
+//            }
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        } finally {
+//            //cleanUp();
+//        }
     }
 
     @WebMethod(operationName = "GetUnassignedApplications")
     public List<ApplicationSearchResultTO> GetUnassignedApplications(
             @WebParam(name = "locale") String locale) throws SOLAFault, UnhandledFault {
-        try {
-            try {
-                beginTransaction();
-                List<ApplicationSearchResult> appList = searchEJB.getUnassignedApplications(locale);
-                List<ApplicationSearchResultTO> appTOList = GenericTranslator.toTOList(
-                        appList, ApplicationSearchResultTO.class);
+        
+        //     FLOSS - 813 1       
+            final String localeTmp = locale;
+            final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
 
-                commitTransaction();
-                return appTOList;
-            } finally {
-                rollbackTransaction();
-            }
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        } finally {
-        }
+            @Override
+            public void run() {
+                List<ApplicationSearchResult> appList = searchEJB.getUnassignedApplications(localeTmp);
+                result[0] =  GenericTranslator.toTOList(
+                        appList, ApplicationSearchResultTO.class);
+                        }
+        });
+
+        return (List<ApplicationSearchResultTO>) result[0];
+        
+        
+//        try {
+//            try {
+//                beginTransaction();
+//                List<ApplicationSearchResult> appList = searchEJB.getUnassignedApplications(locale);
+//                List<ApplicationSearchResultTO> appTOList = GenericTranslator.toTOList(
+//                        appList, ApplicationSearchResultTO.class);
+//
+//                commitTransaction();
+//                return appTOList;
+//            } finally {
+//                rollbackTransaction();
+//            }
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        } finally {
+//        }
     }
 
     @WebMethod(operationName = "GetAssignedApplications")
     public List<ApplicationSearchResultTO> GetAssignedApplications(@WebParam(name = "locale") String locale)
             throws SOLAFault, UnhandledFault {
-        try {
-            try {
-                beginTransaction();
-                List<ApplicationSearchResult> appList = searchEJB.getAssignedApplications(locale);
-                List<ApplicationSearchResultTO> appTOList = GenericTranslator.toTOList(
+        
+         //     FLOSS - 813 2       
+            final String localeTmp = locale;
+            final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+               List<ApplicationSearchResult> appList = searchEJB.getAssignedApplications(localeTmp);
+                result[0] =  GenericTranslator.toTOList(
                         appList, ApplicationSearchResultTO.class);
-                commitTransaction();
-                return appTOList;
-            } finally {
-                rollbackTransaction();
-            }
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        } finally {
-        }
+                        }
+        });
+
+        return (List<ApplicationSearchResultTO>) result[0];
+        
+//        try {
+//            try {
+//                beginTransaction();
+//                List<ApplicationSearchResult> appList = searchEJB.getAssignedApplications(locale);
+//                List<ApplicationSearchResultTO> appTOList = GenericTranslator.toTOList(
+//                        appList, ApplicationSearchResultTO.class);
+//                commitTransaction();
+//                return appTOList;
+//            } finally {
+//                rollbackTransaction();
+//            }
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        } finally {
+//        }
     }
 
     @WebMethod(operationName = "SearchApplications")
     public List<ApplicationSearchResultTO> SearchApplications(
             @WebParam(name = "ApplicationSearchParamsTO") ApplicationSearchParamsTO paramsTO)
             throws SOLAFault, UnhandledFault {
-        try {
-            // initialize();
-            try {
-                beginTransaction();
+       
+         //     FLOSS - 813 3       
+            final ApplicationSearchParamsTO paramsTOTmp = paramsTO;
+            final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
 
-                ApplicationSearchParams params = GenericTranslator.fromTO(paramsTO, ApplicationSearchParams.class, null);
-
-                List<ApplicationSearchResult> appList = searchEJB.searchApplications(params);
-                List<ApplicationSearchResultTO> appTOList = GenericTranslator.toTOList(
+            @Override
+            public void run() {
+               ApplicationSearchParams params = GenericTranslator.fromTO(paramsTOTmp, ApplicationSearchParams.class, null);
+               List<ApplicationSearchResult> appList = searchEJB.searchApplications(params);
+                result[0] =  GenericTranslator.toTOList(
                         appList, ApplicationSearchResultTO.class);
-                commitTransaction();
-                return appTOList;
-            } finally {
-                rollbackTransaction();
-            }
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        } finally {
-        }
+                        }
+        });
+
+        return (List<ApplicationSearchResultTO>) result[0];
+//        try {
+//            // initialize();
+//            try {
+//                beginTransaction();
+//
+//                ApplicationSearchParams params = GenericTranslator.fromTO(paramsTO, ApplicationSearchParams.class, null);
+//
+//                List<ApplicationSearchResult> appList = searchEJB.searchApplications(params);
+//                List<ApplicationSearchResultTO> appTOList = GenericTranslator.toTOList(
+//                        appList, ApplicationSearchResultTO.class);
+//                commitTransaction();
+//                return appTOList;
+//            } finally {
+//                rollbackTransaction();
+//            }
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        } finally {
+//        }
     }
 
     @WebMethod(operationName = "Select")
     public List<ResultForSelectionInfo> Select(List<QueryForSelect> queries)
             throws SOLAFault, UnhandledFault {
-        try {
-            try {
-                beginTransaction();
-                List<ResultForSelectionInfo> result = this.searchEJB.getSpatialResultFromSelection(queries);
-                commitTransaction();
-                return result;
-            } finally {
-                rollbackTransaction();
-            }
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        } finally {
-        }
+        
+          //     FLOSS - 813 4      
+            final List<QueryForSelect> queriesTmp = queries;
+            final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] =  searchEJB.getSpatialResultFromSelection(queriesTmp);
+                        }
+        });
+
+        return (List<ResultForSelectionInfo>) result[0];
+        
+//        try {
+//            try {
+//                beginTransaction();
+//                List<ResultForSelectionInfo> result = this.searchEJB.getSpatialResultFromSelection(queries);
+//                commitTransaction();
+//                return result;
+//            } finally {
+//                rollbackTransaction();
+//            }
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        } finally {
+//        }
     }
 
     @WebMethod(operationName = "SearchParties")
     public List<PartySearchResultTO> searchParties(
             @WebParam(name = "searchParams") PartySearchParamsTO searchParams)
             throws SOLAFault, UnhandledFault {
-        try {
-            PartySearchParams params = GenericTranslator.fromTO(searchParams,
+       
+        
+          //     FLOSS - 813 5     
+            final PartySearchParamsTO searchParamsTmp = searchParams;
+            final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                PartySearchParams params = GenericTranslator.fromTO(searchParamsTmp,
                     PartySearchParams.class, null);
-
-            return GenericTranslator.toTOList(
+                result[0] =  GenericTranslator.toTOList(
                     searchEJB.searchParties(params), PartySearchResultTO.class);
+                        }
+        });
 
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        } finally {
-        }
+        return (List<PartySearchResultTO>) result[0];
+        
+//        try {
+//            PartySearchParams params = GenericTranslator.fromTO(searchParams,
+//                    PartySearchParams.class, null);
+//
+//            return GenericTranslator.toTOList(
+//                    searchEJB.searchParties(params), PartySearchResultTO.class);
+//
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        } finally {
+//        }
     }
 
     @WebMethod(operationName = "SearchSources")
     public List<SourceSearchResultTO> searchSources(
             @WebParam(name = "searchParams") SourceSearchParamsTO searchParams)
             throws SOLAFault, UnhandledFault {
-        try {
-            SourceSearchParams params = GenericTranslator.fromTO(searchParams,
-                    SourceSearchParams.class, null);
+          //     FLOSS - 813 6     
+            final SourceSearchParamsTO searchParamsTmp = searchParams;
+            final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
 
-            return GenericTranslator.toTOList(
+            @Override
+            public void run() {
+                SourceSearchParams params = GenericTranslator.fromTO(searchParamsTmp,
+                    SourceSearchParams.class, null);
+                result[0] = GenericTranslator.toTOList(
                     searchEJB.searchSources(params), SourceSearchResultTO.class);
 
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        } finally {
-        }
+                        }
+        });
+
+        return (List<SourceSearchResultTO>) result[0];
+//        
+//        try {
+//            SourceSearchParams params = GenericTranslator.fromTO(searchParams,
+//                    SourceSearchParams.class, null);
+//
+//            return GenericTranslator.toTOList(
+//                    searchEJB.searchSources(params), SourceSearchResultTO.class);
+//
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        } finally {
+//        }
     }
 
     @WebMethod(operationName = "GetActiveUsers")
     public List<UserSearchResultTO> getActiveUsers() throws SOLAFault, UnhandledFault {
-        try {
-            try {
-                beginTransaction();
+       
+            //     FLOSS - 813 7    
+            final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
                 List<UserSearchResult> activeUsers = searchEJB.getActiveUsers();
-                List<UserSearchResultTO> activeUsersTO = GenericTranslator.toTOList(activeUsers, UserSearchResultTO.class);
-                commitTransaction();
-                return activeUsersTO;
-            } finally {
-                rollbackTransaction();
-            }
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        } finally {
-            cleanUp();
-        }
+                result[0] =  GenericTranslator.toTOList(activeUsers, UserSearchResultTO.class);
+
+                        }
+        });
+
+        return (List<UserSearchResultTO>) result[0];
+//        try {
+//            try {
+//                beginTransaction();
+//                List<UserSearchResult> activeUsers = searchEJB.getActiveUsers();
+//                List<UserSearchResultTO> activeUsersTO = GenericTranslator.toTOList(activeUsers, UserSearchResultTO.class);
+//                commitTransaction();
+//                return activeUsersTO;
+//            } finally {
+//                rollbackTransaction();
+//            }
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        } finally {
+//            cleanUp();
+//        }
     }
 
     @WebMethod(operationName = "searchUsers")
     public List<UserSearchAdvancedResultTO> searchUsers(@WebParam(name = "searchParams") UserSearchParamsTO searchParams) throws SOLAFault, UnhandledFault {
-        try {
-            try {
-                beginTransaction();
-                UserSearchParams params = GenericTranslator.fromTO(searchParams,
+        
+            //     FLOSS - 813 8  
+            final UserSearchParamsTO searchParamsTmp = searchParams;
+            final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                 UserSearchParams params = GenericTranslator.fromTO(searchParamsTmp,
                         UserSearchParams.class, null);
                 List<UserSearchResult> users = searchEJB.searchUsers(params);
-                List<UserSearchAdvancedResultTO> usersTO = GenericTranslator.toTOList(users, UserSearchAdvancedResultTO.class);
-                commitTransaction();
-                return usersTO;
-            } finally {
-                rollbackTransaction();
-            }
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        } finally {
-            cleanUp();
-        }
+                result[0] =  GenericTranslator.toTOList(users, UserSearchAdvancedResultTO.class);
+
+                        }
+        });
+
+        return (List<UserSearchAdvancedResultTO>) result[0];
+//        try {
+//            try {
+//                beginTransaction();
+//                UserSearchParams params = GenericTranslator.fromTO(searchParams,
+//                        UserSearchParams.class, null);
+//                List<UserSearchResult> users = searchEJB.searchUsers(params);
+//                List<UserSearchAdvancedResultTO> usersTO = GenericTranslator.toTOList(users, UserSearchAdvancedResultTO.class);
+//                commitTransaction();
+//                return usersTO;
+//            } finally {
+//                rollbackTransaction();
+//            }
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        } finally {
+//            cleanUp();
+//        }
     }
 
     @WebMethod(operationName = "getApplicationLog")
     public List<ApplicationLogResultTO> getApplicationLog(@WebParam(name = "applicationId") String applicationId) throws SOLAFault, UnhandledFault {
-        try {
-            try {
-                beginTransaction();
-                List<ApplicationLogResult> log = searchEJB.getApplicationLog(applicationId);
-                List<ApplicationLogResultTO> logTO = GenericTranslator.toTOList(log, ApplicationLogResultTO.class);
-                commitTransaction();
-                return logTO;
-            } finally {
-                rollbackTransaction();
-            }
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        } finally {
-            cleanUp();
-        }
+        
+                  //     FLOSS - 813 9  
+            final String applicationIdTmp = applicationId;
+            final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                  List<ApplicationLogResult> log = searchEJB.getApplicationLog(applicationIdTmp);
+                result[0] =   GenericTranslator.toTOList(log, ApplicationLogResultTO.class);
+
+                        }
+        });
+
+        return (List<ApplicationLogResultTO>) result[0];
+//        try {
+//            try {
+//                beginTransaction();
+//                List<ApplicationLogResult> log = searchEJB.getApplicationLog(applicationId);
+//                List<ApplicationLogResultTO> logTO = GenericTranslator.toTOList(log, ApplicationLogResultTO.class);
+//                commitTransaction();
+//                return logTO;
+//            } finally {
+//                rollbackTransaction();
+//            }
+//        } catch (Throwable t) {
+//            Throwable fault = FaultUtility.ProcessException(t);
+//            if (fault.getClass() == SOLAFault.class) {
+//                throw (SOLAFault) fault;
+//            }
+//            throw (UnhandledFault) fault;
+//        } finally {
+//            cleanUp();
+//        }
     }
     
     @WebMethod(operationName = "SearchBr")
