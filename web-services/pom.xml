@@ -63,6 +63,7 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>sola-transfer-objects</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.sola.services.ejbs</groupId>

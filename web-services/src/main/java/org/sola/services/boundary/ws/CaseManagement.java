@@ -27,6 +27,7 @@
  */
 package org.sola.services.boundary.ws;
 
+
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
@@ -49,6 +50,9 @@ import org.sola.services.ejb.application.repository.entities.Application;
 import org.sola.services.boundary.transferobjects.casemanagement.ApplicationLogTO;
 import org.sola.services.boundary.transferobjects.casemanagement.ApplicationTO;
 import org.sola.services.boundary.transferobjects.casemanagement.BrReportTO;
+import org.sola.services.boundary.transferobjects.casemanagement.LodgementTimingTO;
+import org.sola.services.boundary.transferobjects.casemanagement.LodgementViewParamsTO;
+import org.sola.services.boundary.transferobjects.casemanagement.LodgementViewTO;
 import org.sola.services.common.contracts.GenericTranslator;
 import org.sola.services.common.webservices.AbstractWebService;
 import org.sola.services.ejb.application.repository.entities.Service;
@@ -57,6 +61,9 @@ import org.sola.services.boundary.transferobjects.casemanagement.PartySummaryTO;
 import org.sola.services.boundary.transferobjects.casemanagement.PartyTO;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.faults.SOLAAccessFault;
+import org.sola.services.ejb.application.repository.entities.LodgementTiming;
+import org.sola.services.ejb.application.repository.entities.LodgementView;
+import org.sola.services.ejb.application.repository.entities.LodgementViewParams;
 import org.sola.services.ejb.party.repository.entities.Party;
 import org.sola.services.ejb.source.businesslogic.SourceEJBLocal;
 import org.sola.services.ejb.system.businesslogic.SystemEJBLocal;
@@ -162,7 +169,60 @@ public class CaseManagement extends AbstractWebService {
 
         return (PartyTO) result[0];
     }
+     
+    
+    
+     @WebMethod(operationName = "GetLodgementView")
+    public List<LodgementViewTO> getLodgementView(
+          @WebParam(name = "LodgementViewParamsTO") LodgementViewParamsTO paramsTO)
 
+            throws SOLAFault, UnhandledFault {
+       
+        
+        //     FLOSS - 813 4  
+            final LodgementViewParamsTO paramsTOTmp = paramsTO;
+            final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                LodgementViewParams params = GenericTranslator.fromTO(paramsTOTmp, LodgementViewParams.class, null);
+                List<LodgementView> appList = applicationEJB.getLodgementView(params);
+                result[0] = GenericTranslator.toTOList(
+                        appList, LodgementViewTO.class);
+                        } 
+          });
+        return (List<LodgementViewTO>) result[0];
+    }
+
+    
+    @WebMethod(operationName = "GetLodgementTiming")
+    public List<LodgementTimingTO> getLodgementTiming(
+          @WebParam(name = "LodgementViewParamsTO") LodgementViewParamsTO paramsTO)
+
+            throws SOLAFault, UnhandledFault {
+       
+        
+        //     FLOSS - 813 4  
+            final LodgementViewParamsTO paramsTOTmp = paramsTO;
+            final Object[] result = {null};
+  
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                LodgementViewParams params = GenericTranslator.fromTO(paramsTOTmp, LodgementViewParams.class, null);
+                List<LodgementTiming> appList = applicationEJB.getLodgementTiming(params);
+                result[0] = GenericTranslator.toTOList(
+                        appList, LodgementTimingTO.class);
+                        } 
+          });
+        return (List<LodgementTimingTO>) result[0];
+    }
+
+    
+    
     @WebMethod(operationName = "GetAddress")
     public AddressTO GetAddress(@WebParam(name = "id") String id) throws SOLAFault, UnhandledFault {
         

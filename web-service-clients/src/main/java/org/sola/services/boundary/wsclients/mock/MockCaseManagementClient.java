@@ -35,10 +35,13 @@ import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.casemanagement.AddressTO;
 import org.sola.webservices.transferobjects.casemanagement.ApplicationTO;
 import org.sola.webservices.transferobjects.casemanagement.BrReportTO;
+import org.sola.webservices.transferobjects.casemanagement.LodgementTimingTO;
+import org.sola.webservices.transferobjects.casemanagement.LodgementViewTO;
 import org.sola.webservices.transferobjects.casemanagement.PartySummaryTO;
 import org.sola.webservices.transferobjects.casemanagement.PartyTO;
 import org.sola.webservices.transferobjects.casemanagement.ServiceTO;
 import org.sola.webservices.transferobjects.casemanagement.SourceTO;
+import org.sola.webservices.transferobjects.casemanagement.LodgementViewParamsTO;
 
 /**
  * Provides a mock implementation for the 
@@ -70,6 +73,9 @@ public class MockCaseManagementClient extends AbstractMockWSClient implements Ca
     public static final String VALIDATE = "validate";
     public static final String CHANGE_APPLICATION_STATUS = "changeApplicationStatus";
     public static final String CHANGE_SERVICE_STATUS = "changeServiceStatus";
+    public static final String GET_LODGEMENT = SERVICE_NAME + "getLodgementView";
+    public static final String GET_LODGEMENT_TIMING = SERVICE_NAME + "getLodgementTiming";
+    
 
     public MockCaseManagementClient(String url) {
         super(url, null);
@@ -110,6 +116,22 @@ public class MockCaseManagementClient extends AbstractMockWSClient implements Ca
         List<BrReportTO> defaultResponse = new ArrayList<BrReportTO>();
         return getManager().getResponse(GET_BRREPORT, List.class, defaultResponse);
     }
+    
+      /** @return default = new LodgementViewTO with id set */
+    @Override
+    public List<LodgementViewTO> getLodgementView(LodgementViewParamsTO lodgementViewParamsTO)  {
+        List<LodgementViewTO> defaultResponse = new ArrayList<LodgementViewTO>();
+        return getManager().getResponse(GET_LODGEMENT, List.class, defaultResponse);
+    }
+    
+       /** @return default = new LodgementViewTO with id set */
+    @Override
+    public List<LodgementTimingTO> getLodgementTiming(LodgementViewParamsTO lodgementViewParamsTO)  {
+        List<LodgementTimingTO> defaultResponse = new ArrayList<LodgementTimingTO>();
+        return getManager().getResponse(GET_LODGEMENT_TIMING, List.class, defaultResponse);
+    }
+    
+    
     
     /** @return default = new ApplicationTO with id set */
     @Override

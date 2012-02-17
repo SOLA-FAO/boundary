@@ -38,6 +38,7 @@ import javax.xml.ws.WebServiceContext;
 import org.sola.services.boundary.transferobjects.configuration.ConfigMapLayerTO;
 import org.sola.services.boundary.transferobjects.configuration.MapDefinitionTO;
 import org.sola.services.common.ServiceConstants;
+import org.sola.services.common.faults.FaultUtility;
 import org.sola.services.common.faults.SOLAFault;
 import org.sola.services.common.faults.UnhandledFault;
 import org.sola.services.common.webservices.AbstractWebService;
@@ -61,13 +62,14 @@ public class Spatial extends AbstractWebService {
     @WebMethod(operationName = "GetMapDefinition")
     public MapDefinitionTO getMapDefinition( @WebParam(name = "languageCode") String languageCode)
             throws UnhandledFault, SOLAFault {
-        //     FLOSS - 813 1       
-            
+//        //     FLOSS - 813 1       
+//            
             final Object[] result = {null};
             final String languageCodeTmp = languageCode;
-       
-            runGeneralMethod(wsContext, new Runnable() {
-
+//       
+//            runGeneralMethod(wsContext, new Runnable() {
+              runGeneralMethodNoUser (wsContext, new Runnable() {
+//
             @Override
             public void run() {
             HashMap<String, String> mapSettings = searchEJB.getMapSettingList();
@@ -103,7 +105,7 @@ public class Spatial extends AbstractWebService {
         });
 
         return (MapDefinitionTO) result[0];
-//        
+        
         
 //        try {
 //            HashMap<String, String> mapSettings = this.searchEJB.getMapSettingList();
@@ -154,12 +156,12 @@ public class Spatial extends AbstractWebService {
     @WebMethod(operationName = "GetSpatialForNavigation")
     public ResultForNavigationInfo GetSpatialForNavigation(QueryForNavigation spatialQuery)
             throws SOLAFault, UnhandledFault {
-          //     FLOSS - 813 1       
-            
+//          //     FLOSS - 813 1       
+//            
             final Object[] result = {null};
             final QueryForNavigation spatialQueryTmp = spatialQuery;
        
-            runGeneralMethod(wsContext, new Runnable() {
+            runGeneralMethodNoUser (wsContext, new Runnable() {
 
             @Override
             public void run() {

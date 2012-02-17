@@ -27,6 +27,8 @@
  */
  package org.sola.services.boundary.wsclients;
 
+
+import java.util.Date;
 import java.util.List;
 import javax.xml.namespace.QName;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
@@ -44,9 +46,13 @@ import org.sola.webservices.transferobjects.casemanagement.AddressTO;
 import org.sola.webservices.transferobjects.casemanagement.ApplicationLogTO;
 import org.sola.webservices.transferobjects.casemanagement.ApplicationTO;
 import org.sola.webservices.transferobjects.casemanagement.BrReportTO;
+import org.sola.webservices.transferobjects.casemanagement.LodgementTimingTO;
+import org.sola.webservices.transferobjects.casemanagement.LodgementViewTO;
 import org.sola.webservices.transferobjects.casemanagement.PartyTO;
 import org.sola.webservices.transferobjects.casemanagement.ServiceTO;
 import org.sola.webservices.transferobjects.casemanagement.SourceTO;
+import org.sola.webservices.transferobjects.casemanagement.LodgementViewParamsTO;
+
 
 /**
  * Implementation class for the {@linkplain CaseManagementClient} interface. 
@@ -112,7 +118,40 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
             throw processException(SERVICE_NAME + "saveApplication", t);
         }
     }
-
+     
+    
+     @Override
+    public List<LodgementViewTO> getLodgementView(LodgementViewParamsTO lodgementViewParamsTO) throws WebServiceClientException {
+        try {
+           List<LodgementViewTO> result = getPort().getLodgementView(lodgementViewParamsTO);
+            return result;
+        } catch (SOLAFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    f.getFaultInfo());
+        } catch (UnhandledFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    f.getFaultInfo());
+        } catch (Throwable t) {
+            throw processException(SERVICE_NAME + "getLodgementView", t);
+        }
+    }
+    
+     @Override
+    public List<LodgementTimingTO> getLodgementTiming(LodgementViewParamsTO lodgementViewParamsTO) throws WebServiceClientException {
+        try {
+           List<LodgementTimingTO> result = getPort().getLodgementTiming(lodgementViewParamsTO);
+            return result;
+        } catch (SOLAFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    f.getFaultInfo());
+        } catch (UnhandledFault f) {
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    f.getFaultInfo());
+        } catch (Throwable t) {
+            throw processException(SERVICE_NAME + "getLodgementTiming", t);
+        }
+    }
+    
     @Override
     public List<BrReportTO> getAllBrs() throws WebServiceClientException {
         try {
