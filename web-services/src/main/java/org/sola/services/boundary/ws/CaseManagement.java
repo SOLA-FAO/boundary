@@ -333,38 +333,12 @@ public class CaseManagement extends AbstractWebService {
         });
 
         return (PartyTO) result[0];
-        
-        
-        
-//        try {
-//            // initialize()
-//            try {
-//                beginTransaction();
-//                PartyTO result = GenericTranslator.toTO(partyEJB.getParty(id), PartyTO.class);
-//
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//
-//
-//            if (fault.getClass() == SOLAFault.class) {
-//
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetAgents")
     public List<PartySummaryTO> GetAgents() throws SOLAFault, UnhandledFault {
         
-         //     FLOSS - 813 3       
-           final Object[] result = {null};
+        final Object[] result = {null};
   
         runGeneralMethod(wsContext, new Runnable() {
 
@@ -376,32 +350,6 @@ public class CaseManagement extends AbstractWebService {
         });
 
         return (List<PartySummaryTO>) result[0];
-        
-        
-//        try {
-//            // initialize()
-//            try {
-//                beginTransaction();
-//                List<PartySummaryTO> agents = GenericTranslator.toTOList(partyEJB.getAgents(),
-//                        PartySummaryTO.class);
-//                commitTransaction();
-//
-//                return agents;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//
-//
-//            if (fault.getClass() == SOLAFault.class) {
-//
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetUserActions")

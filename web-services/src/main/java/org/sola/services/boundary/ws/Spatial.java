@@ -59,8 +59,9 @@ public class Spatial extends AbstractWebService {
     @Resource
     private WebServiceContext wsContext;
 //TODO 
+
     @WebMethod(operationName = "GetMapDefinition")
-    public MapDefinitionTO getMapDefinition( @WebParam(name = "languageCode") String languageCode)
+    public MapDefinitionTO getMapDefinition(@WebParam(name = "languageCode") String languageCode)
             throws UnhandledFault, SOLAFault {
 //        //     FLOSS - 813 1       
 //            
@@ -153,6 +154,7 @@ public class Spatial extends AbstractWebService {
         return true;
     }
 // TODO
+
     @WebMethod(operationName = "GetSpatialForNavigation")
     public ResultForNavigationInfo GetSpatialForNavigation(QueryForNavigation spatialQuery)
             throws SOLAFault, UnhandledFault {
@@ -169,17 +171,28 @@ public class Spatial extends AbstractWebService {
                         }
         });
 
-        return (ResultForNavigationInfo) result[0];
-//        
-//        try {
-//            return this.searchEJB.getSpatialResult(spatialQuery);
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
+//        final Object[] result = {null};
+//        final QueryForNavigation spatialQueryTmp = spatialQuery;
+//
+//        runGeneralMethod(wsContext, new Runnable() {
+//
+//            @Override
+//            public void run() {
+//                result[0] = searchEJB.getSpatialResult(spatialQueryTmp);
 //            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//        }
+//        });
+//
+//        return (ResultForNavigationInfo) result[0];
+        
+        try {
+            return this.searchEJB.getSpatialResult(spatialQuery);
+        } catch (Throwable t) {
+            Throwable fault = FaultUtility.ProcessException(t);
+            if (fault.getClass() == SOLAFault.class) {
+                throw (SOLAFault) fault;
+            }
+            throw (UnhandledFault) fault;
+        } finally {
+        }
     }
 }
