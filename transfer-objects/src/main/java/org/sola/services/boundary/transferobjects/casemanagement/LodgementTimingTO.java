@@ -24,8 +24,6 @@
  */
 package org.sola.services.boundary.transferobjects.casemanagement;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import org.sola.services.common.contracts.AbstractBasicIdTO;
 
 
@@ -39,23 +37,20 @@ public class LodgementTimingTO  extends AbstractBasicIdTO {
 
     private String  resultCode;
     private int resultTotal;
-    private String  resultDailyAvg;
+    private double  resultDailyAvg;
 
-    public String getResultDailyAvg() {
+    public double getResultDailyAvg() {
         return resultDailyAvg;
     }
 
-    public void setResultDailyAvg(String resultDailyAvg) {
+    public void setResultDailyAvg(double resultDailyAvg) {
         this.resultDailyAvg = resultDailyAvg;
     }
-    
 
     public LodgementTimingTO() {
         super();
     }
 
-  
-   
     public int getResultTotal() {
         return resultTotal;
     }
