@@ -1,28 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
- * All rights reserved.
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- *    1. Redistributions of source code must retain the above copyright notice,this list
- *       of conditions and the following disclaimer.
- *    2. Redistributions in binary form must reproduce the above copyright notice,this list
- *       of conditions and the following disclaimer in the documentation and/or other
- *       materials provided with the distribution.
- *    3. Neither the name of FAO nor the names of its contributors may be used to endorse or
- *       promote products derived from this software without specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT
- * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.ws;
@@ -31,9 +33,9 @@ import java.util.HashMap;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
-import javax.jws.WebMethod;
 import javax.xml.ws.WebServiceContext;
 import org.sola.services.boundary.transferobjects.configuration.ConfigMapLayerTO;
 import org.sola.services.boundary.transferobjects.configuration.MapDefinitionTO;
@@ -58,132 +60,75 @@ public class Spatial extends AbstractWebService {
     SearchEJBLocal searchEJB;
     @Resource
     private WebServiceContext wsContext;
-//TODO 
 
     @WebMethod(operationName = "GetMapDefinition")
     public MapDefinitionTO getMapDefinition(@WebParam(name = "languageCode") String languageCode)
             throws UnhandledFault, SOLAFault {
-//        //     FLOSS - 813 1       
-//            
-            final Object[] result = {null};
-            final String languageCodeTmp = languageCode;
-//       
-//            runGeneralMethod(wsContext, new Runnable() {
-              runGeneralMethodNoUser (wsContext, new Runnable() {
-//
+
+        final Object[] result = {null};
+        final String languageCodeTmp = languageCode;
+        runGeneralMethodNoUser(wsContext, new Runnable() {
+
             @Override
             public void run() {
-            HashMap<String, String> mapSettings = searchEJB.getMapSettingList();
-            List<ConfigMapLayer> configMapLayerList = searchEJB.getConfigMapLayerList(languageCodeTmp);
-            MapDefinitionTO mapDefinition = new MapDefinitionTO();
-            mapDefinition.setSrid(Integer.parseInt(mapSettings.get("map-srid")));
-            mapDefinition.setWktOfCrs(mapSettings.get("wkt-of-crs"));
-            mapDefinition.setWest(Double.parseDouble(mapSettings.get("map-west")));
-            mapDefinition.setSouth(Double.parseDouble(mapSettings.get("map-south")));
-            mapDefinition.setEast(Double.parseDouble(mapSettings.get("map-east")));
-            mapDefinition.setNorth(Double.parseDouble(mapSettings.get("map-north")));
-            mapDefinition.setSnapTolerance(Double.parseDouble(mapSettings.get("map-tolerance")));
-            mapDefinition.setSurveyPointShiftRuralArea(
-                    Double.parseDouble(mapSettings.get("map-shift-tolerance-rural")));
-            mapDefinition.setSurveyPointShiftUrbanArea(
-                    Double.parseDouble(mapSettings.get("map-shift-tolerance-urban")));
-            for (ConfigMapLayer configMapLayer : configMapLayerList) {
-                ConfigMapLayerTO configMapLayerTO = new ConfigMapLayerTO();
-                configMapLayerTO.setId(configMapLayer.getId());
-                configMapLayerTO.setPojoQueryName(configMapLayer.getPojoQueryName());
-                configMapLayerTO.setPojoQueryNameForSelect(configMapLayer.getPojoQueryNameForSelect());
-                configMapLayerTO.setPojoStructure(configMapLayer.getPojoStructure());
-                configMapLayerTO.setShapeLocation(configMapLayer.getShapeLocation());
-                configMapLayerTO.setStyle(configMapLayer.getStyle());
-                configMapLayerTO.setTypeCode(configMapLayer.getTypeCode());
-                configMapLayerTO.setTitle(configMapLayer.getTitle());
-                configMapLayerTO.setWmsLayers(configMapLayer.getWmsLayers());
-                configMapLayerTO.setWmsUrl(configMapLayer.getWmsUrl());
-                mapDefinition.getLayers().add(configMapLayerTO);
+                HashMap<String, String> mapSettings = searchEJB.getMapSettingList();
+                List<ConfigMapLayer> configMapLayerList = searchEJB.getConfigMapLayerList(languageCodeTmp);
+                MapDefinitionTO mapDefinition = new MapDefinitionTO();
+                mapDefinition.setSrid(Integer.parseInt(mapSettings.get("map-srid")));
+                mapDefinition.setWktOfCrs(mapSettings.get("wkt-of-crs"));
+                mapDefinition.setWest(Double.parseDouble(mapSettings.get("map-west")));
+                mapDefinition.setSouth(Double.parseDouble(mapSettings.get("map-south")));
+                mapDefinition.setEast(Double.parseDouble(mapSettings.get("map-east")));
+                mapDefinition.setNorth(Double.parseDouble(mapSettings.get("map-north")));
+                mapDefinition.setSnapTolerance(Double.parseDouble(mapSettings.get("map-tolerance")));
+                mapDefinition.setSurveyPointShiftRuralArea(
+                        Double.parseDouble(mapSettings.get("map-shift-tolerance-rural")));
+                mapDefinition.setSurveyPointShiftUrbanArea(
+                        Double.parseDouble(mapSettings.get("map-shift-tolerance-urban")));
+                for (ConfigMapLayer configMapLayer : configMapLayerList) {
+                    ConfigMapLayerTO configMapLayerTO = new ConfigMapLayerTO();
+                    configMapLayerTO.setId(configMapLayer.getId());
+                    configMapLayerTO.setPojoQueryName(configMapLayer.getPojoQueryName());
+                    configMapLayerTO.setPojoQueryNameForSelect(configMapLayer.getPojoQueryNameForSelect());
+                    configMapLayerTO.setPojoStructure(configMapLayer.getPojoStructure());
+                    configMapLayerTO.setShapeLocation(configMapLayer.getShapeLocation());
+                    configMapLayerTO.setStyle(configMapLayer.getStyle());
+                    configMapLayerTO.setTypeCode(configMapLayer.getTypeCode());
+                    configMapLayerTO.setTitle(configMapLayer.getTitle());
+                    configMapLayerTO.setWmsLayers(configMapLayer.getWmsLayers());
+                    configMapLayerTO.setWmsUrl(configMapLayer.getWmsUrl());
+                    mapDefinition.getLayers().add(configMapLayerTO);
+                }
+                result[0] = mapDefinition;
             }
-                result[0] =  mapDefinition;
-                        }
         });
 
         return (MapDefinitionTO) result[0];
-        
-        
-//        try {
-//            HashMap<String, String> mapSettings = this.searchEJB.getMapSettingList();
-//            List<ConfigMapLayer> configMapLayerList = this.searchEJB.getConfigMapLayerList(languageCode);
-//            MapDefinitionTO mapDefinition = new MapDefinitionTO();
-//            mapDefinition.setSrid(Integer.parseInt(mapSettings.get("map-srid")));
-//            mapDefinition.setWktOfCrs(mapSettings.get("wkt-of-crs"));
-//            mapDefinition.setWest(Double.parseDouble(mapSettings.get("map-west")));
-//            mapDefinition.setSouth(Double.parseDouble(mapSettings.get("map-south")));
-//            mapDefinition.setEast(Double.parseDouble(mapSettings.get("map-east")));
-//            mapDefinition.setNorth(Double.parseDouble(mapSettings.get("map-north")));
-//            mapDefinition.setSnapTolerance(Double.parseDouble(mapSettings.get("map-tolerance")));
-//            mapDefinition.setSurveyPointShiftRuralArea(
-//                    Double.parseDouble(mapSettings.get("map-shift-tolerance-rural")));
-//            mapDefinition.setSurveyPointShiftUrbanArea(
-//                    Double.parseDouble(mapSettings.get("map-shift-tolerance-urban")));
-//            for (ConfigMapLayer configMapLayer : configMapLayerList) {
-//                ConfigMapLayerTO configMapLayerTO = new ConfigMapLayerTO();
-//                configMapLayerTO.setId(configMapLayer.getId());
-//                configMapLayerTO.setPojoQueryName(configMapLayer.getPojoQueryName());
-//                configMapLayerTO.setPojoQueryNameForSelect(configMapLayer.getPojoQueryNameForSelect());
-//                configMapLayerTO.setPojoStructure(configMapLayer.getPojoStructure());
-//                configMapLayerTO.setShapeLocation(configMapLayer.getShapeLocation());
-//                configMapLayerTO.setStyle(configMapLayer.getStyle());
-//                configMapLayerTO.setTypeCode(configMapLayer.getTypeCode());
-//                configMapLayerTO.setTitle(configMapLayer.getTitle());
-//                configMapLayerTO.setWmsLayers(configMapLayer.getWmsLayers());
-//                configMapLayerTO.setWmsUrl(configMapLayer.getWmsUrl());
-//                mapDefinition.getLayers().add(configMapLayerTO);
-//            }
-//            return mapDefinition;
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//        }
     }
 
-    /** Dummy method to check the web service instance is working */
+    /**
+     * Dummy method to check the web service instance is working
+     */
     @WebMethod(operationName = "CheckConnection")
     public boolean CheckConnection() {
         return true;
     }
-// TODO
 
     @WebMethod(operationName = "GetSpatialForNavigation")
     public ResultForNavigationInfo GetSpatialForNavigation(QueryForNavigation spatialQuery)
             throws SOLAFault, UnhandledFault {
-//          //     FLOSS - 813 1       
-//            
-            final Object[] result = {null};
-            final QueryForNavigation spatialQueryTmp = spatialQuery;
-       
-            runGeneralMethodNoUser (wsContext, new Runnable() {
+
+        final Object[] result = {null};
+        final QueryForNavigation spatialQueryTmp = spatialQuery;
+
+        runGeneralMethodNoUser(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =  searchEJB.getSpatialResult(spatialQueryTmp);
-                        }
+                result[0] = searchEJB.getSpatialResult(spatialQueryTmp);
+            }
         });
 
-//        final Object[] result = {null};
-//        final QueryForNavigation spatialQueryTmp = spatialQuery;
-//
-//        runGeneralMethod(wsContext, new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                result[0] = searchEJB.getSpatialResult(spatialQueryTmp);
-//            }
-//        });
-//
-//        return (ResultForNavigationInfo) result[0];
-        
         try {
             return this.searchEJB.getSpatialResult(spatialQuery);
         } catch (Throwable t) {

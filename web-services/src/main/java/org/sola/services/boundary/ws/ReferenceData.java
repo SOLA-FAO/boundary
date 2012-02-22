@@ -1,28 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
- * All rights reserved.
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- *    1. Redistributions of source code must retain the above copyright notice,this list
- *       of conditions and the following disclaimer.
- *    2. Redistributions in binary form must reproduce the above copyright notice,this list
- *       of conditions and the following disclaimer in the documentation and/or other
- *       materials provided with the distribution.
- *    3. Neither the name of FAO nor the names of its contributors may be used to endorse or
- *       promote products derived from this software without specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT
- * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.ws;
@@ -125,7 +127,9 @@ public class ReferenceData extends AbstractWebService {
     @Resource
     private WebServiceContext wsContext;
 
-    /** Dummy method to check the web service instance is working */
+    /**
+     * Dummy method to check the web service instance is working
+     */
     @WebMethod(operationName = "CheckConnection")
     public boolean CheckConnection() {
         return true;
@@ -134,954 +138,440 @@ public class ReferenceData extends AbstractWebService {
     @WebMethod(operationName = "GetCommunicationTypes")
     public List<CommunicationTypeTO> GetCommunicationTypes(String languageCode)
             throws SOLAFault, UnhandledFault {
-      
-        
-          //     FLOSS - 813 0       
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
         runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =  GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         partyEJB.getCommunicationTypes(languageCodeTmp),
                         CommunicationTypeTO.class);
-                        }
+            }
         });
 
         return (List<CommunicationTypeTO>) result[0];
-    
-//        
-//        try {
-//            //initialize();
-//            try {
-//                beginTransaction();
-//                List<CommunicationTypeTO> result = GenericTranslator.toTOList(
-//                        partyEJB.getCommunicationTypes(languageCode),
-//                        CommunicationTypeTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetGenderTypes")
     public List<GenderTypeTO> GetGenderTypes(String languageCode)
             throws SOLAFault, UnhandledFault {
-         
-        //     FLOSS - 813 1       
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
         runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =  GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         partyEJB.getGenderTypes(languageCodeTmp),
                         GenderTypeTO.class);
-                }
+            }
         });
 
         return (List<GenderTypeTO>) result[0];
-        
-        
-//        
-//        try {
-//            //initialize();
-//            try {
-//                beginTransaction();
-//                List<GenderTypeTO> result = GenericTranslator.toTOList(
-//                        partyEJB.getGenderTypes(languageCode),
-//                        GenderTypeTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetAvailabilityStatusList")
     public List<AvailabilityStatusTO> GetAvailabilityStatusList(String languageCode)
             throws SOLAFault, UnhandledFault {
-       
-         //     FLOSS - 813 1       
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
-            runGeneralMethod(wsContext, new Runnable() {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =   GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         sourceEJB.getAvailabilityStatusList(languageCodeTmp),
                         AvailabilityStatusTO.class);
-                }
+            }
         });
 
         return (List<AvailabilityStatusTO>) result[0];
-        
-//        
-//        try {
-//            // initialize();
-//            try {
-//                beginTransaction();
-//                List<AvailabilityStatusTO> result = GenericTranslator.toTOList(
-//                        sourceEJB.getAvailabilityStatusList(languageCode),
-//                        AvailabilityStatusTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetPresentationFormTypes")
     public List<PresentationFormTypeTO> GetPresentationFormTypes(String languageCode) throws SOLAFault, UnhandledFault {
-       //     FLOSS - 813 2      
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
-            runGeneralMethod(wsContext, new Runnable() {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =   GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         sourceEJB.getPresentationFormTypes(languageCodeTmp),
                         PresentationFormTypeTO.class);
-                }
+            }
         });
 
         return (List<PresentationFormTypeTO>) result[0];
-        
-//        
-//        try {
-//            //initialize();
-//            try {
-//                beginTransaction();
-//                List<PresentationFormTypeTO> result = GenericTranslator.toTOList(
-//                        sourceEJB.getPresentationFormTypes(languageCode),
-//                        PresentationFormTypeTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetRequestTypes")
     public List<RequestTypeTO> GetRequestTypes(String languageCode) throws SOLAFault, UnhandledFault {
-       //     FLOSS - 813 3      
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
-            runGeneralMethod(wsContext, new Runnable() {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =   GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         applicationEJB.getRequestTypes(languageCodeTmp), RequestTypeTO.class);
-                }
+            }
         });
 
         return (List<RequestTypeTO>) result[0];
-        
-//        try {
-//            //initialize();
-//            try {
-//                beginTransaction();
-//                List<RequestTypeTO> result = GenericTranslator.toTOList(
-//                        applicationEJB.getRequestTypes(languageCode), RequestTypeTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetRequestCategoryTypes")
     public List<RequestCategoryTypeTO> GetRequestCategoryTypes(String languageCode)
             throws SOLAFault, UnhandledFault {
-       
-         //     FLOSS - 813 4      
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
-            runGeneralMethod(wsContext, new Runnable() {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =   GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         applicationEJB.getRequestCategoryTypes(languageCodeTmp), RequestCategoryTypeTO.class);
-                }
+            }
         });
 
         return (List<RequestCategoryTypeTO>) result[0];
-//        try {
-//            //initialize();
-//            try {
-//                beginTransaction();
-//                List<RequestCategoryTypeTO> result = GenericTranslator.toTOList(
-//                        applicationEJB.getRequestCategoryTypes(languageCode), RequestCategoryTypeTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetSourceTypes")
     public List<SourceTypeTO> GetSourceTypes(String languageCode) throws SOLAFault, UnhandledFault {
-        //     FLOSS - 813 5      
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
-            runGeneralMethod(wsContext, new Runnable() {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =   GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         sourceEJB.getSourceTypes(languageCodeTmp), SourceTypeTO.class);
-                }
+            }
         });
 
         return (List<SourceTypeTO>) result[0];
-        
-//        try {
-//            // initialize();
-//            try {
-//                beginTransaction();
-//                List<SourceTypeTO> result = GenericTranslator.toTOList(
-//                        sourceEJB.getSourceTypes(languageCode), SourceTypeTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetApplicationStatusTypes")
     public List<ApplicationStatusTypeTO> GetApplicationStatusTypes(String languageCode)
             throws SOLAFault, UnhandledFault {
-        //     FLOSS - 813 5      
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
-            runGeneralMethod(wsContext, new Runnable() {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =   GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         applicationEJB.getApplicationStatusTypes(languageCodeTmp),
                         ApplicationStatusTypeTO.class);
-                }
+            }
         });
 
         return (List<ApplicationStatusTypeTO>) result[0];
-        
-//        try {
-//            // initialize();
-//            try {
-//                beginTransaction();
-//                List<ApplicationStatusTypeTO> result = GenericTranslator.toTOList(
-//                        applicationEJB.getApplicationStatusTypes(languageCode),
-//                        ApplicationStatusTypeTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetApplicationActionTypes")
     public List<ApplicationActionTypeTO> GetApplicationActionTypes(String languageCode)
             throws SOLAFault, UnhandledFault {
-        
-        //     FLOSS - 813 6     
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
-            runGeneralMethod(wsContext, new Runnable() {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =   GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         applicationEJB.getApplicationActionTypes(languageCodeTmp),
                         ApplicationActionTypeTO.class);
-                }
+            }
         });
 
         return (List<ApplicationActionTypeTO>) result[0];
-        
-        
-//        try {
-//            // initialize();
-//            try {
-//                beginTransaction();
-//                List<ApplicationActionTypeTO> result = GenericTranslator.toTOList(
-//                        applicationEJB.getApplicationActionTypes(languageCode),
-//                        ApplicationActionTypeTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetServiceStatusTypes")
     public List<ServiceStatusTypeTO> GetServiceStatusTypes(String languageCode)
             throws SOLAFault, UnhandledFault {
-         //     FLOSS - 813 7     
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
-            runGeneralMethod(wsContext, new Runnable() {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =   GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         applicationEJB.getServiceStatusTypes(languageCodeTmp),
                         ServiceStatusTypeTO.class);
-                }
+            }
         });
 
         return (List<ServiceStatusTypeTO>) result[0];
-        
-//        try {
-//            // initialize();
-//            try {
-//                beginTransaction();
-//                List<ServiceStatusTypeTO> result = GenericTranslator.toTOList(
-//                        applicationEJB.getServiceStatusTypes(languageCode),
-//                        ServiceStatusTypeTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetServiceActionTypes")
     public List<ServiceActionTypeTO> GetServiceActionTypes(String languageCode)
             throws SOLAFault, UnhandledFault {
-         //     FLOSS - 813 7     
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
-            runGeneralMethod(wsContext, new Runnable() {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =   GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         applicationEJB.getServiceActionTypes(languageCodeTmp),
                         ServiceActionTypeTO.class);
-                }
+            }
         });
 
         return (List<ServiceActionTypeTO>) result[0];
-        
-//        try {
-//            //initialize();
-//            try {
-//                beginTransaction();
-//                List<ServiceActionTypeTO> result = GenericTranslator.toTOList(
-//                        applicationEJB.getServiceActionTypes(languageCode),
-//                        ServiceActionTypeTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetPartyTypes")
     public List<PartyTypeTO> GetPartyTypes(String languageCode) throws SOLAFault, UnhandledFault {
-       //     FLOSS - 813 8    
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
-            runGeneralMethod(wsContext, new Runnable() {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =   GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         partyEJB.getPartyTypes(languageCodeTmp), PartyTypeTO.class);
-                }
+            }
         });
 
         return (List<PartyTypeTO>) result[0];
-        
-        
-//        try {
-//            //initialize();
-//            try {
-//                beginTransaction();
-//                List<PartyTypeTO> result = GenericTranslator.toTOList(
-//                        partyEJB.getPartyTypes(languageCode), PartyTypeTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetPartyRoles")
     public List<PartyRoleTypeTO> GetPartyRoles(String languageCode) throws SOLAFault, UnhandledFault {
-        //     FLOSS - 813 8    
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
-            runGeneralMethod(wsContext, new Runnable() {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =   GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         partyEJB.getPartyRoles(languageCodeTmp), PartyRoleTypeTO.class);
-                }
+            }
         });
 
         return (List<PartyRoleTypeTO>) result[0];
-        
-//        
-//        try {
-//            //initialize();
-//            try {
-//                beginTransaction();
-//                List<PartyRoleTypeTO> result = GenericTranslator.toTOList(
-//                        partyEJB.getPartyRoles(language_code), PartyRoleTypeTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetIdTypes")
     public List<IdTypeTO> GetIdTypes(String languageCode) throws SOLAFault, UnhandledFault {
-         //     FLOSS - 813 9    
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
-            runGeneralMethod(wsContext, new Runnable() {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =   GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         partyEJB.getIdTypes(languageCodeTmp), IdTypeTO.class);
-                }
+            }
         });
 
         return (List<IdTypeTO>) result[0];
-//        
-//        try {
-//            //initialize();
-//            try {
-//                beginTransaction();
-//                List<IdTypeTO> result = GenericTranslator.toTOList(
-//                        partyEJB.getIdTypes(languageCode), IdTypeTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetBaUnitTypes")
     public List<BaUnitTypeTO> GetBaUnitTypes(String languageCode) throws SOLAFault, UnhandledFault {
-          //     FLOSS - 813 10  
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
-            runGeneralMethod(wsContext, new Runnable() {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =   GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         administrativeEJB.getBaUnitTypes(languageCodeTmp), BaUnitTypeTO.class);
-                }
+            }
         });
 
         return (List<BaUnitTypeTO>) result[0];
-        
-//        try {
-//            // initialize();
-//            try {
-//                beginTransaction();
-//                List<BaUnitTypeTO> result = GenericTranslator.toTOList(
-//                        administrativeEJB.getBaUnitTypes(languageCode), BaUnitTypeTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetChangeStatuTypes")
     public List<ChangeStatusTypeTO> GetChangeStatuTypes(String languageCode) throws SOLAFault, UnhandledFault {
-        //     FLOSS - 813 11  
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
-            runGeneralMethod(wsContext, new Runnable() {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =   GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         administrativeEJB.getChangeStatusTypes(languageCodeTmp),
                         ChangeStatusTypeTO.class);
-                }
+            }
         });
 
         return (List<ChangeStatusTypeTO>) result[0];
-        
-//        try {
-//            // initialize();
-//            try {
-//                beginTransaction();
-//                List<ChangeStatusTypeTO> result = GenericTranslator.toTOList(
-//                        administrativeEJB.getChangeStatusTypes(languageCode),
-//                        ChangeStatusTypeTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetMortgageTypes")
     public List<MortgageTypeTO> GetMortgageTypes(String languageCode) throws SOLAFault, UnhandledFault {
-        
-         //     FLOSS - 813 12  
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
-            runGeneralMethod(wsContext, new Runnable() {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =   GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         administrativeEJB.getMortgageTypes(languageCodeTmp), MortgageTypeTO.class);
-                }
+            }
         });
 
         return (List<MortgageTypeTO>) result[0];
-//        try {
-//            // initialize();
-//            try {
-//                beginTransaction();
-//                List<MortgageTypeTO> result = GenericTranslator.toTOList(
-//                        administrativeEJB.getMortgageTypes(languageCode), MortgageTypeTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetRRRGroupTypes")
     public List<RrrGroupTypeTO> GetRRRGroupTypes(String languageCode) throws SOLAFault, UnhandledFault {
-        
-        //     FLOSS - 813 13  
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
-            runGeneralMethod(wsContext, new Runnable() {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =   GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         administrativeEJB.getRRRGroupTypes(languageCodeTmp), RrrGroupTypeTO.class);
-                }
+            }
         });
 
         return (List<RrrGroupTypeTO>) result[0];
-      
-//        
-//        try {
-//            //initialize();
-//            try {
-//                beginTransaction();
-//                List<RrrGroupTypeTO> result = GenericTranslator.toTOList(
-//                        administrativeEJB.getRRRGroupTypes(languageCode), RrrGroupTypeTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetRRRTypes")
     public List<RrrTypeTO> GetRRRTypes(String languageCode) throws SOLAFault, UnhandledFault {
-        //     FLOSS - 813 14  
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
-            runGeneralMethod(wsContext, new Runnable() {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =   GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         administrativeEJB.getRRRTypes(languageCodeTmp), RrrTypeTO.class);
-                }
+            }
         });
 
         return (List<RrrTypeTO>) result[0];
-      
-//        
-//        try {
-//            // initialize();
-//            try {
-//                beginTransaction();
-//                List<RrrTypeTO> result = GenericTranslator.toTOList(
-//                        administrativeEJB.getRRRTypes(languageCode), RrrTypeTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetSourceBaUnitRelationTypes")
     public List<SourceBaUnitRelationTypeTO> GetSourceBaUnitRelationTypes(String languageCode)
             throws SOLAFault, UnhandledFault {
-         //     FLOSS - 813 15  
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
-            runGeneralMethod(wsContext, new Runnable() {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =   GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         administrativeEJB.getSourceBaUnitRelationTypes(languageCodeTmp),
                         SourceBaUnitRelationTypeTO.class);
-                }
+            }
         });
 
         return (List<SourceBaUnitRelationTypeTO>) result[0];
-      
-        
-//        try {
-//            // initialize();
-//            try {
-//                beginTransaction();
-//                List<SourceBaUnitRelationTypeTO> result = GenericTranslator.toTOList(
-//                        administrativeEJB.getSourceBaUnitRelationTypes(languageCode),
-//                        SourceBaUnitRelationTypeTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetRegistrationStatusTypes")
     public List<RegistrationStatusTypeTO> GetRegistrationStatusTypes(String languageCode)
             throws SOLAFault, UnhandledFault {
-            //     FLOSS - 813 16  
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
-            runGeneralMethod(wsContext, new Runnable() {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =   GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         transactionEJB.getRegistrationStatusTypes(languageCodeTmp),
                         RegistrationStatusTypeTO.class);
-                }
+            }
         });
 
         return (List<RegistrationStatusTypeTO>) result[0];
-        
-//        try {
-//            //initialize();
-//            try {
-//                beginTransaction();
-//                List<RegistrationStatusTypeTO> result = GenericTranslator.toTOList(
-//                        transactionEJB.getRegistrationStatusTypes(languageCode),
-//                        RegistrationStatusTypeTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetCadastreObjectTypes")
     public List<CadastreObjectTypeTO> GetCadastreObjectTypes(String languageCode)
             throws SOLAFault, UnhandledFault {
-       //     FLOSS - 813 17 
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
-            runGeneralMethod(wsContext, new Runnable() {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =   GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         cadastreEJB.getCadastreObjectTypes(languageCodeTmp),
                         CadastreObjectTypeTO.class);
-                }
+            }
         });
 
         return (List<CadastreObjectTypeTO>) result[0];
-        
-//        try {
-//            //  initialize();
-//            try {
-//                beginTransaction();
-//                List<CadastreObjectTypeTO> result = GenericTranslator.toTOList(
-//                        cadastreEJB.getCadastreObjectTypes(languageCode),
-//                        CadastreObjectTypeTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetTypeActions")
     public List<TypeActionTO> GetTypeActions(String languageCode)
             throws SOLAFault, UnhandledFault {
-       
-         //     FLOSS - 813 18 
-            final String languageCodeTmp  = languageCode;
-            final Object[] result = {null};
-  
-            runGeneralMethod(wsContext, new Runnable() {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =   GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         applicationEJB.getTypeActions(languageCodeTmp),
                         TypeActionTO.class);
-                }
+            }
         });
 
         return (List<TypeActionTO>) result[0];
-      
-//        try {
-//            //  initialize();
-//            try {
-//                beginTransaction();
-//                List<TypeActionTO> result = GenericTranslator.toTOList(
-//                        applicationEJB.getTypeActions(languageCode),
-//                        TypeActionTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetBrTechnicalTypes")
@@ -1121,7 +611,7 @@ public class ReferenceData extends AbstractWebService {
 
         return (List<BrValidationTargetTypeTO>) result[0];
     }
-    
+
     @WebMethod(operationName = "GetBrSeverityTypes")
     public List<BrSeverityTypeTO> GetBrSeverityTypes(@WebParam(name = "languageCode") String languageCode)
             throws SOLAFault, UnhandledFault {
@@ -1140,7 +630,7 @@ public class ReferenceData extends AbstractWebService {
 
         return (List<BrSeverityTypeTO>) result[0];
     }
-    
+
     @WebMethod(operationName = "GetBaUnitRelTypes")
     public List<BaUnitRelTypeTO> GetBaUnitRelTypes(@WebParam(name = "languageCode") String languageCode)
             throws SOLAFault, UnhandledFault {
@@ -1159,12 +649,12 @@ public class ReferenceData extends AbstractWebService {
 
         return (List<BaUnitRelTypeTO>) result[0];
     }
-    
+
     @RolesAllowed(RolesConstants.ADMIN_MANAGE_REFDATA)
     @WebMethod(operationName = "saveReferenceData")
     public AbstractCodeTO saveReferenceData(AbstractCodeTO refDataTO)
             throws SOLAFault, UnhandledFault {
-       
+
         try {
             try {
                 beginTransaction();

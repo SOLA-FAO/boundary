@@ -1,28 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
- * All rights reserved.
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- *    1. Redistributions of source code must retain the above copyright notice,this list
- *       of conditions and the following disclaimer.
- *    2. Redistributions in binary form must reproduce the above copyright notice,this list
- *       of conditions and the following disclaimer in the documentation and/or other
- *       materials provided with the distribution.
- *    3. Neither the name of FAO nor the names of its contributors may be used to endorse or
- *       promote products derived from this software without specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT
- * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.ws;
@@ -30,26 +32,21 @@ package org.sola.services.boundary.ws;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
-import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
 import org.sola.common.SOLAException;
 import org.sola.common.messaging.ServiceMessage;
-import org.sola.services.boundary.transferobjects.security.RoleTO;
 import org.sola.services.boundary.transferobjects.security.GroupSummaryTO;
 import org.sola.services.boundary.transferobjects.security.GroupTO;
+import org.sola.services.boundary.transferobjects.security.RoleTO;
 import org.sola.services.boundary.transferobjects.security.UserTO;
 import org.sola.services.boundary.transferobjects.system.BrTO;
 import org.sola.services.boundary.transferobjects.system.LanguageTO;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.contracts.GenericTranslator;
-import org.sola.services.common.faults.FaultUtility;
-import org.sola.services.common.faults.OptimisticLockingFault;
-import org.sola.services.common.faults.SOLAAccessFault;
-import org.sola.services.common.faults.SOLAFault;
-import org.sola.services.common.faults.SOLAValidationFault;
-import org.sola.services.common.faults.UnhandledFault;
+import org.sola.services.common.faults.*;
 import org.sola.services.common.webservices.AbstractWebService;
 import org.sola.services.ejb.system.businesslogic.SystemEJBLocal;
 import org.sola.services.ejb.system.repository.entities.Br;
@@ -59,7 +56,8 @@ import org.sola.services.ejbs.admin.businesslogic.repository.entities.Role;
 import org.sola.services.ejbs.admin.businesslogic.repository.entities.User;
 
 /**
- * Provides methods for administrators to manage users, reference data and system settings.
+ * Provides methods for administrators to manage users, reference data and
+ * system settings.
  */
 @WebService(serviceName = "admin-service", targetNamespace = ServiceConstants.ADMIN_WS_NAMESPACE)
 public class Admin extends AbstractWebService {
@@ -68,234 +66,134 @@ public class Admin extends AbstractWebService {
     AdminEJBLocal adminEJB;
     @EJB
     SystemEJBLocal systemEJB;
-    
     @Resource
     private WebServiceContext wsContext;
 
-    /** Dummy method to check the web service instance is working. */
+    /**
+     * Dummy method to check the web service instance is working.
+     */
     @WebMethod(operationName = "CheckConnection")
     public boolean CheckConnection() {
         return true;
     }
 
-    /** Returns list of all available languages.  */
+    /**
+     * Returns list of all available languages.
+     */
     @WebMethod(operationName = "GetLanguages")
     public List<LanguageTO> GetLanguages(String lang)
             throws SOLAFault, UnhandledFault {
-        
-        
-         //     FLOSS - 813 0       
-        final String langTmp = lang;   
+
+        final String langTmp = lang;
         final Object[] result = {null};
-  
+
         runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =  GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         adminEJB.getLanguages(langTmp), LanguageTO.class);
-                        }
+            }
         });
 
         return (List<LanguageTO>) result[0];
-        
-//        try {
-//            try {
-//                beginTransaction();
-//                List<LanguageTO> result = GenericTranslator.toTOList(
-//                        adminEJB.getLanguages(lang), LanguageTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
-    
-    /** Returns list of all user groups.  */
+
+    /**
+     * Returns list of all user groups.
+     */
     @WebMethod(operationName = "GetGroups")
     public List<GroupTO> GetGroups()
             throws SOLAFault, UnhandledFault {
-       
-            //     FLOSS - 813 1       
+
         final Object[] result = {null};
-  
+
         runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =  GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         adminEJB.getGroups(), GroupTO.class);
-                        }
+            }
         });
 
         return (List<GroupTO>) result[0];
-        
-//        try {
-//            try {
-//                beginTransaction();
-//                List<GroupTO> result = GenericTranslator.toTOList(
-//                        adminEJB.getGroups(), GroupTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
-    /** Returns list of all groups summaries.  */
+    /**
+     * Returns list of all groups summaries.
+     */
     @WebMethod(operationName = "GetGroupsSummary")
     public List<GroupSummaryTO> GetGroupsSummary()
             throws SOLAFault, UnhandledFault, SOLAAccessFault {
-        
-          //     FLOSS - 813 2       
+
         final Object[] result = {null};
-  
+
         runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =  GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         adminEJB.getGroupsSummary(), GroupSummaryTO.class);
-                        }
+            }
         });
 
         return (List<GroupSummaryTO>) result[0];
-        
-        
-//        try {
-//            try {
-//                beginTransaction();
-//                List<GroupSummaryTO> result = GenericTranslator.toTOList(
-//                        adminEJB.getGroupsSummary(), GroupSummaryTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAAccessFault.class) {
-//                throw (SOLAAccessFault) fault;
-//            }
-//
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
-    /** Returns currently logged user */
+    /**
+     * Returns currently logged user
+     */
     @WebMethod(operationName = "GetCurrentUser")
     public UserTO GetCurrentUser()
             throws SOLAFault, UnhandledFault {
-       
-           //     FLOSS - 813 3      
+
+        //     FLOSS - 813 3      
         final Object[] result = {null};
-  
+
         runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =  GenericTranslator.toTO(
+                result[0] = GenericTranslator.toTO(
                         adminEJB.getCurrentUser(), UserTO.class);
-                        }
+            }
         });
 
         return (UserTO) result[0];
-        
-//        try {
-//            try {
-//                beginTransaction();
-//                UserTO currentUser = GenericTranslator.toTO(
-//                        adminEJB.getCurrentUser(), UserTO.class);
-//                commitTransaction();
-//                return currentUser;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
-    /** Returns user */
+    /**
+     * Returns user
+     */
     @WebMethod(operationName = "GetUser")
     public UserTO GetUser(@WebParam(name = "userName") String userName)
             throws SOLAFault, UnhandledFault {
-        
-         //     FLOSS - 813 4     
+
         final String userNameTmp = userName;
         final Object[] result = {null};
-  
+
         runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =  GenericTranslator.toTO(
+                result[0] = GenericTranslator.toTO(
                         adminEJB.getUser(userNameTmp), UserTO.class);
-                        }
+            }
         });
 
         return (UserTO) result[0];
-
-        //        try {
-//            try {
-//                beginTransaction();
-//                UserTO user = GenericTranslator.toTO(
-//                        adminEJB.getUser(userName), UserTO.class);
-//                commitTransaction();
-//                return user;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
-    /** Saves user. */
+    /**
+     * Saves user.
+     */
     @WebMethod(operationName = "SaveUser")
     public UserTO SaveUser(@WebParam(name = "userTO") UserTO userTO) throws SOLAFault, UnhandledFault {
-        
-        
-            //     FLOSS - 813 5     
+
         final UserTO userTOTmp = userTO;
         final Object[] result = {null};
-  
+
         runGeneralMethod(wsContext, new Runnable() {
 
             @Override
@@ -308,313 +206,154 @@ public class Admin extends AbstractWebService {
                             new String[]{user.getUserName()});
 
                 }
-                result[0] =  GenericTranslator.toTO(
+                result[0] = GenericTranslator.toTO(
                         adminEJB.saveUser(GenericTranslator.fromTO(userTOTmp, User.class, user)), UserTO.class);
-                        }
+            }
         });
 
         return (UserTO) result[0];
-//        try {
-//            try {
-//                beginTransaction();
-//                User user = adminEJB.getUser(userTO.getUserName());
-//                if (user != null && userTO != null && user.getUserName() != null
-//                        && user.getUserName().equals(userTO.getUserName())
-//                        && !user.getId().equals(userTO.getId())) {
-//                    throw new SOLAException(ServiceMessage.ADMIN_WS_USER_EXISTS,
-//                            new String[]{user.getUserName()});
-//
-//                }
-//                UserTO result = GenericTranslator.toTO(
-//                        adminEJB.saveUser(GenericTranslator.fromTO(userTO, User.class, user)), UserTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
-    /** Returns group by ID. */
+    /**
+     * Returns group by ID.
+     */
     @WebMethod(operationName = "GetGroup")
     public GroupTO GetGroup(@WebParam(name = "groupId") String groupId)
             throws SOLAFault, UnhandledFault {
-       
-               //     FLOSS - 813 6     
+
         final String groupIdTmp = groupId;
         final Object[] result = {null};
-  
+
         runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =  GenericTranslator.toTO(adminEJB.getGroup(groupIdTmp), 
+                result[0] = GenericTranslator.toTO(adminEJB.getGroup(groupIdTmp),
                         GroupTO.class);
-                }
+            }
         });
 
         return (GroupTO) result[0];
-
-        
-//        try {
-//            try {
-//                beginTransaction();
-//                GroupTO result = GenericTranslator.toTO(adminEJB.getGroup(groupId), GroupTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
-    /** Creates/saves group. */
+    /**
+     * Creates/saves group.
+     */
     @WebMethod(operationName = "SaveGroup")
     public GroupTO SaveGroup(@WebParam(name = "groupTO") GroupTO groupTO) throws SOLAFault, UnhandledFault {
-                 //     FLOSS - 813 6     
+        //     FLOSS - 813 6     
         final GroupTO groupTOTmp = groupTO;
         final Object[] result = {null};
-  
+
         runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
                 Group group = adminEJB.getGroup(groupTOTmp.getId());
-                result[0] =  GenericTranslator.toTO(
+                result[0] = GenericTranslator.toTO(
                         adminEJB.saveGroup(GenericTranslator.fromTO(groupTOTmp, Group.class, group)), GroupTO.class);
-             }
+            }
         });
 
         return (GroupTO) result[0];
-        
-//        try {
-//            try {
-//                beginTransaction();
-//                Group group = adminEJB.getGroup(groupTO.getId());
-//                GroupTO result = GenericTranslator.toTO(
-//                        adminEJB.saveGroup(GenericTranslator.fromTO(groupTO, Group.class, group)), GroupTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetRoles")
     public List<RoleTO> GetRoles()
             throws SOLAFault, UnhandledFault {
-       
-                   //     FLOSS - 813 7     
+
         final Object[] result = {null};
-  
+
         runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =  GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         adminEJB.getRoles(), RoleTO.class);
-                        }
+            }
         });
 
         return (List<RoleTO>) result[0];
-        
-//        try {
-//            try {
-//                beginTransaction();
-//                List<RoleTO> result = GenericTranslator.toTOList(
-//                        adminEJB.getRoles(), RoleTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
     @WebMethod(operationName = "GetCurrentUserRoles")
     public List<RoleTO> GetCurrentUserRoles() throws SOLAFault, UnhandledFault {
-        
-                   //     FLOSS - 813 8    
+
         final Object[] result = {null};
-  
+
         runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =  GenericTranslator.toTOList(
+                result[0] = GenericTranslator.toTOList(
                         adminEJB.getCurrentUserRoles(), RoleTO.class);
-                        }
+            }
         });
 
         return (List<RoleTO>) result[0];
-        
-        
-        
-//        
-//        try {
-//            try {
-//                beginTransaction();
-//                List<RoleTO> result = GenericTranslator.toTOList(
-//                        adminEJB.getCurrentUserRoles(), RoleTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
-    /** Update role. */
+    /**
+     * Update role.
+     */
     @WebMethod(operationName = "SaveRole")
     public RoleTO SaveRole(@WebParam(name = "roleTO") RoleTO roleTO) throws SOLAFault, UnhandledFault {
-       
-        
-        //     FLOSS - 813 9  
+
+
         final RoleTO roleTOTmp = roleTO;
         final Object[] result = {null};
-  
+
         runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
                 Role role = adminEJB.getRole(roleTOTmp.getCode());
-                result[0] =  GenericTranslator.toTO(
+                result[0] = GenericTranslator.toTO(
                         adminEJB.saveRole(GenericTranslator.fromTO(roleTOTmp, Role.class, role)), RoleTO.class);
-                }
+            }
         });
 
         return (RoleTO) result[0];
-//        try {
-//            try {
-//                beginTransaction();
-//                Role role = adminEJB.getRole(roleTO.getCode());
-//                RoleTO result = GenericTranslator.toTO(
-//                        adminEJB.saveRole(GenericTranslator.fromTO(roleTO, Role.class, role)), RoleTO.class);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
     }
 
-    /** Update role. */
+    /**
+     * Update role.
+     */
     @WebMethod(operationName = "ChangePassword")
     public boolean ChangePassword(@WebParam(name = "userName") String userName,
             @WebParam(name = "password") String password) throws SOLAFault, UnhandledFault {
-        
-         //     FLOSS - 813 10  
+
         final String userNameTmp = userName;
         final String passwordTmp = password;
         final boolean[] result = {false};
-  
+
         runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =  adminEJB.changePassword(userNameTmp, passwordTmp);
-                }
+                result[0] = adminEJB.changePassword(userNameTmp, passwordTmp);
+            }
         });
 
-        return  result[0];
-        
-//        try {
-//            try {
-//                beginTransaction();
-//                boolean result = adminEJB.changePassword(userName, password);
-//                commitTransaction();
-//                return result;
-//            } finally {
-//                rollbackTransaction();
-//            }
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
+        return result[0];
     }
 
     @WebMethod(operationName = "IsUserAdmin")
     public boolean IsUserAdmin() throws SOLAFault, UnhandledFault {
-        //     FLOSS - 813 11  
+
         final boolean[] result = {false};
-  
+
         runGeneralMethod(wsContext, new Runnable() {
 
             @Override
             public void run() {
-                result[0] =  adminEJB.isUserAdmin();
-                }
+                result[0] = adminEJB.isUserAdmin();
+            }
         });
 
-        return  result[0];
-        
-//        try {
-//            return adminEJB.isUserAdmin();
-//        } catch (Throwable t) {
-//            Throwable fault = FaultUtility.ProcessException(t);
-//            if (fault.getClass() == SOLAFault.class) {
-//                throw (SOLAFault) fault;
-//            }
-//            throw (UnhandledFault) fault;
-//        } finally {
-//            cleanUp();
-//        }
+        return result[0];
     }
-    
+
     @WebMethod(operationName = "GetBr")
     public BrTO GetBr(@WebParam(name = "id") String id, @WebParam(name = "lang") String lang)
             throws SOLAFault, UnhandledFault, SOLAAccessFault {
@@ -634,7 +373,7 @@ public class Admin extends AbstractWebService {
 
         return (BrTO) result[0];
     }
-    
+
     @WebMethod(operationName = "SaveBr")
     public BrTO SaveBr(@WebParam(name = "br") BrTO br)
             throws SOLAFault, UnhandledFault, SOLAAccessFault, OptimisticLockingFault, SOLAValidationFault {
@@ -645,10 +384,10 @@ public class Admin extends AbstractWebService {
 
             @Override
             public void run() {
-                BrTO brTO =(BrTO)params[0];
+                BrTO brTO = (BrTO) params[0];
                 Br br = systemEJB.getBr(brTO.getId(), null);
                 result[0] = GenericTranslator.toTO(
-                        systemEJB.saveBr(GenericTranslator.fromTO(brTO, Br.class, br)), 
+                        systemEJB.saveBr(GenericTranslator.fromTO(brTO, Br.class, br)),
                         BrTO.class);
             }
         });
