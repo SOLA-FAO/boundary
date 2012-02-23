@@ -57,157 +57,112 @@ public class DigitalArchiveClientImpl extends AbstractWSClientImpl implements Di
     
     @Override
     public boolean checkConnection() {
+        final String inputService = SERVICE_NAME + "checkConnection";
         try {
             boolean result = getPort().checkConnection();
             return result;
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "checkConnection", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return false;
         }
     }
      
     @Override
     public DocumentBinaryTO getDocument(String documentId) {
+        final String inputService = SERVICE_NAME + "getDocument";
         try {
             return getPort().getDocument(documentId);
-         } 
-        catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getDocument", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public DocumentTO saveDocument(DocumentTO documentTO) {
+        final String inputService = SERVICE_NAME + "saveDocument";
         try {
             return getPort().saveDocument(documentTO);
-         } catch (OptimisticLockingFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                    f.getFaultInfo());} 
-        catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "saveDocument", t);
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public DocumentTO createDocument(DocumentBinaryTO documentBinaryTO) {
+        final String inputService = SERVICE_NAME + "createDocument";
         try {
             return getPort().createDocument(documentBinaryTO);
-         } 
-        catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "createDocument", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public DocumentTO createDocumentFromServer(DocumentTO documentTO, String fileName) {
+        final String inputService = SERVICE_NAME + "createDocumentFromServer";
         try {
             return getPort().createDocumentFromServer(documentTO, fileName);
-         } 
-        catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "createDocumentFromServer", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public FileBinaryTO getFileBinary(String fileName) {
+        final String inputService = SERVICE_NAME + "getFileBinary";
         try {
             return getPort().getFileBinary(fileName);
-         } 
-        catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getFileBinary", t);
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public FileBinaryTO getFileThumbnail(String fileName) {
+        final String inputService = SERVICE_NAME + "getFileThumbnail";
         try {
             return getPort().getFileThumbnail(fileName);
-         } 
-        catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getFileThumbnail", t);
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public List<FileInfoTO> getAllFiles() {
+        final String inputService = SERVICE_NAME + "getAllFiles";
         try {
             return getPort().getAllFiles();
-         } 
-        catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getAllFiles", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public boolean deleteFile(String fileName) {
+        final String inputService = SERVICE_NAME + "deleteFile";
         try {
             return getPort().deleteFile(fileName);
-         } 
-        catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "deleteFile", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return false;
         }
     }
 
     @Override
     public boolean rotateImage(String fileName, int angle) {
+        final String inputService = SERVICE_NAME + "rotateImage";
         try {
             return getPort().rotateImage(fileName, angle);
-         } 
-        catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "rotateImage", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return false;
         }
     }
     

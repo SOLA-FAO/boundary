@@ -82,27 +82,25 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
 
     @Override
     public boolean checkConnection() throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "checkConnection";
         try {
             boolean result = getPort().checkConnection();
             return result;
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "checkConnection", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return false;
         }
     }
 
     @Override
     public List<CommunicationTypeTO> getCommunicationTypes(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getCommunicationTypes";
         try {
             List<CommunicationTypeTO> result = getPort().getCommunicationTypes(lang);
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getCommunicationTypes", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -118,16 +116,12 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
 
     @Override
     public List<GenderTypeTO> getGenderTypes(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getGenderTypes";
         try {
             return getPort().getGenderTypes(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getGenderTypes", t);
+       } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -138,16 +132,12 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
 
     @Override
     public List<RequestTypeTO> getRequestTypes(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getRequestTypes";
         try {
             return getPort().getRequestTypes(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getRequestTypes", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -158,16 +148,12 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
 
     @Override
     public List<SourceTypeTO> getSourceTypes(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getSourceTypes";
         try {
             return getPort().getSourceTypes(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getSourceTypes", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -178,16 +164,12 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
     
     @Override
     public List<ApplicationStatusTypeTO> getApplicationStatusTypes(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getApplicationStatusTypes";
         try {
             return getPort().getApplicationStatusTypes(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getApplicationStatusTypes", t);
+       } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -198,16 +180,12 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
     
     @Override
     public List<ServiceStatusTypeTO> getServiceStatusTypes(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getServiceStatusTypes";
         try {
             return getPort().getServiceStatusTypes(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getServiceStatusTypes", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -218,16 +196,12 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
     
     @Override
     public List<ServiceActionTypeTO> getServiceActionTypes(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getServiceActionTypes";
         try {
             return getPort().getServiceActionTypes(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getServiceActionTypes", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -238,16 +212,12 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
 
     @Override
     public List<ApplicationActionTypeTO> getApplicationActionTypes(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getApplicationActionTypes";
         try {
             return getPort().getApplicationActionTypes(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getApplicationActionTypes", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
     
@@ -258,16 +228,12 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
     
     @Override
     public List<PartyTypeTO> getPartyTypes(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getPartyTypes";
         try {
             return getPort().getPartyTypes(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getPartyTypes", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -278,16 +244,12 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
     
     @Override
     public List<PartyRoleTypeTO> getPartyRoles(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getPartyRoles";
         try {
             return getPort().getPartyRoles(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getPartyRoles", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -298,16 +260,12 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
     
     @Override
     public List<IdTypeTO> getIdTypes(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getIdTypes";
         try {
             return getPort().getIdTypes(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getIdTypes", t);
+       } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -318,16 +276,12 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
     
     @Override
     public List<ChangeStatusTypeTO> getChangeStatusTypes(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getChangeStatusTypes";
         try {
             return getPort().getChangeStatuTypes(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getChangeStatusTypes", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -338,17 +292,13 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
 
     @Override
     public List<BaUnitTypeTO> getBaUnitTypes(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getBaUnitTypes";
         try {
             List<BaUnitTypeTO> result = getPort().getBaUnitTypes(lang);
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getBaUnitTypes", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -359,16 +309,12 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
     
     @Override
     public List<MortgageTypeTO> getMortgageTypes(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getMortgageTypes";
         try {
             return getPort().getMortgageTypes(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getMortgageTypes", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -379,16 +325,12 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
     
     @Override
     public List<RrrGroupTypeTO> getRrrGroupTypes(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getRrrGroupTypes";
         try {
             return getPort().getRRRGroupTypes(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getRrrGroupTypes", t);
+       } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -399,16 +341,12 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
     
     @Override
     public List<RrrTypeTO> getRrrTypes(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getRrrTypes";
         try {
             return getPort().getRRRTypes(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getRrrTypes", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -421,16 +359,12 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
     @Override
     public List<SourceBaUnitRelationTypeTO> getSourceBaUnitRelationTypes(String lang)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getSourceBaUnitRelationTypes";
         try {
             return getPort().getSourceBaUnitRelationTypes(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getSourceBaUnitRelationTypes", t);
+       } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -443,16 +377,12 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
     @Override
     public List<RegistrationStatusTypeTO> getRegistrationStatusTypes(String lang)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getRegistrationStatusTypes";
         try {
             return getPort().getRegistrationStatusTypes(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getRegistrationStatusTypes", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -465,16 +395,12 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
     @Override
     public List<CadastreObjectTypeTO> getCadastreObjectTypes(String lang)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getCadastreObjectTypes";
         try {
             return getPort().getCadastreObjectTypes(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getCadastreObjectTypes", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -485,31 +411,23 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
     
     @Override
     public List<TypeActionTO> getTypeActions(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getTypeActions";
         try {
             return getPort().getTypeActions(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getTypeActions", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public AbstractCodeTO saveReferenceData(AbstractCodeTO refDataTO) {
+        final String inputService = SERVICE_NAME + "getRrrTypeActions";
         try {
             return getPort().saveReferenceData(refDataTO);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getRrrTypeActions", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -520,16 +438,12 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
 
     @Override
     public List<RequestCategoryTypeTO> getRequestCategoryTypes(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getRequestCategoryTypes";
         try {
             return getPort().getRequestCategoryTypes(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getRequestCategoryTypes", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -540,16 +454,12 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
 
     @Override
     public List<BrTechnicalTypeTO> getBrTechnicalTypes(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getBrTechnicalTypes";
         try {
             return getPort().getBrTechnicalTypes(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getBrTechnicalTypes", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -560,16 +470,12 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
 
     @Override
     public List<BrValidationTargetTypeTO> getBrValidationTargetTypes(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getBrValidationTargetTypes";
         try {
             return getPort().getBrValidationTargetTypes(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getBrValidationTargetTypes", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -580,31 +486,23 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
 
     @Override
     public List<BrSeverityTypeTO> getBrSeverityTypes(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getBrSeverityTypes";
         try {
             return getPort().getBrSeverityTypes(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getBrSeverityTypes", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public List<BaUnitRelTypeTO> getBaUnitRelTypes(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getBaUnitRelTypes";
         try {
             return getPort().getBaUnitRelTypes(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getBaUnitRelTypes", t);
+       } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 

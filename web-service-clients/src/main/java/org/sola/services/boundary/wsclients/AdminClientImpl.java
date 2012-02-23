@@ -61,202 +61,156 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
 
     @Override
     public boolean checkConnection() throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "checkConnection";
         try {
             boolean result = getPort().checkConnection();
             return result;
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "checkConnection", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return false;
         }
     }
 
     @Override
     public UserTO getCurrentUser() throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getCurrentUser";
         try {
             UserTO result = getPort().getCurrentUser();
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getCurrentUser", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public List<GroupTO> getGroups() throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "GetGroups";
         try {
             List<GroupTO> result = getPort().getGroups();
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "GetGroups", t);
-        }
+       } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 
     @Override
     public GroupTO getGroup(String groupId) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "GetGroup";
         try {
             GroupTO result = getPort().getGroup(groupId);
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "GetGroup", t);
-        }
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 
     @Override
     public UserTO getUser(String userName) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "GetUser";
         try {
             UserTO result = getPort().getUser(userName);
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "GetUser", t);
-        }
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 
     @Override
     public UserTO saveUser(UserTO userTO) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "SaveUser";
         try {
             UserTO result = getPort().saveUser(userTO);
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "SaveUser", t);
-        }
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 
     @Override
     public GroupTO saveGroup(GroupTO groupTO) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "SaveGroup";
         try {
             GroupTO result = getPort().saveGroup(groupTO);
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "SaveGroup", t);
-        }
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
     
     @Override
     public List<RoleTO> getRoles() throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getRoles";
         try {
             List<RoleTO> result = getPort().getRoles();
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getRoles", t);
-        }
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
     
     @Override
     public RoleTO saveRole(RoleTO roleTO) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "SaveRole";
         try {
             RoleTO result = getPort().saveRole(roleTO);
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "SaveRole", t);
-        }
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 
     @Override
     public List<GroupSummaryTO> getGroupsSummary() throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "GetGroupsSummary";
         try {
             List<GroupSummaryTO> result = getPort().getGroupsSummary();
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "GetGroupsSummary", t);
-        }
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 
     @Override
     public boolean changePassword(String userName, String password) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "changePasswords";
         try {
             return getPort().changePassword(userName, password);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "changePasswords", t);
-        }
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return false;
+       }
     }
 
     @Override
     public List<RoleTO> getCurrentUserRoles() throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getCurrentUserRoles";
         try {
             List<RoleTO> result = getPort().getCurrentUserRoles();
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getCurrentUserRoles", t);
-        }
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 
     @Override
     public boolean isUserAdmin() throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "isUserAdmin";
         try {
             return getPort().isUserAdmin();
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "isUserAdmin", t);
-        }
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return false;
+       }
     }
 
     @Override
@@ -266,32 +220,24 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
 
     @Override
     public List<LanguageTO> getLanguages(String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getLanguages";
         try {
             return getPort().getLanguages(lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getLanguages", t);
-        }
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 
     @Override
     public BrTO getBr(String id, String lang) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getBr";
         try {
             return getPort().getBr(id, lang);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getBr", t);
-        }
+       } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 
     @Override
@@ -301,16 +247,12 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
     
     @Override
     public BrTO saveBr(BrTO brTO) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "saveBr";
         try {
             return getPort().saveBr(brTO);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "saveBr", t);
-        }
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 }

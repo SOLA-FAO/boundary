@@ -56,121 +56,95 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
     @Override
     public BaUnitTO CreateBaUnit(
             String serviceId, BaUnitTO baUnitTO) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "createBaUnit";
         try {
             BaUnitTO result = getPort().createBaUnit(serviceId, baUnitTO);
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "createBaUnit", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public BaUnitTO SaveBaUnit(
             String serviceId, BaUnitTO baUnitTO) throws WebServiceClientException {
-        try {
+       final String inputService = SERVICE_NAME + "saveBaUnit";
+       try {
             BaUnitTO result = getPort().saveBaUnit(serviceId, baUnitTO);
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "saveBaUnit", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public BaUnitTO GetBaUnitById(String id) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getBaUnitById";
         try {
             BaUnitTO result = getPort().getBaUnitById(id);
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getBaUnitById", t);
+       } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public BaUnitTO GetBaUnitByCode(String nameFirstpart, String nameLastpart) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getBaUnitByCode";
         try {
             BaUnitTO result = getPort().getBaUnitByCode(nameFirstpart, nameLastpart);
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getBaUnitByCode", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public boolean CheckConnection() {
+        final String inputService = SERVICE_NAME + "checkConnection";
         try {
             boolean result = getPort().checkConnection();
             return result;
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "checkConnection", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return false;
         }
     }
 
     @Override
     public List<BaUnitTO> getBaUnitsByServiceId(String serviceId) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getBaUnitsByServiceId";
         try {
             return getPort().getBaUnitsByServiceId(serviceId);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getBaUnitsByServiceId", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public BaUnitTO cancelBaUnitTermination(String baUnitId) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "cancelBaUnitTermination";
         try {
             return getPort().cancelBaUnitTermination(baUnitId);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "cancelBaUnitTermination", t);
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public BaUnitTO terminateBaUnit(String baUnitId, String serviceId) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "terminateBaUnit";
         try {
             return getPort().terminateBaUnit(baUnitId, serviceId);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "terminateBaUnit", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
     

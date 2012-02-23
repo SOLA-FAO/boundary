@@ -54,6 +54,7 @@ import org.sola.webservices.transferobjects.casemanagement.SourceTO;
 import org.sola.webservices.transferobjects.casemanagement.LodgementViewParamsTO;
 
 
+
 /**
  * Implementation class for the {@linkplain CaseManagementClient} interface. 
  * @author amcdowell
@@ -63,7 +64,9 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
     private static final String NAMESPACE_URI = "http://webservices.sola.org/casemanagement";
     private static final String LOCAL_PART = "casemanagement-service";
     private static final String SERVICE_NAME = "CaseManagement.";
-
+    
+  
+     
     public CaseManagementClientImpl(String url) {
         super(url, new QName(NAMESPACE_URI, LOCAL_PART));
     }
@@ -82,669 +85,391 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         }
     }
 
-    @Override
+     @Override
     public ApplicationTO createApplication(ApplicationTO application)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "createApplication";
         try {
             ApplicationTO result = getPort().createApplication(application);
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "createApplication", t);
-        }
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 
-    @Override
+
+      @Override
     public ApplicationTO saveApplication(ApplicationTO application)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "saveApplication";
         try {
             ApplicationTO result = getPort().saveApplication(application);
             return result;
-        } catch (OptimisticLockingFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "saveApplication", t);
-        }
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
      
     
      @Override
     public List<LodgementViewTO> getLodgementView(LodgementViewParamsTO lodgementViewParamsTO) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getLodgementView";
         try {
            List<LodgementViewTO> result = getPort().getLodgementView(lodgementViewParamsTO);
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getLodgementView", t);
-        }
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
     
      @Override
     public List<LodgementTimingTO> getLodgementTiming(LodgementViewParamsTO lodgementViewParamsTO) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getLodgementTiming";
         try {
            List<LodgementTimingTO> result = getPort().getLodgementTiming(lodgementViewParamsTO);
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getLodgementTiming", t);
-        }
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
     
     @Override
     public List<BrReportTO> getAllBrs() throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getBrReport";
         try {
            List<BrReportTO> result = getPort().getAllBrs();
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getBrReport", t);
-        }
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
     
       @Override
     public AddressTO getAddress(String id) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getAddress";
         try {
             AddressTO result = getPort().getAddress(id);
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getAddress", t);
-        }
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 
     @Override
     public ApplicationTO getApplication(String id) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getApplication";
         try {
             ApplicationTO result = getPort().getApplication(id);
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getApplication", t);
-        }
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 
     @Override
     public PartyTO getParty(String id) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getParty";
         try {
             PartyTO result = getPort().getParty(id);
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getParty", t);
-        }
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 
     @Override
     public List<PartySummaryTO> getAgents() throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getAgents";
         try {
             List<PartySummaryTO> result = getPort().getAgents();
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getAgents", t);
-        }
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 
     @Override
     public ApplicationTO calculateFee(ApplicationTO application) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "calculateFee";
         try {
             ApplicationTO result = getPort().calculateFee(application);
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "calculateFee", t);
-        }
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 
     @Override
     public PartyTO saveParty(PartyTO party)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "saveParty";
         try {
             PartyTO result = getPort().saveParty(party);
             return result;
-        } catch (OptimisticLockingFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "saveParty", t);
-        }
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 
     @Override
     public SourceTO attachSourceToTransaction(String serviceId, String sourceId)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "attachSourceToTransaction";
         try {
             return getPort().attachSourceToTransaction(serviceId, sourceId, this.getLanguageCode());
-        } catch (SOLAValidationFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "attachSourceToTransaction", t);
-        }
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 
     @Override
     public boolean dettachSourceFromTransaction(String sourceId) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "attachSourceToTransaction";
         try {
             return getPort().dettachSourceFromTransaction(sourceId);
-        } catch (SOLAValidationFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "attachSourceToTransaction", t);
-        }
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return false;
+       }
     }
 
     @Override
     public List<SourceTO> getSourcesByServiceId(String serviceId) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getAgents";
         try {
             return getPort().getSourcesByServiceId(serviceId);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getAgents", t);
-        }
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 
     @Override
     public List<SourceTO> getSourcesByIds(List<String> sourceIds) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getSourcesByIds";
         try {
             return getPort().getSourcesByIds(sourceIds);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getSourcesByIds", t);
-        }
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
     
     @Override
     public List<ValidationResult> serviceActionComplete(String serviceId, int rowVersion)
-            throws WebServiceClientException {
+            throws  WebServiceClientException {
+        final String inputService = SERVICE_NAME + "serviceActionComplete";
         try {
-            return getPort().serviceActionComplete(serviceId, this.getLanguageCode(), rowVersion);
-        } catch (SOLAAccessFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
-        } catch (SOLAValidationFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                    f.getFaultInfo());
-        } catch (OptimisticLockingFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "serviceActionComplete", t);
+           return getPort().serviceActionComplete(serviceId, this.getLanguageCode(), rowVersion);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public List<ValidationResult> serviceActionRevert(String serviceId, int rowVersion)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "serviceActionRevert";
         try {
             return getPort().serviceActionRevert(serviceId, this.getLanguageCode(), rowVersion);
-        } catch (SOLAAccessFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
-        } catch (SOLAValidationFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                    f.getFaultInfo());
-        } catch (OptimisticLockingFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "serviceActionRevert", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public List<ValidationResult> serviceActionStart(String serviceId, int rowVersion)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "serviceActionStart";
         try {
             return getPort().serviceActionStart(serviceId, this.getLanguageCode(), rowVersion);
-        } catch (SOLAAccessFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
-        } catch (SOLAValidationFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                    f.getFaultInfo());
-        } catch (OptimisticLockingFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "serviceActionStart", t);
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public List<ValidationResult> serviceActionCancel(String serviceId, int rowVersion)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "serviceActionCancel";
         try {
             return getPort().serviceActionCancel(serviceId, this.getLanguageCode(), rowVersion);
-        } catch (SOLAAccessFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
-        } catch (SOLAValidationFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                    f.getFaultInfo());
-        } catch (OptimisticLockingFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "serviceActionCancel", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public List<ValidationResult> applicationActionApprove(String applicationId, int rowVersion)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "applicationActionApprove";
         try {
             return getPort().applicationActionApprove(
                     applicationId, this.getLanguageCode(), rowVersion);
-        } catch (SOLAAccessFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
-        } catch (SOLAValidationFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                    f.getFaultInfo());
-        } catch (OptimisticLockingFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "applicationActionApprove", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public List<ValidationResult> applicationActionArchive(String applicationId, int rowVersion)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "applicationActionArchive";
         try {
             return getPort().applicationActionArchive(
                     applicationId, this.getLanguageCode(), rowVersion);
-        } catch (SOLAAccessFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
-        } catch (SOLAValidationFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                    f.getFaultInfo());
-        } catch (OptimisticLockingFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "applicationActionArchive", t);
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
+
 
     @Override
     public List<ValidationResult> applicationActionAssign(
             String applicationId, String userId, int rowVersion)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "applicationActionAssign";
         try {
             return getPort().applicationActionAssign(
                     applicationId, userId, this.getLanguageCode(), rowVersion);
-        } catch (SOLAAccessFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
-        } catch (SOLAValidationFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                    f.getFaultInfo());
-        } catch (OptimisticLockingFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "applicationActionAssign", t);
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public List<ValidationResult> applicationActionCancel(String applicationId, int rowVersion)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "applicationActionCancel";
         try {
             return getPort().applicationActionCancel(
                     applicationId, this.getLanguageCode(), rowVersion);
-        } catch (SOLAAccessFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
-        } catch (SOLAValidationFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                    f.getFaultInfo());
-        } catch (OptimisticLockingFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "applicationActionCancel", t);
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public List<ValidationResult> applicationActionDespatch(String applicationId, int rowVersion)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "applicationActionDespatch";
         try {
             return getPort().applicationActionDespatch(
                     applicationId, this.getLanguageCode(), rowVersion);
-        } catch (SOLAAccessFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
-        } catch (SOLAValidationFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                    f.getFaultInfo());
-        } catch (OptimisticLockingFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "applicationActionDespatch", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public List<ValidationResult> applicationActionLapse(String applicationId, int rowVersion)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "applicationActionLapse";
         try {
             return getPort().applicationActionLapse(
                     applicationId, this.getLanguageCode(), rowVersion);
-        } catch (SOLAAccessFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
-        } catch (SOLAValidationFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                    f.getFaultInfo());
-        } catch (OptimisticLockingFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "applicationActionLapse", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public List<ValidationResult> applicationActionRequisition(String applicationId, int rowVersion)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "applicationActionRequisition";
         try {
             return getPort().applicationActionRequisition(
                     applicationId, this.getLanguageCode(), rowVersion);
-        } catch (SOLAAccessFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
-        } catch (SOLAValidationFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                    f.getFaultInfo());
-        } catch (OptimisticLockingFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "applicationActionRequisition", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public List<ValidationResult> applicationActionResubmit(String applicationId, int rowVersion)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "applicationActionResubmit";
         try {
             return getPort().applicationActionResubmit(
                     applicationId, this.getLanguageCode(), rowVersion);
-        } catch (SOLAAccessFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
-        } catch (SOLAValidationFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                    f.getFaultInfo());
-        } catch (OptimisticLockingFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "applicationActionResubmit", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public List<ValidationResult> applicationActionUnassign(String applicationId, int rowVersion)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "applicationActionUnassign";
         try {
             return getPort().applicationActionUnassign(
                     applicationId, this.getLanguageCode(), rowVersion);
-        } catch (SOLAAccessFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
-        } catch (SOLAValidationFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                    f.getFaultInfo());
-        } catch (OptimisticLockingFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "applicationActionUnassign", t);
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public List<ValidationResult> applicationActionValidate(String applicationId, int rowVersion)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "applicationActionValidate";
         try {
             return getPort().applicationActionValidate(
                     applicationId, this.getLanguageCode(), rowVersion);
-        } catch (SOLAAccessFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
-        } catch (SOLAValidationFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                    f.getFaultInfo());
-        } catch (OptimisticLockingFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "applicationActionValidate", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public List<ValidationResult> applicationActionWithdraw(String applicationId, int rowVersion)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "applicationActionWithdraw";
         try {
             return getPort().applicationActionWithdraw(
                     applicationId, this.getLanguageCode(), rowVersion);
-        } catch (SOLAAccessFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
-        } catch (SOLAValidationFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                    f.getFaultInfo());
-        } catch (OptimisticLockingFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "applicationActionWithdraw", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
     
     @Override
      public ServiceTO saveInformationService(ServiceTO service) throws WebServiceClientException{
+        final String inputService = SERVICE_NAME + "saveInformationService";
         try {
             return getPort().saveInformationService(
                     service, this.getLanguageCode());
-        } catch (SOLAAccessFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
-        } catch (SOLAValidationFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                    f.getFaultInfo());
-        } catch (OptimisticLockingFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "saveInformationService", t);
-        }        
+       } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+        }   
     }
 
 }

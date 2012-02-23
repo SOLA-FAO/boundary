@@ -63,44 +63,40 @@ public class SpatialClientImpl extends AbstractWSClientImpl implements SpatialCl
 
     @Override
     public boolean checkConnection() throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "checkConnection";
         try {
             boolean result = getPort().checkConnection();
             return result;
-        } catch (Exception ex) {
-            throw processException(SERVICE_NAME + "checkConnection", ex);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return false;
         }
     }
 
     @Override
     public ResultForNavigationInfo getSpatialForNavigation(QueryForNavigation query)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getSpatialForNavigation";
         try {
             ResultForNavigationInfo result = getPort().getSpatialForNavigation(query);
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Exception ex) {
-            throw processException(SERVICE_NAME + "getSpatialForNavigation", ex);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
 
     }
     
     @Override
     public MapDefinitionTO getMapDefinition() throws WebServiceClientException{
+        final String inputService = SERVICE_NAME + "getSpatialForNavigation";
         try {
             return getPort().getMapDefinition(this.getLanguageCode());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Exception ex) {
-            throw processException(SERVICE_NAME + "getSpatialForNavigation", ex);
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
+
     }
 }
+ 

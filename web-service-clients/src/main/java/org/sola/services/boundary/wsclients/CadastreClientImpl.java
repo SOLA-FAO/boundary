@@ -67,28 +67,26 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
 
     @Override
     public boolean checkConnection() throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "checkConnection";
         try {
             boolean result = getPort().checkConnection();
             return result;
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "checkConnection", t);
+       } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return false;
         }
     }
 
     @Override
     public List<CadastreObjectTO> getCadastreObjectByParts(String searchString)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "GetCadastreObjectByParts";
         try {
             List<CadastreObjectTO> result = getPort().getCadastreObjectByParts(searchString);
             return result;
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "GetCadastreObjectByParts", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
 
     }
@@ -96,16 +94,12 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
     @Override
     public CadastreObjectTO getCadastreObjectByPoint(double x, double y, int srid)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "GetCadastreObjectByPoint";
         try {
             return getPort().getCadastreObjectByPoint(x, y, srid);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "GetCadastreObjectByPoint", t);
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
 
     }
@@ -113,16 +107,12 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
     @Override
     public List<CadastreObjectTO> getCadastreObjectsByBaUnit(String baUnitId)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getCadastreObjectsByBaUnit";
         try {
             return getPort().getCadastreObjectsByBaUnit(baUnitId);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getCadastreObjectsByBaUnit", t);
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
 
     }
@@ -130,16 +120,12 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
     @Override
     public List<CadastreObjectTO> getCadastreObjectsByService(String serviceId)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getCadastreObjectsByService";
         try {
             return getPort().getCadastreObjectsByService(serviceId);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getCadastreObjectsByService", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
@@ -147,57 +133,36 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
     public List<ValidationResult>  saveTransactionCadastreChange(
             TransactionCadastreChangeTO transactionCadastreChangeTO)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "saveCadastreChange";
         try {
             return getPort().saveCadastreChange(transactionCadastreChangeTO, this.getLanguageCode());
-        } catch (SOLAAccessFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
-        } catch (SOLAValidationFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                    f.getFaultInfo());
-        } catch (OptimisticLockingFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "saveCadastreChange", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
     
     @Override
     public TransactionCadastreChangeTO getTransactionCadastreChange(String serviceId)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getCadastreChange";
         try {
             return getPort().getCadastreChange(serviceId);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getCadastreChange", t);
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
     }
 
     @Override
     public List<CadastreObjectTO> getCadastreObjects(List<String> Ids)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getCadastreObjects";
         try {
             return getPort().getCadastreObjects(Ids);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getCadastreObjects", t);
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
         }
 
     }
@@ -206,75 +171,50 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
     public CadastreObjectNodeTO getCadastreObjectNode(
             double xMin, double yMin, double xMax, double yMax, int srid)
     throws WebServiceClientException{
+        final String inputService = SERVICE_NAME + "getCadastreObjects";
         try {
             return getPort().getCadastreObjectNode(xMin, yMin, xMax, yMax, srid);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getCadastreObjects", t);
-        }
+       } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 
     @Override
     public CadastreObjectNodeTO getCadastreObjectNodePotential(
             double xMin, double yMin, double xMax, double yMax, int srid)
     throws WebServiceClientException{
+        final String inputService = SERVICE_NAME + "getCadastreObjects";
         try {
             return getPort().getCadastreObjectNodePotential(xMin, yMin, xMax, yMax, srid);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getCadastreObjects", t);
-        }
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 
     @Override
     public List<ValidationResult>  saveTransactionCadastreRedefinition(
             TransactionCadastreRedefinitionTO transactionTO)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "saveTransactionCadastreRedefinition";
         try {
             return getPort().saveCadastreRedefinition(transactionTO, this.getLanguageCode());
-        } catch (SOLAAccessFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
-        } catch (SOLAValidationFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                    f.getFaultInfo());
-        } catch (OptimisticLockingFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                    f.getFaultInfo());
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "saveTransactionCadastreRedefinition", t);
-        }
+        } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 
     @Override
     public TransactionCadastreRedefinitionTO getTransactionCadastreRedefinition(String serviceId)
             throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getTransactionCadastreRedefinition";
         try {
             return getPort().getCadastreRedefinition(serviceId);
-        } catch (SOLAFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                    f.getFaultInfo());
-        } catch (UnhandledFault f) {
-            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                    f.getFaultInfo());
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "getTransactionCadastreRedefinition", t);
-        }
+         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+       }
     }
 }

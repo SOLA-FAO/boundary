@@ -31,6 +31,8 @@ import java.util.List;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.admin.BrTO;
 import org.sola.webservices.admin.LanguageTO;
+import org.sola.webservices.admin.SOLAFault;
+import org.sola.webservices.admin.UnhandledFault;
 import org.sola.webservices.transferobjects.security.GroupSummaryTO;
 import org.sola.webservices.transferobjects.security.GroupTO;
 import org.sola.webservices.transferobjects.security.RoleTO;
@@ -44,7 +46,7 @@ public interface AdminClient extends AbstractWSClient {
 
     boolean checkConnection() throws WebServiceClientException;
 
-    UserTO getCurrentUser() throws WebServiceClientException;
+    UserTO getCurrentUser() throws  WebServiceClientException;
 
     List<GroupTO> getGroups() throws WebServiceClientException;
 

@@ -35,6 +35,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
+import org.sola.webservices.casemanagement.*;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.casemanagement.AddressTO;
 import org.sola.webservices.transferobjects.casemanagement.ApplicationTO;
