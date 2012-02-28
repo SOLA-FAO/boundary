@@ -128,16 +128,7 @@ public class Spatial extends AbstractWebService {
                 result[0] = searchEJB.getSpatialResult(spatialQueryTmp);
             }
         });
-
-        try {
-            return this.searchEJB.getSpatialResult(spatialQuery);
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
-            if (fault.getClass() == SOLAFault.class) {
-                throw (SOLAFault) fault;
-            }
-            throw (UnhandledFault) fault;
-        } finally {
-        }
+        
+        return (ResultForNavigationInfo)result[0];
     }
 }
