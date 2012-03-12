@@ -67,7 +67,7 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
             return result;
         } catch (Throwable e) {
            handleExceptionsMethod(inputService,e);
-           return false;
+           return  true;
         }
     }
 
@@ -186,7 +186,7 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
             return getPort().changePassword(userName, password);
         } catch (Throwable e) {
            handleExceptionsMethod(inputService,e);
-           return false;
+           return  true;
        }
     }
 
