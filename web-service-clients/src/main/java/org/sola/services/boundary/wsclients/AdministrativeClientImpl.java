@@ -111,7 +111,7 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
             return result;
         } catch (Throwable e) {
            handleExceptionsMethod(inputService,e);
-           return false;
+           return  true;
         }
     }
 
