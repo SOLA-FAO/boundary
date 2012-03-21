@@ -36,9 +36,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;
-import javax.annotation.Resource;
-import javax.transaction.Status;
-import javax.transaction.UserTransaction;
 import javax.xml.namespace.QName;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.Service;
@@ -47,14 +44,6 @@ import javax.xml.ws.soap.SOAPFaultException;
 import org.sola.common.messaging.ServiceMessage;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientExceptionType;
-//import org.sola.webservices.casemanagement.*;
-import org.sola.webservices.casemanagement.SOLAFault;
-import org.sola.webservices.casemanagement.SOLAValidationFault;
-import org.sola.webservices.casemanagement.UnhandledFault;
-import org.sola.webservices.casemanagement.CaseManagement;
-import org.sola.webservices.casemanagement.CasemanagementService;
-import org.sola.webservices.casemanagement.OptimisticLockingFault;
-import org.sola.webservices.casemanagement.SOLAAccessFault;
 
 /**
  * Implementation class for the {@linkplain AbstractWSClient} interface. Also provides common
