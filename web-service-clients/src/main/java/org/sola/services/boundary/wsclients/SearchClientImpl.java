@@ -81,7 +81,7 @@ public class SearchClientImpl extends AbstractWSClientImpl implements SearchClie
             return result;
         } catch (Throwable e) {
            handleExceptionsMethod(inputService,e);
-           return false;
+           return  true;
         }
     }
 

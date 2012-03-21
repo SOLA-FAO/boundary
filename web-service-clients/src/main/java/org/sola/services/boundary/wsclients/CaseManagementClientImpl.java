@@ -241,7 +241,7 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
             return getPort().dettachSourceFromTransaction(sourceId);
         } catch (Throwable e) {
            handleExceptionsMethod(inputService,e);
-           return false;
+           return true;
        }
     }
 
