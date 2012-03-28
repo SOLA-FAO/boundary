@@ -208,170 +208,172 @@ public abstract class AbstractWSClientImpl implements AbstractWSClient {
     }
     
     
+    
       protected void handleExceptionsMethod(
             String serviceName,    
             Throwable e) throws  WebServiceClientException {
-       
-            Throwable fault =  processException(serviceName, e);
-          
+ 
+
 //          ###  org.sola.webservices.casemanagement  ##
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.casemanagement.SOLAAccessFault.class)) {
-            org.sola.webservices.casemanagement.SOLAAccessFault f  = null;   
+           if (org.sola.webservices.casemanagement.SOLAAccessFault.class.isAssignableFrom(e.getClass())) {
+            org.sola.webservices.casemanagement.SOLAAccessFault fault  = (org.sola.webservices.casemanagement.SOLAAccessFault)e;   
             throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
+                    fault.getFaultInfo());
            }
            
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.casemanagement.SOLAValidationFault.class)) {
-                org.sola.webservices.casemanagement.SOLAValidationFault f  = null;   
+                   
+           if (org.sola.webservices.casemanagement.SOLAValidationFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.casemanagement.SOLAValidationFault fault  = (org.sola.webservices.casemanagement.SOLAValidationFault)e;  
                 throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             } 
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.casemanagement.OptimisticLockingFault.class)) {
-                org.sola.webservices.casemanagement.OptimisticLockingFault f  = null;   
+           
+           if (org.sola.webservices.casemanagement.OptimisticLockingFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.casemanagement.OptimisticLockingFault fault  = (org.sola.webservices.casemanagement.OptimisticLockingFault)e;  
                 throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             }
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.casemanagement.SOLAFault.class)) {
-                org.sola.webservices.casemanagement.SOLAFault f  = null;   
+           if (org.sola.webservices.casemanagement.SOLAFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.casemanagement.SOLAFault fault  = (org.sola.webservices.casemanagement.SOLAFault)e;  
                 throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             }
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.casemanagement.UnhandledFault.class)) {
-                org.sola.webservices.casemanagement.UnhandledFault f  = null;   
+           if (org.sola.webservices.casemanagement.UnhandledFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.casemanagement.UnhandledFault fault  = (org.sola.webservices.casemanagement.UnhandledFault)e; 
                 throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             }
 //          ###  org.sola.webservices.admin ##
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.admin.SOLAAccessFault.class)) {
-            org.sola.webservices.admin.SOLAAccessFault f  = null;   
+           if (org.sola.webservices.admin.SOLAAccessFault.class.isAssignableFrom(e.getClass())) {
+            org.sola.webservices.admin.SOLAAccessFault fault  = (org.sola.webservices.admin.SOLAAccessFault)e;  
             throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
+                    fault.getFaultInfo());
            }
            
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.admin.SOLAValidationFault.class)) {
-                org.sola.webservices.admin.SOLAValidationFault f  = null;   
+           if (org.sola.webservices.admin.SOLAValidationFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.admin.SOLAValidationFault fault  = (org.sola.webservices.admin.SOLAValidationFault)e;     
                 throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             } 
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.admin.OptimisticLockingFault.class)) {
-                org.sola.webservices.admin.OptimisticLockingFault f  = null;   
+           if (org.sola.webservices.admin.OptimisticLockingFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.admin.OptimisticLockingFault fault  = (org.sola.webservices.admin.OptimisticLockingFault)e;     
                 throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             }
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.admin.SOLAFault.class)) {
-                org.sola.webservices.admin.SOLAFault f  = null;   
+           if (org.sola.webservices.admin.SOLAFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.admin.SOLAFault fault = (org.sola.webservices.admin.SOLAFault)e;     
                 throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             }
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.admin.UnhandledFault.class)) {
-                org.sola.webservices.admin.UnhandledFault f  = null;   
+           if (org.sola.webservices.admin.UnhandledFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.admin.UnhandledFault fault  = (org.sola.webservices.admin.UnhandledFault)e;       
                 throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             }
 //          ###  org.sola.webservices.administrative ##
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.administrative.SOLAAccessFault.class)) {
-            org.sola.webservices.administrative.SOLAAccessFault f  = null;   
+           if (org.sola.webservices.administrative.SOLAAccessFault.class.isAssignableFrom(e.getClass())) {
+            org.sola.webservices.administrative.SOLAAccessFault fault  = (org.sola.webservices.administrative.SOLAAccessFault)e;       
             throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
+                    fault.getFaultInfo());
            }
            
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.administrative.SOLAFault.class)) {
-                org.sola.webservices.administrative.SOLAFault f  = null;   
+           if (org.sola.webservices.administrative.SOLAFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.administrative.SOLAFault fault  = (org.sola.webservices.administrative.SOLAFault)e;         
                 throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             }
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.administrative.UnhandledFault.class)) {
-                org.sola.webservices.administrative.UnhandledFault f  = null;   
+           if (org.sola.webservices.administrative.UnhandledFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.administrative.UnhandledFault fault  = (org.sola.webservices.administrative.UnhandledFault)e;         
                 throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             }
 //          ###  org.sola.webservices.cadastre ##
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.cadastre.SOLAAccessFault.class)) {
-            org.sola.webservices.cadastre.SOLAAccessFault f  = null;   
+           if (org.sola.webservices.cadastre.SOLAAccessFault.class.isAssignableFrom(e.getClass())) {
+            org.sola.webservices.cadastre.SOLAAccessFault fault = (org.sola.webservices.cadastre.SOLAAccessFault)e;
             throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
+                    fault.getFaultInfo());
            }
            
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.cadastre.SOLAValidationFault.class)) {
-                org.sola.webservices.cadastre.SOLAValidationFault f  = null;   
+           if (org.sola.webservices.cadastre.SOLAValidationFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.cadastre.SOLAValidationFault fault  = (org.sola.webservices.cadastre.SOLAValidationFault)e;  
                 throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             } 
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.cadastre.OptimisticLockingFault.class)) {
-                org.sola.webservices.cadastre.OptimisticLockingFault f  = null;   
+           if (org.sola.webservices.cadastre.OptimisticLockingFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.cadastre.OptimisticLockingFault fault  = (org.sola.webservices.cadastre.OptimisticLockingFault)e;
                 throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             }
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.cadastre.SOLAFault.class)) {
-                org.sola.webservices.cadastre.SOLAFault f  = null;   
+           if (org.sola.webservices.cadastre.SOLAFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.cadastre.SOLAFault fault  = (org.sola.webservices.cadastre.SOLAFault)e;  
                 throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             }
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.cadastre.UnhandledFault.class)) {
-                org.sola.webservices.cadastre.UnhandledFault f  = null;   
+           if (org.sola.webservices.cadastre.UnhandledFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.cadastre.UnhandledFault fault  =  (org.sola.webservices.cadastre.UnhandledFault)e;  
                 throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             }
 //          ###  org.sola.webservices.digitalarchive ##
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.digitalarchive.OptimisticLockingFault.class)) {
-                org.sola.webservices.digitalarchive.OptimisticLockingFault f  = null;   
+           if (org.sola.webservices.digitalarchive.OptimisticLockingFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.digitalarchive.OptimisticLockingFault fault  =  (org.sola.webservices.digitalarchive.OptimisticLockingFault)e;  
                 throw new WebServiceClientException(WebServiceClientExceptionType.OPTIMISTIC_LOCK,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             }
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.digitalarchive.SOLAFault.class)) {
-                org.sola.webservices.digitalarchive.SOLAFault f  = null;   
+           if (org.sola.webservices.digitalarchive.SOLAFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.digitalarchive.SOLAFault fault  =(org.sola.webservices.digitalarchive.SOLAFault)e;  
                 throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             }
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.digitalarchive.UnhandledFault.class)) {
-                org.sola.webservices.digitalarchive.UnhandledFault f  = null;   
+           if (org.sola.webservices.digitalarchive.UnhandledFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.digitalarchive.UnhandledFault fault  = (org.sola.webservices.digitalarchive.UnhandledFault)e;  
                 throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             }
 //          ###  org.sola.webservices.referencedata ##
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.referencedata.SOLAFault.class)) {
-                org.sola.webservices.referencedata.SOLAFault f  = null;   
+           if (org.sola.webservices.referencedata.SOLAFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.referencedata.SOLAFault fault  = (org.sola.webservices.referencedata.SOLAFault)e;  
                 throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                        f.getFaultInfo());
+                       fault.getFaultInfo());
             }
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.referencedata.UnhandledFault.class)) {
-                org.sola.webservices.referencedata.UnhandledFault f  = null;   
+           if (org.sola.webservices.referencedata.UnhandledFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.referencedata.UnhandledFault fault  = (org.sola.webservices.referencedata.UnhandledFault)e;
                 throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             }
 //          ###  org.sola.webservices.search ##
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.search.SOLAAccessFault.class)) {
-            org.sola.webservices.search.SOLAAccessFault f  = null;   
+           if (org.sola.webservices.search.SOLAAccessFault.class.isAssignableFrom(e.getClass())) {
+            org.sola.webservices.search.SOLAAccessFault fault  = (org.sola.webservices.search.SOLAAccessFault)e;  
             throw new WebServiceClientException(WebServiceClientExceptionType.ACCESS_VIOLATION,
-                    f.getFaultInfo());
+                    fault.getFaultInfo());
            }
            
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.search.SOLAFault.class)) {
-                org.sola.webservices.search.SOLAFault f  = null;   
+           if (org.sola.webservices.search.SOLAFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.search.SOLAFault fault = (org.sola.webservices.search.SOLAFault)e;  
                 throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             }
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.search.UnhandledFault.class)) {
-                org.sola.webservices.search.UnhandledFault f  = null;   
+           if (org.sola.webservices.search.UnhandledFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.search.UnhandledFault fault  =(org.sola.webservices.search.UnhandledFault)e;  
                 throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             }
 //          ###  org.sola.webservices.spatial ##
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.spatial.SOLAFault.class)) {
-                org.sola.webservices.spatial.SOLAFault f  = null;   
+           if (org.sola.webservices.spatial.SOLAFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.spatial.SOLAFault fault  = (org.sola.webservices.spatial.SOLAFault)e;  
                 throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             }
-           if (fault.getClass().isAssignableFrom(org.sola.webservices.spatial.UnhandledFault.class)) {
-                org.sola.webservices.spatial.UnhandledFault f  = null;   
+           if (org.sola.webservices.spatial.UnhandledFault.class.isAssignableFrom(e.getClass())) {
+                org.sola.webservices.spatial.UnhandledFault fault  = (org.sola.webservices.spatial.UnhandledFault)e;  
                 throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
-                        f.getFaultInfo());
+                        fault.getFaultInfo());
             }
+
 //           ###  Throwable              
-           if (fault.getClass().isAssignableFrom(Throwable.class)) {
+           if (Throwable.class.isAssignableFrom(e.getClass())) {
             throw processException(serviceName, e);
            }
-           
-//           return null; 
+         
       }    
 }
