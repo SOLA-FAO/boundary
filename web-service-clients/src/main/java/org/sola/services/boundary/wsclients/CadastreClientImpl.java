@@ -73,7 +73,7 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
             return result;
        } catch (Throwable e) {
            handleExceptionsMethod(inputService,e);
-           return  true;
+           return  false;
         }
     }
 

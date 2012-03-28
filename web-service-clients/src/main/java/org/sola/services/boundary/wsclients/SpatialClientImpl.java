@@ -69,7 +69,7 @@ public class SpatialClientImpl extends AbstractWSClientImpl implements SpatialCl
             return result;
         } catch (Throwable e) {
            handleExceptionsMethod(inputService,e);
-           return  true;
+           return  false;
         }
     }
 

@@ -63,7 +63,7 @@ public class DigitalArchiveClientImpl extends AbstractWSClientImpl implements Di
             return result;
         } catch (Throwable e) {
            handleExceptionsMethod(inputService,e);
-           return  true;
+           return  false;
         }
     }
      
@@ -151,7 +151,7 @@ public class DigitalArchiveClientImpl extends AbstractWSClientImpl implements Di
             return getPort().deleteFile(fileName);
         } catch (Throwable e) {
            handleExceptionsMethod(inputService,e);
-           return  true;
+           return  false;
         }
     }
 
@@ -162,7 +162,7 @@ public class DigitalArchiveClientImpl extends AbstractWSClientImpl implements Di
             return getPort().rotateImage(fileName, angle);
         } catch (Throwable e) {
            handleExceptionsMethod(inputService,e);
-           return  true;
+           return  false;
         }
     }
     

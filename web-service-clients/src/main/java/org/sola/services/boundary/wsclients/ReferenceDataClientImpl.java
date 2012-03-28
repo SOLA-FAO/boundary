@@ -88,7 +88,7 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
             return result;
         } catch (Throwable e) {
            handleExceptionsMethod(inputService,e);
-           return  true;
+           return  false;
         }
     }
 
