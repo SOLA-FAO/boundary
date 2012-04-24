@@ -67,6 +67,7 @@ import org.sola.services.ejb.application.repository.entities.LodgementView;
 import org.sola.services.ejb.application.repository.entities.LodgementViewParams;
 import org.sola.services.ejb.party.repository.entities.Party;
 import org.sola.services.ejb.source.businesslogic.SourceEJBLocal;
+import org.sola.services.ejb.source.repository.entities.Source;
 import org.sola.services.ejb.system.businesslogic.SystemEJBLocal;
 
 /**
@@ -147,6 +148,29 @@ public class CaseManagement extends AbstractWebService {
         return (ApplicationTO) result[0];
     }
 
+    @WebMethod(operationName = "saveSource")
+    public SourceTO saveSource(@WebParam(name = "sourceTO") final SourceTO sourceTO)
+            throws SOLAFault, UnhandledFault, OptimisticLockingFault,
+            SOLAValidationFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runUpdateMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                if (sourceTO != null) {
+                    Source source = sourceEJB.saveSource(
+                            GenericTranslator.fromTO(sourceTO, Source.class,
+                            sourceEJB.getSourceById(sourceTO.getId())));
+                    result[0] = GenericTranslator.toTO(source, SourceTO.class);
+                }
+            }
+        });
+
+        return (SourceTO) result[0];
+    }
+    
     @WebMethod(operationName = "SaveParty")
     public PartyTO SaveParty(@WebParam(name = "party") PartyTO party)
             throws SOLAFault, UnhandledFault, SOLAAccessFault,
@@ -416,6 +440,24 @@ public class CaseManagement extends AbstractWebService {
         return (List<SourceTO>) result[0];
     }
 
+    @WebMethod(operationName = "getSourceById")
+    public SourceTO getSourceById(
+            @WebParam(name = "id") final String sourceId) throws SOLAFault, UnhandledFault {
+
+        final Object[] result = {null};
+
+        runGeneralMethod(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTO(
+                        sourceEJB.getSourceById(sourceId), SourceTO.class);
+            }
+        });
+
+        return (SourceTO) result[0];
+    }
+    
     @WebMethod(operationName = "ServiceActionComplete")
     public List<ValidationResult> ServiceActionComplete(
             @WebParam(name = "serviceId") String serviceId,

@@ -287,4 +287,14 @@ public class MockCaseManagementClient extends AbstractMockWSClient implements Ca
     public ServiceTO saveInformationService(ServiceTO service) throws WebServiceClientException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public SourceTO saveSource(SourceTO sourceTO) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public SourceTO getSourceById(String sourceId) throws WebServiceClientException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
