@@ -118,7 +118,7 @@ public class MockSearchClient extends AbstractMockWSClient implements SearchClie
 
     /** @return default = new PropertyVerifierTO() */
     @Override
-    public PropertyVerifierTO verifyApplicationProperty(String firstPart, String lastPart)
+    public PropertyVerifierTO verifyApplicationProperty(String applicationNumber, String firstPart, String lastPart)
             throws WebServiceClientException {
         PropertyVerifierTO defaultResponse = new PropertyVerifierTO();
         return getManager().getResponse(VERIFY_APPLICATION_PROPERTY, PropertyVerifierTO.class,

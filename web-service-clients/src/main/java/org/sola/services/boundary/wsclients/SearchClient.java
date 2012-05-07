@@ -68,7 +68,7 @@ public interface SearchClient extends AbstractWSClient {
 
     List<ApplicationSearchResultTO> searchApplications(ApplicationSearchParamsTO applicationSearchParamsTO) throws WebServiceClientException;
 
-    PropertyVerifierTO verifyApplicationProperty(String firstPart, String lastPart) throws WebServiceClientException;
+    PropertyVerifierTO verifyApplicationProperty(String applicationNumber, String firstPart, String lastPart) throws WebServiceClientException;
 
     public List<ResultForSelectionInfo> select(List<QueryForSelect> queries)
             throws WebServiceClientException;
