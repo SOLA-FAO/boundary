@@ -36,22 +36,7 @@ import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.search.GenericResult;
 import org.sola.webservices.search.QueryForSelect;
 import org.sola.webservices.search.ResultForSelectionInfo;
-import org.sola.webservices.transferobjects.search.ApplicationSearchParamsTO;
-import org.sola.webservices.transferobjects.search.ApplicationSearchResultTO;
-import org.sola.webservices.transferobjects.search.PartySearchParamsTO;
-import org.sola.webservices.transferobjects.search.PartySearchResultTO;
-import org.sola.webservices.transferobjects.search.PropertyVerifierTO;
-import org.sola.webservices.transferobjects.search.SourceSearchParamsTO;
-import org.sola.webservices.transferobjects.search.SourceSearchResultTO;
-import org.sola.webservices.transferobjects.search.UserSearchAdvancedResultTO;
-import org.sola.webservices.transferobjects.search.UserSearchParamsTO;
-import org.sola.webservices.transferobjects.search.UserSearchResultTO;
-import org.sola.webservices.transferobjects.search.ApplicationLogResultTO;
-import org.sola.webservices.transferobjects.search.BaUnitSearchParamsTO;
-import org.sola.webservices.transferobjects.search.BaUnitSearchResultTO;
-import org.sola.webservices.transferobjects.search.BrSearchParamsTO;
-import org.sola.webservices.transferobjects.search.BrSearchResultTO;
-import org.sola.webservices.transferobjects.search.CadastreObjectSearchResultTO;
+import org.sola.webservices.transferobjects.search.*;
 
 /**
  * Interface for the Search Service. Implemented by {@linkplain SearchClientImpl}
@@ -87,8 +72,10 @@ public interface SearchClient extends AbstractWSClient {
     
     List<BaUnitSearchResultTO> searchBaUnit(BaUnitSearchParamsTO searchParams) throws WebServiceClientException;
     
-    List<CadastreObjectSearchResultTO> searchCadastreObjects(
-            String searchBy, String searchString) throws WebServiceClientException;
-    
     GenericResult test() throws WebServiceClientException;
+    
+    List<SpatialSearchOptionTO> getSpatialSearchOptions() throws WebServiceClientException;
+    
+    List<SpatialSearchResultTO> searchSpatialObjects(
+            String queryName, String searchString) throws WebServiceClientException; 
 }

@@ -30,30 +30,12 @@ package org.sola.services.boundary.wsclients;
 import java.util.List;
 import javax.xml.namespace.QName;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
-import org.sola.services.boundary.wsclients.exception.WebServiceClientExceptionType;
 import org.sola.webservices.search.GenericResult;
 import org.sola.webservices.search.QueryForSelect;
 import org.sola.webservices.search.ResultForSelectionInfo;
-import org.sola.webservices.search.SOLAFault;
 import org.sola.webservices.search.Search;
 import org.sola.webservices.search.SearchService;
-import org.sola.webservices.search.UnhandledFault;
-import org.sola.webservices.transferobjects.search.BaUnitSearchParamsTO;
-import org.sola.webservices.transferobjects.search.BaUnitSearchResultTO;
-import org.sola.webservices.transferobjects.search.BrSearchParamsTO;
-import org.sola.webservices.transferobjects.search.BrSearchResultTO;
-import org.sola.webservices.transferobjects.search.PropertyVerifierTO;
-import org.sola.webservices.transferobjects.search.ApplicationSearchParamsTO;
-import org.sola.webservices.transferobjects.search.ApplicationSearchResultTO;
-import org.sola.webservices.transferobjects.search.PartySearchParamsTO;
-import org.sola.webservices.transferobjects.search.PartySearchResultTO;
-import org.sola.webservices.transferobjects.search.SourceSearchParamsTO;
-import org.sola.webservices.transferobjects.search.SourceSearchResultTO;
-import org.sola.webservices.transferobjects.search.UserSearchAdvancedResultTO;
-import org.sola.webservices.transferobjects.search.UserSearchParamsTO;
-import org.sola.webservices.transferobjects.search.UserSearchResultTO;
-import org.sola.webservices.transferobjects.search.ApplicationLogResultTO;
-import org.sola.webservices.transferobjects.search.CadastreObjectSearchResultTO;
+import org.sola.webservices.transferobjects.search.*;
 
 /**
  * Implementation class for the {@linkplain SearchClient} interface. 
@@ -229,18 +211,6 @@ public class SearchClientImpl extends AbstractWSClientImpl implements SearchClie
         }
     }
 
-    @Override
-    public List<CadastreObjectSearchResultTO> searchCadastreObjects(
-            String searchBy, String searchString) throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "searchCadastreObjects";
-        try {
-            return getPort().searchCadastreObjects(searchBy, searchString);
-        } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return null;
-        }
-    }
-
     public GenericResult test() throws WebServiceClientException {
         final String inputService = SERVICE_NAME + "test";
         try {
@@ -257,6 +227,40 @@ public class SearchClientImpl extends AbstractWSClientImpl implements SearchClie
         try {
             return getPort().searchBaUnit(searchParams);
         } catch (Throwable e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+        }
+    }
+    
+    /**
+     * @return The list of spatial search options configured for the application. 
+     * @throws WebServiceClientException 
+     */
+     @Override
+    public List<SpatialSearchOptionTO> getSpatialSearchOptions() throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "getSpatialSearchOptions";
+        try {
+            return getPort().getSpatialSearchOptions(getLanguageCode());
+        } catch (Exception e) {
+           handleExceptionsMethod(inputService,e);
+           return null;
+        }
+    } 
+     
+    /**
+     * Executes a spatial search using the specified query name and search string
+     * @param queryName The name of the dynamic query to execute for the search
+     * @param searchString The search string (e.g. the label of the spatial object to find)
+     * @return The results of the search
+     * @throws WebServiceClientException 
+     */
+    @Override
+    public List<SpatialSearchResultTO> searchSpatialObjects(
+            String queryName, String searchString) throws WebServiceClientException {
+        final String inputService = SERVICE_NAME + "searchSpatialObjects";
+        try {
+            return getPort().searchSpatialObjects(queryName, searchString);
+        } catch (Exception e) {
            handleExceptionsMethod(inputService,e);
            return null;
         }
