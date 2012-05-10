@@ -45,6 +45,7 @@ public class ConfigMapLayerTO extends AbstractTO {
     private String shapeLocation;
     private String style;
     private String title;
+    private boolean visible; 
 
     public String getId() {
         return id;
@@ -125,5 +126,12 @@ public class ConfigMapLayerTO extends AbstractTO {
     public void setTitle(String title) {
         this.title = title;
     }
-      
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }    
 }

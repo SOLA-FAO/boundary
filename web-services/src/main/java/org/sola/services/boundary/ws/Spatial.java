@@ -37,9 +37,11 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
+import org.sola.services.boundary.transferobjects.casemanagement.ApplicationTO;
 import org.sola.services.boundary.transferobjects.configuration.ConfigMapLayerTO;
 import org.sola.services.boundary.transferobjects.configuration.MapDefinitionTO;
 import org.sola.services.common.ServiceConstants;
+import org.sola.services.common.contracts.GenericTranslator;
 import org.sola.services.common.faults.FaultUtility;
 import org.sola.services.common.faults.SOLAFault;
 import org.sola.services.common.faults.UnhandledFault;
@@ -85,19 +87,9 @@ public class Spatial extends AbstractWebService {
                         Double.parseDouble(mapSettings.get("map-shift-tolerance-rural")));
                 mapDefinition.setSurveyPointShiftUrbanArea(
                         Double.parseDouble(mapSettings.get("map-shift-tolerance-urban")));
-                for (ConfigMapLayer configMapLayer : configMapLayerList) {
-                    ConfigMapLayerTO configMapLayerTO = new ConfigMapLayerTO();
-                    configMapLayerTO.setId(configMapLayer.getId());
-                    configMapLayerTO.setPojoQueryName(configMapLayer.getPojoQueryName());
-                    configMapLayerTO.setPojoQueryNameForSelect(configMapLayer.getPojoQueryNameForSelect());
-                    configMapLayerTO.setPojoStructure(configMapLayer.getPojoStructure());
-                    configMapLayerTO.setShapeLocation(configMapLayer.getShapeLocation());
-                    configMapLayerTO.setStyle(configMapLayer.getStyle());
-                    configMapLayerTO.setTypeCode(configMapLayer.getTypeCode());
-                    configMapLayerTO.setTitle(configMapLayer.getTitle());
-                    configMapLayerTO.setWmsLayers(configMapLayer.getWmsLayers());
-                    configMapLayerTO.setWmsUrl(configMapLayer.getWmsUrl());
-                    mapDefinition.getLayers().add(configMapLayerTO);
+                for (ConfigMapLayer configMapLayer : configMapLayerList) {                
+                    mapDefinition.getLayers().add(
+                            GenericTranslator.toTO(configMapLayer, ConfigMapLayerTO.class));
                 }
                 result[0] = mapDefinition;
             }
