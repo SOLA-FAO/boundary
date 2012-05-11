@@ -25,6 +25,7 @@
  */
 package org.sola.services.boundary.transferobjects.search;
 
+import java.math.BigDecimal;
 import org.sola.services.common.contracts.AbstractTO;
 
 /**
@@ -36,6 +37,8 @@ public class SpatialSearchOptionTO extends AbstractTO {
     private String title;
     private String queryName;
     private String description;
+    private int minSearchStrLen;
+    private BigDecimal zoomInBuffer;
 
     public SpatialSearchOptionTO() {
         super();
@@ -72,4 +75,21 @@ public class SpatialSearchOptionTO extends AbstractTO {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public int getMinSearchStrLen() {
+        return minSearchStrLen;
+    }
+
+    public void setMinSearchStrLen(int minSearchStrLen) {
+        this.minSearchStrLen = minSearchStrLen;
+    }
+
+    public BigDecimal getZoomInBuffer() {
+        return zoomInBuffer;
+    }
+
+    public void setZoomInBuffer(BigDecimal zoomInBuffer) {
+        this.zoomInBuffer = zoomInBuffer;
+    }
+ 
 }
