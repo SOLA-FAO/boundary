@@ -150,11 +150,6 @@ public class WSManager {
      * Returns administrative Web-service client instance.
      */
     public AdministrativeClient getAdministrative() {
-        if(administrativeWS == null){
-            throw new WebServiceClientException(
-                    ClientMessage.GENERAL_ERRORS_WEBSERVICE_NOT_INITIALIZED, 
-                    new Object[]{"Administrative"});
-        }
         return administrativeWS;
     }
 
@@ -162,11 +157,6 @@ public class WSManager {
      * Returns digital archive Web-service client instance.
      */
     public DigitalArchiveClient getDigitalArchive() {
-        if(digitalArchiveWS == null){
-            throw new WebServiceClientException(
-                    ClientMessage.GENERAL_ERRORS_WEBSERVICE_NOT_INITIALIZED, 
-                    new Object[]{"Digital Archive"});
-        }
         return digitalArchiveWS;
     }
 
@@ -174,11 +164,6 @@ public class WSManager {
      * Returns case management Web-service client instance.
      */
     public CaseManagementClient getCaseManagementService() {
-        if(caseManagementWS == null){
-            throw new WebServiceClientException(
-                    ClientMessage.GENERAL_ERRORS_WEBSERVICE_NOT_INITIALIZED, 
-                    new Object[]{"Case Management"});
-        }
         return caseManagementWS;
     }
 
@@ -186,11 +171,6 @@ public class WSManager {
      * Returns admin Web-service client instance.
      */
     public AdminClient getAdminService() {
-        if(adminWS == null){
-            throw new WebServiceClientException(
-                    ClientMessage.GENERAL_ERRORS_WEBSERVICE_NOT_INITIALIZED, 
-                    new Object[]{"Admin"});
-        }
         return adminWS;
     }
 
@@ -198,11 +178,6 @@ public class WSManager {
      * Returns reference data Web-service client instance.
      */
     public ReferenceDataClient getReferenceDataService() {
-        if(referenceWS == null){
-            throw new WebServiceClientException(
-                    ClientMessage.GENERAL_ERRORS_WEBSERVICE_NOT_INITIALIZED, 
-                    new Object[]{"Reference Data"});
-        }
         return referenceWS;
     }
 
@@ -210,11 +185,6 @@ public class WSManager {
      * Returns search Web-service client instance.
      */
     public SearchClient getSearchService() {
-        if(searchWS == null){
-            throw new WebServiceClientException(
-                    ClientMessage.GENERAL_ERRORS_WEBSERVICE_NOT_INITIALIZED, 
-                    new Object[]{"Search"});
-        }
         return searchWS;
     }
 
@@ -222,11 +192,6 @@ public class WSManager {
      * Returns search Web-service client instance.
      */
     public CadastreClient getCadastreService() {
-        if(cadastreWS == null){
-            throw new WebServiceClientException(
-                    ClientMessage.GENERAL_ERRORS_WEBSERVICE_NOT_INITIALIZED, 
-                    new Object[]{"Cadastre"});
-        }
         return cadastreWS;
     }
 
@@ -234,11 +199,6 @@ public class WSManager {
      * Returns spatial Web-service client instance.
      */
     public SpatialClient getSpatialService() {
-        if(spatialWS == null){
-            throw new WebServiceClientException(
-                    ClientMessage.GENERAL_ERRORS_WEBSERVICE_NOT_INITIALIZED, 
-                    new Object[]{"Spatial"});
-        }
         return spatialWS;
     }
 }
