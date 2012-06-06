@@ -1,30 +1,26 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations
- * (FAO). All rights reserved.
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO). All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted
+ * provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice,this
- * list of conditions and the following disclaimer. 2. Redistributions in binary
- * form must reproduce the above copyright notice,this list of conditions and
- * the following disclaimer in the documentation and/or other materials provided
- * with the distribution. 3. Neither the name of FAO nor the names of its
- * contributors may be used to endorse or promote products derived from this
- * software without specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this list of conditions
+ * and the following disclaimer. 2. Redistributions in binary form must reproduce the above
+ * copyright notice,this list of conditions and the following disclaimer in the documentation and/or
+ * other materials provided with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this software without
+ * specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
- * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+ * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.ws;
@@ -74,6 +70,7 @@ import org.sola.services.boundary.transferobjects.referencedata.RrrGroupTypeTO;
 import org.sola.services.boundary.transferobjects.referencedata.TypeActionTO;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.contracts.AbstractCodeTO;
+import org.sola.services.common.faults.*;
 import org.sola.services.common.repository.entities.AbstractCodeEntity;
 import org.sola.services.ejb.administrative.businesslogic.AdministrativeEJBLocal;
 import org.sola.services.ejb.administrative.repository.entities.BaUnitRelType;
@@ -107,6 +104,9 @@ import org.sola.services.ejb.system.repository.entities.BrValidationTargetType;
 import org.sola.services.ejb.transaction.businesslogic.TransactionEJBLocal;
 import org.sola.services.ejb.transaction.repository.entities.RegistrationStatusType;
 
+/**
+ * Web Service Boundary class to expose the SOLA reference code values.
+ */
 @WebService(serviceName = "referencedata-service", targetNamespace = ServiceConstants.REF_DATA_WS_NAMESPACE)
 public class ReferenceData extends AbstractWebService {
 
@@ -128,21 +128,31 @@ public class ReferenceData extends AbstractWebService {
     private WebServiceContext wsContext;
 
     /**
-     * Dummy method to check the web service instance is working
+     * Web method that can be used to validate if the web service is available.
+     *
+     * @return Always true
      */
     @WebMethod(operationName = "CheckConnection")
     public boolean CheckConnection() {
         return true;
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB#getCommunicationTypes(java.lang.String)
+     * PartyEJB.getCommunicationTypes}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetCommunicationTypes")
     public List<CommunicationTypeTO> GetCommunicationTypes(String languageCode)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -155,14 +165,22 @@ public class ReferenceData extends AbstractWebService {
         return (List<CommunicationTypeTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB#getGenderTypes(java.lang.String)
+     * PartyEJB.getGenderTypes}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetGenderTypes")
     public List<GenderTypeTO> GetGenderTypes(String languageCode)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -175,14 +193,22 @@ public class ReferenceData extends AbstractWebService {
         return (List<GenderTypeTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#getAvailabilityStatusList(java.lang.String)
+     * SourceEJB.getAvailabilityStatusList}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetAvailabilityStatusList")
     public List<AvailabilityStatusTO> GetAvailabilityStatusList(String languageCode)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -195,13 +221,22 @@ public class ReferenceData extends AbstractWebService {
         return (List<AvailabilityStatusTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#getPresentationFormTypes(java.lang.String)
+     * SourceEJB.getPresentationFormTypes}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetPresentationFormTypes")
-    public List<PresentationFormTypeTO> GetPresentationFormTypes(String languageCode) throws SOLAFault, UnhandledFault {
+    public List<PresentationFormTypeTO> GetPresentationFormTypes(String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -214,13 +249,22 @@ public class ReferenceData extends AbstractWebService {
         return (List<PresentationFormTypeTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getRequestTypes(java.lang.String)
+     * ApplicationEJB.getRequestTypes}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetRequestTypes")
-    public List<RequestTypeTO> GetRequestTypes(String languageCode) throws SOLAFault, UnhandledFault {
+    public List<RequestTypeTO> GetRequestTypes(String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -232,14 +276,22 @@ public class ReferenceData extends AbstractWebService {
         return (List<RequestTypeTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getRequestCategoryTypes(java.lang.String)
+     * ApplicationEJB.getRequestCategoryTypes}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetRequestCategoryTypes")
     public List<RequestCategoryTypeTO> GetRequestCategoryTypes(String languageCode)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -251,13 +303,22 @@ public class ReferenceData extends AbstractWebService {
         return (List<RequestCategoryTypeTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#getSourceTypes(java.lang.String)
+     * SourceEJB.getSourceTypes}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetSourceTypes")
-    public List<SourceTypeTO> GetSourceTypes(String languageCode) throws SOLAFault, UnhandledFault {
+    public List<SourceTypeTO> GetSourceTypes(String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -269,14 +330,22 @@ public class ReferenceData extends AbstractWebService {
         return (List<SourceTypeTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getApplicationStatusTypes(java.lang.String)
+     * ApplicationEJB.getApplicationStatusTypes}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetApplicationStatusTypes")
     public List<ApplicationStatusTypeTO> GetApplicationStatusTypes(String languageCode)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -289,14 +358,22 @@ public class ReferenceData extends AbstractWebService {
         return (List<ApplicationStatusTypeTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getApplicationActionTypes(java.lang.String)
+     * ApplicationEJB.getApplicationActionTypes}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetApplicationActionTypes")
     public List<ApplicationActionTypeTO> GetApplicationActionTypes(String languageCode)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -309,14 +386,22 @@ public class ReferenceData extends AbstractWebService {
         return (List<ApplicationActionTypeTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getServiceStatusTypes(java.lang.String)
+     * ApplicationEJB.getServiceStatusTypes}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetServiceStatusTypes")
     public List<ServiceStatusTypeTO> GetServiceStatusTypes(String languageCode)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -329,14 +414,22 @@ public class ReferenceData extends AbstractWebService {
         return (List<ServiceStatusTypeTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getServiceActionTypes(java.lang.String)
+     * ApplicationEJB.getServiceActionTypes}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetServiceActionTypes")
     public List<ServiceActionTypeTO> GetServiceActionTypes(String languageCode)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -349,13 +442,21 @@ public class ReferenceData extends AbstractWebService {
         return (List<ServiceActionTypeTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB#getPartyTypes(java.lang.String)
+     * PartyEJB.getPartyTypes}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetPartyTypes")
-    public List<PartyTypeTO> GetPartyTypes(String languageCode) throws SOLAFault, UnhandledFault {
+    public List<PartyTypeTO> GetPartyTypes(String languageCode) throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -367,13 +468,22 @@ public class ReferenceData extends AbstractWebService {
         return (List<PartyTypeTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB#getPartyRoles(java.lang.String)
+     * PartyEJB.getPartyRoles}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetPartyRoles")
-    public List<PartyRoleTypeTO> GetPartyRoles(String languageCode) throws SOLAFault, UnhandledFault {
+    public List<PartyRoleTypeTO> GetPartyRoles(String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -385,13 +495,22 @@ public class ReferenceData extends AbstractWebService {
         return (List<PartyRoleTypeTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB#getIdTypes(java.lang.String)
+     * PartyEJB.getIdTypes}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetIdTypes")
-    public List<IdTypeTO> GetIdTypes(String languageCode) throws SOLAFault, UnhandledFault {
+    public List<IdTypeTO> GetIdTypes(String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runOpenQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -403,13 +522,22 @@ public class ReferenceData extends AbstractWebService {
         return (List<IdTypeTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getBaUnitTypes(java.lang.String)
+     * AdministrativeEJB.getBaUnitTypes}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetBaUnitTypes")
-    public List<BaUnitTypeTO> GetBaUnitTypes(String languageCode) throws SOLAFault, UnhandledFault {
+    public List<BaUnitTypeTO> GetBaUnitTypes(String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -421,13 +549,22 @@ public class ReferenceData extends AbstractWebService {
         return (List<BaUnitTypeTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getChangeStatusTypes(java.lang.String)
+     * AdministrativeEJB.getChangeStatusTypes}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetChangeStatuTypes")
-    public List<ChangeStatusTypeTO> GetChangeStatuTypes(String languageCode) throws SOLAFault, UnhandledFault {
+    public List<ChangeStatusTypeTO> GetChangeStatuTypes(String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -440,13 +577,22 @@ public class ReferenceData extends AbstractWebService {
         return (List<ChangeStatusTypeTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getMortgageTypes(java.lang.String)
+     * AdministrativeEJB.getMortgageTypes}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetMortgageTypes")
-    public List<MortgageTypeTO> GetMortgageTypes(String languageCode) throws SOLAFault, UnhandledFault {
+    public List<MortgageTypeTO> GetMortgageTypes(String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -458,13 +604,22 @@ public class ReferenceData extends AbstractWebService {
         return (List<MortgageTypeTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getRRRGroupTypes(java.lang.String)
+     * AdministrativeEJB.getRRRGroupTypes}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetRRRGroupTypes")
-    public List<RrrGroupTypeTO> GetRRRGroupTypes(String languageCode) throws SOLAFault, UnhandledFault {
+    public List<RrrGroupTypeTO> GetRRRGroupTypes(String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -476,13 +631,22 @@ public class ReferenceData extends AbstractWebService {
         return (List<RrrGroupTypeTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getRRRTypes(java.lang.String)
+     * AdministrativeEJB.getRRRTypes}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetRRRTypes")
-    public List<RrrTypeTO> GetRRRTypes(String languageCode) throws SOLAFault, UnhandledFault {
+    public List<RrrTypeTO> GetRRRTypes(String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -494,14 +658,22 @@ public class ReferenceData extends AbstractWebService {
         return (List<RrrTypeTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getSourceBaUnitRelationTypes(java.lang.String)
+     * AdministrativeEJB.getSourceBaUnitRelationTypes}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetSourceBaUnitRelationTypes")
     public List<SourceBaUnitRelationTypeTO> GetSourceBaUnitRelationTypes(String languageCode)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -514,14 +686,22 @@ public class ReferenceData extends AbstractWebService {
         return (List<SourceBaUnitRelationTypeTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.transaction.businesslogic.TransactionEJB#getRegistrationStatusTypes(java.lang.String)
+     * TransactionEJB.getRegistrationStatusTypes}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetRegistrationStatusTypes")
     public List<RegistrationStatusTypeTO> GetRegistrationStatusTypes(String languageCode)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -534,14 +714,22 @@ public class ReferenceData extends AbstractWebService {
         return (List<RegistrationStatusTypeTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#getCadastreObjectTypes(java.lang.String)
+     * CadastreEJB.getCadastreObjectTypes}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetCadastreObjectTypes")
     public List<CadastreObjectTypeTO> GetCadastreObjectTypes(String languageCode)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -554,14 +742,22 @@ public class ReferenceData extends AbstractWebService {
         return (List<CadastreObjectTypeTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getTypeActions(java.lang.String)
+     * ApplicationEJB.getTypeActions}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetTypeActions")
     public List<TypeActionTO> GetTypeActions(String languageCode)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -574,13 +770,21 @@ public class ReferenceData extends AbstractWebService {
         return (List<TypeActionTO>) result[0];
     }
 
+    /**
+     * Uses the {@linkplain org.sola.services.ejb.system.businesslogic.SystemEJB#getCodeEntityList(java.lang.Class, java.lang.String)
+     * SystemEJB.getCodeEntityList} to retrieve the BrTechnicalType codes.
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetBrTechnicalTypes")
     public List<BrTechnicalTypeTO> GetBrTechnicalTypes(@WebParam(name = "languageCode") String languageCode)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
         final Object[] params = {languageCode};
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -593,13 +797,21 @@ public class ReferenceData extends AbstractWebService {
         return (List<BrTechnicalTypeTO>) result[0];
     }
 
+    /**
+     * Uses the {@linkplain org.sola.services.ejb.system.businesslogic.SystemEJB#getCodeEntityList(java.lang.Class, java.lang.String)
+     * SystemEJB.getCodeEntityList} to retrieve the BrValidationTargetType codes.
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetBrValidationTargetTypes")
     public List<BrValidationTargetTypeTO> GetBrValidationTargetTypes(@WebParam(name = "languageCode") String languageCode)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
         final Object[] params = {languageCode};
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -612,13 +824,21 @@ public class ReferenceData extends AbstractWebService {
         return (List<BrValidationTargetTypeTO>) result[0];
     }
 
+    /**
+     * Uses the {@linkplain org.sola.services.ejb.system.businesslogic.SystemEJB#getCodeEntityList(java.lang.Class, java.lang.String)
+     * SystemEJB.getCodeEntityList} to retrieve the BrSeverityType codes.
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetBrSeverityTypes")
     public List<BrSeverityTypeTO> GetBrSeverityTypes(@WebParam(name = "languageCode") String languageCode)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
         final Object[] params = {languageCode};
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -631,13 +851,21 @@ public class ReferenceData extends AbstractWebService {
         return (List<BrSeverityTypeTO>) result[0];
     }
 
+    /**
+     * Uses the {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getCodeEntityList(java.lang.Class, java.lang.String)
+     * SystemEJB.getCodeEntityList} to retrieve the BaUnitRelType codes.
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetBaUnitRelTypes")
     public List<BaUnitRelTypeTO> GetBaUnitRelTypes(@WebParam(name = "languageCode") String languageCode)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
         final Object[] params = {languageCode};
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -650,10 +878,18 @@ public class ReferenceData extends AbstractWebService {
         return (List<BaUnitRelTypeTO>) result[0];
     }
 
+    /**
+     * Supports saving of all SOLA Reference Data types.
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     */
     @RolesAllowed(RolesConstants.ADMIN_MANAGE_REFDATA)
     @WebMethod(operationName = "saveReferenceData")
     public AbstractCodeTO saveReferenceData(AbstractCodeTO refDataTO)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault, OptimisticLockingFault {
 
         try {
             try {
@@ -774,10 +1010,16 @@ public class ReferenceData extends AbstractWebService {
             } finally {
                 rollbackTransaction();
             }
-        } catch (Throwable t) {
-            Throwable fault = FaultUtility.ProcessException(t);
+        } catch (Exception t) {
+            Exception fault = FaultUtility.ProcessException(t);
             if (fault.getClass() == SOLAFault.class) {
                 throw (SOLAFault) fault;
+            }
+            if (fault.getClass() == SOLAAccessFault.class) {
+                throw (SOLAAccessFault) fault;
+            }
+            if (fault.getClass() == OptimisticLockingFault.class) {
+                throw (OptimisticLockingFault) fault;
             }
             throw (UnhandledFault) fault;
         } finally {

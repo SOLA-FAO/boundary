@@ -52,7 +52,7 @@ import org.sola.webservices.search.ResultForSelectionInfo;
  * @author amcdowell
  * @see MockResponse
  */
-public class MockSpatialClient extends AbstractMockWSClient implements SpatialClient {
+public class MockSpatialClient extends AbstractMockWSClient { // implements SpatialClient {
 
     private static final String SERVICE_NAME = "Spatial.";
     public static final String CHECK_CONNECTION = SERVICE_NAME + "checkConnection";
@@ -64,24 +64,24 @@ public class MockSpatialClient extends AbstractMockWSClient implements SpatialCl
     }
 
     /** @return default = true */
-    @Override
-    public boolean checkConnection() throws WebServiceClientException {
-        return getManager().getResponse(CHECK_CONNECTION, Boolean.class, true);
-    }
-
-    /** @return default = new ResultForNavigationInfo() */
-    @Override
-    public ResultForNavigationInfo getSpatialForNavigation(QueryForNavigation query)
-            throws WebServiceClientException {
-        ResultForNavigationInfo defaultResponse = new ResultForNavigationInfo();
-        return getManager().getResponse(GET_SPATIAL_FOR_NAVIGATION,
-                ResultForNavigationInfo.class, defaultResponse, query);
-    }
-
-    @Override
-    public MapDefinitionTO getMapDefinition() throws WebServiceClientException{
-        MapDefinitionTO defaultResponse = new MapDefinitionTO();
-        return getManager().getResponse(GET_SPATIAL_FOR_NAVIGATION,
-                MapDefinitionTO.class, defaultResponse);
-    }
+//    @Override
+//    public boolean checkConnection() throws WebServiceClientException {
+//        return getManager().getResponse(CHECK_CONNECTION, Boolean.class, true);
+//    }
+//
+//    /** @return default = new ResultForNavigationInfo() */
+//    @Override
+//    public ResultForNavigationInfo getSpatialForNavigation(QueryForNavigation query)
+//            throws WebServiceClientException {
+//        ResultForNavigationInfo defaultResponse = new ResultForNavigationInfo();
+//        return getManager().getResponse(GET_SPATIAL_FOR_NAVIGATION,
+//                ResultForNavigationInfo.class, defaultResponse, query);
+//    }
+//
+//    @Override
+//    public MapDefinitionTO getMapDefinition() throws WebServiceClientException{
+//        MapDefinitionTO defaultResponse = new MapDefinitionTO();
+//        return getManager().getResponse(GET_SPATIAL_FOR_NAVIGATION,
+//                MapDefinitionTO.class, defaultResponse);
+//    }
 }

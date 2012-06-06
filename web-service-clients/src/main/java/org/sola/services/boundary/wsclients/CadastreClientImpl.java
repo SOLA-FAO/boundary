@@ -1,46 +1,35 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
- * All rights reserved.
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO). All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted
+ * provided that the following conditions are met:
  *
- *    1. Redistributions of source code must retain the above copyright notice,this list
- *       of conditions and the following disclaimer.
- *    2. Redistributions in binary form must reproduce the above copyright notice,this list
- *       of conditions and the following disclaimer in the documentation and/or other
- *       materials provided with the distribution.
- *    3. Neither the name of FAO nor the names of its contributors may be used to endorse or
- *       promote products derived from this software without specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this list of conditions
+ * and the following disclaimer. 2. Redistributions in binary form must reproduce the above
+ * copyright notice,this list of conditions and the following disclaimer in the documentation and/or
+ * other materials provided with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this software without
+ * specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT
- * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+ * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
- */
-/*
- * To change this template, choose Tools | Templates and open the template in the editor.
  */
 package org.sola.services.boundary.wsclients;
 
 import java.util.List;
 import javax.xml.namespace.QName;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
-import org.sola.services.boundary.wsclients.exception.WebServiceClientExceptionType;
 import org.sola.webservices.cadastre.Cadastre;
 import org.sola.webservices.cadastre.CadastreService;
-import org.sola.webservices.cadastre.OptimisticLockingFault;
-import org.sola.webservices.cadastre.SOLAAccessFault;
-import org.sola.webservices.cadastre.SOLAFault;
-import org.sola.webservices.cadastre.SOLAValidationFault;
-import org.sola.webservices.cadastre.UnhandledFault;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectNodeTO;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectTO;
@@ -48,15 +37,18 @@ import org.sola.webservices.transferobjects.transaction.TransactionCadastreChang
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreRedefinitionTO;
 
 /**
- *
- * @author Manoku
+ * Implementation class for the {@linkplain CadastreClient} interface.
  */
 public class CadastreClientImpl extends AbstractWSClientImpl implements CadastreClient {
 
     private static final String NAMESPACE_URI = "http://webservices.sola.org/cadastre";
     private static final String LOCAL_PART = "cadastre-service";
-    private static final String SERVICE_NAME = "Cadastre.";
 
+    /**
+     * Creates a web service client class for the web service hosted at the specified URL
+     *
+     * @param url The location of the service WSDL
+     */
     public CadastreClientImpl(String url) {
         super(url, new QName(NAMESPACE_URI, LOCAL_PART));
     }
@@ -67,154 +59,198 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
 
     @Override
     public boolean checkConnection() throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "checkConnection";
+        boolean result = false;
+        final String methodName = CadastreClient.CHECK_CONNECTION;
         try {
-            boolean result = getPort().checkConnection();
-            return result;
-       } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return  false;
+            beforeWebMethod(methodName);
+            result = getPort().checkConnection();
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result);
         }
+        return result;
     }
 
     @Override
     public List<CadastreObjectTO> getCadastreObjectByParts(String searchString)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "GetCadastreObjectByParts";
+        List<CadastreObjectTO> result = null;
+        final String methodName = CadastreClient.GET_CADASTRE_OBJECT_BY_PARTS;
         try {
-            List<CadastreObjectTO> result = getPort().getCadastreObjectByParts(searchString);
-            return result;
-        } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return null;
+            beforeWebMethod(methodName, searchString);
+            result = getPort().getCadastreObjectByParts(searchString);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, searchString);
         }
-
+        return result;
     }
 
     @Override
     public CadastreObjectTO getCadastreObjectByPoint(double x, double y, int srid)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "GetCadastreObjectByPoint";
+        CadastreObjectTO result = null;
+        final String methodName = CadastreClient.GET_CADASTRE_OBJECT_BY_POINT;
         try {
-            return getPort().getCadastreObjectByPoint(x, y, srid);
-         } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return null;
+            beforeWebMethod(methodName, x, y, srid);
+            result = getPort().getCadastreObjectByPoint(x, y, srid);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, x, y, srid);
         }
-
+        return result;
     }
 
     @Override
     public List<CadastreObjectTO> getCadastreObjectsByBaUnit(String baUnitId)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "getCadastreObjectsByBaUnit";
+        List<CadastreObjectTO> result = null;
+        final String methodName = CadastreClient.GET_CADASTRE_OBJECTS_BY_BA_UNIT;
         try {
-            return getPort().getCadastreObjectsByBaUnit(baUnitId);
-         } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return null;
+            beforeWebMethod(methodName, baUnitId);
+            result = getPort().getCadastreObjectsByBaUnit(baUnitId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, baUnitId);
         }
-
+        return result;
     }
 
     @Override
     public List<CadastreObjectTO> getCadastreObjectsByService(String serviceId)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "getCadastreObjectsByService";
+        List<CadastreObjectTO> result = null;
+        final String methodName = CadastreClient.GET_CADASTRE_OBJECTS_BY_SERVICE;
         try {
-            return getPort().getCadastreObjectsByService(serviceId);
-        } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return null;
+            beforeWebMethod(methodName, serviceId);
+            result = getPort().getCadastreObjectsByService(serviceId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, serviceId);
         }
+        return result;
     }
 
     @Override
-    public List<ValidationResult>  saveTransactionCadastreChange(
+    public List<ValidationResult> saveTransactionCadastreChange(
             TransactionCadastreChangeTO transactionCadastreChangeTO)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "saveCadastreChange";
+        List<ValidationResult> result = null;
+        final String methodName = CadastreClient.SAVE_TRANSACTION_CADASTRE_CHANGE;
+        String languageCode = this.getLanguageCode();
         try {
-            return getPort().saveCadastreChange(transactionCadastreChangeTO, this.getLanguageCode());
-        } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return null;
+            beforeWebMethod(methodName, transactionCadastreChangeTO, languageCode);
+            result = getPort().saveCadastreChange(transactionCadastreChangeTO, languageCode);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, transactionCadastreChangeTO, languageCode);
         }
+        return result;
     }
-    
+
     @Override
     public TransactionCadastreChangeTO getTransactionCadastreChange(String serviceId)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "getCadastreChange";
+        TransactionCadastreChangeTO result = null;
+        final String methodName = CadastreClient.GET_TRANSACTION_CADASTRE_CHANGE;
         try {
-            return getPort().getCadastreChange(serviceId);
-        } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return null;
+            beforeWebMethod(methodName, serviceId);
+            result = getPort().getCadastreChange(serviceId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, serviceId);
         }
+        return result;
     }
 
     @Override
     public List<CadastreObjectTO> getCadastreObjects(List<String> Ids)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "getCadastreObjects";
+        List<CadastreObjectTO> result = null;
+        final String methodName = CadastreClient.GET_CADASTRE_OBJECTS;
         try {
-            return getPort().getCadastreObjects(Ids);
-         } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return null;
+            beforeWebMethod(methodName, Ids);
+            result = getPort().getCadastreObjects(Ids);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, Ids);
         }
-
+        return result;
     }
 
     @Override
     public CadastreObjectNodeTO getCadastreObjectNode(
             double xMin, double yMin, double xMax, double yMax, int srid)
-    throws WebServiceClientException{
-        final String inputService = SERVICE_NAME + "getCadastreObjects";
+            throws WebServiceClientException {
+        CadastreObjectNodeTO result = null;
+        final String methodName = CadastreClient.GET_CADASTRE_OBJECT_NODE;
         try {
-            return getPort().getCadastreObjectNode(xMin, yMin, xMax, yMax, srid);
-       } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return null;
-       }
+            beforeWebMethod(methodName, xMin, yMin, xMax, yMax, srid);
+            result = getPort().getCadastreObjectNode(xMin, yMin, xMax, yMax, srid);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, xMin, yMin, xMax, yMax, srid);
+        }
+        return result;
     }
 
     @Override
     public CadastreObjectNodeTO getCadastreObjectNodePotential(
             double xMin, double yMin, double xMax, double yMax, int srid)
-    throws WebServiceClientException{
-        final String inputService = SERVICE_NAME + "getCadastreObjects";
+            throws WebServiceClientException {
+        CadastreObjectNodeTO result = null;
+        final String methodName = CadastreClient.GET_CADASTRE_OBJECT_NODE_POTENTIAL;
         try {
-            return getPort().getCadastreObjectNodePotential(xMin, yMin, xMax, yMax, srid);
-        } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return null;
-       }
+            beforeWebMethod(methodName, xMin, yMin, xMax, yMax, srid);
+            result = getPort().getCadastreObjectNodePotential(xMin, yMin, xMax, yMax, srid);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, xMin, yMin, xMax, yMax, srid);
+        }
+        return result;
     }
 
     @Override
-    public List<ValidationResult>  saveTransactionCadastreRedefinition(
+    public List<ValidationResult> saveTransactionCadastreRedefinition(
             TransactionCadastreRedefinitionTO transactionTO)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "saveTransactionCadastreRedefinition";
+        List<ValidationResult> result = null;
+        final String methodName = CadastreClient.SAVE_TRANSACTION_CADASTRE_REDFN;
+        String languageCode = this.getLanguageCode();
         try {
-            return getPort().saveCadastreRedefinition(transactionTO, this.getLanguageCode());
-        } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return null;
-       }
+            beforeWebMethod(methodName, transactionTO, languageCode);
+            result = getPort().saveCadastreRedefinition(transactionTO, languageCode);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, transactionTO, languageCode);
+        }
+        return result;
     }
 
     @Override
     public TransactionCadastreRedefinitionTO getTransactionCadastreRedefinition(String serviceId)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "getTransactionCadastreRedefinition";
+        TransactionCadastreRedefinitionTO result = null;
+        final String methodName = CadastreClient.GET_TRANSACTION_CADASTRE_REDFN;
         try {
-            return getPort().getCadastreRedefinition(serviceId);
-         } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return null;
-       }
+            beforeWebMethod(methodName, serviceId);
+            result = getPort().getCadastreRedefinition(serviceId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, serviceId);
+        }
+        return result;
     }
 }

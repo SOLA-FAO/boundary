@@ -50,7 +50,7 @@ import org.sola.webservices.transferobjects.digitalarchive.FileInfoTO;
  * @author amcdowell
  * @see MockResponse
  */
-public class MockDigitalArchiveClient extends AbstractMockWSClient implements DigitalArchiveClient {
+public class MockDigitalArchiveClient extends AbstractMockWSClient { // implements DigitalArchiveClient {
 
     private static final String SERVICE_NAME = "DigitalArchive.";
     public static final String CHECK_CONNECTION = SERVICE_NAME + "checkConnection";
@@ -68,75 +68,75 @@ public class MockDigitalArchiveClient extends AbstractMockWSClient implements Di
         super(url, null);
     }
 
-    /** @return default = true */
-    @Override
-    public boolean checkConnection() {
-        return getManager().getResponse(CHECK_CONNECTION, Boolean.class, true);
-    }
-
-    /** @return default = new DocumentTO with id set */
-    @Override
-    public DocumentBinaryTO getDocument(String documentId) {
-        DocumentBinaryTO defaultResponse = new DocumentBinaryTO();
-        defaultResponse.setId(documentId);
-        return getManager().getResponse(GET_DOCUMENT, DocumentBinaryTO.class, defaultResponse, documentId);
-    }
-
-    /** @return default = true */
-    @Override
-    public DocumentTO saveDocument(DocumentTO documentTO) {
-        DocumentTO defaultResponse = new DocumentTO();
-        return getManager().getResponse(SAVE_DOCUMENT, DocumentTO.class, defaultResponse, documentTO);
-    }
-
-    /** @return default = newDocumentId */
-    @Override
-    public DocumentTO createDocument(DocumentBinaryTO documentBinaryTO) {
-        DocumentTO defaultResponse = new DocumentTO();
-        return getManager().getResponse(CREATE_DOCUMENT, DocumentTO.class, defaultResponse, documentBinaryTO);
-    }
-
-    /** @return default = newDocumentId */
-    @Override
-    public DocumentTO createDocumentFromServer(DocumentTO documentTO, String fileName) {
-        DocumentTO defaultResponse = new DocumentTO();
-        return getManager().getResponse(CREATE_DOCUMENT_FROM_SERVER, DocumentTO.class, defaultResponse,
-                documentTO, fileName);
-    }
-
-    /** @return default = new FileBinaryTO */
-    @Override
-    public FileBinaryTO getFileBinary(String fileName) {
-        FileBinaryTO defaultResponse = new FileBinaryTO();
-        return getManager().getResponse(GET_FILE_BINARY, FileBinaryTO.class, defaultResponse,
-                fileName);
-
-    }
-
-    /** @return default = new FileBinaryTO */
-    @Override
-    public FileBinaryTO getFileThumbnail(String fileName) {
-        FileBinaryTO defaultResponse = new FileBinaryTO();
-        return getManager().getResponse(GET_FILE_THUMBNAIL, FileBinaryTO.class, defaultResponse,
-                fileName);
-    }
-
-    /** @return default = new ArrayList<FileInfoTO> */
-    @Override
-    public List<FileInfoTO> getAllFiles() {
-        List<FileInfoTO> defaultResponse = new ArrayList<FileInfoTO>();
-        return getManager().getResponse(GET_ALL_FILES, List.class, defaultResponse);
-    }
-
-    /** @return default = true */
-    @Override
-    public boolean deleteFile(String fileName) {
-        return getManager().getResponse(DELETE_FILE, Boolean.class, true, fileName);
-    }
-
-    /** @return default = true */
-    @Override
-    public boolean rotateImage(String fileName, int angle) {
-        return getManager().getResponse(ROTATE_IMAGE, Boolean.class, true, fileName, angle);
-    }
+//    /** @return default = true */
+//    @Override
+//    public boolean checkConnection() {
+//        return getManager().getResponse(CHECK_CONNECTION, Boolean.class, true);
+//    }
+//
+//    /** @return default = new DocumentTO with id set */
+//    @Override
+//    public DocumentBinaryTO getDocument(String documentId) {
+//        DocumentBinaryTO defaultResponse = new DocumentBinaryTO();
+//        defaultResponse.setId(documentId);
+//        return getManager().getResponse(GET_DOCUMENT, DocumentBinaryTO.class, defaultResponse, documentId);
+//    }
+//
+//    /** @return default = true */
+//    @Override
+//    public DocumentTO saveDocument(DocumentTO documentTO) {
+//        DocumentTO defaultResponse = new DocumentTO();
+//        return getManager().getResponse(SAVE_DOCUMENT, DocumentTO.class, defaultResponse, documentTO);
+//    }
+//
+//    /** @return default = newDocumentId */
+//    @Override
+//    public DocumentTO createDocument(DocumentBinaryTO documentBinaryTO) {
+//        DocumentTO defaultResponse = new DocumentTO();
+//        return getManager().getResponse(CREATE_DOCUMENT, DocumentTO.class, defaultResponse, documentBinaryTO);
+//    }
+//
+//    /** @return default = newDocumentId */
+//    @Override
+//    public DocumentTO createDocumentFromServer(DocumentTO documentTO, String fileName) {
+//        DocumentTO defaultResponse = new DocumentTO();
+//        return getManager().getResponse(CREATE_DOCUMENT_FROM_SERVER, DocumentTO.class, defaultResponse,
+//                documentTO, fileName);
+//    }
+//
+//    /** @return default = new FileBinaryTO */
+//    @Override
+//    public FileBinaryTO getFileBinary(String fileName) {
+//        FileBinaryTO defaultResponse = new FileBinaryTO();
+//        return getManager().getResponse(GET_FILE_BINARY, FileBinaryTO.class, defaultResponse,
+//                fileName);
+//
+//    }
+//
+//    /** @return default = new FileBinaryTO */
+//    @Override
+//    public FileBinaryTO getFileThumbnail(String fileName) {
+//        FileBinaryTO defaultResponse = new FileBinaryTO();
+//        return getManager().getResponse(GET_FILE_THUMBNAIL, FileBinaryTO.class, defaultResponse,
+//                fileName);
+//    }
+//
+//    /** @return default = new ArrayList<FileInfoTO> */
+//    @Override
+//    public List<FileInfoTO> getAllFiles() {
+//        List<FileInfoTO> defaultResponse = new ArrayList<FileInfoTO>();
+//        return getManager().getResponse(GET_ALL_FILES, List.class, defaultResponse);
+//    }
+//
+//    /** @return default = true */
+//    @Override
+//    public boolean deleteFile(String fileName) {
+//        return getManager().getResponse(DELETE_FILE, Boolean.class, true, fileName);
+//    }
+//
+//    /** @return default = true */
+//    @Override
+//    public boolean rotateImage(String fileName, int angle) {
+//        return getManager().getResponse(ROTATE_IMAGE, Boolean.class, true, fileName, angle);
+//    }
 }

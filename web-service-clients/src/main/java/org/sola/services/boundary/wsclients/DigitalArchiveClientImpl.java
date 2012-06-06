@@ -1,28 +1,26 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO).
- * All rights reserved.
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO). All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted
+ * provided that the following conditions are met:
  *
- *    1. Redistributions of source code must retain the above copyright notice,this list
- *       of conditions and the following disclaimer.
- *    2. Redistributions in binary form must reproduce the above copyright notice,this list
- *       of conditions and the following disclaimer in the documentation and/or other
- *       materials provided with the distribution.
- *    3. Neither the name of FAO nor the names of its contributors may be used to endorse or
- *       promote products derived from this software without specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this list of conditions
+ * and the following disclaimer. 2. Redistributions in binary form must reproduce the above
+ * copyright notice,this list of conditions and the following disclaimer in the documentation and/or
+ * other materials provided with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this software without
+ * specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT
- * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+ * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.wsclients;
@@ -30,140 +28,166 @@ package org.sola.services.boundary.wsclients;
 import java.util.List;
 import javax.xml.namespace.QName;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
-import org.sola.services.boundary.wsclients.exception.WebServiceClientExceptionType;
 import org.sola.webservices.digitalarchive.DigitalArchive;
 import org.sola.webservices.digitalarchive.DigitalarchiveService;
 import org.sola.webservices.transferobjects.digitalarchive.FileBinaryTO;
 import org.sola.webservices.transferobjects.digitalarchive.FileInfoTO;
 import org.sola.webservices.transferobjects.digitalarchive.DocumentTO;
-import org.sola.webservices.digitalarchive.OptimisticLockingFault;
-import org.sola.webservices.digitalarchive.SOLAFault;
-import org.sola.webservices.digitalarchive.UnhandledFault;
 import org.sola.webservices.transferobjects.digitalarchive.DocumentBinaryTO;
 
+/**
+ * Implementation class for the {@linkplain DigitalArchiveClient} interface.
+ */
 public class DigitalArchiveClientImpl extends AbstractWSClientImpl implements DigitalArchiveClient {
 
     private static final String NAMESPACE_URI = "http://webservices.sola.org/digitalarchive";
     private static final String LOCAL_PART = "digitalarchive-service";
-    private static final String SERVICE_NAME = "DigitalArchive.";
-    
-    public DigitalArchiveClientImpl(String url){
+
+    /**
+     * Creates a web service client class for the web service hosted at the specified URL
+     *
+     * @param url The location of the service WSDL
+     */
+    public DigitalArchiveClientImpl(String url) {
         super(url, new QName(NAMESPACE_URI, LOCAL_PART));
     }
-    
-     private DigitalArchive getPort() {
+
+    private DigitalArchive getPort() {
         return getPort(DigitalArchive.class, DigitalarchiveService.class);
     }
-    
+
     @Override
-    public boolean checkConnection() {
-        final String inputService = SERVICE_NAME + "checkConnection";
+    public boolean checkConnection() throws WebServiceClientException {
+        boolean result = false;
+        final String methodName = DigitalArchiveClient.CHECK_CONNECTION;
         try {
-            boolean result = getPort().checkConnection();
-            return result;
-        } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return  false;
+            beforeWebMethod(methodName);
+            result = getPort().checkConnection();
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result);
         }
+        return result;
     }
-     
+
     @Override
     public DocumentBinaryTO getDocument(String documentId) {
-        final String inputService = SERVICE_NAME + "getDocument";
+        DocumentBinaryTO result = null;
+        final String methodName = DigitalArchiveClient.GET_DOCUMENT;
         try {
-            return getPort().getDocument(documentId);
-        } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return null;
+            beforeWebMethod(methodName, documentId);
+            result = getPort().getDocument(documentId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, documentId);
         }
+        return result;
     }
 
     @Override
     public DocumentTO saveDocument(DocumentTO documentTO) {
-        final String inputService = SERVICE_NAME + "saveDocument";
+        DocumentTO result = null;
+        final String methodName = DigitalArchiveClient.SAVE_DOCUMENT;
         try {
-            return getPort().saveDocument(documentTO);
-         } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return null;
+            beforeWebMethod(methodName, documentTO);
+            result = getPort().saveDocument(documentTO);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, documentTO);
         }
+        return result;
     }
 
     @Override
     public DocumentTO createDocument(DocumentBinaryTO documentBinaryTO) {
-        final String inputService = SERVICE_NAME + "createDocument";
+        DocumentTO result = null;
+        final String methodName = DigitalArchiveClient.CREATE_DOCUMENT;
         try {
-            return getPort().createDocument(documentBinaryTO);
-        } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return null;
+            beforeWebMethod(methodName, documentBinaryTO);
+            result = getPort().createDocument(documentBinaryTO);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, documentBinaryTO);
         }
+        return result;
     }
 
     @Override
     public DocumentTO createDocumentFromServer(DocumentTO documentTO, String fileName) {
-        final String inputService = SERVICE_NAME + "createDocumentFromServer";
+        DocumentTO result = null;
+        final String methodName = DigitalArchiveClient.CREATE_DOCUMENT_FROM_SERVER;
         try {
-            return getPort().createDocumentFromServer(documentTO, fileName);
-        } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return null;
+            beforeWebMethod(methodName, documentTO, fileName);
+            result = getPort().createDocumentFromServer(documentTO, fileName);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, documentTO, fileName);
         }
+        return result;
     }
 
     @Override
     public FileBinaryTO getFileBinary(String fileName) {
-        final String inputService = SERVICE_NAME + "getFileBinary";
+        FileBinaryTO result = null;
+        final String methodName = DigitalArchiveClient.GET_FILE_BINARY;
         try {
-            return getPort().getFileBinary(fileName);
-         } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return null;
+            beforeWebMethod(methodName, fileName);
+            result = getPort().getFileBinary(fileName);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, fileName);
         }
+        return result;
     }
 
     @Override
     public FileBinaryTO getFileThumbnail(String fileName) {
-        final String inputService = SERVICE_NAME + "getFileThumbnail";
+        FileBinaryTO result = null;
+        final String methodName = DigitalArchiveClient.GET_FILE_THUMBNAIL;
         try {
-            return getPort().getFileThumbnail(fileName);
-         } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return null;
+            beforeWebMethod(methodName, fileName);
+            result = getPort().getFileThumbnail(fileName);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, fileName);
         }
+        return result;
     }
 
     @Override
     public List<FileInfoTO> getAllFiles() {
-        final String inputService = SERVICE_NAME + "getAllFiles";
+        List<FileInfoTO> result = null;
+        final String methodName = DigitalArchiveClient.GET_ALL_FILES;
         try {
-            return getPort().getAllFiles();
-        } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return null;
+            beforeWebMethod(methodName);
+            result = getPort().getAllFiles();
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result);
         }
+        return result;
     }
 
     @Override
     public boolean deleteFile(String fileName) {
-        final String inputService = SERVICE_NAME + "deleteFile";
+        boolean result = false;
+        final String methodName = DigitalArchiveClient.DELETE_FILE;
         try {
-            return getPort().deleteFile(fileName);
-        } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return  false;
+            beforeWebMethod(methodName, fileName);
+            result = getPort().deleteFile(fileName);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, fileName);
         }
+        return result;
     }
-
-    @Override
-    public boolean rotateImage(String fileName, int angle) {
-        final String inputService = SERVICE_NAME + "rotateImage";
-        try {
-            return getPort().rotateImage(fileName, angle);
-        } catch (Throwable e) {
-           handleExceptionsMethod(inputService,e);
-           return  false;
-        }
-    }
-    
 }

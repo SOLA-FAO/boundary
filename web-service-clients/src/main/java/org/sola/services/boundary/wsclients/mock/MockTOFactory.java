@@ -31,11 +31,8 @@
  */
 package org.sola.services.boundary.wsclients.mock;
 
-import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map.Entry;
-import org.sola.services.boundary.wsclients.exception.MockResponseException;
 import org.sola.webservices.transferobjects.AbstractCodeTO;
 import org.sola.webservices.transferobjects.referencedata.ApplicationActionTypeTO;
 import org.sola.webservices.transferobjects.referencedata.ApplicationStatusTypeTO;

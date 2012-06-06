@@ -75,9 +75,8 @@ public class Development {
         // Valid service connection
         System.out.println("Valid Service Connection - Case Management");
         String url = "http://localhost:8080/sola/webservices/casemanagement-service?wsdl";
-        CaseManagementClient result = WSClientFactory.getCaseManagementClient(url);
-        //CaseManagementClient result = WSManager.getInstance().initWebServices(url, userPassword, null)
-        result.setCredentials("test", "test".toCharArray());
+        CaseManagementClient result = WSManager.getInstance().getWSClient(
+                CaseManagementClientImpl.class, url, "test", "test".toCharArray());
         System.out.print("Checking connection:");
         System.out.println(result.checkConnection());
 
@@ -98,8 +97,8 @@ public class Development {
         // Valid service connection
         System.out.println("Valid Service Connection - Case Management");
         String url = "http://localhost:8080/sola/webservices/cadastre-service?wsdl";
-        CadastreClient result = WSClientFactory.getCadastreClient(url);
-        result.setCredentials("test", "test".toCharArray());
+        CadastreClient result = WSManager.getInstance().getWSClient(
+                CadastreClientImpl.class, url, "test", "test".toCharArray());
         System.out.print("Checking connection:");
                 System.out.println(result.checkConnection());
 
@@ -112,21 +111,21 @@ public class Development {
     }        
     
     @Test
-    //@Ignore
+    @Ignore
     public void testSearch() {
         System.out.println("test search");
 
         // Valid service connection
         System.out.println("Valid Service Connection - Case Management");
         String url = "http://localhost:8080/sola/webservices/search-service?wsdl";
-        SearchClient result = WSClientFactory.getSearchClient(url);
-        result.setCredentials("test", "test".toCharArray());
+        SearchClient result = WSManager.getInstance().getWSClient(
+                SearchClientImpl.class, url, "test", "test".toCharArray());
         System.out.print("Checking connection:");
                 System.out.println(result.checkConnection());
 
-                GenericResult res = result.test();
-        System.out.println("test");
-        System.out.println("result:" + res);
+//               GenericResult res = result.test();
+//        System.out.println("test");
+//        System.out.println("result:" + res);
         
     }        
 
@@ -138,10 +137,10 @@ public class Development {
         // Valid service connection
         System.out.println("Valid Service Connection - Administrative");
         String url = "http://localhost:8080/sola/webservices/administrative-service?wsdl";
-        AdministrativeClient result = WSClientFactory.getAdministrativeClient(url);
-        result.setCredentials("test", "test".toCharArray());
+        AdministrativeClient result = WSManager.getInstance().getWSClient(
+                AdministrativeClientImpl.class, url, "test", "test".toCharArray());
         System.out.print("Checking connection:");
-                System.out.println(result.CheckConnection());
+                System.out.println(result.checkConnection());
 
     }        
 }

@@ -29,7 +29,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.sola.services.boundary.wsclients.exception;
+package  org.sola.services.boundary.wsclients.mock;
 
 /**
  * Exception to indicate the mock response type is not compatible with the return type of the

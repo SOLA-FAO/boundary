@@ -44,6 +44,9 @@ import org.sola.services.ejb.search.repository.entities.*;
 import org.sola.services.ejb.search.spatial.QueryForSelect;
 import org.sola.services.ejb.search.spatial.ResultForSelectionInfo;
 
+/**
+ * Web Service Boundary class to expose {@linkplain org.sola.services.ejb.search.businesslogic.SearchEJB} methods.
+ */
 @WebService(serviceName = "search-service", targetNamespace = ServiceConstants.SEARCH_WS_NAMESPACE)
 public class Search extends AbstractWebService {
 
@@ -53,22 +56,33 @@ public class Search extends AbstractWebService {
     private WebServiceContext wsContext;
 
     /**
-     * Dummy method to check the web service instance is working
+     * Web method that can be used to validate if the web service is available.
+     *
+     * @return Always true
      */
     @WebMethod(operationName = "CheckConnection")
     public boolean CheckConnection() {
         return true;
     }
 
+    /**
+     * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#getPropertyVerifier(java.lang.String, java.lang.String, java.lang.String)
+     * SearchEJB.getPropertyVerifier}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "VerifyApplicationProperty")
     public PropertyVerifierTO VerifyApplicationProperty(
             @WebParam(name = "applicationNumber") final String applicationNumber,
             @WebParam(name = "firstPart") final String firstPart,
-            @WebParam(name = "lastPart") final String lastPart) throws SOLAFault, UnhandledFault {
+            @WebParam(name = "lastPart") final String lastPart) throws SOLAFault, UnhandledFault,
+            SOLAAccessFault {
 
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -82,14 +96,22 @@ public class Search extends AbstractWebService {
         return (PropertyVerifierTO) result[0];
     }
 
+    /**
+     * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#getUnassignedApplications(java.lang.String)
+     * SearchEJB.getUnassignedApplications}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetUnassignedApplications")
     public List<ApplicationSearchResultTO> GetUnassignedApplications(
-            @WebParam(name = "locale") String locale) throws SOLAFault, UnhandledFault {
+            @WebParam(name = "locale") String locale) throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String localeTmp = locale;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -102,14 +124,22 @@ public class Search extends AbstractWebService {
         return (List<ApplicationSearchResultTO>) result[0];
     }
 
+    /**
+     * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#getAssignedApplications(java.lang.String)
+     * SearchEJB.getAssignedApplications}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetAssignedApplications")
     public List<ApplicationSearchResultTO> GetAssignedApplications(@WebParam(name = "locale") String locale)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String localeTmp = locale;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -122,15 +152,23 @@ public class Search extends AbstractWebService {
         return (List<ApplicationSearchResultTO>) result[0];
     }
 
+    /**
+     * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#searchApplications(org.sola.services.ejb.search.repository.entities.ApplicationSearchParams)
+     * SearchEJB.searchApplications}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "SearchApplications")
     public List<ApplicationSearchResultTO> SearchApplications(
             @WebParam(name = "ApplicationSearchParamsTO") ApplicationSearchParamsTO paramsTO)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final ApplicationSearchParamsTO paramsTOTmp = paramsTO;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -144,14 +182,22 @@ public class Search extends AbstractWebService {
         return (List<ApplicationSearchResultTO>) result[0];
     }
 
+    /**
+     * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#getSpatialResultFromSelection(java.util.List)
+     * SearchEJB.getSpatialResultFromSelection}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "Select")
     public List<ResultForSelectionInfo> Select(List<QueryForSelect> queries)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final List<QueryForSelect> queriesTmp = queries;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -162,15 +208,23 @@ public class Search extends AbstractWebService {
         return (List<ResultForSelectionInfo>) result[0];
     }
 
+    /**
+     * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#searchParties(org.sola.services.ejb.search.repository.entities.PartySearchParams)
+     * SearchEJB.searchParties}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "SearchParties")
     public List<PartySearchResultTO> searchParties(
             @WebParam(name = "searchParams") PartySearchParamsTO searchParams)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final PartySearchParamsTO searchParamsTmp = searchParams;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -184,15 +238,23 @@ public class Search extends AbstractWebService {
         return (List<PartySearchResultTO>) result[0];
     }
 
+    /**
+     * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#searchSources(org.sola.services.ejb.search.repository.entities.SourceSearchParams)
+     * SearchEJB.searchSources}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "SearchSources")
     public List<SourceSearchResultTO> searchSources(
             @WebParam(name = "searchParams") SourceSearchParamsTO searchParams)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final SourceSearchParamsTO searchParamsTmp = searchParams;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -207,12 +269,20 @@ public class Search extends AbstractWebService {
         return (List<SourceSearchResultTO>) result[0];
     }
 
+    /**
+     * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#getActiveUsers()
+     * SearchEJB.getActiveUsers}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetActiveUsers")
-    public List<UserSearchResultTO> getActiveUsers() throws SOLAFault, UnhandledFault {
+    public List<UserSearchResultTO> getActiveUsers() throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -225,13 +295,22 @@ public class Search extends AbstractWebService {
         return (List<UserSearchResultTO>) result[0];
     }
 
+    /**
+     * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#searchUsers(org.sola.services.ejb.search.repository.entities.UserSearchParams)
+     * SearchEJB.searchUsers}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "searchUsers")
-    public List<UserSearchAdvancedResultTO> searchUsers(@WebParam(name = "searchParams") UserSearchParamsTO searchParams) throws SOLAFault, UnhandledFault {
+    public List<UserSearchAdvancedResultTO> searchUsers(@WebParam(name = "searchParams") UserSearchParamsTO searchParams)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final UserSearchParamsTO searchParamsTmp = searchParams;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -246,13 +325,22 @@ public class Search extends AbstractWebService {
         return (List<UserSearchAdvancedResultTO>) result[0];
     }
 
+    /**
+     * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#getApplicationLog(java.lang.String)
+     * SearchEJB.getApplicationLog}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "getApplicationLog")
-    public List<ApplicationLogResultTO> getApplicationLog(@WebParam(name = "applicationId") String applicationId) throws SOLAFault, UnhandledFault {
+    public List<ApplicationLogResultTO> getApplicationLog(@WebParam(name = "applicationId") String applicationId)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String applicationIdTmp = applicationId;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -265,6 +353,14 @@ public class Search extends AbstractWebService {
         return (List<ApplicationLogResultTO>) result[0];
     }
 
+    /**
+     * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#searchBr(org.sola.services.ejb.search.repository.entities.BrSearchParams, java.lang.String)
+     * SearchEJB.searchBr}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "SearchBr")
     public List<BrSearchResultTO> searchBr(@WebParam(name = "searchParams") BrSearchParamsTO searchParams,
             @WebParam(name = "lang") String lang)
@@ -273,7 +369,7 @@ public class Search extends AbstractWebService {
         final Object[] params = {searchParams, lang};
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -290,6 +386,14 @@ public class Search extends AbstractWebService {
         return (List<BrSearchResultTO>) result[0];
     }
 
+    /**
+     * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#searchBaUnits(org.sola.services.ejb.search.repository.entities.BaUnitSearchParams)
+     * SearchEJB.searchBaUnits}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "searchBaUnit")
     public List<BaUnitSearchResultTO> searchBaUnit(@WebParam(name = "searchParams") BaUnitSearchParamsTO searchParams)
             throws SOLAFault, UnhandledFault, SOLAAccessFault {
@@ -297,7 +401,7 @@ public class Search extends AbstractWebService {
         final Object[] params = {searchParams};
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -314,6 +418,14 @@ public class Search extends AbstractWebService {
         return (List<BaUnitSearchResultTO>) result[0];
     }
 
+    /**
+     * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#getSpatialSearchOptions(java.lang.String)
+     * SearchEJB.getSpatialSearchOptions}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetSpatialSearchOptions")
     public List<SpatialSearchOptionTO> GetSpatialSearchOptions(
             @WebParam(name = "languageCode") String languageCode)
@@ -322,7 +434,7 @@ public class Search extends AbstractWebService {
         final String languageCodeTmp = languageCode;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -334,6 +446,14 @@ public class Search extends AbstractWebService {
         return (List<SpatialSearchOptionTO>) result[0];
     }
 
+    /**
+     * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#searchSpatialObjects(java.lang.String, java.lang.String)
+     * SearchEJB.searchSpatialObjects}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "SearchSpatialObjects")
     public List<SpatialSearchResultTO> SearchSpatialObjects(
             @WebParam(name = "queryName") String queryName,
@@ -344,7 +464,7 @@ public class Search extends AbstractWebService {
         final String searchStringTmp = searchString;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -354,23 +474,5 @@ public class Search extends AbstractWebService {
             }
         });
         return (List<SpatialSearchResultTO>) result[0];
-    }
-
-    @WebMethod(operationName = "Test")
-    public GenericResult Test(@WebParam(name = "lang") String lang)
-            throws SOLAFault, UnhandledFault, SOLAAccessFault {
-
-        final String langTmp = lang;
-        final Object[] result = {null};
-
-        runGeneralMethod(wsContext, new Runnable() {
-
-            @Override
-            public void run() {
-                result[0] = searchEJB.getGenericResultList("test", null);
-            }
-        });
-
-        return (GenericResult) result[0];
     }
 }

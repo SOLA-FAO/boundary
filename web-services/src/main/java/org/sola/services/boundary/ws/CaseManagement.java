@@ -1,30 +1,26 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations
- * (FAO). All rights reserved.
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO). All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted
+ * provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice,this
- * list of conditions and the following disclaimer. 2. Redistributions in binary
- * form must reproduce the above copyright notice,this list of conditions and
- * the following disclaimer in the documentation and/or other materials provided
- * with the distribution. 3. Neither the name of FAO nor the names of its
- * contributors may be used to endorse or promote products derived from this
- * software without specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this list of conditions
+ * and the following disclaimer. 2. Redistributions in binary form must reproduce the above
+ * copyright notice,this list of conditions and the following disclaimer in the documentation and/or
+ * other materials provided with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this software without
+ * specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
- * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+ * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.ws;
@@ -71,8 +67,11 @@ import org.sola.services.ejb.source.repository.entities.Source;
 import org.sola.services.ejb.system.businesslogic.SystemEJBLocal;
 
 /**
- *
- * @author soladev
+ * Web Service Boundary class to expose Case Management functionality available on  
+ * {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB}, 
+ * {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB}, 
+ * {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB} and
+ * {@linkplain org.sola.services.ejb.address.businesslogic.AddressEJB}. 
  */
 @WebService(serviceName = "casemanagement-service", targetNamespace = ServiceConstants.CASE_MAN_WS_NAMESPACE)
 public class CaseManagement extends AbstractWebService {
@@ -91,21 +90,33 @@ public class CaseManagement extends AbstractWebService {
     private WebServiceContext wsContext;
 
     /**
-     * Dummy method to check the web service instance is working
+     * Web method that can be used to validate if the web service is available.
+     *
+     * @return Always true
      */
     @WebMethod(operationName = "CheckConnection")
     public boolean CheckConnection() {
         return true;
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#createApplication(org.sola.services.ejb.application.repository.entities.Application)
+     * ApplicationEJB.createApplication}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
     @WebMethod(operationName = "CreateApplication")
     public ApplicationTO CreateApplication(@WebParam(name = "application") ApplicationTO application)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault, OptimisticLockingFault, SOLAValidationFault {
 
         final Object[] params = {application};
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -122,6 +133,16 @@ public class CaseManagement extends AbstractWebService {
         return (ApplicationTO) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#saveApplication(org.sola.services.ejb.application.repository.entities.Application)
+     * ApplicationEJB.saveApplication}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "SaveApplication")
     public ApplicationTO SaveApplication(@WebParam(name = "application") ApplicationTO application)
             throws SOLAFault, UnhandledFault, OptimisticLockingFault,
@@ -130,7 +151,7 @@ public class CaseManagement extends AbstractWebService {
         final Object[] params = {application};
         final Object[] result = {null};
 
-        runUpdateMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -148,6 +169,16 @@ public class CaseManagement extends AbstractWebService {
         return (ApplicationTO) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#saveSource(org.sola.services.ejb.source.repository.entities.Source)
+     * SourceEJB#saveSource}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "saveSource")
     public SourceTO saveSource(@WebParam(name = "sourceTO") final SourceTO sourceTO)
             throws SOLAFault, UnhandledFault, OptimisticLockingFault,
@@ -155,7 +186,7 @@ public class CaseManagement extends AbstractWebService {
 
         final Object[] result = {null};
 
-        runUpdateMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -170,7 +201,17 @@ public class CaseManagement extends AbstractWebService {
 
         return (SourceTO) result[0];
     }
-    
+
+    /**
+     * See {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB#saveParty(org.sola.services.ejb.party.repository.entities.Party)
+     * PartyEJB#saveParty}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
     @WebMethod(operationName = "SaveParty")
     public PartyTO SaveParty(@WebParam(name = "party") PartyTO party)
             throws SOLAFault, UnhandledFault, SOLAAccessFault,
@@ -179,7 +220,7 @@ public class CaseManagement extends AbstractWebService {
         final Object[] params = {party};
         final Object[] result = {null};
 
-        runUpdateMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -197,15 +238,23 @@ public class CaseManagement extends AbstractWebService {
         return (PartyTO) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getLodgementView(org.sola.services.ejb.application.repository.entities.LodgementViewParams)
+     * ApplicationEJB.getLodgementView}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetLodgementView")
     public List<LodgementViewTO> getLodgementView(
             @WebParam(name = "LodgementViewParamsTO") LodgementViewParamsTO paramsTO)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final LodgementViewParamsTO paramsTOTmp = paramsTO;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -218,15 +267,23 @@ public class CaseManagement extends AbstractWebService {
         return (List<LodgementViewTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getLodgementTiming(org.sola.services.ejb.application.repository.entities.LodgementViewParams)
+     * ApplicationEJB.getLodgementTiming}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetLodgementTiming")
     public List<LodgementTimingTO> getLodgementTiming(
             @WebParam(name = "LodgementViewParamsTO") LodgementViewParamsTO paramsTO)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final LodgementViewParamsTO paramsTOTmp = paramsTO;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -239,13 +296,22 @@ public class CaseManagement extends AbstractWebService {
         return (List<LodgementTimingTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.address.businesslogic.AddressEJB#getAddress(java.lang.String)
+     * AddressEJB.getAddress}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetAddress")
-    public AddressTO GetAddress(@WebParam(name = "id") String id) throws SOLAFault, UnhandledFault {
+    public AddressTO GetAddress(@WebParam(name = "id") String id) throws SOLAFault, UnhandledFault,
+            SOLAAccessFault {
 
         final String idTmp = id;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -257,14 +323,22 @@ public class CaseManagement extends AbstractWebService {
         return (AddressTO) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getApplication(java.lang.String)
+     * ApplicationEJB.getApplication}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetApplication")
     public ApplicationTO GetApplication(@WebParam(name = "id") String id)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String idTmp = id;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -276,13 +350,21 @@ public class CaseManagement extends AbstractWebService {
         return (ApplicationTO) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB#getParty(java.lang.String)
+     * PartyEJB.getParty}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetParty")
-    public PartyTO GetParty(@WebParam(name = "id") String id) throws SOLAFault, UnhandledFault {
+    public PartyTO GetParty(@WebParam(name = "id") String id) throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String idTmp = id;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -293,12 +375,20 @@ public class CaseManagement extends AbstractWebService {
         return (PartyTO) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB#getAgents()
+     * PartyEJB.getAgents}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetAgents")
-    public List<PartySummaryTO> GetAgents() throws SOLAFault, UnhandledFault {
+    public List<PartySummaryTO> GetAgents() throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -310,18 +400,26 @@ public class CaseManagement extends AbstractWebService {
         return (List<PartySummaryTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getUserActions(java.lang.String, java.util.Date, java.util.Date)
+     * ApplicationEJB.getUserActions}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetUserActions")
     public List<ApplicationLogTO> getUserActions(@WebParam(name = "userName") String user,
             @WebParam(name = "from") Date from,
             @WebParam(name = "to") Date to)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String userTmp = user;
         final Date fromTmp = from;
         final Date toTmp = to;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -334,14 +432,22 @@ public class CaseManagement extends AbstractWebService {
         return (List<ApplicationLogTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#calculateFeesAndDates(org.sola.services.ejb.application.repository.entities.Application)
+     * ApplicationEJB.calculateFeesAndDates}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "CalculateFee")
     public ApplicationTO CalculateFee(@WebParam(name = "application") ApplicationTO application)
-            throws SOLAFault, UnhandledFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final ApplicationTO applicationTmp = application;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -355,6 +461,16 @@ public class CaseManagement extends AbstractWebService {
         return (ApplicationTO) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#attachSourceToTransaction(java.lang.String, java.lang.String, java.lang.String)
+     * SourceEJB.attachSourceToTransaction}
+     *
+     * @throws SOLAValidationFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "AttachSourceToTransaction")
     public SourceTO AttachSourceToTransaction(
             @WebParam(name = "serviceId") String serviceId,
@@ -368,7 +484,7 @@ public class CaseManagement extends AbstractWebService {
 
         final Object[] result = {null};
 
-        runUpdateMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -381,15 +497,26 @@ public class CaseManagement extends AbstractWebService {
         return (SourceTO) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#dettachSourceFromTransaction(java.lang.String)
+     * SourceEJB.dettachSourceFromTransaction}
+     *
+     * @throws SOLAValidationFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "DettachSourceFromTransaction")
     public boolean DettachSourceFromTransaction(
             @WebParam(name = "sourceId") String sourceId)
-            throws SOLAValidationFault, OptimisticLockingFault, SOLAFault, UnhandledFault {
+            throws SOLAValidationFault, OptimisticLockingFault, SOLAFault, UnhandledFault,
+            SOLAAccessFault {
 
         final String sourceIdTmp = sourceId;
         final boolean[] result = {false};
 
-        runBooleanMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -400,14 +527,23 @@ public class CaseManagement extends AbstractWebService {
         return result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#getSourcesByServiceId(java.lang.String)
+     * SourceEJB.getSourcesByServiceId}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetSourcesByServiceId")
     public List<SourceTO> GetSourcesByServiceId(
-            @WebParam(name = "serviceId") String serviceId) throws SOLAFault, UnhandledFault {
+            @WebParam(name = "serviceId") String serviceId) throws SOLAFault, UnhandledFault,
+            SOLAAccessFault {
 
         final String serviceIdTmp = serviceId;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -420,14 +556,23 @@ public class CaseManagement extends AbstractWebService {
         return (List<SourceTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#getSourcesByIds(java.util.List)
+     * SourceEJB.getSourcesByIds}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetSourcesByIds")
     public List<SourceTO> GetSourcesByIds(
-            @WebParam(name = "sourceIds") List<String> sourceIds) throws SOLAFault, UnhandledFault {
+            @WebParam(name = "sourceIds") List<String> sourceIds) throws SOLAFault, UnhandledFault,
+            SOLAAccessFault {
 
         final List<String> sourceIdsTmp = sourceIds;
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -440,13 +585,22 @@ public class CaseManagement extends AbstractWebService {
         return (List<SourceTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#getSourceById(java.lang.String)
+     * SourceEJB.getSourceById}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "getSourceById")
     public SourceTO getSourceById(
-            @WebParam(name = "id") final String sourceId) throws SOLAFault, UnhandledFault {
+            @WebParam(name = "id") final String sourceId) throws SOLAFault, UnhandledFault,
+            SOLAAccessFault {
 
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -457,7 +611,17 @@ public class CaseManagement extends AbstractWebService {
 
         return (SourceTO) result[0];
     }
-    
+
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#serviceActionComplete(java.lang.String, java.lang.String, int)
+     * ApplicationEJB.serviceActionComplete}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
     @WebMethod(operationName = "ServiceActionComplete")
     public List<ValidationResult> ServiceActionComplete(
             @WebParam(name = "serviceId") String serviceId,
@@ -471,7 +635,7 @@ public class CaseManagement extends AbstractWebService {
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
-        runUpdateMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -483,6 +647,16 @@ public class CaseManagement extends AbstractWebService {
         return (List<ValidationResult>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#serviceActionCancel(java.lang.String, java.lang.String, int)
+     * ApplicationEJB.serviceActionCancel}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
     @WebMethod(operationName = "ServiceActionCancel")
     public List<ValidationResult> ServiceActionCancel(
             @WebParam(name = "serviceId") String serviceId,
@@ -496,7 +670,7 @@ public class CaseManagement extends AbstractWebService {
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
-        runUpdateMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -508,6 +682,16 @@ public class CaseManagement extends AbstractWebService {
         return (List<ValidationResult>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#serviceActionRevert(java.lang.String, java.lang.String, int)
+     * ApplicationEJB.serviceActionRevert}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
     @WebMethod(operationName = "ServiceActionRevert")
     public List<ValidationResult> ServiceActionRevert(
             @WebParam(name = "serviceId") String serviceId,
@@ -521,7 +705,7 @@ public class CaseManagement extends AbstractWebService {
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
-        runUpdateMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -533,6 +717,16 @@ public class CaseManagement extends AbstractWebService {
         return (List<ValidationResult>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#serviceActionStart(java.lang.String, java.lang.String, int)
+     * ApplicationEJB.serviceActionStart}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
     @WebMethod(operationName = "ServiceActionStart")
     public List<ValidationResult> ServiceActionStart(
             @WebParam(name = "serviceId") String serviceId,
@@ -546,7 +740,7 @@ public class CaseManagement extends AbstractWebService {
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
-        runUpdateMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -558,6 +752,16 @@ public class CaseManagement extends AbstractWebService {
         return (List<ValidationResult>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#applicationActionWithdraw(java.lang.String, java.lang.String, int)
+     * ApplicationEJB.applicationActionWithdraw}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
     @WebMethod(operationName = "ApplicationActionWithdraw")
     public List<ValidationResult> ApplicationActionWithdraw(
             @WebParam(name = "applicationId") String applicationId,
@@ -571,7 +775,7 @@ public class CaseManagement extends AbstractWebService {
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
-        runUpdateMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -583,6 +787,16 @@ public class CaseManagement extends AbstractWebService {
         return (List<ValidationResult>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#applicationActionCancel(java.lang.String, java.lang.String, int)
+     * ApplicationEJB.applicationActionCancel}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
     @WebMethod(operationName = "ApplicationActionCancel")
     public List<ValidationResult> ApplicationActionCancel(
             @WebParam(name = "applicationId") String applicationId,
@@ -596,7 +810,7 @@ public class CaseManagement extends AbstractWebService {
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
-        runUpdateMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -608,6 +822,16 @@ public class CaseManagement extends AbstractWebService {
         return (List<ValidationResult>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#applicationActionRequisition(java.lang.String, java.lang.String, int)
+     * ApplicationEJB.applicationActionRequisition}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
     @WebMethod(operationName = "ApplicationActionRequisition")
     public List<ValidationResult> ApplicationActionRequisition(
             @WebParam(name = "applicationId") String applicationId,
@@ -621,7 +845,7 @@ public class CaseManagement extends AbstractWebService {
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
-        runUpdateMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -633,6 +857,16 @@ public class CaseManagement extends AbstractWebService {
         return (List<ValidationResult>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#applicationActionValidate(java.lang.String, java.lang.String, int)
+     * ApplicationEJB.applicationActionValidate}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
     @WebMethod(operationName = "ApplicationActionValidate")
     public List<ValidationResult> ApplicationActionValidate(
             @WebParam(name = "applicationId") String applicationId,
@@ -646,7 +880,7 @@ public class CaseManagement extends AbstractWebService {
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
-        runUpdateMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -658,6 +892,16 @@ public class CaseManagement extends AbstractWebService {
         return (List<ValidationResult>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#applicationActionApprove(java.lang.String, java.lang.String, int)
+     * ApplicationEJB.applicationActionApprove}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
     @WebMethod(operationName = "ApplicationActionApprove")
     public List<ValidationResult> ApplicationActionApprove(
             @WebParam(name = "applicationId") String applicationId,
@@ -671,7 +915,7 @@ public class CaseManagement extends AbstractWebService {
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
-        runUpdateMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -683,6 +927,16 @@ public class CaseManagement extends AbstractWebService {
         return (List<ValidationResult>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#applicationActionArchive(java.lang.String, java.lang.String, int)
+     * ApplicationEJB.applicationActionArchive}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
     @WebMethod(operationName = "ApplicationActionArchive")
     public List<ValidationResult> ApplicationActionArchive(
             @WebParam(name = "applicationId") String applicationId,
@@ -696,7 +950,7 @@ public class CaseManagement extends AbstractWebService {
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
-        runUpdateMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -708,6 +962,16 @@ public class CaseManagement extends AbstractWebService {
         return (List<ValidationResult>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#applicationActionDespatch(java.lang.String, java.lang.String, int)
+     * ApplicationEJB.applicationActionDespatch}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
     @WebMethod(operationName = "ApplicationActionDespatch")
     public List<ValidationResult> ApplicationActionDespatch(
             @WebParam(name = "applicationId") String applicationId,
@@ -721,7 +985,7 @@ public class CaseManagement extends AbstractWebService {
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
-        runUpdateMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -733,6 +997,16 @@ public class CaseManagement extends AbstractWebService {
         return (List<ValidationResult>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#applicationActionLapse(java.lang.String, java.lang.String, int)
+     * ApplicationEJB.applicationActionLapse}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
     @WebMethod(operationName = "ApplicationActionLapse")
     public List<ValidationResult> ApplicationActionLapse(
             @WebParam(name = "applicationId") String applicationId,
@@ -746,7 +1020,7 @@ public class CaseManagement extends AbstractWebService {
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
-        runUpdateMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -758,6 +1032,16 @@ public class CaseManagement extends AbstractWebService {
         return (List<ValidationResult>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#applicationActionUnassign(java.lang.String, java.lang.String, int)
+     * ApplicationEJB.applicationActionUnassign}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
     @WebMethod(operationName = "ApplicationActionUnassign")
     public List<ValidationResult> ApplicationActionUnassign(
             @WebParam(name = "applicationId") String applicationId,
@@ -771,7 +1055,7 @@ public class CaseManagement extends AbstractWebService {
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
-        runUpdateMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -783,6 +1067,16 @@ public class CaseManagement extends AbstractWebService {
         return (List<ValidationResult>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#applicationActionAssign(java.lang.String, java.lang.String, java.lang.String, int)
+     * ApplicationEJB.applicationActionAssign}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
     @WebMethod(operationName = "ApplicationActionAssign")
     public List<ValidationResult> ApplicationActionAssign(
             @WebParam(name = "applicationId") String applicationId,
@@ -798,7 +1092,7 @@ public class CaseManagement extends AbstractWebService {
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
-        runUpdateMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -810,6 +1104,16 @@ public class CaseManagement extends AbstractWebService {
         return (List<ValidationResult>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#applicationActionResubmit(java.lang.String, java.lang.String, int)
+     * ApplicationEJB.applicationActionResubmit}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
     @WebMethod(operationName = "ApplicationActionResubmit")
     public List<ValidationResult> ApplicationActionResubmit(
             @WebParam(name = "applicationId") String applicationId,
@@ -823,7 +1127,7 @@ public class CaseManagement extends AbstractWebService {
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
 
-        runUpdateMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -835,12 +1139,20 @@ public class CaseManagement extends AbstractWebService {
         return (List<ValidationResult>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.system.businesslogic.SystemEJB#getAllBrs()
+     * SystemEJB.getAllBrs}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetAllBrs")
-    public List<BrReportTO> GetAllBrs() throws SOLAFault, UnhandledFault {
+    public List<BrReportTO> GetAllBrs() throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final Object[] result = {null};
 
-        runGeneralMethod(wsContext, new Runnable() {
+        runGeneralQuery(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -852,6 +1164,16 @@ public class CaseManagement extends AbstractWebService {
         return (List<BrReportTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#saveInformationService(org.sola.services.ejb.application.repository.entities.Service, java.lang.String)
+     * ApplicationEJB.saveInformationService}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
     @WebMethod(operationName = "SaveInformationService")
     public ServiceTO SaveInformationService(
             @WebParam(name = "service") ServiceTO service,
@@ -863,7 +1185,7 @@ public class CaseManagement extends AbstractWebService {
         final ServiceTO serviceTmp = service;
         final Object[] result = {null};
 
-        runUpdateMethod(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {

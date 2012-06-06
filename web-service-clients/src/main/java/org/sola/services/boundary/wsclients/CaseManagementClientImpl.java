@@ -1,30 +1,26 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations
- * (FAO). All rights reserved.
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO). All rights
+ * reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted
+ * provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice,this
- * list of conditions and the following disclaimer. 2. Redistributions in binary
- * form must reproduce the above copyright notice,this list of conditions and
- * the following disclaimer in the documentation and/or other materials provided
- * with the distribution. 3. Neither the name of FAO nor the names of its
- * contributors may be used to endorse or promote products derived from this
- * software without specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this list of conditions
+ * and the following disclaimer. 2. Redistributions in binary form must reproduce the above
+ * copyright notice,this list of conditions and the following disclaimer in the documentation and/or
+ * other materials provided with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this software without
+ * specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
- * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+ * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.wsclients;
@@ -40,14 +36,17 @@ import org.sola.webservices.transferobjects.casemanagement.*;
 /**
  * Implementation class for the {@linkplain CaseManagementClient} interface.
  *
- * @author amcdowell
  */
 public class CaseManagementClientImpl extends AbstractWSClientImpl implements CaseManagementClient {
 
     private static final String NAMESPACE_URI = "http://webservices.sola.org/casemanagement";
     private static final String LOCAL_PART = "casemanagement-service";
-    private static final String SERVICE_NAME = "CaseManagement.";
 
+    /**
+     * Creates a web service client class for the web service hosted at the specified URL
+     *
+     * @param url The location of the service WSDL
+     */
     public CaseManagementClientImpl(String url) {
         super(url, new QName(NAMESPACE_URI, LOCAL_PART));
     }
@@ -58,417 +57,548 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
 
     @Override
     public boolean checkConnection() throws WebServiceClientException {
+        boolean result = false;
+        final String methodName = CaseManagementClient.CHECK_CONNECTION;
         try {
-            boolean result = getPort().checkConnection();
-            return result;
-        } catch (Throwable t) {
-            throw processException(SERVICE_NAME + "checkConnection", t);
+            beforeWebMethod(methodName);
+            result = getPort().checkConnection();
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result);
         }
+        return result;
     }
 
     @Override
     public ApplicationTO createApplication(ApplicationTO application)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "createApplication";
+        ApplicationTO result = null;
+        final String methodName = CaseManagementClient.CREATE_APPLICATION;
         try {
-            ApplicationTO result = getPort().createApplication(application);
-            return result;
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, application);
+            result = getPort().createApplication(application);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, application);
         }
+        return result;
     }
 
     @Override
     public ApplicationTO saveApplication(ApplicationTO application)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "saveApplication";
+        ApplicationTO result = null;
+        final String methodName = CaseManagementClient.SAVE_APPLICATION;
         try {
-            ApplicationTO result = getPort().saveApplication(application);
-            return result;
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, application);
+            result = getPort().saveApplication(application);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, application);
         }
+        return result;
     }
 
     @Override
     public List<LodgementViewTO> getLodgementView(LodgementViewParamsTO lodgementViewParamsTO) throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "getLodgementView";
+        List<LodgementViewTO> result = null;
+        final String methodName = CaseManagementClient.GET_LODGEMENT_VIEW;
         try {
-            List<LodgementViewTO> result = getPort().getLodgementView(lodgementViewParamsTO);
-            return result;
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, lodgementViewParamsTO);
+            result = getPort().getLodgementView(lodgementViewParamsTO);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, lodgementViewParamsTO);
         }
+        return result;
     }
 
     @Override
     public List<LodgementTimingTO> getLodgementTiming(LodgementViewParamsTO lodgementViewParamsTO) throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "getLodgementTiming";
+        List<LodgementTimingTO> result = null;
+        final String methodName = CaseManagementClient.GET_LODGEMENT_TIMING;
         try {
-            List<LodgementTimingTO> result = getPort().getLodgementTiming(lodgementViewParamsTO);
-            return result;
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, lodgementViewParamsTO);
+            result = getPort().getLodgementTiming(lodgementViewParamsTO);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, lodgementViewParamsTO);
         }
+        return result;
     }
 
     @Override
     public List<BrReportTO> getAllBrs() throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "getBrReport";
+        List<BrReportTO> result = null;
+        final String methodName = CaseManagementClient.GET_ALL_BRS;
         try {
-            List<BrReportTO> result = getPort().getAllBrs();
-            return result;
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName);
+            result = getPort().getAllBrs();
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result);
         }
+        return result;
     }
 
     @Override
     public AddressTO getAddress(String id) throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "getAddress";
+        AddressTO result = null;
+        final String methodName = CaseManagementClient.GET_ADDRESS;
         try {
-            AddressTO result = getPort().getAddress(id);
-            return result;
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, id);
+            result = getPort().getAddress(id);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, id);
         }
+        return result;
     }
 
     @Override
     public ApplicationTO getApplication(String id) throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "getApplication";
+        ApplicationTO result = null;
+        final String methodName = CaseManagementClient.GET_APPLICATION;
         try {
-            ApplicationTO result = getPort().getApplication(id);
-            return result;
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, id);
+            result = getPort().getApplication(id);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, id);
         }
+        return result;
     }
 
     @Override
     public PartyTO getParty(String id) throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "getParty";
+        PartyTO result = null;
+        final String methodName = CaseManagementClient.GET_PARTY;
         try {
-            PartyTO result = getPort().getParty(id);
-            return result;
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, id);
+            result = getPort().getParty(id);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, id);
         }
+        return result;
     }
 
     @Override
     public List<PartySummaryTO> getAgents() throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "getAgents";
+        List<PartySummaryTO> result = null;
+        final String methodName = CaseManagementClient.GET_AGENTS;
         try {
-            List<PartySummaryTO> result = getPort().getAgents();
-            return result;
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName);
+            result = getPort().getAgents();
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result);
         }
+        return result;
     }
 
     @Override
     public ApplicationTO calculateFee(ApplicationTO application) throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "calculateFee";
+        ApplicationTO result = null;
+        final String methodName = CaseManagementClient.CALCULATE_FEE;
         try {
-            ApplicationTO result = getPort().calculateFee(application);
-            return result;
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, application);
+            result = getPort().calculateFee(application);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, application);
         }
+        return result;
     }
 
     @Override
     public PartyTO saveParty(PartyTO party)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "saveParty";
+        PartyTO result = null;
+        final String methodName = CaseManagementClient.SAVE_PARTY;
         try {
-            PartyTO result = getPort().saveParty(party);
-            return result;
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, party);
+            result = getPort().saveParty(party);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, party);
         }
+        return result;
     }
 
     @Override
     public SourceTO attachSourceToTransaction(String serviceId, String sourceId)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "attachSourceToTransaction";
+        SourceTO result = null;
+        final String methodName = CaseManagementClient.ATTACH_SOURCE_TO_TRANSACTION;
+        String languageCode = getLanguageCode();
         try {
-            return getPort().attachSourceToTransaction(serviceId, sourceId, this.getLanguageCode());
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, serviceId, sourceId, languageCode);
+            result = getPort().attachSourceToTransaction(serviceId, sourceId, languageCode);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, serviceId, sourceId, languageCode);
         }
+        return result;
     }
 
     @Override
     public boolean dettachSourceFromTransaction(String sourceId) throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "attachSourceToTransaction";
+        boolean result = false;
+        final String methodName = CaseManagementClient.DETTACH_SOURCE_FROM_TRANSACTION;
         try {
-            return getPort().dettachSourceFromTransaction(sourceId);
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return false;
+            beforeWebMethod(methodName, sourceId);
+            result = getPort().dettachSourceFromTransaction(sourceId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, sourceId);
         }
+        return result;
     }
 
     @Override
     public List<SourceTO> getSourcesByServiceId(String serviceId) throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "getAgents";
+        List<SourceTO> result = null;
+        final String methodName = CaseManagementClient.GET_SOURCES_BY_SERVICE_ID;
         try {
-            return getPort().getSourcesByServiceId(serviceId);
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, serviceId);
+            result = getPort().getSourcesByServiceId(serviceId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, serviceId);
         }
+        return result;
     }
 
     @Override
     public List<SourceTO> getSourcesByIds(List<String> sourceIds) throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "getSourcesByIds";
+        List<SourceTO> result = null;
+        final String methodName = CaseManagementClient.GET_SOURCES_BY_IDS;
         try {
-            return getPort().getSourcesByIds(sourceIds);
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, sourceIds);
+            result = getPort().getSourcesByIds(sourceIds);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, sourceIds);
         }
+        return result;
     }
 
     @Override
     public List<ValidationResult> serviceActionComplete(String serviceId, int rowVersion)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "serviceActionComplete";
+        List<ValidationResult> result = null;
+        final String methodName = CaseManagementClient.SERVICE_ACTION_COMPLETE;
+        String languageCode = getLanguageCode();
         try {
-            return getPort().serviceActionComplete(serviceId, this.getLanguageCode(), rowVersion);
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, serviceId, languageCode, rowVersion);
+            result = getPort().serviceActionComplete(serviceId, languageCode, rowVersion);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, serviceId, languageCode, rowVersion);
         }
+        return result;
     }
 
     @Override
     public List<ValidationResult> serviceActionRevert(String serviceId, int rowVersion)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "serviceActionRevert";
+        List<ValidationResult> result = null;
+        final String methodName = CaseManagementClient.SERVICE_ACTION_REVERT;
+        String languageCode = getLanguageCode();
         try {
-            return getPort().serviceActionRevert(serviceId, this.getLanguageCode(), rowVersion);
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, serviceId, languageCode, rowVersion);
+            result = getPort().serviceActionRevert(serviceId, languageCode, rowVersion);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, serviceId, languageCode, rowVersion);
         }
+        return result;
     }
 
     @Override
     public List<ValidationResult> serviceActionStart(String serviceId, int rowVersion)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "serviceActionStart";
+        List<ValidationResult> result = null;
+        final String methodName = CaseManagementClient.SERVICE_ACTION_START;
+        String languageCode = getLanguageCode();
         try {
-            return getPort().serviceActionStart(serviceId, this.getLanguageCode(), rowVersion);
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, serviceId, languageCode, rowVersion);
+            result = getPort().serviceActionStart(serviceId, languageCode, rowVersion);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, serviceId, languageCode, rowVersion);
         }
+        return result;
     }
 
     @Override
     public List<ValidationResult> serviceActionCancel(String serviceId, int rowVersion)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "serviceActionCancel";
+        List<ValidationResult> result = null;
+        final String methodName = CaseManagementClient.SERVICE_ACTION_CANCEL;
+        String languageCode = getLanguageCode();
         try {
-            return getPort().serviceActionCancel(serviceId, this.getLanguageCode(), rowVersion);
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, serviceId, languageCode, rowVersion);
+            result = getPort().serviceActionCancel(serviceId, languageCode, rowVersion);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, serviceId, languageCode, rowVersion);
         }
+        return result;
     }
 
     @Override
     public List<ValidationResult> applicationActionApprove(String applicationId, int rowVersion)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "applicationActionApprove";
+        List<ValidationResult> result = null;
+        final String methodName = CaseManagementClient.APPLICATION_ACTION_APPROVE;
+        String languageCode = getLanguageCode();
         try {
-            return getPort().applicationActionApprove(
-                    applicationId, this.getLanguageCode(), rowVersion);
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, applicationId, languageCode, rowVersion);
+            result = getPort().applicationActionApprove(applicationId, languageCode, rowVersion);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, applicationId, languageCode, rowVersion);
         }
+        return result;
     }
 
     @Override
     public List<ValidationResult> applicationActionArchive(String applicationId, int rowVersion)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "applicationActionArchive";
+        List<ValidationResult> result = null;
+        final String methodName = CaseManagementClient.APPLICATION_ACTION_ARCHIVE;
+        String languageCode = getLanguageCode();
         try {
-            return getPort().applicationActionArchive(
-                    applicationId, this.getLanguageCode(), rowVersion);
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, applicationId, languageCode, rowVersion);
+            result = getPort().applicationActionArchive(applicationId, languageCode, rowVersion);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, applicationId, languageCode, rowVersion);
         }
+        return result;
     }
 
     @Override
     public List<ValidationResult> applicationActionAssign(
             String applicationId, String userId, int rowVersion)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "applicationActionAssign";
+        List<ValidationResult> result = null;
+        final String methodName = CaseManagementClient.APPLICATION_ACTION_ASSIGN;
+        String languageCode = getLanguageCode();
         try {
-            return getPort().applicationActionAssign(
-                    applicationId, userId, this.getLanguageCode(), rowVersion);
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, applicationId, userId, languageCode, rowVersion);
+            result = getPort().applicationActionAssign(applicationId, userId, languageCode, rowVersion);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, applicationId, userId, languageCode, rowVersion);
         }
+        return result;
     }
 
     @Override
     public List<ValidationResult> applicationActionCancel(String applicationId, int rowVersion)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "applicationActionCancel";
+        List<ValidationResult> result = null;
+        final String methodName = CaseManagementClient.APPLICATION_ACTION_CANCEL;
+        String languageCode = getLanguageCode();
         try {
-            return getPort().applicationActionCancel(
-                    applicationId, this.getLanguageCode(), rowVersion);
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, applicationId, languageCode, rowVersion);
+            result = getPort().applicationActionCancel(applicationId, languageCode, rowVersion);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, applicationId, languageCode, rowVersion);
         }
+        return result;
     }
 
     @Override
     public List<ValidationResult> applicationActionDespatch(String applicationId, int rowVersion)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "applicationActionDespatch";
+        List<ValidationResult> result = null;
+        final String methodName = CaseManagementClient.APPLICATION_ACTION_DESPATCH;
+        String languageCode = getLanguageCode();
         try {
-            return getPort().applicationActionDespatch(
-                    applicationId, this.getLanguageCode(), rowVersion);
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, applicationId, languageCode, rowVersion);
+            result = getPort().applicationActionDespatch(applicationId, languageCode, rowVersion);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, applicationId, languageCode, rowVersion);
         }
+        return result;
     }
 
     @Override
     public List<ValidationResult> applicationActionLapse(String applicationId, int rowVersion)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "applicationActionLapse";
+        List<ValidationResult> result = null;
+        final String methodName = CaseManagementClient.APPLICATION_ACTION_LAPSE;
+        String languageCode = getLanguageCode();
         try {
-            return getPort().applicationActionLapse(
-                    applicationId, this.getLanguageCode(), rowVersion);
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, applicationId, languageCode, rowVersion);
+            result = getPort().applicationActionLapse(applicationId, languageCode, rowVersion);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, applicationId, languageCode, rowVersion);
         }
+        return result;
     }
 
     @Override
     public List<ValidationResult> applicationActionRequisition(String applicationId, int rowVersion)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "applicationActionRequisition";
+        List<ValidationResult> result = null;
+        final String methodName = CaseManagementClient.APPLICATION_ACTION_REQUISITION;
+        String languageCode = getLanguageCode();
         try {
-            return getPort().applicationActionRequisition(
-                    applicationId, this.getLanguageCode(), rowVersion);
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, applicationId, languageCode, rowVersion);
+            result = getPort().applicationActionRequisition(applicationId, languageCode, rowVersion);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, applicationId, languageCode, rowVersion);
         }
+        return result;
     }
 
     @Override
     public List<ValidationResult> applicationActionResubmit(String applicationId, int rowVersion)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "applicationActionResubmit";
+        List<ValidationResult> result = null;
+        final String methodName = CaseManagementClient.APPLICATION_ACTION_RESUBMIT;
+        String languageCode = getLanguageCode();
         try {
-            return getPort().applicationActionResubmit(
-                    applicationId, this.getLanguageCode(), rowVersion);
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, applicationId, languageCode, rowVersion);
+            result = getPort().applicationActionResubmit(applicationId, languageCode, rowVersion);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, applicationId, languageCode, rowVersion);
         }
+        return result;
     }
 
     @Override
     public List<ValidationResult> applicationActionUnassign(String applicationId, int rowVersion)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "applicationActionUnassign";
+        List<ValidationResult> result = null;
+        final String methodName = CaseManagementClient.APPLICATION_ACTION_UNASSIGN;
+        String languageCode = getLanguageCode();
         try {
-            return getPort().applicationActionUnassign(
-                    applicationId, this.getLanguageCode(), rowVersion);
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, applicationId, languageCode, rowVersion);
+            result = getPort().applicationActionUnassign(applicationId, languageCode, rowVersion);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, applicationId, languageCode, rowVersion);
         }
+        return result;
     }
 
     @Override
     public List<ValidationResult> applicationActionValidate(String applicationId, int rowVersion)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "applicationActionValidate";
+        List<ValidationResult> result = null;
+        final String methodName = CaseManagementClient.APPLICATION_ACTION_VALIDATE;
+        String languageCode = getLanguageCode();
         try {
-            return getPort().applicationActionValidate(
-                    applicationId, this.getLanguageCode(), rowVersion);
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, applicationId, languageCode, rowVersion);
+            result = getPort().applicationActionValidate(applicationId, languageCode, rowVersion);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, applicationId, languageCode, rowVersion);
         }
+        return result;
     }
 
     @Override
     public List<ValidationResult> applicationActionWithdraw(String applicationId, int rowVersion)
             throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "applicationActionWithdraw";
+        List<ValidationResult> result = null;
+        final String methodName = CaseManagementClient.APPLICATION_ACTION_WITHDRAW;
+        String languageCode = getLanguageCode();
         try {
-            return getPort().applicationActionWithdraw(
-                    applicationId, this.getLanguageCode(), rowVersion);
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, applicationId, languageCode, rowVersion);
+            result = getPort().applicationActionWithdraw(applicationId, languageCode, rowVersion);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, applicationId, languageCode, rowVersion);
         }
+        return result;
     }
 
     @Override
     public ServiceTO saveInformationService(ServiceTO service) throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "saveInformationService";
+        ServiceTO result = null;
+        final String methodName = CaseManagementClient.SAVE_INFORMATION_SERVICE;
+        String languageCode = getLanguageCode();
         try {
-            return getPort().saveInformationService(
-                    service, this.getLanguageCode());
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, service, languageCode);
+            result = getPort().saveInformationService(service, languageCode);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, service, languageCode);
         }
+        return result;
     }
 
     @Override
     public SourceTO saveSource(SourceTO sourceTO) {
-        final String inputService = SERVICE_NAME + "saveSource";
+        SourceTO result = null;
+        final String methodName = CaseManagementClient.SAVE_SOURCE;
         try {
-            return getPort().saveSource(sourceTO);
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, sourceTO);
+            result = getPort().saveSource(sourceTO);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, sourceTO);
         }
+        return result;
     }
 
     @Override
     public SourceTO getSourceById(String sourceId) throws WebServiceClientException {
-        final String inputService = SERVICE_NAME + "getSourceById";
+        SourceTO result = null;
+        final String methodName = CaseManagementClient.GET_SOURCE_BY_ID;
         try {
-            return getPort().getSourceById(sourceId);
-        } catch (Throwable e) {
-            handleExceptionsMethod(inputService, e);
-            return null;
+            beforeWebMethod(methodName, sourceId);
+            result = getPort().getSourceById(sourceId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, sourceId);
         }
+        return result;
     }
 }
