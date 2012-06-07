@@ -23,50 +23,51 @@
  * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.sola.services.boundary.wsclients.mock;
 
-import javax.xml.namespace.QName;
-import org.sola.services.boundary.wsclients.AbstractWSClientImpl;
+import org.sola.services.boundary.wsclients.CadastreClient;
+import org.sola.services.boundary.wsclients.CadastreClientImpl;
+import org.sola.webservices.cadastre.Cadastre;
 
 /**
- * Ancestor class to be used by all mock web service clients.
+ * Mock implementation of the {@linkplain CadastreClient} interface that extends the
+ * {@linkplain CadastreClientImpl}, overriding the getPort method to return a mock port object - {@linkplain MockCadastrePort}.
  *
+ * <p> Allows testing of the {@linkplain CadastreClientImpl} and classes dependent on the
+ * {@linkplain CadastreClient} interface without deploying the SOLA web services </p>
+ *
+ * @see CadastreClient
+ * @see CadastreClientImpl
+ * @see MockCadastrePort
  * @see MockServiceManager
- * @see MockCaseManagementClient
- * @author amcdowell
  */
-public class AbstractMockWSClient extends AbstractWSClientImpl {
+public class MockCadastreClient extends CadastreClientImpl implements CadastreClient {
 
-    public static final String DEFAULT_MOCK_ID = "defaultMockId";
-
-    public AbstractMockWSClient(String url, QName qName) {
-        super(url, qName);
-    }
+    private MockCadastrePort port = new MockCadastrePort();
 
     /**
-     * Provides access to the {@linkplain MockServiceManager} instance
+     * Constructor for the mock class.
      */
-    public MockServiceManager getManager() {
-        return MockServiceManager.getInstance();
+    public MockCadastreClient() {
+        // The URL is irrelevant for the mock client class
+        super("");
     }
 
     /**
-     * Overridden to help avoid leakage of password details during testing. i.e. Credential details
-     * are not saved.
+     * Overrides the default getPort method on {@linkplain CadastreClientImpl} to return a mock port
+     * object - {@linkplain MockCadastrePort}.
+     */
+    @Override
+    protected Cadastre getPort() {
+        return port;
+    }
+
+    /**
+     * Overridden to help avoid leakage of password details during testing. i.e. Only username is
+     * saved.
      */
     @Override
     public void setCredentials(String userName, char[] password) {
-    }
-
-    /**
-     * @return Always returns true to indicate a valid connection. 
-     */
-    @Override
-    public boolean checkConnection() {
-        return true;
+        super.setCredentials(userName, null);
     }
 }

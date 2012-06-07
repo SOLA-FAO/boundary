@@ -74,7 +74,7 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
         super(url, new QName(NAMESPACE_URI, LOCAL_PART));
     }
 
-    private ReferenceData getPort() {
+    protected ReferenceData getPort() {
         return getPort(ReferenceData.class, ReferencedataService.class);
     }
 

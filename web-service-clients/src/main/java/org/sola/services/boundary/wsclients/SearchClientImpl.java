@@ -51,7 +51,7 @@ public class SearchClientImpl extends AbstractWSClientImpl implements SearchClie
         super(url, new QName(NAMESPACE_URI, LOCAL_PART));
     }
 
-    private Search getPort() {
+    protected Search getPort() {
         return getPort(Search.class, SearchService.class);
     }
 

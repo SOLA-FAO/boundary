@@ -52,7 +52,7 @@ public class DigitalArchiveClientImpl extends AbstractWSClientImpl implements Di
         super(url, new QName(NAMESPACE_URI, LOCAL_PART));
     }
 
-    private DigitalArchive getPort() {
+    protected DigitalArchive getPort() {
         return getPort(DigitalArchive.class, DigitalarchiveService.class);
     }
 

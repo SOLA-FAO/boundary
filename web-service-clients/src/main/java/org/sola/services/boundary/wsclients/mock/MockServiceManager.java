@@ -23,10 +23,6 @@
  * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.sola.services.boundary.wsclients.mock;
 
 import java.util.HashMap;
@@ -131,18 +127,35 @@ public class MockServiceManager {
     /**
      * Sets the flag indicating that a mock service should be used (
      * <code>true</code>) or not (
-     * <code>false</code>). Also creates the mock services on the WSManager
+     * <code>false</code>). If
+     * <code>true</code>, the mock services are created on the WSManager. If
+     * <code>false</code>, the services cached on the WSManager are cleared so that they can be
+     * re-initialized if necessary.
      *
      * @param mockService
      */
     public void setMockServices(boolean mockService) {
         this.mockService = mockService;
-        WSManager.getInstance().setAdminWS(new MockAdminClient());
-//        WSManager.getInstance().setCaseManagementWS(new MockCaseManagementClient(""));
-//        WSManager.getInstance().setDigitalArchiveWS(new MockDigitalArchiveClient(""));
-//        WSManager.getInstance().setReferenceWS(new MockReferenceDataClient(""));
-//        WSManager.getInstance().setSearchWS(new MockSearchClient(""));
-//        WSManager.getInstance().setSpatialWS(new MockSpatialClient(""));
+        if (mockService) {
+            WSManager.getInstance().setAdminWS(new MockAdminClient());
+            WSManager.getInstance().setCaseManagementWS(new MockCaseManagementClient());
+            WSManager.getInstance().setDigitalArchiveWS(new MockDigitalArchiveClient());
+            WSManager.getInstance().setReferenceWS(new MockReferenceDataClient());
+            WSManager.getInstance().setSearchWS(new MockSearchClient());
+            WSManager.getInstance().setSpatialWS(new MockSpatialClient());
+            WSManager.getInstance().setCadastreWS(new MockCadastreClient());
+            WSManager.getInstance().setAdministrativeWS(new MockAdministrativeClient());
+        } else {
+            WSManager.getInstance().setAdminWS(null);
+            WSManager.getInstance().setCaseManagementWS(null);
+            WSManager.getInstance().setDigitalArchiveWS(null);
+            WSManager.getInstance().setReferenceWS(null);
+            WSManager.getInstance().setSearchWS(null);
+            WSManager.getInstance().setSpatialWS(null);
+            WSManager.getInstance().setCadastreWS(null);
+            WSManager.getInstance().setAdministrativeWS(null);
+        }
+
     }
 
     /**

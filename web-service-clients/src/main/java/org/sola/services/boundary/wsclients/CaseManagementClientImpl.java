@@ -26,6 +26,7 @@
 package org.sola.services.boundary.wsclients;
 
 import java.util.List;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.casemanagement.CaseManagement;
@@ -51,7 +52,7 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         super(url, new QName(NAMESPACE_URI, LOCAL_PART));
     }
 
-    private CaseManagement getPort() {
+    protected CaseManagement getPort() {
         return getPort(CaseManagement.class, CasemanagementService.class);
     }
 
@@ -598,6 +599,22 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
             processException(methodName, e);
         } finally {
             afterWebMethod(methodName, result, sourceId);
+        }
+        return result;
+    }
+
+    @Override
+    public List<ApplicationLogTO> getUserActions(String userName, XMLGregorianCalendar from, XMLGregorianCalendar to)
+            throws WebServiceClientException {
+        List<ApplicationLogTO> result = null;
+        final String methodName = CaseManagementClient.GET_USER_ACTIONS;
+        try {
+            beforeWebMethod(methodName, userName, from, to);
+            result = getPort().getUserActions(userName, from, to);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, userName, from, to);
         }
         return result;
     }

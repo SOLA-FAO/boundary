@@ -26,6 +26,7 @@
 package org.sola.services.boundary.wsclients;
 
 import java.util.List;
+import javax.xml.datatype.XMLGregorianCalendar;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.casemanagement.*;
@@ -92,11 +93,13 @@ public interface CaseManagementClient extends AbstractWSClient {
      */
     public static final String SAVE_PARTY = SERVICE_NAME + "saveParty";
     /**
-     * CaseManagement.attachSourceToTransaction - Identifier for the attachSourceToTransaction method
+     * CaseManagement.attachSourceToTransaction - Identifier for the attachSourceToTransaction
+     * method
      */
     public static final String ATTACH_SOURCE_TO_TRANSACTION = SERVICE_NAME + "attachSourceToTransaction";
     /**
-     * CaseManagement.dettachSourceFromTransaction - Identifier for the dettachSourceFromTransaction method
+     * CaseManagement.dettachSourceFromTransaction - Identifier for the dettachSourceFromTransaction
+     * method
      */
     public static final String DETTACH_SOURCE_FROM_TRANSACTION = SERVICE_NAME + "dettachSourceFromTransaction";
     /**
@@ -128,7 +131,8 @@ public interface CaseManagementClient extends AbstractWSClient {
      */
     public static final String SERVICE_ACTION_CANCEL = SERVICE_NAME + "serviceActionCancel";
     /**
-     * CaseManagement.applicationActionWithdraw - Identifier for the applicationActionWithdraw method
+     * CaseManagement.applicationActionWithdraw - Identifier for the applicationActionWithdraw
+     * method
      */
     public static final String APPLICATION_ACTION_WITHDRAW = SERVICE_NAME + "applicationActionWithdraw";
     /**
@@ -136,11 +140,13 @@ public interface CaseManagementClient extends AbstractWSClient {
      */
     public static final String APPLICATION_ACTION_CANCEL = SERVICE_NAME + "applicationActionCancel";
     /**
-     * CaseManagement.applicationActionRequisition - Identifier for the applicationActionRequisition method
+     * CaseManagement.applicationActionRequisition - Identifier for the applicationActionRequisition
+     * method
      */
     public static final String APPLICATION_ACTION_REQUISITION = SERVICE_NAME + "applicationActionRequisition";
     /**
-     * CaseManagement.applicationActionValidate - Identifier for the applicationActionValidate method
+     * CaseManagement.applicationActionValidate - Identifier for the applicationActionValidate
+     * method
      */
     public static final String APPLICATION_ACTION_VALIDATE = SERVICE_NAME + "applicationActionValidate";
     /**
@@ -152,7 +158,8 @@ public interface CaseManagementClient extends AbstractWSClient {
      */
     public static final String APPLICATION_ACTION_ARCHIVE = SERVICE_NAME + "applicationActionArchive";
     /**
-     * CaseManagement.applicationActionDespatch - Identifier for the applicationActionDespatch method
+     * CaseManagement.applicationActionDespatch - Identifier for the applicationActionDespatch
+     * method
      */
     public static final String APPLICATION_ACTION_DESPATCH = SERVICE_NAME + "applicationActionDespatch";
     /**
@@ -160,7 +167,8 @@ public interface CaseManagementClient extends AbstractWSClient {
      */
     public static final String APPLICATION_ACTION_LAPSE = SERVICE_NAME + "applicationActionLapse";
     /**
-     * CaseManagement.applicationActionUnassign - Identifier for the applicationActionUnassign method
+     * CaseManagement.applicationActionUnassign - Identifier for the applicationActionUnassign
+     * method
      */
     public static final String APPLICATION_ACTION_UNASSIGN = SERVICE_NAME + "applicationActionUnassign";
     /**
@@ -168,7 +176,8 @@ public interface CaseManagementClient extends AbstractWSClient {
      */
     public static final String APPLICATION_ACTION_ASSIGN = SERVICE_NAME + "applicationActionAssign";
     /**
-     * CaseManagement.applicationActionResubmit - Identifier for the applicationActionResubmit method
+     * CaseManagement.applicationActionResubmit - Identifier for the applicationActionResubmit
+     * method
      */
     public static final String APPLICATION_ACTION_RESUBMIT = SERVICE_NAME + "applicationActionResubmit";
     /**
@@ -179,6 +188,10 @@ public interface CaseManagementClient extends AbstractWSClient {
      * CaseManagement.saveSource - Identifier for the saveSource method
      */
     public static final String SAVE_SOURCE = SERVICE_NAME + "saveSource";
+    /**
+     * CaseManagement.getUserActions - Identifier for the getUserActions method
+     */
+    public static final String GET_USER_ACTIONS = SERVICE_NAME + "getUserActions";
 
     ApplicationTO calculateFee(ApplicationTO application) throws WebServiceClientException;
 
@@ -261,4 +274,7 @@ public interface CaseManagementClient extends AbstractWSClient {
     ServiceTO saveInformationService(ServiceTO service) throws WebServiceClientException;
 
     SourceTO saveSource(SourceTO sourceTO);
+
+    List<ApplicationLogTO> getUserActions(String userName, XMLGregorianCalendar from, XMLGregorianCalendar to)
+            throws WebServiceClientException;
 }

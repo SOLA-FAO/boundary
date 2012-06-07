@@ -53,7 +53,7 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
         super(url, new QName(NAMESPACE_URI, LOCAL_PART));
     }
 
-    private Cadastre getPort() {
+    protected Cadastre getPort() {
         return getPort(Cadastre.class, CadastreService.class);
     }
 

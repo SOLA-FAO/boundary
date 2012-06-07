@@ -41,7 +41,6 @@ import org.sola.webservices.admin.Admin;
  * @see AdminClientImpl
  * @see MockAdminPort
  * @see MockServiceManager
- * @author soladev
  */
 public class MockAdminClient extends AdminClientImpl implements AdminClient {
 

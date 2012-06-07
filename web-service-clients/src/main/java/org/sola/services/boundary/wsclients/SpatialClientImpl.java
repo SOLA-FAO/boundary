@@ -50,7 +50,7 @@ public class SpatialClientImpl extends AbstractWSClientImpl implements SpatialCl
         super(url, new QName(NAMESPACE_URI, LOCAL_PART));
     }
 
-    private Spatial getPort() {
+    protected Spatial getPort() {
         return getPort(Spatial.class, SpatialService.class);
     }
 

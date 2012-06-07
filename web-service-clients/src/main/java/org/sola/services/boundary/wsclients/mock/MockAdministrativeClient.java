@@ -25,41 +25,41 @@
  */
 package org.sola.services.boundary.wsclients.mock;
 
-import org.sola.services.boundary.wsclients.SearchClient;
-import org.sola.services.boundary.wsclients.SearchClientImpl;
-import org.sola.webservices.search.Search;
+import org.sola.services.boundary.wsclients.AdministrativeClient;
+import org.sola.services.boundary.wsclients.AdministrativeClientImpl;
+import org.sola.webservices.administrative.Administrative;
 
 /**
- * Mock implementation of the {@linkplain SearchClient} interface that extends the
- * {@linkplain SearchClientImpl}, overriding the getPort method to return a mock port object
- * - {@linkplain MockSearchPort}.
+ * Mock implementation of the {@linkplain AdministrativeClient} interface that extends the
+ * {@linkplain AdministrativeClientImpl}, overriding the getPort method to return a mock port object
+ * - {@linkplain MockAdministrativePort}.
  *
- * <p> Allows testing of the {@linkplain SearchClientImpl} and classes dependent on the
- * {@linkplain SearchClient} interface without deploying the SOLA web services </p>
+ * <p> Allows testing of the {@linkplain AdministrativeClientImpl} and classes dependent on the
+ * {@linkplain AdministrativeClient} interface without deploying the SOLA web services </p>
  *
- * @see SearchClient
- * @see SearchClientImpl
- * @see MockSearchPort
+ * @see AdministrativeClient
+ * @see AdministrativeClientImpl
+ * @see MockAdministrativePort
  * @see MockServiceManager
  */
-public class MockSearchClient extends SearchClientImpl implements SearchClient {
+public class MockAdministrativeClient extends AdministrativeClientImpl implements AdministrativeClient {
 
- private MockSearchPort port = new MockSearchPort();
+ private MockAdministrativePort port = new MockAdministrativePort();
 
     /**
      * Constructor for the mock class.
      */
-    public MockSearchClient() {
+    public MockAdministrativeClient() {
         // The URL is irrelevant for the mock client class
         super("");
     }
 
     /**
-     * Overrides the default getPort method on {@linkplain SearchClientImpl} to return a
-     * mock port object - {@linkplain MockSearchPort}.
+     * Overrides the default getPort method on {@linkplain AdministrativeClientImpl} to return a
+     * mock port object - {@linkplain MockAdministrativePort}.
      */
     @Override
-    protected Search getPort() {
+    protected Administrative getPort() {
         return port;
     }
 

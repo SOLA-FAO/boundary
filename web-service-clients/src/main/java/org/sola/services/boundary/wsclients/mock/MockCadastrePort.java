@@ -27,29 +27,30 @@ package org.sola.services.boundary.wsclients.mock;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.sola.services.boundary.wsclients.AdminClient;
-import org.sola.webservices.admin.*;
-import org.sola.webservices.transferobjects.security.GroupSummaryTO;
-import org.sola.webservices.transferobjects.security.GroupTO;
-import org.sola.webservices.transferobjects.security.RoleTO;
-import org.sola.webservices.transferobjects.security.UserTO;
+import org.sola.services.boundary.wsclients.CadastreClient;
+import org.sola.webservices.cadastre.*;
+import org.sola.webservices.transferobjects.ValidationResult;
+import org.sola.webservices.transferobjects.cadastre.CadastreObjectNodeTO;
+import org.sola.webservices.transferobjects.cadastre.CadastreObjectTO;
+import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
+import org.sola.webservices.transferobjects.transaction.TransactionCadastreRedefinitionTO;
 
 /**
  * Provides a mock implementation for the
- * {@linkplain org.sola.webservices.admin} interface. Uses the
+ * {@linkplain org.sola.webservices.cadastre.Cadastre} interface. Uses the
  * {@linkplain MockServiceManager} to obtain the appropriate mock response for each web method.
  * <p>Each method mocked by this class has a public constant defined that can be used to reference a
  * mock response object from the {@linkplain MockServiceManager}. To set a response object for a web
  * method, use the {@linkplain MockServiceManager#setResponse(String, Object)} method referencing
- * the appropriate web method constant from {@linkplain org.sola.services.boundary.wsclients.AdminClient}.</p>
+ * the appropriate web method constant from {@linkplain org.sola.services.boundary.wsclients.CadastreClient}.</p>
  *
- * @see MockAdminClient
- * @see AdminClient
+ * @see MockCadastreClient
+ * @see CadastreClient
  * @see MockServiceManager
  * @see MockResponse
  *
  */
-public class MockAdminPort implements Admin {
+public class MockCadastrePort implements Cadastre {
 
     /**
      *
@@ -129,30 +130,14 @@ public class MockAdminPort implements Admin {
     }
 
     /**
-     * Response Key = AdminClient.CHANAGE_PASSWORD
+     * Response Key = CadastreClient.CHECK_CONNECTION
      *
      * @return default = true
      */
     @Override
-    public boolean changePassword(String userName, String password) throws SOLAFault, UnhandledFault, SOLAAccessFault,
-            OptimisticLockingFault {
-        try {
-            return getManager().getResponse(AdminClient.CHANGE_PASSWORD, Boolean.class, true, userName, password);
-        } catch (Exception ex) {
-            processExceptionUpdate(ex);
-            return false;
-        }
-    }
-
-    /**
-     * Response Key = AdminClient.CHECK_CONNECTION
-     *
-     * @return default = true.
-     */
-    @Override
     public boolean checkConnection() {
         try {
-            return getManager().getResponse(AdminClient.CHECK_CONNECTION, Boolean.class, true);
+            return getManager().getResponse(CadastreClient.CHECK_CONNECTION, Boolean.class, true);
         } catch (Exception ex) {
             if (RuntimeException.class.isAssignableFrom(ex.getClass())) {
                 throw (RuntimeException) ex;
@@ -163,15 +148,17 @@ public class MockAdminPort implements Admin {
     }
 
     /**
-     * Response Key = AdminClient.GET_BR
+     * Response Key = CadastreClient.GET_CADASTRE_OBJECT_BY_PARTS
      *
-     * @return default = new BrTO()
+     * @return default = new ArrayList<CadastreObjectTO>()
      */
     @Override
-    public BrTO getBr(String id, String lang) throws SOLAAccessFault, SOLAFault, UnhandledFault {
-        BrTO defaultResponse = new BrTO();
+    public List<CadastreObjectTO> getCadastreObjectByParts(String searchString)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<CadastreObjectTO> defaultResponse = new ArrayList<CadastreObjectTO>();
         try {
-            return getManager().getResponse(AdminClient.GET_BR, BrTO.class, defaultResponse, id, lang);
+            return getManager().getResponse(CadastreClient.GET_CADASTRE_OBJECT_BY_PARTS,
+                    List.class, defaultResponse, searchString);
         } catch (Exception ex) {
             processExceptionAccess(ex);
             return null;
@@ -179,47 +166,17 @@ public class MockAdminPort implements Admin {
     }
 
     /**
-     * Response Key = AdminClient.GET_CURRENT_USER
+     * Response Key = CadastreClient.GET_CADASTRE_OBJECT_BY_POINT
      *
-     * @return default = MockTOFactory.createUser("test", "test", "Bob", "Smith")
+     * @return default = new CadastreObjectTO()
      */
     @Override
-    public UserTO getCurrentUser() throws SOLAFault, UnhandledFault {
-        UserTO defaultResponse = MockTOFactory.createUser("test", "test", "Bob", "Smith");
+    public CadastreObjectTO getCadastreObjectByPoint(double x, double y, int srid)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        CadastreObjectTO defaultResponse = new CadastreObjectTO();
         try {
-            return getManager().getResponse(AdminClient.GET_CURRENT_USER, UserTO.class, defaultResponse);
-        } catch (Exception ex) {
-            processExceptionBasic(ex);
-            return null;
-        }
-    }
-
-    /**
-     * Response Key = AdminClient.GET_CURRENT_USER_ROLES
-     *
-     * @return default = MockTOFactory.createRoles()
-     */
-    @Override
-    public List<RoleTO> getCurrentUserRoles() throws SOLAFault, UnhandledFault {
-        List<RoleTO> defaultResponse = MockTOFactory.createRoles();
-        try {
-            return getManager().getResponse(AdminClient.GET_CURRENT_USER_ROLES, List.class, defaultResponse);
-        } catch (Exception ex) {
-            processExceptionBasic(ex);
-            return null;
-        }
-    }
-
-    /**
-     * Response Key = AdminClient.GET_GROUP
-     *
-     * @return default = MockTOFactory.createGroup()
-     */
-    @Override
-    public GroupTO getGroup(String groupId) throws SOLAFault, UnhandledFault, SOLAAccessFault {
-        GroupTO defaultResponse = MockTOFactory.createGroup();
-        try {
-            return getManager().getResponse(AdminClient.GET_GROUP, GroupTO.class, defaultResponse, groupId);
+            return getManager().getResponse(CadastreClient.GET_CADASTRE_OBJECT_BY_POINT,
+                    CadastreObjectTO.class, defaultResponse, x, y, srid);
         } catch (Exception ex) {
             processExceptionAccess(ex);
             return null;
@@ -227,15 +184,17 @@ public class MockAdminPort implements Admin {
     }
 
     /**
-     * Response Key = AdminClient.GET_GROUPS
+     * Response Key = CadastreClient.GET_CADASTRE_OBJECTS_BY_BA_UNIT
      *
-     * @return default = MockTOFactory.createGroup()
+     * @return default = new CadastreObjectTO()
      */
     @Override
-    public List<GroupTO> getGroups() throws SOLAFault, UnhandledFault, SOLAAccessFault {
-        List<GroupTO> defaultResponse = MockTOFactory.createGroupList();
+    public List<CadastreObjectTO> getCadastreObjectsByBaUnit(String baUnitId)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<CadastreObjectTO> defaultResponse = new ArrayList<CadastreObjectTO>();
         try {
-            return getManager().getResponse(AdminClient.GET_GROUPS, List.class, defaultResponse);
+            return getManager().getResponse(CadastreClient.GET_CADASTRE_OBJECTS_BY_BA_UNIT,
+                    List.class, defaultResponse, baUnitId);
         } catch (Exception ex) {
             processExceptionAccess(ex);
             return null;
@@ -243,15 +202,17 @@ public class MockAdminPort implements Admin {
     }
 
     /**
-     * Response Key = AdminClient.GET_GROUPS_SUMMARY
+     * Response Key = CadastreClient.GET_CADASTRE_OBJECTS_BY_SERVICE
      *
-     * @return default = new ArrayList<GroupSummaryTO>()
+     * @return default = new CadastreObjectTO()
      */
     @Override
-    public List<GroupSummaryTO> getGroupsSummary() throws SOLAAccessFault, SOLAFault, UnhandledFault {
-        List<GroupSummaryTO> defaultResponse = new ArrayList<GroupSummaryTO>();
+    public List<CadastreObjectTO> getCadastreObjectsByService(String serviceId)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<CadastreObjectTO> defaultResponse = new ArrayList<CadastreObjectTO>();
         try {
-            return getManager().getResponse(AdminClient.GET_GROUPS_SUMMARY, List.class, defaultResponse);
+            return getManager().getResponse(CadastreClient.GET_CADASTRE_OBJECTS_BY_SERVICE,
+                    List.class, defaultResponse, serviceId);
         } catch (Exception ex) {
             processExceptionAccess(ex);
             return null;
@@ -259,31 +220,17 @@ public class MockAdminPort implements Admin {
     }
 
     /**
-     * Response Key = AdminClient.GET_LANGUAGES
+     * Response Key = CadastreClient.GET_TRANSACTION_CADASTRE_CHANGE
      *
-     * @return default = new ArrayList<LanguageTO>()
+     * @return default = new TransactionCadastreChangeTO()
      */
     @Override
-    public List<LanguageTO> getLanguages(String arg0) throws SOLAFault, UnhandledFault {
-        List<LanguageTO> defaultResponse = new ArrayList<LanguageTO>();
+    public TransactionCadastreChangeTO getCadastreChange(String serviceId)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        TransactionCadastreChangeTO defaultResponse = new TransactionCadastreChangeTO();
         try {
-            return getManager().getResponse(AdminClient.GET_LANGUAGES, List.class, defaultResponse, arg0);
-        } catch (Exception ex) {
-            processExceptionBasic(ex);
-            return null;
-        }
-    }
-
-    /**
-     * Response Key = AdminClient.GET_ROLES
-     *
-     * @return default = MockTOFactory.createRoles()
-     */
-    @Override
-    public List<RoleTO> getRoles() throws SOLAFault, UnhandledFault, SOLAAccessFault {
-        List<RoleTO> defaultResponse = MockTOFactory.createRoles();
-        try {
-            return getManager().getResponse(AdminClient.GET_ROLES, List.class, defaultResponse);
+            return getManager().getResponse(CadastreClient.GET_TRANSACTION_CADASTRE_CHANGE,
+                    TransactionCadastreChangeTO.class, defaultResponse, serviceId);
         } catch (Exception ex) {
             processExceptionAccess(ex);
             return null;
@@ -291,15 +238,17 @@ public class MockAdminPort implements Admin {
     }
 
     /**
-     * Response Key = AdminClient.GET_USER
+     * Response Key = CadastreClient.GET_CADASTRE_OBJECTS
      *
-     * @return default = MockTOFactory.createUser("test2", "test2", "Matthew", "Smith1")
+     * @return default = new ArrayList<CadastreObjectTO>()
      */
     @Override
-    public UserTO getUser(String userName) throws SOLAFault, UnhandledFault, SOLAAccessFault {
-        UserTO defaultResponse = MockTOFactory.createUser("test2", "test2", "Matthew", "Smith1");
+    public List<CadastreObjectTO> getCadastreObjects(List<String> ids)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<CadastreObjectTO> defaultResponse = new ArrayList<CadastreObjectTO>();
         try {
-            return getManager().getResponse(AdminClient.GET_USER, UserTO.class, defaultResponse, userName);
+            return getManager().getResponse(CadastreClient.GET_CADASTRE_OBJECTS,
+                    List.class, defaultResponse, ids);
         } catch (Exception ex) {
             processExceptionAccess(ex);
             return null;
@@ -307,30 +256,36 @@ public class MockAdminPort implements Admin {
     }
 
     /**
-     * Response Key = AdminClient.IS_USER_ADMIN
+     * Response Key = CadastreClient.GET_CADASTRE_OBJECT_NODE
      *
-     * @return default = false
+     * @return default = new CadastreObjectNodeTO()
      */
     @Override
-    public boolean isUserAdmin() throws SOLAFault, UnhandledFault {
+    public CadastreObjectNodeTO getCadastreObjectNode(double xMin, double yMin, double xMax,
+            double yMax, int srid) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        CadastreObjectNodeTO defaultResponse = new CadastreObjectNodeTO();
         try {
-            return getManager().getResponse(AdminClient.IS_USER_ADMIN, Boolean.class, false);
+            return getManager().getResponse(CadastreClient.GET_CADASTRE_OBJECT_NODE,
+                    CadastreObjectNodeTO.class, defaultResponse, xMin, yMin, xMax, yMax, srid);
         } catch (Exception ex) {
-            processExceptionBasic(ex);
-            return false;
+            processExceptionAccess(ex);
+            return null;
         }
     }
 
     /**
-     * Response Key = AdminClient.SAVE_BR
+     * Response Key = CadastreClient.SAVE_TRANSACTION_CADASTRE_REDFN
      *
-     * @return default = br parameter
+     * @return default = new ArrayList<ValidationResult>()
      */
     @Override
-    public BrTO saveBr(BrTO br) throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, SOLAValidationFault, UnhandledFault {
-        BrTO defaultResponse = br;
+    public List<ValidationResult> saveCadastreRedefinition(TransactionCadastreRedefinitionTO transactionCadastreRedefinitionTO,
+            String languageCode) throws OptimisticLockingFault, SOLAAccessFault, SOLAFault,
+            SOLAValidationFault, UnhandledFault {
+        List<ValidationResult> defaultResponse = new ArrayList<ValidationResult>();
         try {
-            return getManager().getResponse(AdminClient.SAVE_BR, BrTO.class, defaultResponse, br);
+            return getManager().getResponse(CadastreClient.SAVE_TRANSACTION_CADASTRE_REDFN,
+                    List.class, defaultResponse, transactionCadastreRedefinitionTO, languageCode);
         } catch (Exception ex) {
             processExceptionAll(ex);
             return null;
@@ -338,50 +293,56 @@ public class MockAdminPort implements Admin {
     }
 
     /**
-     * Response Key = AdminClient.SAVE_GROUP
+     * Response Key = CadastreClient.SAVE_TRANSACTION_CADASTRE_CHANGE
      *
-     * @return default = groupTO parameter
+     * @return default = new ArrayList<ValidationResult>()
      */
     @Override
-    public GroupTO saveGroup(GroupTO groupTO) throws SOLAFault, UnhandledFault, SOLAAccessFault, OptimisticLockingFault {
-        GroupTO defaultResponse = groupTO;
+    public List<ValidationResult> saveCadastreChange(TransactionCadastreChangeTO transactionCadastreChangeTO,
+            String languageCode) throws OptimisticLockingFault, SOLAAccessFault, SOLAFault,
+            SOLAValidationFault, UnhandledFault {
+        List<ValidationResult> defaultResponse = new ArrayList<ValidationResult>();
         try {
-            return getManager().getResponse(AdminClient.SAVE_GROUP, GroupTO.class, defaultResponse, groupTO);
+            return getManager().getResponse(CadastreClient.SAVE_TRANSACTION_CADASTRE_CHANGE,
+                    List.class, defaultResponse, transactionCadastreChangeTO, languageCode);
         } catch (Exception ex) {
-            processExceptionUpdate(ex);
+            processExceptionAll(ex);
             return null;
         }
     }
 
     /**
-     * Response Key = AdminClient.SAVE_ROLE
+     * Response Key = CadastreClient.GET_CADASTRE_OBJECT_NODE_POTENTIAL
      *
-     * @return default = roleTO parameter
+     * @return default = new CadastreObjectNodeTO()
      */
     @Override
-    public RoleTO saveRole(RoleTO roleTO) throws SOLAFault, UnhandledFault, SOLAAccessFault, OptimisticLockingFault {
-        RoleTO defaultResponse = roleTO;
+    public CadastreObjectNodeTO getCadastreObjectNodePotential(double xMin, double yMin,
+            double xMax, double yMax, int srid) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        CadastreObjectNodeTO defaultResponse = new CadastreObjectNodeTO();
         try {
-            return getManager().getResponse(AdminClient.SAVE_ROLE, RoleTO.class, defaultResponse, roleTO);
+            return getManager().getResponse(CadastreClient.GET_CADASTRE_OBJECT_NODE_POTENTIAL,
+                    CadastreObjectNodeTO.class, defaultResponse, xMin, yMin, xMax, yMax, srid);
         } catch (Exception ex) {
-            processExceptionUpdate(ex);
+            processExceptionAccess(ex);
             return null;
         }
     }
 
     /**
-     * Response Key = AdminClient.SAVE_USER
+     * Response Key = CadastreClient.GET_TRANSACTION_CADASTRE_REDFN
      *
-     * @return default = userTO parameter
+     * @return default = new TransactionCadastreRedefinitionTO()
      */
     @Override
-    public UserTO saveUser(UserTO userTO) throws SOLAFault, UnhandledFault, SOLAAccessFault,
-            OptimisticLockingFault {
-        UserTO defaultResponse = userTO;
+    public TransactionCadastreRedefinitionTO getCadastreRedefinition(String serviceId)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        TransactionCadastreRedefinitionTO defaultResponse = new TransactionCadastreRedefinitionTO();
         try {
-            return getManager().getResponse(AdminClient.SAVE_USER, UserTO.class, defaultResponse, userTO);
+            return getManager().getResponse(CadastreClient.GET_TRANSACTION_CADASTRE_REDFN,
+                    TransactionCadastreRedefinitionTO.class, defaultResponse, serviceId);
         } catch (Exception ex) {
-            processExceptionUpdate(ex);
+            processExceptionAccess(ex);
             return null;
         }
     }

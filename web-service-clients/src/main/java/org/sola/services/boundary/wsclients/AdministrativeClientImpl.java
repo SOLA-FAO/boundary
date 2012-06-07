@@ -50,7 +50,7 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
         super(url, new QName(NAMESPACE_URI, LOCAL_PART));
     }
 
-    private Administrative getPort() {
+    protected Administrative getPort() {
         return getPort(Administrative.class, AdministrativeService.class);
     }
 
