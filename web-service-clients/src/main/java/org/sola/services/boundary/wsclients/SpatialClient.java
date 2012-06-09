@@ -58,7 +58,24 @@ public interface SpatialClient extends AbstractWSClient {
      */
     public static final String GET_MAP_DEFINITION = SERVICE_NAME + "getMapDefinition";
 
+    /**
+     * Used for navigation (i.e. pan and zoom) of the Map. Executes a dynamic layer query using the
+     * bounding box details provided in the search parameters. The dynamic query to execute must be
+     * one of the layer queries in system.query.
+     *
+     * @param query The parameters to use for the query including the name of the dynamic layer
+     * query to execute.
+     * @return A summary of all spatial objects intersecting the bounding box
+     * @throws WebServiceClientException
+     */
     ResultForNavigationInfo getSpatialForNavigation(QueryForNavigation query) throws WebServiceClientException;
 
+    /**
+     * Returns the map layer config details from system.config_map_layer table. Also retrieves the
+     * default map settings (i.e. default extent for the map and srid) from the system.settings
+     * table. Uses the default language code of the client locale to localize display values.
+     *
+     * @throws WebServiceClientException
+     */
     MapDefinitionTO getMapDefinition() throws WebServiceClientException;
 }

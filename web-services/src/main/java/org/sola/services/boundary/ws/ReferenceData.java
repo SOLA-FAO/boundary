@@ -879,7 +879,8 @@ public class ReferenceData extends AbstractWebService {
     }
 
     /**
-     * Supports saving of all SOLA Reference Data types.
+     * Supports saving of all SOLA Reference Data types. <p>Requires the {@linkplain RolesConstants#ADMIN_MANAGE_REFDATA}
+     * role.</p>
      *
      * @throws SOLAFault
      * @throws UnhandledFault

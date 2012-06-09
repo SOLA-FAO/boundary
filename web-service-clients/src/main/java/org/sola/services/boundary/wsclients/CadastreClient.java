@@ -100,30 +100,102 @@ public interface CadastreClient extends AbstractWSClient {
      */
     public static final String GET_TRANSACTION_CADASTRE_REDFN = SERVICE_NAME + "getTransactionCadastreRedefinition";
 
+    /**
+     * Returns a maximum of 10 cadastre objects that have a name first part and/or name last part
+     * that matches the specified search string. This method supports partial matches and is case
+     * insensitive.
+     *
+     * @param searchString The search string to use
+     * @return The list of cadastre objects matching the search string
+     * @throws WebServiceClientException
+     */
     List<CadastreObjectTO> getCadastreObjectByParts(String searchString)
             throws WebServiceClientException;
 
+    /**
+     * Returns the cadastre object that is located at the point specified or null if there is no
+     * cadastre object at that location. Uses the PostGIS ST_Intersects function to perform the
+     * comparison.
+     *
+     * @param x The x ordinate of the location
+     * @param y The y ordinate of the location
+     * @param srid The SRID identifying the coordinate system for the x,y coordinate. Must match the
+     * SRID used by SOLA.
+     * @throws WebServiceClientException
+     */
     CadastreObjectTO getCadastreObjectByPoint(double x, double y, int srid)
             throws WebServiceClientException;
 
+    /**
+     * Retrieves all cadastre objects linked to the specified BA Unit.
+     *
+     * @param baUnitId Identifier of the BA Unit
+     */
     List<CadastreObjectTO> getCadastreObjectsByBaUnit(String baUnitId);
 
+    /**
+     * Retrieves all cadastre objects linked to the specified Service through transaction.
+     *
+     * @param serviceId Identifier of the Service
+     */
     List<CadastreObjectTO> getCadastreObjectsByService(String serviceId);
 
+    /**
+     * Can be used to create a new cadastre object or save any updates to the details of an existing
+     * cadastre object.
+     *
+     * @param cadastreObject The cadastre object to create/save.
+     * @return The cadastre object after the save is completed.
+     */
     List<ValidationResult> saveTransactionCadastreChange(TransactionCadastreChangeTO cadastreChangeTO);
 
     TransactionCadastreChangeTO getTransactionCadastreChange(String serviceId);
 
+    /**
+     * Retrieves a list of cadastre object matching the list of ids provided.
+     *
+     * @param Ids A list of cadaster object ids to use for retrieval.
+     */
     List<CadastreObjectTO> getCadastreObjects(List<String> Ids);
 
+    /**
+     * Retrieves all node points from the underlying cadastre objects that intersect the specified
+     * bounding box coordinates. All of the node points within the bounding box are used to create a
+     * single geometry - {@linkplain CadastreObjectNode#geom}. The cadastre objects used as the
+     * source of the node points are also captured in the {@linkplain CadastreObjectNode#cadastreObjectList}.
+     *
+     * @param xMin The xMin ordinate of the bounding box
+     * @param yMin The yMin ordinate of the bounding box
+     * @param xMax The xMax ordinate of the bounding box
+     * @param yMax The yMax ordinate of the bounding box
+     * @param srid The SRID to use to create the bounding box. Must be the same SRID as the one used
+     * by the cadastre_object table.
+     * @return The CadastreObjectNode representing all node points within the bounding box as well
+     * as the list of cadastre objects used to obtain the node points.
+     */
     CadastreObjectNodeTO getCadastreObjectNode(
             double xMin, double yMin, double xMax, double yMax, int srid);
 
+    /**
+     * Unknown
+     *
+     * @param xMin The xMin ordinate of the bounding box
+     * @param yMin The yMin ordinate of the bounding box
+     * @param xMax The xMax ordinate of the bounding box
+     * @param yMax The yMax ordinate of the bounding box
+     * @param srid The SRID to use to create the bounding box. Must be the same SRID as the one used
+     * by the cadastre_object table.
+     */
     CadastreObjectNodeTO getCadastreObjectNodePotential(
             double xMin, double yMin, double xMax, double yMax, int srid);
 
     List<ValidationResult> saveTransactionCadastreRedefinition(
             TransactionCadastreRedefinitionTO transactionTO);
 
+    /**
+     * Approves the changes to cadastre objects as a result of a cadastre redefinition.
+     *
+     * @param transactionId The identifier of the transaction
+     */
     TransactionCadastreRedefinitionTO getTransactionCadastreRedefinition(String serviceId);
 }

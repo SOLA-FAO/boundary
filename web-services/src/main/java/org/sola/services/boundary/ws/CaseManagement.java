@@ -557,8 +557,8 @@ public class CaseManagement extends AbstractWebService {
     }
 
     /**
-     * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#getSourcesByIds(java.util.List)
-     * SourceEJB.getSourcesByIds}
+     * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#getSources(java.util.List)
+     * SourceEJB.getSources}
      *
      * @throws SOLAFault
      * @throws UnhandledFault
@@ -577,7 +577,7 @@ public class CaseManagement extends AbstractWebService {
             @Override
             public void run() {
                 result[0] = GenericTranslator.toTOList(
-                        sourceEJB.getSourcesByIds(sourceIdsTmp),
+                        sourceEJB.getSources(sourceIdsTmp),
                         SourceTO.class);
             }
         });

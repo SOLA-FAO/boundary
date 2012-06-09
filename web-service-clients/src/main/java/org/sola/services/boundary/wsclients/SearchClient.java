@@ -27,7 +27,6 @@ package org.sola.services.boundary.wsclients;
 
 import java.util.List;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
-import org.sola.webservices.search.GenericResult;
 import org.sola.webservices.search.QueryForSelect;
 import org.sola.webservices.search.ResultForSelectionInfo;
 import org.sola.webservices.transferobjects.search.*;
@@ -106,31 +105,151 @@ public interface SearchClient extends AbstractWSClient {
      */
     public static final String SEARCH_SPATIAL_OBJECTS = SERVICE_NAME + "searchSpatialObjects";
 
+    /**
+     * Returns applications that have a lodged or approved status and are assigned to the currently
+     * logged in user.
+     *
+     * <p>If the currently logged in user has the {@linkplain RolesConstants#APPLICATION_UNASSIGN_FROM_OTHERS}
+     * then all lodged or approved applications assigned to any user are returned. </p>
+     *
+     * <p>Requires the {@linkplain RolesConstants#APPLICATION_VIEW_APPS} role.</p>
+     *
+     * @return A maximum of 100 applications that match the search criteria, sorted by lodgement
+     * date DESC.
+     * @throws WebServiceClientException
+     */
     List<ApplicationSearchResultTO> getAssignedApplications() throws WebServiceClientException;
 
+    /**
+     * Returns applications that have a lodged or approve status and are not assigned to any user.
+     *
+     * <p>Requires the {@linkplain RolesConstants#APPLICATION_VIEW_APPS} role.</p>
+     *
+     * @return A maximum of 100 applications that match the search criteria, sorted by lodgement
+     * date DESC.
+     * @throws WebServiceClientException
+     */
     List<ApplicationSearchResultTO> getUnassignedApplications() throws WebServiceClientException;
 
-    List<ApplicationSearchResultTO> searchApplications(ApplicationSearchParamsTO applicationSearchParamsTO) throws WebServiceClientException;
+    /**
+     * Executes a search across all applications using the search criteria provided. Partial, case
+     * insensitive matches are supported for the contact person name, agent name, application
+     * number, document number and the document reference number criteria.
+     *
+     * <p>Requires the {@linkplain RolesConstants#APPLICATION_VIEW_APPS} role.</p>
+     *
+     * @param applicationSearchParamsTO The criteria to use for the search.
+     * @return A maximum of 100 applications that match the search criteria, sorted by lodgement
+     * date DESC.
+     * @throws WebServiceClientException
+     */
+    List<ApplicationSearchResultTO> searchApplications(ApplicationSearchParamsTO applicationSearchParamsTO)
+            throws WebServiceClientException;
 
-    PropertyVerifierTO verifyApplicationProperty(String applicationNumber, String firstPart, String lastPart) throws WebServiceClientException;
+    /**
+     * Determines if the property details provided already exist in the SOLA database or not. Can be
+     * used to help determine if the property being added to a new application is valid or not.
+     *
+     * @param applicationNumber The number of the application the property is being added/associated
+     * to. Used to exclude the current application from the test and avoid a false positive match.
+     * @param firstPart The first part of the property name.
+     * @param lastPart The last part of the property name.
+     * @throws WebServiceClientException
+     */
+    PropertyVerifierTO verifyApplicationProperty(String applicationNumber, String firstPart, String lastPart)
+            throws WebServiceClientException;
 
+    /**
+     * Executes a group of dynamic spatial queries using a filtering geometry. Primarily used to
+     * obtain results for the Object Information Tool. Each dynamic query must have a set of query
+     * fields configured in the system.query_field table.
+     *
+     * @param queries The list of dynamic spatial queries to execute using the filtering geometry as
+     * a parameter.
+     * @throws WebServiceClientException
+     */
     public List<ResultForSelectionInfo> select(List<QueryForSelect> queries)
             throws WebServiceClientException;
 
-    List<PartySearchResultTO> searchParties(PartySearchParamsTO searchParams) throws WebServiceClientException;
+    /**
+     * Executes a search across all parties using the search criteria provided. Partial matches are
+     * supported for the party name criteria.
+     *
+     * @param searchParams The criteria to use for the search.
+     * @return A maximum of 101 parties that match the search criteria.
+     * @throws WebServiceClientException
+     */
+    List<PartySearchResultTO> searchParties(PartySearchParamsTO searchParams)
+            throws WebServiceClientException;
 
-    List<SourceSearchResultTO> searchSources(SourceSearchParamsTO searchParams) throws WebServiceClientException;
+    /**
+     * Executes a search across all sources using the search criteria provided. Partial matches are
+     * supported for the document number and the document reference number criteria.
+     *
+     * <p>Requires the {@linkplain RolesConstants#SOURCE_SEARCH} role.</p>
+     *
+     * @param params The criteria to use for the search.
+     * @return A maximum of 101 sources that match the search criteria.
+     * @throws WebServiceClientException
+     */
+    List<SourceSearchResultTO> searchSources(SourceSearchParamsTO searchParams)
+            throws WebServiceClientException;
 
+    /**
+     * Returns details for all users marked as active in the SOLA database.
+     *
+     * @throws WebServiceClientException
+     */
     List<UserSearchResultTO> getActiveUsers() throws WebServiceClientException;
 
-    List<UserSearchAdvancedResultTO> searchUsers(UserSearchParamsTO searchParams) throws WebServiceClientException;
+    /**
+     * Executes a search across all users using the search criteria provided. Partial matches are
+     * supported for the username, first name and last name criteria.
+     *
+     * <p>Requires the {@linkplain RolesConstants#ADMIN_MANAGE_SECURITY} role.</p>
+     *
+     * @param searchParams The criteria to use for the search.
+     * @return The users that match the search criteria.
+     * @throws WebServiceClientException
+     */
+    List<UserSearchAdvancedResultTO> searchUsers(UserSearchParamsTO searchParams)
+            throws WebServiceClientException;
 
+    /**
+     * Retrieves the history of changes and actions that have been applied to the application.
+     * <p>Requires the {@linkplain RolesConstants#APPLICATION_VIEW_APPS} role.</p>
+     *
+     * @param applicationId The application to retrieve the log for
+     */
     List<ApplicationLogResultTO> getApplicationLog(String applicationId);
 
+    /**
+     * Executes a search across all Business Rules. Partial matches of the br display name are
+     * supported. <p>Requires the {@linkplain RolesConstants#ADMIN_MANAGE_BR} role.</p>
+     *
+     * @param searchParams The parameters to use for the search.
+     * @throws WebServiceClientException
+     */
     List<BrSearchResultTO> searchBr(BrSearchParamsTO searchParams) throws WebServiceClientException;
 
-    List<BaUnitSearchResultTO> searchBaUnit(BaUnitSearchParamsTO searchParams) throws WebServiceClientException;
+    /**
+     * Executes a search across all BA Units. Partial, case insensitive matches of the name first
+     * part, name last part and owner name are supported.
+     *
+     * <p>Requires the {@linkplain RolesConstants#ADMINISTRATIVE_BA_UNIT_SEARCH} role.</p>
+     *
+     * @param searchParams The search criteria to use.
+     * @return A maximum of 101 BA Units matching the search criteria.
+     * @throws WebServiceClientException
+     */
+    List<BaUnitSearchResultTO> searchBaUnit(BaUnitSearchParamsTO searchParams)
+            throws WebServiceClientException;
 
+    /**
+     * Retrieves the list of active spatial search options from the system.map_search_option table.
+     *
+     * @throws WebServiceClientException
+     */
     List<SpatialSearchOptionTO> getSpatialSearchOptions() throws WebServiceClientException;
 
     /**

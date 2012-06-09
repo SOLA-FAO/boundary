@@ -45,7 +45,7 @@ import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
  * ... Unit test setup
  * MockServiceManager mockMan = MockServiceManager.getInstance();
  * mockMan.setMockService(true);
- * mockMan.setResponse(MockCaseManagementClient.CHECK_CONNECTION, false);
+ * mockMan.setResponse(CaseManagementClient.CHECK_CONNECTION, false);
  * ... The code that calls the CaseManagementClient.checkConnection web method
  * </pre></blockquote>
  *

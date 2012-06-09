@@ -27,9 +27,9 @@ package org.sola.services.boundary.wsclients;
 
 import java.util.List;
 import org.sola.webservices.transferobjects.digitalarchive.DocumentBinaryTO;
+import org.sola.webservices.transferobjects.digitalarchive.DocumentTO;
 import org.sola.webservices.transferobjects.digitalarchive.FileBinaryTO;
 import org.sola.webservices.transferobjects.digitalarchive.FileInfoTO;
-import org.sola.webservices.transferobjects.digitalarchive.DocumentTO;
 
 /**
  * Interface for the Digital Archive Service. Implemented by {@linkplain DigitalArchiveClientImpl}.
@@ -81,19 +81,78 @@ public interface DigitalArchiveClient extends AbstractWSClient {
      */
     public static final String DELETE_FILE = SERVICE_NAME + "deleteFile";
 
+    /**
+     * Retrieves the document for the specified identifier. This includes the document content (i.e
+     * the digital file). <p>Requires the {@linkplain RolesConstants#SOURCE_SEARCH} role.</p>
+     *
+     * @param documentId Identifier of the document to retrieve
+     */
     public DocumentBinaryTO getDocument(String documentId);
 
+    /**
+     * Can be used to create a new document or save any updates to the details of an existing
+     * document. <p>Requires the {@linkplain RolesConstants#SOURCE_SAVE} role.</p>
+     *
+     * @param documentTO The document to create/save.
+     * @return The document after the save is completed.
+     */
     public DocumentTO saveDocument(DocumentTO documentTO);
 
+    /**
+     * Can be used to create a new document. Also assigns the document number. <p>Requires the {@linkplain RolesConstants#SOURCE_SAVE}
+     * role.</p>
+     *
+     * @param documentBinaryTO The document to create.
+     * @return The document after the save is completed.
+     */
     public DocumentTO createDocument(DocumentBinaryTO documentBinaryTO);
 
+    /**
+     * Can be used to create a new document with the digital content obtained from the specified
+     * file. Used to create documents from the network scan folder. After the digital file is
+     * loaded, it is deleted from the network scan folder. <p>Requires the {@linkplain RolesConstants#SOURCE_SAVE}
+     * role.</p>
+     *
+     * @param documentTO The document to create.
+     * @param fileName The filename of the digital file to save with the document.
+     * @return The document after the save is completed.
+     * @return
+     */
     public DocumentTO createDocumentFromServer(DocumentTO documentTO, String fileName);
 
+    /**
+     * Loads the specified file from the Network Scan folder. <p>Requires the {@linkplain RolesConstants#SOURCE_SEARCH}
+     * role.</p>
+     *
+     * @param fileName The name of the file to load
+     * @return The binary file along with some attributes of the file
+     */
     public FileBinaryTO getFileBinary(String fileName);
 
+    /**
+     * Loads the specified file from the Network Scan folder then generates a thumbnail image of the
+     * file if one does not already exist. <p>Requires the {@linkplain RolesConstants#SOURCE_SEARCH}
+     * role.</p>
+     *
+     * @param fileName The name of the file to load
+     * @return A thumbnail image of the file
+     */
     public FileBinaryTO getFileThumbnail(String fileName);
 
+    /**
+     * Retrieves the list of all files in the Network Scan Folder. Only meta data about the file is
+     * returned. The content of the file is omitted to avoid transferring a large amount of file
+     * data across the network. <p>Requires the {@linkplain RolesConstants#SOURCE_SEARCH} role.</p>
+     */
     public List<FileInfoTO> getAllFiles();
 
+    /**
+     * Deletes the specified file from the Network Scan folder. Also attempts to delete any
+     * thumbnail for the file if one exists. <p>Requires the {@linkplain RolesConstants#SOURCE_SEARCH}
+     * role.</p>
+     *
+     * @param fileName The name of the file to delete.
+     * @return true if the file is successfully deleted.
+     */
     public boolean deleteFile(String fileName);
 }
