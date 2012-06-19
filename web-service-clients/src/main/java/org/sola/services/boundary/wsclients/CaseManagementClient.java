@@ -515,8 +515,8 @@ public interface CaseManagementClient extends AbstractWSClient {
             String applicationId, int rowVersion) throws WebServiceClientException;
 
     /**
-     * Sets the action code on the application to <cpde>despatch</code> to indicate the application
-     * has been despatched. <p>Requires the {@linkplain RolesConstants#APPLICATION_DESPATCH}
+     * Sets the action code on the application to <cpde>dispatch</code> to indicate the application
+     * has been dispatched. <p>Requires the {@linkplain RolesConstants#APPLICATION_DISPATCH}
      * role.</p>
      *
      * @param applicationId The application to perform the action against
