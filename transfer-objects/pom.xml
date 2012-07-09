@@ -28,7 +28,7 @@
     <dependency>
       <groupId>org.sola.services</groupId>
       <artifactId>sola-services-common</artifactId>
-      <version>1.1-SNAPSHOT</version>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
 </project>
