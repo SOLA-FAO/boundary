@@ -25,6 +25,7 @@
  */
 package org.sola.services.boundary.ws;
 
+import java.util.HashMap;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -32,6 +33,8 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
+import org.sola.services.boundary.transferobjects.configuration.ConfigMapLayerTO;
+import org.sola.services.boundary.transferobjects.configuration.MapDefinitionTO;
 import org.sola.services.boundary.transferobjects.search.*;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.contracts.GenericTranslator;
@@ -475,4 +478,52 @@ public class Search extends AbstractWebService {
         });
         return (List<SpatialSearchResultTO>) result[0];
     }
+
+    /**
+     * Retrieves the map layer configuration data
+     *
+     * @param languageCode The language code to use for localization of display values
+     * @return The configuration data for each map layer
+     * @throws UnhandledFault
+     * @throws SOLAFault
+     * @see org.sola.services.ejb.search.businesslogic.SearchEJB#getMapSettingList()
+     * @see
+     * org.sola.services.ejb.search.businesslogic.SearchEJB#getConfigMapLayerList(java.lang.String)
+     */
+    @WebMethod(operationName = "GetMapDefinition")
+    public MapDefinitionTO GetMapDefinition(@WebParam(name = "languageCode") String languageCode)
+            throws UnhandledFault, SOLAFault {
+
+        final Object[] result = {null};
+        final String languageCodeTmp = languageCode;
+        runUnsecured(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                HashMap<String, String> mapSettings = searchEJB.getMapSettingList();
+                List<ConfigMapLayer> configMapLayerList = 
+                        searchEJB.getConfigMapLayerList(languageCodeTmp);
+                MapDefinitionTO mapDefinition = new MapDefinitionTO();
+                mapDefinition.setSrid(Integer.parseInt(mapSettings.get("map-srid")));
+                mapDefinition.setWktOfCrs(mapSettings.get("wkt-of-crs"));
+                mapDefinition.setWest(Double.parseDouble(mapSettings.get("map-west")));
+                mapDefinition.setSouth(Double.parseDouble(mapSettings.get("map-south")));
+                mapDefinition.setEast(Double.parseDouble(mapSettings.get("map-east")));
+                mapDefinition.setNorth(Double.parseDouble(mapSettings.get("map-north")));
+                mapDefinition.setSnapTolerance(Double.parseDouble(mapSettings.get("map-tolerance")));
+                mapDefinition.setSurveyPointShiftRuralArea(
+                        Double.parseDouble(mapSettings.get("map-shift-tolerance-rural")));
+                mapDefinition.setSurveyPointShiftUrbanArea(
+                        Double.parseDouble(mapSettings.get("map-shift-tolerance-urban")));
+                for (ConfigMapLayer configMapLayer : configMapLayerList) {
+                    mapDefinition.getLayers().add(
+                            GenericTranslator.toTO(configMapLayer, ConfigMapLayerTO.class));
+                }
+                result[0] = mapDefinition;
+            }
+        });
+
+        return (MapDefinitionTO) result[0];
+    }
+    
 }

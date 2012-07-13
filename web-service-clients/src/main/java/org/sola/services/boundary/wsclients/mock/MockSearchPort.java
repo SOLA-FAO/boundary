@@ -28,7 +28,9 @@ package org.sola.services.boundary.wsclients.mock;
 import java.util.ArrayList;
 import java.util.List;
 import org.sola.services.boundary.wsclients.SearchClient;
+import org.sola.services.boundary.wsclients.SpatialClient;
 import org.sola.webservices.search.*;
+import org.sola.webservices.search.MapDefinitionTO;
 import org.sola.webservices.transferobjects.search.*;
 
 /**
@@ -360,6 +362,24 @@ public class MockSearchPort implements Search {
             } else {
                 return false;
             }
+        }
+    }
+
+    /**
+     * Response Key = SpatialClient.GET_MAP_DEFINITION
+     *
+     * @return default = new MapDefinitionTO()
+     */
+    @Override
+    public MapDefinitionTO getMapDefinition(String languageCode)
+            throws org.sola.webservices.search.SOLAFault, org.sola.webservices.search.UnhandledFault {
+        MapDefinitionTO defaultResponse = new MapDefinitionTO();
+        try {
+            return getManager().getResponse(SearchClient.GET_MAP_DEFINITION,
+                    MapDefinitionTO.class, defaultResponse, languageCode);
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
+            return null;
         }
     }
 }

@@ -29,6 +29,7 @@ import java.util.List;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.search.QueryForSelect;
 import org.sola.webservices.search.ResultForSelectionInfo;
+import org.sola.webservices.search.MapDefinitionTO;
 import org.sola.webservices.transferobjects.search.*;
 
 /**
@@ -104,6 +105,11 @@ public interface SearchClient extends AbstractWSClient {
      * Search.searchSpatialObjects - Identifier for the searchSpatialObjects method
      */
     public static final String SEARCH_SPATIAL_OBJECTS = SERVICE_NAME + "searchSpatialObjects";
+
+    /**
+     * Search.getMapDefinition - Identifier for the getMapDefinition method
+     */
+    public static final String GET_MAP_DEFINITION = SERVICE_NAME + "getMapDefinition";
 
     /**
      * Returns applications that have a lodged or approved status and are assigned to the currently
@@ -261,4 +267,13 @@ public interface SearchClient extends AbstractWSClient {
      */
     List<SpatialSearchResultTO> searchSpatialObjects(
             String queryName, String searchString) throws WebServiceClientException;
+
+    /**
+     * Returns the map layer config details from system.config_map_layer table. Also retrieves the
+     * default map settings (i.e. default extent for the map and srid) from the system.settings
+     * table. Uses the default language code of the client locale to localize display values.
+     *
+     * @throws WebServiceClientException
+     */
+    MapDefinitionTO getMapDefinition() throws WebServiceClientException;
 }

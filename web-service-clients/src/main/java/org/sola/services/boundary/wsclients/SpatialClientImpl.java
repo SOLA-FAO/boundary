@@ -27,7 +27,6 @@ package org.sola.services.boundary.wsclients;
 
 import javax.xml.namespace.QName;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
-import org.sola.webservices.spatial.MapDefinitionTO;
 import org.sola.webservices.spatial.QueryForNavigation;
 import org.sola.webservices.spatial.ResultForNavigationInfo;
 import org.sola.webservices.spatial.Spatial;
@@ -85,19 +84,4 @@ public class SpatialClientImpl extends AbstractWSClientImpl implements SpatialCl
         return result;
     }
 
-    @Override
-    public MapDefinitionTO getMapDefinition() throws WebServiceClientException {
-        MapDefinitionTO result = null;
-        final String methodName = SpatialClient.GET_MAP_DEFINITION;
-        String languageCode = getLanguageCode();
-        try {
-            beforeWebMethod(methodName, languageCode);
-            result = getPort().getMapDefinition(languageCode);
-        } catch (Exception e) {
-            processException(methodName, e);
-        } finally {
-            afterWebMethod(methodName, result, languageCode);
-        }
-        return result;
-    }
 }

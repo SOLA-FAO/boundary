@@ -32,6 +32,7 @@ import org.sola.webservices.search.QueryForSelect;
 import org.sola.webservices.search.ResultForSelectionInfo;
 import org.sola.webservices.search.Search;
 import org.sola.webservices.search.SearchService;
+import org.sola.webservices.search.MapDefinitionTO;
 import org.sola.webservices.transferobjects.search.*;
 
 /**
@@ -296,6 +297,22 @@ public class SearchClientImpl extends AbstractWSClientImpl implements SearchClie
             processException(methodName, e);
         } finally {
             afterWebMethod(methodName, result, queryName, searchString);
+        }
+        return result;
+    }
+
+    @Override
+    public MapDefinitionTO getMapDefinition() throws WebServiceClientException {
+        MapDefinitionTO result = null;
+        final String methodName = SearchClient.GET_MAP_DEFINITION;
+        String languageCode = getLanguageCode();
+        try {
+            beforeWebMethod(methodName, languageCode);
+            result = getPort().getMapDefinition(languageCode);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, languageCode);
         }
         return result;
     }

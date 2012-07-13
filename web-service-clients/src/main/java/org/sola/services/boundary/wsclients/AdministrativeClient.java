@@ -77,7 +77,7 @@ public interface AdministrativeClient extends AbstractWSClient {
 
     /**
      * Creates a new BA Unit with a default status of pending and a default type of
-     * administrativeUnit. Will also create a new Transaction record for the BA Unit if the Service
+     * basicPropertyUnit. Will also create a new Transaction record for the BA Unit if the Service
      * is not already associated to a Transaction.
      *
      * <p>Requires the {@linkplain RolesConstants#ADMINISTRATIVE_BA_UNIT_SAVE} role.</p>

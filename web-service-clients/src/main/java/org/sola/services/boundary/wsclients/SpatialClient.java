@@ -26,7 +26,6 @@
 package org.sola.services.boundary.wsclients;
 
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
-import org.sola.webservices.spatial.MapDefinitionTO;
 import org.sola.webservices.spatial.QueryForNavigation;
 import org.sola.webservices.spatial.ResultForNavigationInfo;
 
@@ -53,10 +52,6 @@ public interface SpatialClient extends AbstractWSClient {
      * Spatial.getSpatialForNavigation - Identifier for the getSpatialForNavigation method
      */
     public static final String GET_SPATIAL_FOR_NAVIGATION = SERVICE_NAME + "getSpatialForNavigation";
-    /**
-     * Spatial.getMapDefinition - Identifier for the getMapDefinition method
-     */
-    public static final String GET_MAP_DEFINITION = SERVICE_NAME + "getMapDefinition";
 
     /**
      * Used for navigation (i.e. pan and zoom) of the Map. Executes a dynamic layer query using the
@@ -70,12 +65,4 @@ public interface SpatialClient extends AbstractWSClient {
      */
     ResultForNavigationInfo getSpatialForNavigation(QueryForNavigation query) throws WebServiceClientException;
 
-    /**
-     * Returns the map layer config details from system.config_map_layer table. Also retrieves the
-     * default map settings (i.e. default extent for the map and srid) from the system.settings
-     * table. Uses the default language code of the client locale to localize display values.
-     *
-     * @throws WebServiceClientException
-     */
-    MapDefinitionTO getMapDefinition() throws WebServiceClientException;
 }

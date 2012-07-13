@@ -37,7 +37,7 @@ public class ConfigMapLayerTO extends AbstractTO {
 
     private String id;
     private String typeCode;
-    private String wmsUrl;
+    private String url;
     private String wmsLayers;
     private String pojoQueryName;
     private String pojoQueryNameForSelect;
@@ -45,7 +45,11 @@ public class ConfigMapLayerTO extends AbstractTO {
     private String shapeLocation;
     private String style;
     private String title;
-    private boolean visible; 
+    private boolean visible;
+    private String wmsVersion;
+    private String wmsFormat;
+    private String securityUser;
+    private String securityPassword;
 
     public String getId() {
         return id;
@@ -63,12 +67,12 @@ public class ConfigMapLayerTO extends AbstractTO {
         this.shapeLocation = shapeLocation;
     }
 
-    public String getWmsUrl() {
-        return wmsUrl;
+    public String getUrl() {
+        return url;
     }
 
-    public void setWmsUrl(String wmsUrl) {
-        this.wmsUrl = wmsUrl;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getTypeCode() {
@@ -133,5 +137,38 @@ public class ConfigMapLayerTO extends AbstractTO {
 
     public void setVisible(boolean visible) {
         this.visible = visible;
-    }    
+    }
+
+    public String getSecurityPassword() {
+        return securityPassword;
+    }
+
+    public void setSecurityPassword(String securityPassword) {
+        this.securityPassword = securityPassword;
+    }
+
+    public String getSecurityUser() {
+        return securityUser;
+    }
+
+    public void setSecurityUser(String securityUser) {
+        this.securityUser = securityUser;
+    }
+
+    public String getWmsFormat() {
+        return wmsFormat;
+    }
+
+    public void setWmsFormat(String wmsFormat) {
+        this.wmsFormat = wmsFormat;
+    }
+
+    public String getWmsVersion() {
+        return wmsVersion;
+    }
+
+    public void setWmsVersion(String wmsVersion) {
+        this.wmsVersion = wmsVersion;
+    }
+    
 }

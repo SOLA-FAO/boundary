@@ -93,24 +93,6 @@ public class MockSpatialPort implements Spatial {
     }
 
     /**
-     * Response Key = SpatialClient.GET_MAP_DEFINITION
-     *
-     * @return default = new MapDefinitionTO()
-     */
-    @Override
-    public MapDefinitionTO getMapDefinition(String languageCode)
-            throws SOLAFault, UnhandledFault {
-        MapDefinitionTO defaultResponse = new MapDefinitionTO();
-        try {
-            return getManager().getResponse(SpatialClient.GET_MAP_DEFINITION,
-                    MapDefinitionTO.class, defaultResponse, languageCode);
-        } catch (Exception ex) {
-            processExceptionBasic(ex);
-            return null;
-        }
-    }
-
-    /**
      * Response Key = SpatialClient.GET_SPATIAL_FOR_NAVIGATION
      *
      * @return default = new ResultForNavigationInfo()
