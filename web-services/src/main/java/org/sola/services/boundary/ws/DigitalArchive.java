@@ -32,6 +32,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
+import javax.xml.ws.soap.MTOM;
 import org.sola.services.boundary.transferobjects.digitalarchive.DocumentBinaryTO;
 import org.sola.services.boundary.transferobjects.digitalarchive.DocumentTO;
 import org.sola.services.boundary.transferobjects.digitalarchive.FileBinaryTO;
