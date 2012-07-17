@@ -12,18 +12,41 @@
     <version>1.1-SNAPSHOT</version>
     <name>Boundary Web Service Clients</name>
     <url>http://maven.apache.org</url>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.metro</groupId>
+            <artifactId>webservices-rt</artifactId>
+            <version>2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.sola.common</groupId>
+            <artifactId>sola-messaging</artifactId>
+            <version>1.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.sola.common</groupId>
+            <artifactId>sola-common</artifactId>
+            <version>1.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
     <build>
-        <plugins>
+        <plugins>    
             <plugin>
                 <!--
                 Imports the WSDL created during the build of the Boundary Web Services project and
-                generates the client side classes. This plugin is error prone and regularly fails.
-                If it fails to generate the classes, first try to Build the project. If this also
-                fails, attempt to debug the cause using the verbose and xdebug options commented
-                out below. -->
-                <groupId>org.codehaus.mojo</groupId>
+                generates the client side classes. This version of the pluggin is not recongnised
+                by Netbeans and the project will display without the Web Service Reference folder.
+                To access the Web Service Reference folder in Netbeans, see the commented out 
+                section below. -->
+                <groupId>org.jvnet.jax-ws-commons</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
-                <version>1.12</version>
+                <version>2.2</version>
                 <configuration>   
                     <wsdlDirectory>${basedir}/../wsdl</wsdlDirectory>
                     <sourceDestDir>${project.build.directory}/generated-sources/jaxws-wsimport</sourceDestDir>
@@ -139,69 +162,214 @@
                         <phase>generate-sources</phase>
                     </execution>
                 </executions>
-               
-                <dependencies>
-                    <dependency>
-                        <groupId>org.glassfish.metro</groupId>
-                        <artifactId>webservices-api</artifactId>
-                        <version>2.1</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-        </plugins>
-    </build>
-    <pluginRepositories>
-        <pluginRepository>
-            <name>java.net</name>
-            <id>java.net</id>
-            <url>http://download.java.net/maven/2/</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>jboss-public-repository-group</id>
-            <name>JBoss Public Maven Repository Group</name>
-            <url>https://repository.jboss.org/nexus/content/groups/public</url>
-        </pluginRepository>
-    </pluginRepositories>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.8.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.metro</groupId>
-            <artifactId>webservices-rt</artifactId>
-            <version>2.1</version>
-            <!-- To reduce the size of the sola-desktop webstart download, set this depencency
-            to provided scope as it is included in the Java 7 JRE >
-            <scope>provided</scope-->
-        </dependency>
-        <dependency>
-            <groupId>org.sola.common</groupId>
-            <artifactId>sola-messaging</artifactId>
-            <version>1.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.sola.common</groupId>
-            <artifactId>sola-common</artifactId>
-            <version>1.1-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
-    <repositories>
-        <repository>
-            <id>jboss-public-repository-group</id>
-            <name>JBoss Public Maven Repository Group</name>
-            <url>https://repository.jboss.org/nexus/content/groups/public</url>
-        </repository>
-        <repository>
-            <url>http://download.java.net/maven/2/</url>
-            <id>metro</id>
-            <layout>default</layout>
-            <name>Repository for library Library[metro]</name>
-        </repository>
-    </repositories>
-</project>
+                </plugin>
+                  <!-- Don't forget to use endorsed with JAX-WS 2.2 on Java 6 !! -->
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.6</source>
+                        <target>1.6</target>
+                        <compilerArguments>
+                            <endorseddirs>${project.build.directory}/endorsed</endorseddirs>
+                        </compilerArguments>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>2.3</version>
+                    <executions>
+                        <execution>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>copy</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${project.build.directory}/endorsed</outputDirectory>
+                                <silent>true</silent>
+                                <artifactItems>
+                                    <artifactItem>
+                                        <groupId>javax.xml.bind</groupId>
+                                        <artifactId>jaxb-api</artifactId>
+                                        <version>2.2.4</version>
+                                        <type>jar</type>
+                                    </artifactItem>
+                                    <artifactItem>
+                                        <groupId>javax.xml.ws</groupId>
+                                        <artifactId>jaxws-api</artifactId>
+                                        <version>2.2.8</version>
+                                        <type>jar</type>
+                                    </artifactItem>
+                                </artifactItems>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            <!-- PLEASE LEAVE... 
+                 The jaxws-maven-plugin configuration below is recongized by Netbeans and will
+                 cause the project to display the Web Service References folder. This section 
+                 can be uncommented to allow configuration of the Web Service Client WSIT files using
+                 the Netbeans UI. Note that changes to the WSIT are seldom required. -->
+            <!--plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>1.12</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlFiles>
+                                <wsdlFile>localhost_8080/sola/webservices/digitalarchive-service.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <wsdlLocation>http://localhost:8080/sola/webservices/digitalarchive-service?wsdl</wsdlLocation>
+                            <staleFile>${project.build.directory}/jaxws/stale/digitalarchive-service.stale</staleFile>
+                        </configuration>
+                        <id>wsimport-generate-digitalarchive-service</id>
+                        <phase>generate-sources</phase>
+                    </execution>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlFiles>
+                                <wsdlFile>localhost_8080/sola/webservices/cadastre-service.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <wsdlLocation>http://localhost:8080/sola/webservices/cadastre-service?wsdl</wsdlLocation>
+                            <staleFile>${project.build.directory}/jaxws/stale/cadastre-service.stale</staleFile>
+                        </configuration>
+                        <id>wsimport-generate-cadastre-service</id>
+                        <phase>generate-sources</phase>
+                    </execution>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlFiles>
+                                <wsdlFile>localhost_8080/sola/webservices/search-service.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <wsdlLocation>http://localhost:8080/sola/webservices/search-service?wsdl</wsdlLocation>
+                            <staleFile>${project.build.directory}/jaxws/stale/search-service.stale</staleFile>
+                        </configuration>
+                        <id>wsimport-generate-search-service</id>
+                        <phase>generate-sources</phase>
+                    </execution>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlFiles>
+                                <wsdlFile>localhost_8080/sola/webservices/admin-service.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <wsdlLocation>http://localhost:8080/sola/webservices/admin-service?wsdl</wsdlLocation>
+                            <staleFile>${project.build.directory}/jaxws/stale/admin-service.stale</staleFile>
+                        </configuration>
+                        <id>wsimport-generate-admin-service</id>
+                        <phase>generate-sources</phase>
+                    </execution>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlFiles>
+                                <wsdlFile>localhost_8080/sola/webservices/administrative-service.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <wsdlLocation>http://localhost:8080/sola/webservices/administrative-service?wsdl</wsdlLocation>
+                            <staleFile>${project.build.directory}/jaxws/stale/administrative-service.stale</staleFile>
+                        </configuration>
+                        <id>wsimport-generate-administrative-service</id>
+                        <phase>generate-sources</phase>
+                    </execution>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlFiles>
+                                <wsdlFile>localhost_8080/sola/webservices/referencedata-service.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <wsdlLocation>http://localhost:8080/sola/webservices/referencedata-service?wsdl</wsdlLocation>
+                            <staleFile>${project.build.directory}/jaxws/stale/referencedata-service.stale</staleFile>
+                        </configuration>
+                        <id>wsimport-generate-referencedata-service</id>
+                        <phase>generate-sources</phase>
+                    </execution>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlFiles>
+                                <wsdlFile>localhost_8080/sola/webservices/casemanagement-service.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <wsdlLocation>http://localhost:8080/sola/webservices/casemanagement-service?wsdl</wsdlLocation>
+                            <staleFile>${project.build.directory}/jaxws/stale/casemanagement-service.stale</staleFile>
+                        </configuration>
+                        <id>wsimport-generate-casemanagement-service</id>
+                        <phase>generate-sources</phase>
+                    </execution>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlFiles>
+                                <wsdlFile>localhost_8080/sola/webservices/spatial-service.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <wsdlLocation>http://localhost:8080/sola/webservices/spatial-service?wsdl</wsdlLocation>
+                            <staleFile>${project.build.directory}/jaxws/stale/spatial-service.stale</staleFile>
+                        </configuration>
+                        <id>wsimport-generate-spatial-service</id>
+                        <phase>generate-sources</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <sourceDestDir>${project.build.directory}/generated-sources/jaxws-wsimport</sourceDestDir>
+                    <xnocompile>true</xnocompile>
+                    <verbose>true</verbose>
+                    <extension>true</extension>
+                    <catalog>${basedir}/src/jax-ws-catalog.xml</catalog>
+                </configuration>
+            </plugin-->
+            </plugins>
+        </build>
+        <pluginRepositories>
+            <pluginRepository>
+                <name>java.net</name>
+                <id>java.net</id>
+                <url>http://download.java.net/maven/2/</url>
+            </pluginRepository>
+            <pluginRepository>
+                <id>jboss-public-repository-group</id>
+                <name>JBoss Public Maven Repository Group</name>
+                <url>https://repository.jboss.org/nexus/content/groups/public</url>
+            </pluginRepository>
+        </pluginRepositories>
+        <properties>
+            <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        </properties>
+
+        <repositories>
+            <repository>
+                <id>jboss-public-repository-group</id>
+                <name>JBoss Public Maven Repository Group</name>
+                <url>https://repository.jboss.org/nexus/content/groups/public</url>
+            </repository>
+            <repository>
+                <url>http://download.java.net/maven/2/</url>
+                <id>metro</id>
+                <layout>default</layout>
+                <name>Repository for library Library[metro]</name>
+            </repository>
+            <repository>
+                <id>spring-ext</id>
+                <name>Spring Repository Extension</name>
+                <url>https://springframework.svn.sourceforge.net/svnroot/springframework/repos/repo-ext/</url>
+            </repository>
+        </repositories>
+    </project>

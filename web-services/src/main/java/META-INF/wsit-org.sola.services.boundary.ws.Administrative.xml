@@ -3,7 +3,7 @@
  xmlns="http://schemas.xmlsoap.org/wsdl/" 
  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
- xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="administrative" targetNamespace="http%3A%2F%2Fwebservices.sola.org%2Fadministrative" xmlns:tns="http%3A%2F%2Fwebservices.sola.org%2Fadministrative" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:fi="http://java.sun.com/xml/ns/wsit/2006/09/policy/fastinfoset/service" xmlns:tcp="http://java.sun.com/xml/ns/wsit/2006/09/policy/soaptcp/service" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:sc="http://schemas.sun.com/2006/03/wss/server" xmlns:wspp="http://java.sun.com/xml/ns/wsit/policy" 
+ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="administrative-service" targetNamespace="http%3A%2F%2Fwebservices.sola.org%2Fadministrative" xmlns:tns="http%3A%2F%2Fwebservices.sola.org%2Fadministrative" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp1="http://www.w3.org/ns/ws-policy" xmlns:fi="http://java.sun.com/xml/ns/wsit/2006/09/policy/fastinfoset/service" xmlns:tcp="http://java.sun.com/xml/ns/wsit/2006/09/policy/soaptcp/service" xmlns:wsaw="http://www.w3.org/2005/08/addressing" xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy" xmlns:sc="http://schemas.sun.com/2006/03/wss/server" xmlns:wspp="http://java.sun.com/xml/ns/wsit/policy" 
  >
     <message name="CheckConnection"/>
     <message name="CheckConnectionResponse"/>
@@ -11,10 +11,19 @@
     <message name="CreateBaUnitResponse"/>
     <message name="SOLAFault"/>
     <message name="UnhandledFault"/>
+    <message name="SOLAAccessFault"/>
+    <message name="OptimisticLockingFault"/>
     <message name="SaveBaUnit"/>
     <message name="SaveBaUnitResponse"/>
+    <message name="TerminateBaUnit"/>
+    <message name="TerminateBaUnitResponse"/>
+    <message name="SOLAValidationFault"/>
+    <message name="CancelBaUnitTermination"/>
+    <message name="CancelBaUnitTerminationResponse"/>
     <message name="GetBaUnitById"/>
     <message name="GetBaUnitByIdResponse"/>
+    <message name="GetBaUnitsByServiceId"/>
+    <message name="GetBaUnitsByServiceIdResponse"/>
     <message name="GetBaUnitByCode"/>
     <message name="GetBaUnitByCodeResponse"/>
     <portType name="Administrative">
@@ -27,18 +36,47 @@
             <output message="tns:CreateBaUnitResponse"/>
             <fault name="SOLAFault" message="tns:SOLAFault"/>
             <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+            <fault name="OptimisticLockingFault" message="tns:OptimisticLockingFault"/>
         </operation>
         <operation name="SaveBaUnit">
             <input message="tns:SaveBaUnit"/>
             <output message="tns:SaveBaUnitResponse"/>
             <fault name="SOLAFault" message="tns:SOLAFault"/>
             <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+            <fault name="OptimisticLockingFault" message="tns:OptimisticLockingFault"/>
+        </operation>
+        <operation name="TerminateBaUnit">
+            <input message="tns:TerminateBaUnit"/>
+            <output message="tns:TerminateBaUnitResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+            <fault name="OptimisticLockingFault" message="tns:OptimisticLockingFault"/>
+            <fault name="SOLAValidationFault" message="tns:SOLAValidationFault"/>
+        </operation>
+        <operation name="CancelBaUnitTermination">
+            <input message="tns:CancelBaUnitTermination"/>
+            <output message="tns:CancelBaUnitTerminationResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+            <fault name="OptimisticLockingFault" message="tns:OptimisticLockingFault"/>
+            <fault name="SOLAValidationFault" message="tns:SOLAValidationFault"/>
         </operation>
         <operation name="GetBaUnitById">
             <input message="tns:GetBaUnitById"/>
             <output message="tns:GetBaUnitByIdResponse"/>
             <fault name="SOLAFault" message="tns:SOLAFault"/>
             <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+        </operation>
+        <operation name="GetBaUnitsByServiceId">
+            <input message="tns:GetBaUnitsByServiceId"/>
+            <output message="tns:GetBaUnitsByServiceIdResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
         </operation>
         <operation name="GetBaUnitByCode">
             <input message="tns:GetBaUnitByCode"/>
@@ -66,6 +104,8 @@
             </output>
             <fault name="SOLAFault"/>
             <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+            <fault name="OptimisticLockingFault"/>
         </operation>
         <operation name="SaveBaUnit">
             <input>
@@ -76,6 +116,34 @@
             </output>
             <fault name="SOLAFault"/>
             <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+            <fault name="OptimisticLockingFault"/>
+        </operation>
+        <operation name="TerminateBaUnit">
+            <input>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+            <fault name="OptimisticLockingFault"/>
+            <fault name="SOLAValidationFault"/>
+        </operation>
+        <operation name="CancelBaUnitTermination">
+            <input>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+            <fault name="OptimisticLockingFault"/>
+            <fault name="SOLAValidationFault"/>
         </operation>
         <operation name="GetBaUnitById">
             <input>
@@ -86,6 +154,17 @@
             </output>
             <fault name="SOLAFault"/>
             <fault name="UnhandledFault"/>
+        </operation>
+        <operation name="GetBaUnitsByServiceId">
+            <input>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
         </operation>
         <operation name="GetBaUnitByCode">
             <input>
@@ -98,18 +177,18 @@
             <fault name="UnhandledFault"/>
         </operation>
     </binding>
-    <service name="administrative">
+    <service name="administrative-service">
         <port name="AdministrativePort" binding="tns:AdministrativePortBinding"/>
     </service>
     <wsp:Policy wsu:Id="AdministrativePortBindingPolicy">
         <wsp:ExactlyOne>
             <wsp:All>
-                <wsam:Addressing wsp:Optional="false"/>
+                <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" wsp:Optional="false"/>
                 <sp:SymmetricBinding>
                     <wsp:Policy>
                         <sp:ProtectionToken>
                             <wsp:Policy>
-                                <sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/Never">
+                                <sp:X509Token sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/Never">
                                     <wsp:Policy>
                                         <sp:WssX509V3Token10/>
                                         <sp:RequireIssuerSerialReference/>
@@ -138,15 +217,15 @@
                         <sp:MustSupportRefEncryptedKey/>
                     </wsp:Policy>
                 </sp:Wss11>
-                <sp:SignedEncryptedSupportingTokens>
+                <sp:SignedSupportingTokens>
                     <wsp:Policy>
-                        <sp:UsernameToken sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+                        <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
                             <wsp:Policy>
                                 <sp:WssUsernameToken10/>
                             </wsp:Policy>
                         </sp:UsernameToken>
                     </wsp:Policy>
-                </sp:SignedEncryptedSupportingTokens>
+                </sp:SignedSupportingTokens>
                 <sc:KeyStore wspp:visibility="private" location="keystore.jks" type="JKS" storepass="changeit" alias="xws-security-server"/>
             </wsp:All>
         </wsp:ExactlyOne>
@@ -166,10 +245,10 @@
                     <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing"/>
                     <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing"/>
                     <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing"/>
-                    <sp:Header Name="AckRequested" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
-                    <sp:Header Name="SequenceAcknowledgement" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
-                    <sp:Header Name="Sequence" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
-                    <sp:Header Name="CreateSequence" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
+                    <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm"/>
+                    <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm"/>
+                    <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm"/>
+                    <sp:Header Name="CreateSequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm"/>
                 </sp:SignedParts>
             </wsp:All>
         </wsp:ExactlyOne>
@@ -189,10 +268,10 @@
                     <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing"/>
                     <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing"/>
                     <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing"/>
-                    <sp:Header Name="AckRequested" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
-                    <sp:Header Name="SequenceAcknowledgement" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
-                    <sp:Header Name="Sequence" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
-                    <sp:Header Name="CreateSequence" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
+                    <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm"/>
+                    <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm"/>
+                    <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm"/>
+                    <sp:Header Name="CreateSequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm"/>
                 </sp:SignedParts>
             </wsp:All>
         </wsp:ExactlyOne>

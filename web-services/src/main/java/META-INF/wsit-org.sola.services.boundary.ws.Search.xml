@@ -3,85 +3,326 @@
  xmlns="http://schemas.xmlsoap.org/wsdl/" 
  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
- xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="search-service" targetNamespace="http%3A%2F%2Fwebservices.sola.org%2Fsearch" xmlns:tns="http%3A%2F%2Fwebservices.sola.org%2Fsearch" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:fi="http://java.sun.com/xml/ns/wsit/2006/09/policy/fastinfoset/service" xmlns:tcp="http://java.sun.com/xml/ns/wsit/2006/09/policy/soaptcp/service" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:sc="http://schemas.sun.com/2006/03/wss/server" xmlns:wspp="http://java.sun.com/xml/ns/wsit/policy" 
+ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="search-service" targetNamespace="http%3A%2F%2Fwebservices.sola.org%2Fsearch" xmlns:tns="http%3A%2F%2Fwebservices.sola.org%2Fsearch" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp1="http://www.w3.org/ns/ws-policy" xmlns:fi="http://java.sun.com/xml/ns/wsit/2006/09/policy/fastinfoset/service" xmlns:tcp="http://java.sun.com/xml/ns/wsit/2006/09/policy/soaptcp/service" xmlns:wsaw="http://www.w3.org/2005/08/addressing" xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy" xmlns:sc="http://schemas.sun.com/2006/03/wss/server" xmlns:wspp="http://java.sun.com/xml/ns/wsit/policy" 
  >
+    <message name="CheckConnection"/>
+    <message name="CheckConnectionResponse"/>
     <message name="VerifyApplicationProperty"/>
     <message name="VerifyApplicationPropertyResponse"/>
     <message name="SOLAFault"/>
     <message name="UnhandledFault"/>
+    <message name="SOLAAccessFault"/>
     <message name="GetUnassignedApplications"/>
     <message name="GetUnassignedApplicationsResponse"/>
     <message name="GetAssignedApplications"/>
     <message name="GetAssignedApplicationsResponse"/>
     <message name="SearchApplications"/>
     <message name="SearchApplicationsResponse"/>
+    <message name="Select"/>
+    <message name="SelectResponse"/>
+    <message name="SearchParties"/>
+    <message name="SearchPartiesResponse"/>
+    <message name="SearchSources"/>
+    <message name="SearchSourcesResponse"/>
+    <message name="GetActiveUsers"/>
+    <message name="GetActiveUsersResponse"/>
+    <message name="searchUsers"/>
+    <message name="searchUsersResponse"/>
+    <message name="getApplicationLog"/>
+    <message name="getApplicationLogResponse"/>
+    <message name="SearchBr"/>
+    <message name="SearchBrResponse"/>
+    <message name="searchBaUnit"/>
+    <message name="searchBaUnitResponse"/>
+    <message name="GetSpatialSearchOptions"/>
+    <message name="GetSpatialSearchOptionsResponse"/>
+    <message name="SearchSpatialObjects"/>
+    <message name="SearchSpatialObjectsResponse"/>
+    <message name="GetMapDefinition"/>
+    <message name="GetMapDefinitionResponse"/>
     <portType name="Search">
+        <operation name="CheckConnection">
+            <input message="tns:CheckConnection"/>
+            <output message="tns:CheckConnectionResponse"/>
+        </operation>
         <operation name="VerifyApplicationProperty">
             <input message="tns:VerifyApplicationProperty"/>
             <output message="tns:VerifyApplicationPropertyResponse"/>
             <fault name="SOLAFault" message="tns:SOLAFault"/>
             <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
         </operation>
         <operation name="GetUnassignedApplications">
             <input message="tns:GetUnassignedApplications"/>
             <output message="tns:GetUnassignedApplicationsResponse"/>
             <fault name="SOLAFault" message="tns:SOLAFault"/>
             <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
         </operation>
         <operation name="GetAssignedApplications">
             <input message="tns:GetAssignedApplications"/>
             <output message="tns:GetAssignedApplicationsResponse"/>
             <fault name="SOLAFault" message="tns:SOLAFault"/>
             <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
         </operation>
         <operation name="SearchApplications">
             <input message="tns:SearchApplications"/>
             <output message="tns:SearchApplicationsResponse"/>
             <fault name="SOLAFault" message="tns:SOLAFault"/>
             <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+        </operation>
+        <operation name="Select">
+            <input message="tns:Select"/>
+            <output message="tns:SelectResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+        </operation>
+        <operation name="SearchParties">
+            <input message="tns:SearchParties"/>
+            <output message="tns:SearchPartiesResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+        </operation>
+        <operation name="SearchSources">
+            <input message="tns:SearchSources"/>
+            <output message="tns:SearchSourcesResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+        </operation>
+        <operation name="GetActiveUsers">
+            <input message="tns:GetActiveUsers"/>
+            <output message="tns:GetActiveUsersResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+        </operation>
+        <operation name="searchUsers">
+            <input message="tns:searchUsers"/>
+            <output message="tns:searchUsersResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+        </operation>
+        <operation name="getApplicationLog">
+            <input message="tns:getApplicationLog"/>
+            <output message="tns:getApplicationLogResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+        </operation>
+        <operation name="SearchBr">
+            <input message="tns:SearchBr"/>
+            <output message="tns:SearchBrResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+        </operation>
+        <operation name="searchBaUnit">
+            <input message="tns:searchBaUnit"/>
+            <output message="tns:searchBaUnitResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+        </operation>
+        <operation name="GetSpatialSearchOptions">
+            <input message="tns:GetSpatialSearchOptions"/>
+            <output message="tns:GetSpatialSearchOptionsResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+        </operation>
+        <operation name="SearchSpatialObjects">
+            <input message="tns:SearchSpatialObjects"/>
+            <output message="tns:SearchSpatialObjectsResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+        </operation>
+        <operation name="GetMapDefinition">
+            <input message="tns:GetMapDefinition"/>
+            <output message="tns:GetMapDefinitionResponse"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
         </operation>
     </portType>
     <binding name="SearchPortBinding" type="tns:Search">
         <wsp:PolicyReference URI="#SearchPortBindingPolicy"/>
-        <operation name="VerifyApplicationProperty">
+        <operation name="CheckConnection">
             <input>
-                <wsp:PolicyReference URI="#SearchPortBinding_VerifyApplicationProperty_Input_Policy"/>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
             </input>
             <output>
-                <wsp:PolicyReference URI="#SearchPortBinding_VerifyApplicationProperty_Output_Policy"/>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
+            </output>
+        </operation>
+        <operation name="VerifyApplicationProperty">
+            <input>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
             </output>
             <fault name="SOLAFault"/>
             <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
         </operation>
         <operation name="GetUnassignedApplications">
             <input>
-                <wsp:PolicyReference URI="#SearchPortBinding_VerifyApplicationProperty_Input_Policy"/>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
             </input>
             <output>
-                <wsp:PolicyReference URI="#SearchPortBinding_VerifyApplicationProperty_Output_Policy"/>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
             </output>
             <fault name="SOLAFault"/>
             <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
         </operation>
         <operation name="GetAssignedApplications">
             <input>
-                <wsp:PolicyReference URI="#SearchPortBinding_VerifyApplicationProperty_Input_Policy"/>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
             </input>
             <output>
-                <wsp:PolicyReference URI="#SearchPortBinding_VerifyApplicationProperty_Output_Policy"/>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
             </output>
             <fault name="SOLAFault"/>
             <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
         </operation>
         <operation name="SearchApplications">
             <input>
-                <wsp:PolicyReference URI="#SearchPortBinding_VerifyApplicationProperty_Input_Policy"/>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
             </input>
             <output>
-                <wsp:PolicyReference URI="#SearchPortBinding_VerifyApplicationProperty_Output_Policy"/>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
             </output>
             <fault name="SOLAFault"/>
             <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+        </operation>
+        <operation name="Select">
+            <input>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+        </operation>
+        <operation name="SearchParties">
+            <input>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+        </operation>
+        <operation name="SearchSources">
+            <input>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+        </operation>
+        <operation name="GetActiveUsers">
+            <input>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+        </operation>
+        <operation name="searchUsers">
+            <input>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+        </operation>
+        <operation name="getApplicationLog">
+            <input>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+        </operation>
+        <operation name="SearchBr">
+            <input>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+        </operation>
+        <operation name="searchBaUnit">
+            <input>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+        </operation>
+        <operation name="GetSpatialSearchOptions">
+            <input>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+        </operation>
+        <operation name="SearchSpatialObjects">
+            <input>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+        </operation>
+        <operation name="GetMapDefinition">
+            <input>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAFault"/>
         </operation>
     </binding>
     <service name="search-service">
@@ -90,12 +331,12 @@
     <wsp:Policy wsu:Id="SearchPortBindingPolicy">
         <wsp:ExactlyOne>
             <wsp:All>
-                <wsam:Addressing wsp:Optional="false"/>
+                <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" wsp:Optional="false"/>
                 <sp:SymmetricBinding>
                     <wsp:Policy>
                         <sp:ProtectionToken>
                             <wsp:Policy>
-                                <sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/Never">
+                                <sp:X509Token sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/Never">
                                     <wsp:Policy>
                                         <sp:WssX509V3Token10/>
                                         <sp:RequireIssuerSerialReference/>
@@ -124,20 +365,20 @@
                         <sp:MustSupportRefEncryptedKey/>
                     </wsp:Policy>
                 </sp:Wss11>
-                <sp:SignedEncryptedSupportingTokens>
+                <sp:SignedSupportingTokens>
                     <wsp:Policy>
-                        <sp:UsernameToken sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+                        <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
                             <wsp:Policy>
                                 <sp:WssUsernameToken10/>
                             </wsp:Policy>
                         </sp:UsernameToken>
                     </wsp:Policy>
-                </sp:SignedEncryptedSupportingTokens>
+                </sp:SignedSupportingTokens>
                 <sc:KeyStore wspp:visibility="private" location="keystore.jks" type="JKS" storepass="changeit" alias="xws-security-server"/>
             </wsp:All>
         </wsp:ExactlyOne>
     </wsp:Policy>
-    <wsp:Policy wsu:Id="SearchPortBinding_VerifyApplicationProperty_Input_Policy">
+    <wsp:Policy wsu:Id="SearchPortBinding_CheckConnection_Input_Policy">
         <wsp:ExactlyOne>
             <wsp:All>
                 <sp:EncryptedParts>
@@ -152,15 +393,15 @@
                     <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing"/>
                     <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing"/>
                     <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing"/>
-                    <sp:Header Name="AckRequested" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
-                    <sp:Header Name="SequenceAcknowledgement" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
-                    <sp:Header Name="Sequence" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
-                    <sp:Header Name="CreateSequence" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
+                    <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm"/>
+                    <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm"/>
+                    <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm"/>
+                    <sp:Header Name="CreateSequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm"/>
                 </sp:SignedParts>
             </wsp:All>
         </wsp:ExactlyOne>
     </wsp:Policy>
-    <wsp:Policy wsu:Id="SearchPortBinding_VerifyApplicationProperty_Output_Policy">
+    <wsp:Policy wsu:Id="SearchPortBinding_CheckConnection_Output_Policy">
         <wsp:ExactlyOne>
             <wsp:All>
                 <sp:EncryptedParts>
@@ -175,10 +416,10 @@
                     <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing"/>
                     <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing"/>
                     <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing"/>
-                    <sp:Header Name="AckRequested" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
-                    <sp:Header Name="SequenceAcknowledgement" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
-                    <sp:Header Name="Sequence" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
-                    <sp:Header Name="CreateSequence" Namespace="http://docs.oasis-open.org/ws-rx/wsrm/200702"/>
+                    <sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm"/>
+                    <sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm"/>
+                    <sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm"/>
+                    <sp:Header Name="CreateSequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm"/>
                 </sp:SignedParts>
             </wsp:All>
         </wsp:ExactlyOne>
