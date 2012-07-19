@@ -80,6 +80,10 @@ public interface DigitalArchiveClient extends AbstractWSClient {
      * DigitalArchive.deleteFile - Identifier for the deleteFile method
      */
     public static final String DELETE_FILE = SERVICE_NAME + "deleteFile";
+    /**
+     * DigitalArchive.setFileStreamingService - Identifier for the setFileStreamingService method
+     */
+    public static final String SET_FILE_STREAMING_SERVICE = SERVICE_NAME + "setFileStreamingService";
 
     /**
      * Retrieves the document for the specified identifier. This includes the document content (i.e
@@ -127,7 +131,7 @@ public interface DigitalArchiveClient extends AbstractWSClient {
      * @param fileName The name of the file to load
      * @return The binary file along with some attributes of the file
      */
-    public FileBinaryTO getFileBinary(String fileName);
+    public FileInfoTO getFileBinary(String fileName);
 
     /**
      * Loads the specified file from the Network Scan folder then generates a thumbnail image of the
@@ -155,4 +159,11 @@ public interface DigitalArchiveClient extends AbstractWSClient {
      * @return true if the file is successfully deleted.
      */
     public boolean deleteFile(String fileName);
+
+    /**
+     * Sets the file Streaming Service used by the Digital Archive to upload and download files
+     *
+     * @param fsService The instance of the FileStreaming Service to use.
+     */
+    public void setFileStreamingService(FileStreamingClient fsService);
 }

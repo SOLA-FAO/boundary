@@ -161,50 +161,63 @@
                         <id>admin-service</id>
                         <phase>generate-sources</phase>
                     </execution>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlFiles>
+                                <wsdlFile>FilestreamingService.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <staleFile>${project.build.directory}/jaxws/stale/filestreaming.stale</staleFile>                    
+                        </configuration>            
+                        <id>filestreaming-service</id>
+                        <phase>generate-sources</phase>
+                    </execution>
                 </executions>
-                </plugin>
+            </plugin>
                   <!-- Don't forget to use endorsed with JAX-WS 2.2 on Java 6 !! -->
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                        <source>1.6</source>
-                        <target>1.6</target>
-                        <compilerArguments>
-                            <endorseddirs>${project.build.directory}/endorsed</endorseddirs>
-                        </compilerArguments>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-dependency-plugin</artifactId>
-                    <version>2.3</version>
-                    <executions>
-                        <execution>
-                            <phase>validate</phase>
-                            <goals>
-                                <goal>copy</goal>
-                            </goals>
-                            <configuration>
-                                <outputDirectory>${project.build.directory}/endorsed</outputDirectory>
-                                <silent>true</silent>
-                                <artifactItems>
-                                    <artifactItem>
-                                        <groupId>javax.xml.bind</groupId>
-                                        <artifactId>jaxb-api</artifactId>
-                                        <version>2.2.4</version>
-                                        <type>jar</type>
-                                    </artifactItem>
-                                    <artifactItem>
-                                        <groupId>javax.xml.ws</groupId>
-                                        <artifactId>jaxws-api</artifactId>
-                                        <version>2.2.8</version>
-                                        <type>jar</type>
-                                    </artifactItem>
-                                </artifactItems>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <compilerArguments>
+                        <endorseddirs>${project.build.directory}/endorsed</endorseddirs>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/endorsed</outputDirectory>
+                            <silent>true</silent>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>javax.xml.bind</groupId>
+                                    <artifactId>jaxb-api</artifactId>
+                                    <version>2.2.4</version>
+                                    <type>jar</type>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>javax.xml.ws</groupId>
+                                    <artifactId>jaxws-api</artifactId>
+                                    <version>2.2.8</version>
+                                    <type>jar</type>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <!-- PLEASE LEAVE... 
                  The jaxws-maven-plugin configuration below is recongized by Netbeans and will
                  cause the project to display the Web Service References folder. This section 
@@ -327,6 +340,20 @@
                         <id>wsimport-generate-spatial-service</id>
                         <phase>generate-sources</phase>
                     </execution>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlFiles>
+                                <wsdlFile>localhost_8080/sola/webservices/filestreaming-service.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <wsdlLocation>http://localhost:8080/sola/webservices/filestreaming-service?wsdl</wsdlLocation>
+                            <staleFile>${project.build.directory}/jaxws/stale/filestreaming-service.stale</staleFile>
+                        </configuration>
+                        <id>wsimport-generate-filestreaming-service</id>
+                        <phase>generate-sources</phase>
+                    </execution>
                 </executions>
                 <configuration>
                     <sourceDestDir>${project.build.directory}/generated-sources/jaxws-wsimport</sourceDestDir>
@@ -336,40 +363,40 @@
                     <catalog>${basedir}/src/jax-ws-catalog.xml</catalog>
                 </configuration>
             </plugin-->
-            </plugins>
-        </build>
-        <pluginRepositories>
-            <pluginRepository>
-                <name>java.net</name>
-                <id>java.net</id>
-                <url>http://download.java.net/maven/2/</url>
-            </pluginRepository>
-            <pluginRepository>
-                <id>jboss-public-repository-group</id>
-                <name>JBoss Public Maven Repository Group</name>
-                <url>https://repository.jboss.org/nexus/content/groups/public</url>
-            </pluginRepository>
-        </pluginRepositories>
-        <properties>
-            <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        </properties>
+        </plugins>
+    </build>
+    <pluginRepositories>
+        <pluginRepository>
+            <name>java.net</name>
+            <id>java.net</id>
+            <url>http://download.java.net/maven/2/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>jboss-public-repository-group</id>
+            <name>JBoss Public Maven Repository Group</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public</url>
+        </pluginRepository>
+    </pluginRepositories>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
-        <repositories>
-            <repository>
-                <id>jboss-public-repository-group</id>
-                <name>JBoss Public Maven Repository Group</name>
-                <url>https://repository.jboss.org/nexus/content/groups/public</url>
-            </repository>
-            <repository>
-                <url>http://download.java.net/maven/2/</url>
-                <id>metro</id>
-                <layout>default</layout>
-                <name>Repository for library Library[metro]</name>
-            </repository>
-            <repository>
-                <id>spring-ext</id>
-                <name>Spring Repository Extension</name>
-                <url>https://springframework.svn.sourceforge.net/svnroot/springframework/repos/repo-ext/</url>
-            </repository>
-        </repositories>
-    </project>
+    <repositories>
+        <repository>
+            <id>jboss-public-repository-group</id>
+            <name>JBoss Public Maven Repository Group</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public</url>
+        </repository>
+        <repository>
+            <url>http://download.java.net/maven/2/</url>
+            <id>metro</id>
+            <layout>default</layout>
+            <name>Repository for library Library[metro]</name>
+        </repository>
+        <repository>
+            <id>spring-ext</id>
+            <name>Spring Repository Extension</name>
+            <url>https://springframework.svn.sourceforge.net/svnroot/springframework/repos/repo-ext/</url>
+        </repository>
+    </repositories>
+</project>

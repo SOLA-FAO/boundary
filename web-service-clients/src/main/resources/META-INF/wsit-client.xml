@@ -12,6 +12,6 @@
     <import location="digitalarchive-service.xml" namespace="http://webservices.sola.org/digitalarchive"/>
     <!--import location="spatial-service.xml" namespace="http://webservices.sola.org/spatial"/ -->
     <import location="administrative-service.xml" namespace="http://webservices.sola.org/administrative"/>
-    <import location="system-service.xml" namespace="http://webservices.sola.org/system"/>
     <import location="admin-service.xml" namespace="http://webservices.sola.org/admin"/>
+    <!--import location="filestreaming-service.xml" namespace="http://webservices.sola.org/filestreaming"/-->
 </definitions>

@@ -34,7 +34,9 @@ import javax.xml.namespace.QName;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.Service;
 import javax.xml.ws.WebServiceException;
+import javax.xml.ws.WebServiceFeature;
 import javax.xml.ws.soap.SOAPFaultException;
+import org.sola.common.SOLAException;
 import org.sola.common.messaging.ServiceMessage;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientExceptionType;
@@ -74,21 +76,24 @@ public abstract class AbstractWSClientImpl implements AbstractWSClient {
     public abstract boolean checkConnection();
 
     /**
-     * Triggered before a web method is executed. Can be used to support generic timing or tracing 
-     * of all web methods. 
-     * @param methodName The name of the web method being executed (e.g. AdminService.checkConnection)
+     * Triggered before a web method is executed. Can be used to support generic timing or tracing
+     * of all web methods.
+     *
+     * @param methodName The name of the web method being executed (e.g.
+     * AdminService.checkConnection)
      * @param params The parameter values for the web method. null if the method does not have any
-     * parameters. 
+     * parameters.
      */
     protected void beforeWebMethod(String methodName, Object... params) {
     }
 
     /**
-     * Triggered after a web method is executed. Can be used to support generic timing or tracing
-     * of all web methods. Must be executed in the finally block to ensure
+     * Triggered after a web method is executed. Can be used to support generic timing or tracing of
+     * all web methods. Must be executed in the finally block to ensure
+     *
      * @param methodName
      * @param retVal
-     * @param params 
+     * @param params
      */
     protected void afterWebMethod(String methodName, Object retVal, Object... params) {
     }
@@ -127,12 +132,15 @@ public abstract class AbstractWSClientImpl implements AbstractWSClient {
      * @param portInterfaceClass The service client interface class to create. e.g.
      * SecurityClient.class
      * @param serviceClass The service class to use e.g. SecurityService.class
+     * @param features Optional list of web service features to instantiate the port with (e.g.
+     * MTOM)
      * @return A new port object that implements the service client interface class
      * @throws WebServiceClientException If an error occurs while instantiating the service object
      */
-    protected <T, S extends Service> T getPort(Class<T> portInterfaceClass, Class<S> serviceClass)
+    protected <T, S extends Service> T getPort(Class<T> portInterfaceClass, Class<S> serviceClass,
+            WebServiceFeature... features)
             throws WebServiceClientException {
-        T port = getService(serviceClass).getPort(portInterfaceClass);
+        T port = getService(serviceClass).getPort(portInterfaceClass, features);
         setContextParameters((BindingProvider) port);
         return port;
     }
@@ -410,6 +418,9 @@ public abstract class AbstractWSClientImpl implements AbstractWSClient {
             org.sola.webservices.spatial.UnhandledFault fault = (org.sola.webservices.spatial.UnhandledFault) e;
             throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
                     fault.getFaultInfo());
+        }
+        if (SOLAException.class.isAssignableFrom(e.getClass())) {
+            throw (SOLAException) e;
         }
         Object[] parms = {methodName, e.getLocalizedMessage(), e};
         throw new WebServiceClientException(ServiceMessage.GENERAL_UNEXPECTED_ERROR_DETAILS, parms);

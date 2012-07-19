@@ -27,13 +27,14 @@ package org.sola.services.boundary.wsclients;
 
 import java.util.List;
 import javax.xml.namespace.QName;
+import org.sola.common.FileUtility;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.digitalarchive.DigitalArchive;
 import org.sola.webservices.digitalarchive.DigitalarchiveService;
+import org.sola.webservices.transferobjects.digitalarchive.DocumentBinaryTO;
+import org.sola.webservices.transferobjects.digitalarchive.DocumentTO;
 import org.sola.webservices.transferobjects.digitalarchive.FileBinaryTO;
 import org.sola.webservices.transferobjects.digitalarchive.FileInfoTO;
-import org.sola.webservices.transferobjects.digitalarchive.DocumentTO;
-import org.sola.webservices.transferobjects.digitalarchive.DocumentBinaryTO;
 
 /**
  * Implementation class for the {@linkplain DigitalArchiveClient} interface.
@@ -42,6 +43,7 @@ public class DigitalArchiveClientImpl extends AbstractWSClientImpl implements Di
 
     private static final String NAMESPACE_URI = "http://webservices.sola.org/digitalarchive";
     private static final String LOCAL_PART = "digitalarchive-service";
+    private FileStreamingClient fileStreamingService = null;
 
     /**
      * Creates a web service client class for the web service hosted at the specified URL
@@ -54,6 +56,15 @@ public class DigitalArchiveClientImpl extends AbstractWSClientImpl implements Di
 
     protected DigitalArchive getPort() {
         return getPort(DigitalArchive.class, DigitalarchiveService.class);
+    }
+
+    @Override
+    public void setFileStreamingService(FileStreamingClient fsService) {
+        this.fileStreamingService = fsService;
+    }
+
+    private FileStreamingClient getFS() {
+        return this.fileStreamingService;
     }
 
     @Override
@@ -77,7 +88,11 @@ public class DigitalArchiveClientImpl extends AbstractWSClientImpl implements Di
         final String methodName = DigitalArchiveClient.GET_DOCUMENT;
         try {
             beforeWebMethod(methodName, documentId);
-            result = getPort().getDocument(documentId);
+            result = getPort().getDocument(documentId); 
+            String localFileName = FileUtility.generateFileName(result.getNr(),
+                    result.getRowVersion(), result.getExtension());
+            localFileName = getFS().download(result.getFileName(), localFileName);
+            result.setFileName(localFileName);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
@@ -107,6 +122,8 @@ public class DigitalArchiveClientImpl extends AbstractWSClientImpl implements Di
         final String methodName = DigitalArchiveClient.CREATE_DOCUMENT;
         try {
             beforeWebMethod(methodName, documentBinaryTO);
+            String serverFileName = getFS().upload(documentBinaryTO.getFileName());
+            documentBinaryTO.setFileName(serverFileName);
             result = getPort().createDocument(documentBinaryTO);
         } catch (Exception e) {
             processException(methodName, e);
@@ -132,12 +149,14 @@ public class DigitalArchiveClientImpl extends AbstractWSClientImpl implements Di
     }
 
     @Override
-    public FileBinaryTO getFileBinary(String fileName) {
-        FileBinaryTO result = null;
+    public FileInfoTO getFileBinary(String fileName) {
+        FileInfoTO result = null;
         final String methodName = DigitalArchiveClient.GET_FILE_BINARY;
         try {
             beforeWebMethod(methodName, fileName);
             result = getPort().getFileBinary(fileName);
+            fileName = getFS().download(result.getName(), fileName);
+            result.setName(fileName);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {

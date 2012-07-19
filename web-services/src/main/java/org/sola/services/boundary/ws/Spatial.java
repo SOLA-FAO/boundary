@@ -25,23 +25,16 @@
  */
 package org.sola.services.boundary.ws;
 
-import java.util.HashMap;
-import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.jws.WebMethod;
-import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
-import org.sola.services.boundary.transferobjects.configuration.ConfigMapLayerTO;
-import org.sola.services.boundary.transferobjects.configuration.MapDefinitionTO;
 import org.sola.services.common.ServiceConstants;
-import org.sola.services.common.contracts.GenericTranslator;
 import org.sola.services.common.faults.SOLAFault;
 import org.sola.services.common.faults.UnhandledFault;
 import org.sola.services.common.webservices.AbstractWebService;
 import org.sola.services.ejb.search.businesslogic.SearchEJBLocal;
-import org.sola.services.ejb.search.repository.entities.ConfigMapLayer;
 import org.sola.services.ejb.search.spatial.QueryForNavigation;
 import org.sola.services.ejb.search.spatial.ResultForNavigationInfo;
 

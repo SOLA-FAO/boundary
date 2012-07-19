@@ -25,6 +25,7 @@
  */
 package org.sola.services.boundary.ws;
 
+import java.io.File;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -32,7 +33,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
-import javax.xml.ws.soap.MTOM;
+import org.sola.common.FileUtility;
 import org.sola.services.boundary.transferobjects.digitalarchive.DocumentBinaryTO;
 import org.sola.services.boundary.transferobjects.digitalarchive.DocumentTO;
 import org.sola.services.boundary.transferobjects.digitalarchive.FileBinaryTO;
@@ -88,8 +89,17 @@ public class DigitalArchive extends AbstractWebService {
 
             @Override
             public void run() {
-                result[0] = GenericTranslator.toTO(digitalArchiveEJB.getDocument(documentIdTmp),
-                        DocumentBinaryTO.class);
+                Document document = digitalArchiveEJB.getDocument(documentIdTmp);
+                DocumentBinaryTO docTO = GenericTranslator.toTO(document, DocumentBinaryTO.class);
+                // Write the fileContent to disk so that it can be efficiently streamed up to the client 
+                // using the FileStreaming service. 
+                if (document.getBody() != null) {
+                    File file = FileUtility.writeFileToCache(document.getBody(), null);
+                    if (file != null) {
+                        docTO.setFileName(file.getAbsolutePath());
+                    }
+                }
+                result[0] = docTO;
             }
         });
 
@@ -145,8 +155,13 @@ public class DigitalArchive extends AbstractWebService {
 
             @Override
             public void run() {
-                Document document = digitalArchiveEJB.createDocument(GenericTranslator.fromTO(documentBinaryTOTmp, Document.class, null));
+                Document document = GenericTranslator.fromTO(documentBinaryTOTmp, Document.class, null);
+                if (documentBinaryTOTmp.getFileName() != null) {
+                    document.setBody(FileUtility.readFileFromCache(documentBinaryTOTmp.getFileName()));
+                }
+                document = digitalArchiveEJB.createDocument(document);
                 result[0] = GenericTranslator.toTO(document, DocumentTO.class);
+                FileUtility.deleteFileFromCache(documentBinaryTOTmp.getFileName());
             }
         });
 
@@ -193,7 +208,7 @@ public class DigitalArchive extends AbstractWebService {
      * @throws SOLAAccessFault
      */
     @WebMethod(operationName = "GetFileBinary")
-    public FileBinaryTO GetFileBinary(@WebParam(name = "fileName") String fileName)
+    public FileInfoTO GetFileBinary(@WebParam(name = "fileName") String fileName)
             throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String fileNameTmp = fileName;
@@ -203,11 +218,11 @@ public class DigitalArchive extends AbstractWebService {
 
             @Override
             public void run() {
-                result[0] = GenericTranslator.toTO(digitalArchiveEJB.getFileBinary(fileNameTmp), FileBinaryTO.class);
+                result[0] = GenericTranslator.toTO(digitalArchiveEJB.getFileBinary(fileNameTmp), FileInfoTO.class);
             }
         });
 
-        return (FileBinaryTO) result[0];
+        return (FileInfoTO) result[0];
     }
 
     /**

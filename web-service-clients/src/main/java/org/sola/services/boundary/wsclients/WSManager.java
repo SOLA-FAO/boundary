@@ -26,7 +26,6 @@
 package org.sola.services.boundary.wsclients;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import org.sola.common.messaging.ServiceMessage;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
@@ -36,7 +35,7 @@ import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
  * />This class is singleton.
  */
 public class WSManager {
-
+    
     private CaseManagementClient caseManagementWS;
     private AdminClient adminWS;
     private ReferenceDataClient referenceWS;
@@ -45,8 +44,9 @@ public class WSManager {
     private AdministrativeClient administrativeWS;
     private CadastreClient cadastreWS;
     private SpatialClient spatialWS;
+    private FileStreamingClient fileStreamingWS;
     private AbstractWSClient testWS;
-
+    
     private WSManager() {
     }
 
@@ -54,7 +54,7 @@ public class WSManager {
      * Private class to hold singleton instance.
      */
     private static class WSManagerHolder {
-
+        
         private static final WSManager INSTANCE = new WSManager();
     }
 
@@ -123,49 +123,58 @@ public class WSManager {
     public boolean initWebServices(String userName, char[] userPassword, HashMap<String, String> config)
             throws WebServiceClientException {
 
+        // The spatial service is not secured to improve the performance of spatial navigation. 
         if (getSpatialService() == null) {
             setSpatialWS(getWSClient(SpatialClientImpl.class,
                     config.get(WSConfig.SOLA_WS_SPATIAL_SERVICE_URL.toString()),
                     null, null));
         }
 
+        // The file streaming service is not secured to improve the performance of file upload
+        //and download and avoid Out of Memory errors. 
+        if (getFileStreamingService() == null) {
+            setFileStreamingWS(getWSClient(FileStreamingClientImpl.class,
+                    config.get(WSConfig.SOLA_WS_FILE_STREAMING_SERVICE_URL.toString()),
+                    null, null));
+        }
+        
         if (getCaseManagementService() == null) {
             setCaseManagementWS(getWSClient(CaseManagementClientImpl.class,
                     config.get(WSConfig.SOLA_WS_CASE_MANAGEMENT_SERVICE_URL.toString()),
                     userName, userPassword));
         }
-
+        
         if (getAdminService() == null) {
             setAdminWS(getWSClient(AdminClientImpl.class,
                     config.get(WSConfig.SOLA_WS_ADMIN_SERVICE_URL.toString()),
                     userName, userPassword));
         }
-
+        
         if (getReferenceDataService() == null) {
             setReferenceWS(getWSClient(ReferenceDataClientImpl.class,
                     config.get(WSConfig.SOLA_WS_REFERENCE_DATA_SERVICE_URL.toString()),
                     userName, userPassword));
         }
-
+        
         if (getDigitalArchive() == null) {
             setDigitalArchiveWS(getWSClient(DigitalArchiveClientImpl.class,
                     config.get(WSConfig.SOLA_WS_DIGITAL_ARCHIVE_URL.toString()),
                     userName, userPassword));
+            getDigitalArchive().setFileStreamingService(getFileStreamingService());
         }
-
+        
         if (getAdministrative() == null) {
             setAdministrativeWS(getWSClient(AdministrativeClientImpl.class,
                     config.get(WSConfig.SOLA_WS_ADMINISTRATIVE_SERVICE_URL.toString()),
                     userName, userPassword));
         }
-
+        
         if (getCadastreService() == null) {
             setCadastreWS(getWSClient(CadastreClientImpl.class,
                     config.get(WSConfig.SOLA_WS_CADASTRE_SERVICE_URL.toString()),
                     userName, userPassword));
         }
-
-        // The search service is not secured. 
+        
         if (getSearchService() == null) {
             setSearchWS(getWSClient(SearchClientImpl.class,
                     config.get(WSConfig.SOLA_WS_SEARCH_SERVICE_URL.toString()),
@@ -224,41 +233,52 @@ public class WSManager {
     }
 
     /**
+     * Returns the File Streaming Web-service client instance.
+     */
+    public FileStreamingClient getFileStreamingService() {
+        return fileStreamingWS;
+    }
+
+    /**
      * Returns spatial Web-service client instance.
      */
     public SpatialClient getSpatialService() {
         return spatialWS;
     }
-
+    
     public void setAdminWS(AdminClient adminWS) {
         this.adminWS = adminWS;
     }
-
+    
     public void setAdministrativeWS(AdministrativeClient administrativeWS) {
         this.administrativeWS = administrativeWS;
     }
-
+    
     public void setCadastreWS(CadastreClient cadastreWS) {
         this.cadastreWS = cadastreWS;
     }
-
+    
     public void setCaseManagementWS(CaseManagementClient caseManagementWS) {
         this.caseManagementWS = caseManagementWS;
     }
-
+    
     public void setDigitalArchiveWS(DigitalArchiveClient digitalArchiveWS) {
         this.digitalArchiveWS = digitalArchiveWS;
     }
-
+    
     public void setReferenceWS(ReferenceDataClient referenceWS) {
         this.referenceWS = referenceWS;
     }
-
+    
     public void setSearchWS(SearchClient searchWS) {
         this.searchWS = searchWS;
     }
-
+    
     public void setSpatialWS(SpatialClient spatialWS) {
         this.spatialWS = spatialWS;
+    }
+    
+    public void setFileStreamingWS(FileStreamingClient fileStreamingWS) {
+        this.fileStreamingWS = fileStreamingWS;
     }
 }

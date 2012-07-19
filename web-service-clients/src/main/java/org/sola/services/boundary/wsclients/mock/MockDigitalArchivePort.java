@@ -243,12 +243,12 @@ public class MockDigitalArchivePort implements DigitalArchive {
      * @return default = new FileBinaryTO()
      */
     @Override
-    public FileBinaryTO getFileBinary(String fileName) throws SOLAAccessFault, SOLAFault, UnhandledFault {
-        FileBinaryTO defaultResponse = new FileBinaryTO();
+    public FileInfoTO getFileBinary(String fileName) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        FileInfoTO defaultResponse = new FileBinaryTO();
         defaultResponse.setName(fileName);
         try {
             return getManager().getResponse(DigitalArchiveClient.GET_FILE_BINARY,
-                    FileBinaryTO.class, defaultResponse, fileName);
+                    FileInfoTO.class, defaultResponse, fileName);
         } catch (Exception ex) {
             processExceptionAccess(ex);
             return null;

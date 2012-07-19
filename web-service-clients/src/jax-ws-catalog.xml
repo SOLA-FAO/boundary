@@ -99,4 +99,9 @@
     <system systemId="http://localhost:8080/sola/webservices/spatial-service?xsd=2" uri="wsdl/localhost_8080/sola/webservices/spatial-service.xsd_2.xsd"/>
     <system systemId="http://localhost:8080/sola/webservices/spatial-service?xsd=3" uri="wsdl/localhost_8080/sola/webservices/spatial-service.xsd_3.xsd"/>
     <system systemId="http://localhost:8080/sola/webservices/spatial-service?xsd=4" uri="wsdl/localhost_8080/sola/webservices/spatial-service.xsd_4.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/filestreaming-service?wsdl" uri="wsdl/localhost_8080/sola/webservices/filestreaming-service.wsdl"/>
+    <system systemId="http://localhost:8080/sola/webservices/filestreaming-service?xsd=1" uri="wsdl/localhost_8080/sola/webservices/filestreaming-service.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/filestreaming-service?xsd=2" uri="wsdl/localhost_8080/sola/webservices/filestreaming-service.xsd_2.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/filestreaming-service?xsd=3" uri="wsdl/localhost_8080/sola/webservices/filestreaming-service.xsd_3.xsd"/>
+    <system systemId="http://www.w3.org/2005/05/xmlmime" uri="wsdl/www.w3.org/2005/05/xmlmime.xsd"/>
 </catalog>

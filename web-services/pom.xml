@@ -204,6 +204,15 @@
                             <sei>org.sola.services.boundary.ws.Administrative</sei>  
                         </configuration>      
                     </execution>
+                    <execution>
+                        <goals>
+                            <goal>wsgen</goal>
+                        </goals>
+                        <id>wsgen-generate-filestreaming-wsdl</id>
+                        <configuration>
+                            <sei>org.sola.services.boundary.ws.FileStreaming</sei>  
+                        </configuration>      
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
