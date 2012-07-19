@@ -385,4 +385,36 @@ public class MockAdminPort implements Admin {
             return null;
         }
     }
+
+    /**
+     * Response Key = AdminClient.GET_ALL_SETTINGS
+     *
+     * @return default = new ArrayList<SettingTO>()
+     */
+    @Override
+    public List<SettingTO> getAllSettings() throws SOLAFault, UnhandledFault {
+        List<SettingTO> defaultResponse = new ArrayList<SettingTO>();
+        try {
+            return getManager().getResponse(AdminClient.GET_ALL_SETTINGS, List.class, defaultResponse);
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
+            return null;
+        }
+    }
+
+    /**
+     * Response Key = AdminClient.GET_SETTING
+     *
+     * @return default = defaultValue
+     */
+    @Override
+    public String getSetting(String name, String defaultValue) throws SOLAFault, UnhandledFault {
+        String defaultResponse = defaultValue;
+        try {
+            return getManager().getResponse(AdminClient.GET_SETTING, String.class, defaultResponse);
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
+            return null;
+        }
+    }
 }

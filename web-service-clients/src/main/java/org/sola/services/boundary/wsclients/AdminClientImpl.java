@@ -28,13 +28,10 @@ package org.sola.services.boundary.wsclients;
 import java.util.List;
 import javax.xml.namespace.QName;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
-import org.sola.webservices.admin.BrTO;
-import org.sola.webservices.admin.LanguageTO;
+import org.sola.webservices.admin.*;
 import org.sola.webservices.transferobjects.security.GroupSummaryTO;
 import org.sola.webservices.transferobjects.security.GroupTO;
 import org.sola.webservices.transferobjects.security.UserTO;
-import org.sola.webservices.admin.Admin;
-import org.sola.webservices.admin.AdminService;
 import org.sola.webservices.transferobjects.security.RoleTO;
 
 /**
@@ -61,7 +58,7 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
     @Override
     public boolean checkConnection() throws WebServiceClientException {
         boolean result = false;
-        final String methodName = AdminClient.CHECK_CONNECTION; 
+        final String methodName = AdminClient.CHECK_CONNECTION;
         try {
             beforeWebMethod(methodName);
             result = getPort().checkConnection();
@@ -76,7 +73,7 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
     @Override
     public UserTO getCurrentUser() throws WebServiceClientException {
         UserTO result = null;
-        final String methodName = AdminClient.GET_CURRENT_USER; 
+        final String methodName = AdminClient.GET_CURRENT_USER;
         try {
             beforeWebMethod(methodName);
             result = getPort().getCurrentUser();
@@ -91,7 +88,7 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
     @Override
     public List<GroupTO> getGroups() throws WebServiceClientException {
         List<GroupTO> result = null;
-        final String methodName = AdminClient.GET_GROUPS; 
+        final String methodName = AdminClient.GET_GROUPS;
         try {
             beforeWebMethod(methodName);
             result = getPort().getGroups();
@@ -107,7 +104,7 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
     @Override
     public GroupTO getGroup(String groupId) throws WebServiceClientException {
         GroupTO result = null;
-        final String methodName = AdminClient.GET_GROUP; 
+        final String methodName = AdminClient.GET_GROUP;
         try {
             beforeWebMethod(methodName, groupId);
             result = getPort().getGroup(groupId);
@@ -122,7 +119,7 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
     @Override
     public UserTO getUser(String userName) throws WebServiceClientException {
         UserTO result = null;
-        final String methodName = AdminClient.GET_USER; 
+        final String methodName = AdminClient.GET_USER;
         try {
             beforeWebMethod(methodName, userName);
             result = getPort().getUser(userName);
@@ -137,7 +134,7 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
     @Override
     public UserTO saveUser(UserTO userTO) throws WebServiceClientException {
         UserTO result = null;
-        final String methodName = AdminClient.SAVE_USER; 
+        final String methodName = AdminClient.SAVE_USER;
         try {
             beforeWebMethod(methodName, userTO);
             result = getPort().saveUser(userTO);
@@ -152,7 +149,7 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
     @Override
     public GroupTO saveGroup(GroupTO groupTO) throws WebServiceClientException {
         GroupTO result = null;
-        final String methodName = AdminClient.SAVE_GROUP; 
+        final String methodName = AdminClient.SAVE_GROUP;
         try {
             beforeWebMethod(methodName, groupTO);
             result = getPort().saveGroup(groupTO);
@@ -167,7 +164,7 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
     @Override
     public List<RoleTO> getRoles() throws WebServiceClientException {
         List<RoleTO> result = null;
-        final String methodName = AdminClient.GET_ROLES; 
+        final String methodName = AdminClient.GET_ROLES;
         try {
             beforeWebMethod(methodName);
             result = getPort().getRoles();
@@ -182,7 +179,7 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
     @Override
     public RoleTO saveRole(RoleTO roleTO) throws WebServiceClientException {
         RoleTO result = null;
-        final String methodName = AdminClient.SAVE_ROLE; 
+        final String methodName = AdminClient.SAVE_ROLE;
         try {
             beforeWebMethod(methodName, roleTO);
             result = getPort().saveRole(roleTO);
@@ -197,7 +194,7 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
     @Override
     public List<GroupSummaryTO> getGroupsSummary() throws WebServiceClientException {
         List<GroupSummaryTO> result = null;
-        final String methodName = AdminClient.GET_GROUPS_SUMMARY; 
+        final String methodName = AdminClient.GET_GROUPS_SUMMARY;
         try {
             beforeWebMethod(methodName);
             result = getPort().getGroupsSummary();
@@ -306,6 +303,36 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
             processException(methodName, e);
         } finally {
             afterWebMethod(methodName, result, brTO);
+        }
+        return result;
+    }
+
+    @Override
+    public List<SettingTO> getAllSettings() throws WebServiceClientException {
+        List<SettingTO> result = null;
+        final String methodName = AdminClient.GET_ALL_SETTINGS;
+        try {
+            beforeWebMethod(methodName);
+            result = getPort().getAllSettings();
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result);
+        }
+        return result;
+    }
+
+    @Override
+    public String getSetting(String name, String defaultValue) throws WebServiceClientException {
+        String result = null;
+        final String methodName = AdminClient.GET_SETTING;
+        try {
+            beforeWebMethod(methodName, name, defaultValue);
+            result = getPort().getSetting(name, defaultValue);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, name, defaultValue);
         }
         return result;
     }

@@ -26,7 +26,6 @@
 package org.sola.services.boundary.ws;
 
 import com.sun.xml.ws.developer.StreamingAttachment;
-import java.io.File;
 import javax.activation.DataHandler;
 import javax.annotation.Resource;
 import javax.jws.WebMethod;
@@ -42,10 +41,16 @@ import org.sola.services.common.faults.UnhandledFault;
 import org.sola.services.common.webservices.AbstractWebService;
 
 /**
- * Web Service Boundary class to expose methods for spatial navigation on the
- * {@linkplain org.sola.services.ejb.search.businesslogic.SearchEJB}. <p>To avoid impacting
- * performance while navigating the map, this service exposes its methods without securing /
- * authenticating the connection or encrypting the data.</p>
+ * Web Service Boundary class to expose methods for file streaming.
+ *
+ * <p>The Metro library contains a bug (see http://java.net/jira/browse/WSIT-1081) that prevents
+ * file streaming over metro secured connections. Metro also consumes significant amounts of memory
+ * when trying to encrypt large attachments. To avoid these bugs, this service is used unsecured and
+ * does not retrieve from or update the SOLA database. Instead this service can be used to transfer
+ * large files between the file systems of the client and application server. Other secured services
+ * such as the Digital Archive Service, must retrieve or post files to the local file system for the
+ * file streaming service.</p> <p>The service streams files directly to and from disk and has
+ * minimal impact on the overall memory consumption of the application</p>
  */
 @MTOM
 @StreamingAttachment(parseEagerly = true, memoryThreshold = 4000000L)

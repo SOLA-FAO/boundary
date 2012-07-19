@@ -40,6 +40,7 @@ import org.sola.services.boundary.transferobjects.security.RoleTO;
 import org.sola.services.boundary.transferobjects.security.UserTO;
 import org.sola.services.boundary.transferobjects.system.BrTO;
 import org.sola.services.boundary.transferobjects.system.LanguageTO;
+import org.sola.services.boundary.transferobjects.system.SettingTO;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.contracts.GenericTranslator;
 import org.sola.services.common.faults.*;
@@ -487,5 +488,58 @@ public class Admin extends AbstractWebService {
         });
 
         return (BrTO) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.system.businesslogic.SystemEJB#getAllSettings()
+     * SystemEJB.getAllSettings}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetAllSettings")
+    public List<SettingTO> GetAllSettings()
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        systemEJB.getAllSettings(), SettingTO.class);
+            }
+        });
+
+        return (List<SettingTO>) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.system.businesslogic.SystemEJB#getSetting()
+     * SystemEJB.getSetting}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetSetting")
+    public String GetSetting(@WebParam(name = "name") String name,
+            @WebParam(name = "defaultValue") String defaultValue)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final String[] params = {name, defaultValue};
+        final String[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = systemEJB.getSetting(params[0], params[1]);
+            }
+        });
+
+        return result[0];
     }
 }

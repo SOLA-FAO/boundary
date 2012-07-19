@@ -29,6 +29,7 @@ import java.util.List;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.admin.BrTO;
 import org.sola.webservices.admin.LanguageTO;
+import org.sola.webservices.admin.SettingTO;
 import org.sola.webservices.transferobjects.security.GroupSummaryTO;
 import org.sola.webservices.transferobjects.security.GroupTO;
 import org.sola.webservices.transferobjects.security.RoleTO;
@@ -111,6 +112,14 @@ public interface AdminClient extends AbstractWSClient {
      * Admin.saveBr - Identifier for the saveBr method
      */
     public static final String SAVE_BR = SERVICE_NAME + "saveBr";
+    /**
+     * Admin.getAllSettings - Identifier for the getAllSettings method
+     */
+    public static final String GET_ALL_SETTINGS = SERVICE_NAME + "getAllSettings";
+    /**
+     * Admin.getSetting - Identifier for the getSetting method
+     */
+    public static final String GET_SETTING = SERVICE_NAME + "getSetting";
 
     /**
      * Returns the details for the currently authenticated user. <p>No role is required to execute
@@ -274,4 +283,25 @@ public interface AdminClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     BrTO saveBr(BrTO brTO) throws WebServiceClientException;
+
+    /**
+     * Returns all configuration settings in the system.setting table.<p>No role is required to
+     * execute this method.</p>
+     *
+     * @return The settings from the system.setting table
+     * @throws WebServiceClientException
+     */
+    List<SettingTO> getAllSettings() throws WebServiceClientException;
+
+    /**
+     * Retrieves the value for the named setting. Constants for each setting are available in
+     * {@linkplain  ConfigConstants}. If the setting does not exist, the default value for the
+     * setting is returned. <p>No role is required to execute this method.</p>
+     *
+     * @param name The name of the setting to retrieve
+     * @param defaultValue The default value for the setting if it no override value is recorded in
+     * the system.settings table.
+     * @return The override value for the setting or the defaultValue.
+     */
+    String getSetting(String name, String defaultValue) throws WebServiceClientException;
 }

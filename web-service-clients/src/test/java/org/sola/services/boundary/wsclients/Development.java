@@ -30,13 +30,7 @@
  */
 package org.sola.services.boundary.wsclients;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.sola.webservices.search.GenericResult;
+import org.junit.*;
 import org.sola.webservices.transferobjects.casemanagement.ApplicationTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
 
