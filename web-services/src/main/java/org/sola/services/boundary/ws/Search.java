@@ -33,6 +33,8 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
+import org.sola.services.boundary.transferobjects.administrative.RrrTO;
+import org.sola.services.boundary.transferobjects.casemanagement.ServiceTO;
 import org.sola.services.boundary.transferobjects.configuration.ConfigMapLayerTO;
 import org.sola.services.boundary.transferobjects.configuration.MapDefinitionTO;
 import org.sola.services.boundary.transferobjects.search.*;
