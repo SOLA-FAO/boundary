@@ -33,6 +33,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
+import org.sola.services.boundary.transferobjects.administrative.BaUnitAreaTO;
 import org.sola.services.boundary.transferobjects.administrative.BaUnitTO;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.contracts.GenericTranslator;
@@ -41,6 +42,7 @@ import org.sola.services.common.webservices.AbstractWebService;
 import org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB;
 import org.sola.services.ejb.administrative.businesslogic.AdministrativeEJBLocal;
 import org.sola.services.ejb.administrative.repository.entities.BaUnit;
+import org.sola.services.ejb.administrative.repository.entities.BaUnitArea;
 import org.sola.services.ejb.transaction.businesslogic.TransactionEJBLocal;
 import org.sola.services.ejb.transaction.repository.entities.TransactionBasic;
 
@@ -295,4 +297,68 @@ public class Administrative extends AbstractWebService {
 
         return (BaUnitTO) result[0];
     }
+    
+     /**
+     * See {@linkplain AdministrativeEJB#getBaUnitAreas(java.lang.String) 
+     * AdministrativeEJB.getBaUnitAreas}
+
+     * @throws SOLAFault
+     * @throws UnhandledFault 
+     */
+    @WebMethod(operationName = "GetBaUnitAreas")
+    public BaUnitAreaTO GetBaUnitAreas(
+            @WebParam(name = "baUnitId") String baUnitId)
+            throws SOLAFault, UnhandledFault {
+
+        final String baUnitIdTmp = baUnitId;
+        final Object[] result = {null};
+
+        runOpenQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTO(
+                        administrativeEJB.getBaUnitAreas(baUnitIdTmp), BaUnitAreaTO.class);
+            }
+        });
+
+       return (BaUnitAreaTO) result[0];
+    }
+    
+     /**
+     * See {@linkplain AdministrativeEJB#createBaUnitArea(java.lang.String,
+     * org.sola.services.ejb.administrative.repository.entities.BaUnitArea)
+     * AdministrativeEJB.createBaUnitArea}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     */
+    @WebMethod(operationName = "CreateBaUnitArea")
+    public BaUnitAreaTO CreateBaUnitArea(
+            @WebParam(name = "baUnitId") String baUnitId,
+            @WebParam(name = "baUnitTO") BaUnitAreaTO baUnitAreaTO)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault, OptimisticLockingFault {
+
+        final String baUnitIdTmp = baUnitId;
+        final BaUnitAreaTO baUnitAreaTOTmp = baUnitAreaTO;
+        final Object[] result = {null};
+
+        runUpdate(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                BaUnitArea newBaUnitArea = administrativeEJB.createBaUnitArea(
+                        baUnitIdTmp,
+                        GenericTranslator.fromTO(baUnitAreaTOTmp, BaUnitArea.class,
+                        administrativeEJB.getBaUnitAreas(baUnitIdTmp)));
+                result[0] = GenericTranslator.toTO(newBaUnitArea, BaUnitAreaTO.class);
+            }
+        });
+
+        return (BaUnitAreaTO) result[0];
+    }
+
+    
 }

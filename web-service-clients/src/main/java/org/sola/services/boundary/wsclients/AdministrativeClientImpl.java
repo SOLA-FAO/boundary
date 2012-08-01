@@ -30,6 +30,7 @@ import javax.xml.namespace.QName;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.administrative.Administrative;
 import org.sola.webservices.administrative.AdministrativeService;
+import org.sola.webservices.transferobjects.administrative.BaUnitAreaTO;
 import org.sola.webservices.transferobjects.administrative.BaUnitTO;
 
 /**
@@ -84,7 +85,26 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
         }
         return result;
     }
+    
+    
+    @Override
+    public BaUnitAreaTO createBaUnitArea(
+            String baUnitId, BaUnitAreaTO baUnitAreaTO) throws WebServiceClientException {
+        BaUnitAreaTO result = null;
+        final String methodName = AdministrativeClient.CREATE_BA_UNIT_AREA;
+        try {
+            beforeWebMethod(methodName, baUnitId, baUnitAreaTO);
+            result = getPort().createBaUnitArea(baUnitId, baUnitAreaTO);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, baUnitId, baUnitAreaTO);
+        }
+        return result;
+    }
 
+    
+    
     @Override
     public BaUnitTO saveBaUnit(
             String serviceId, BaUnitTO baUnitTO) throws WebServiceClientException {
@@ -172,6 +192,21 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
             processException(methodName, e);
         } finally {
             afterWebMethod(methodName, result, baUnitId, serviceId);
+        }
+        return result;
+    }
+    
+     @Override
+    public BaUnitAreaTO getBaUnitAreas(String baUnitId) throws WebServiceClientException {
+        BaUnitAreaTO result = null;
+        final String methodName = AdministrativeClient.GET_BA_UNIT_AREAS;
+        try {
+            beforeWebMethod(methodName, baUnitId);
+            result = getPort().getBaUnitAreas(baUnitId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, baUnitId);
         }
         return result;
     }
