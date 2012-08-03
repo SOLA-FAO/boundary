@@ -40,6 +40,15 @@ import org.sola.services.common.contracts.AbstractVersionedTO;
 public class CadastreObjectTargetTO extends AbstractVersionedTO{
 
     private String cadastreObjectId;
+    private byte[] geomPolygonCurrent;
+
+    public byte[] getGeomPolygonCurrent() {
+        return geomPolygonCurrent;
+    }
+
+    public void setGeomPolygonCurrent(byte[] geomPolygonCurrent) {
+        this.geomPolygonCurrent = geomPolygonCurrent;
+    }
 
     public String getCadastreObjectId() {
         return cadastreObjectId;

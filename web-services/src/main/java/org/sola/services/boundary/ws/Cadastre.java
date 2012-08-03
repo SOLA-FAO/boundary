@@ -48,7 +48,8 @@ import org.sola.services.ejb.transaction.repository.entities.TransactionCadastre
 import org.sola.services.ejb.transaction.repository.entities.TransactionType;
 
 /**
- * Web Service Boundary class to expose {@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB} methods.
+ * Web Service Boundary class to expose {@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB}
+ * methods.
  */
 @WebService(serviceName = "cadastre-service", targetNamespace = ServiceConstants.CADASTRE_WS_NAMESPACE)
 public class Cadastre extends AbstractWebService {
@@ -215,8 +216,11 @@ public class Cadastre extends AbstractWebService {
 
             @Override
             public void run() {
+                TransactionCadastreChange targetTransaction =
+                        transactionEJB.getTransactionById(
+                        transactionTO.getId(), TransactionCadastreChange.class);
                 TransactionCadastreChange transactionCadastreChange = GenericTranslator.fromTO(
-                        transactionTO, TransactionCadastreChange.class, null);
+                        transactionTO, TransactionCadastreChange.class, targetTransaction);
                 result[0] = transactionEJB.saveTransaction(
                         transactionCadastreChange, TransactionType.CADASTRE_CHANGE, languageCodeTmp);
             }
@@ -367,7 +371,8 @@ public class Cadastre extends AbstractWebService {
      */
     @WebMethod(operationName = "SaveCadastreRedefinition")
     public List<ValidationResult> SaveCadastreRedefinition(
-            @WebParam(name = "transactionCadastreRedefinitionTO") TransactionCadastreRedefinitionTO transactionTO,
+            @WebParam(name = "transactionCadastreRedefinitionTO") 
+                    TransactionCadastreRedefinitionTO transactionTO,
             @WebParam(name = "languageCode") String languageCode)
             throws SOLAValidationFault, OptimisticLockingFault,
             SOLAFault, UnhandledFault, SOLAAccessFault {
@@ -380,9 +385,13 @@ public class Cadastre extends AbstractWebService {
 
             @Override
             public void run() {
-                TransactionCadastreRedefinition transactionCadastreRedefinition =
+                TransactionCadastreRedefinition targetTransaction =
+                        transactionEJB.getTransactionById(
+                        transactionTOTmp.getId(), TransactionCadastreRedefinition.class);
+                TransactionCadastreRedefinition transactionCadastreRedefinition = 
                         GenericTranslator.fromTO(
-                        transactionTOTmp, TransactionCadastreRedefinition.class, null);
+                        transactionTOTmp, TransactionCadastreRedefinition.class, targetTransaction);
+
                 result[0] = transactionEJB.saveTransaction(transactionCadastreRedefinition,
                         TransactionType.REDEFINE_CADASTRE, languageCodeTmp);
             }

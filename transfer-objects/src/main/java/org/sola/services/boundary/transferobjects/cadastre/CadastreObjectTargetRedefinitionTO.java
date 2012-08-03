@@ -38,7 +38,7 @@ package org.sola.services.boundary.transferobjects.cadastre;
 public class CadastreObjectTargetRedefinitionTO extends CadastreObjectTargetTO{
 
     private byte[] geomPolygon;
-    private byte[] geomPolygonCurrent;
+//    private byte[] geomPolygonCurrent;
 
     public byte[] getGeomPolygon() {
         return geomPolygon;
@@ -48,11 +48,11 @@ public class CadastreObjectTargetRedefinitionTO extends CadastreObjectTargetTO{
         this.geomPolygon = geomPolygon;
     }
 
-    public byte[] getGeomPolygonCurrent() {
-        return geomPolygonCurrent;
-    }
-
-    public void setGeomPolygonCurrent(byte[] geomPolygonCurrent) {
-        this.geomPolygonCurrent = geomPolygonCurrent;
-    }
+//    public byte[] getGeomPolygonCurrent() {
+//        return geomPolygonCurrent;
+//    }
+//
+//    public void setGeomPolygonCurrent(byte[] geomPolygonCurrent) {
+//        this.geomPolygonCurrent = geomPolygonCurrent;
+//    }
 }
