@@ -13,6 +13,8 @@ public class BaUnitAreaTO extends AbstractIdTO {
     private String baUnitId;
     private BigDecimal size;
     private String typeCode;
+    private BigDecimal calculatedAreaSize;
+    
     
     public BaUnitAreaTO(){
         super();
@@ -43,8 +45,12 @@ public class BaUnitAreaTO extends AbstractIdTO {
         this.typeCode = typeCode;
     }
     
-    
-    
-    
+    public BigDecimal getCalculatedAreaSize() {
+        return calculatedAreaSize;
+    }
+
+    public void setCalculatedAreaSize(BigDecimal calculatedAreaSize) {
+        this.calculatedAreaSize = calculatedAreaSize;
+    }
     
 }
