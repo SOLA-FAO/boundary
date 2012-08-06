@@ -27,6 +27,7 @@
  */
 package org.sola.services.boundary.transferobjects.administrative;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.sola.services.boundary.transferobjects.cadastre.CadastreObjectTO;
@@ -48,6 +49,15 @@ public class BaUnitTO extends AbstractIdTO {
     private List<RelatedBaUnitInfoTO> childBaUnits;
     private List<RelatedBaUnitInfoTO> parentBaUnits;
     private String pendingActionCode;
+    private BigDecimal calculatedAreaSize;
+
+    public BigDecimal getCalculatedAreaSize() {
+        return calculatedAreaSize;
+    }
+
+    public void setCalculatedAreaSize(BigDecimal calculatedAreaSize) {
+        this.calculatedAreaSize = calculatedAreaSize;
+    }
     
     public BaUnitTO(){
         super();
@@ -81,7 +91,7 @@ public class BaUnitTO extends AbstractIdTO {
     public void setBaUnitNotationList(List<BaUnitNotationTO> baUnitNotationList) {
         this.baUnitNotationList = baUnitNotationList;
     }
-
+      
     public List<CadastreObjectTO> getCadastreObjectList() {
         return cadastreObjectList;
     }

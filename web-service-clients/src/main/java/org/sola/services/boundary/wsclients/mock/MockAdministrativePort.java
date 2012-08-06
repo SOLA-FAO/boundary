@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.sola.services.boundary.wsclients.AdministrativeClient;
 import org.sola.webservices.administrative.*;
+import org.sola.webservices.transferobjects.administrative.BaUnitAreaTO;
 import org.sola.webservices.transferobjects.administrative.BaUnitTO;
 
 /**
@@ -160,7 +161,27 @@ public class MockAdministrativePort implements Administrative {
             return null;
         }
     }
+    
+    /**
+     * Response Key = AdministrativeClient.CREATE_BA_UNIT_AREA
+     *
+     * @return default = baUnitTO param
+     */
+    @Override
+    public BaUnitAreaTO createBaUnitArea(String baUnitId, BaUnitAreaTO baUnitAreaTO)
+            throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, UnhandledFault {
+        BaUnitAreaTO defaultResponse = baUnitAreaTO;
+        try {
+            return getManager().getResponse(AdministrativeClient.CREATE_BA_UNIT_AREA,
+                    BaUnitAreaTO.class, defaultResponse, baUnitId, baUnitAreaTO);
+        } catch (Exception ex) {
+            processExceptionUpdate(ex);
+            return null;
+        }
+    }
 
+    
+    
     /**
      * Response Key = AdministrativeClient.SAVE_BA_UNIT
      *
@@ -266,4 +287,22 @@ public class MockAdministrativePort implements Administrative {
             return null;
         }
     }
+    
+       /**
+     * Response Key = AdministrativeClient.GET_BA_UNIT_AREAS
+     *
+     * @return default = new BaUnitAreaTO()
+     */
+    @Override
+    public BaUnitAreaTO getBaUnitAreas(String baUnitId) throws SOLAFault, UnhandledFault {
+        BaUnitAreaTO defaultResponse = new BaUnitAreaTO();
+        try {
+            return getManager().getResponse(AdministrativeClient.GET_BA_UNIT_AREAS,
+                    BaUnitAreaTO.class, defaultResponse, baUnitId);
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
+            return null;
+        }
+    }
+
 }

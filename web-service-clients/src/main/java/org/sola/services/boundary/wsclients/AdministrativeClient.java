@@ -27,6 +27,7 @@ package org.sola.services.boundary.wsclients;
 
 import java.util.List;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
+import org.sola.webservices.transferobjects.administrative.BaUnitAreaTO;
 import org.sola.webservices.transferobjects.administrative.BaUnitTO;
 
 /**
@@ -50,6 +51,12 @@ public interface AdministrativeClient extends AbstractWSClient {
      * Administrative.createBaUnit - Identifier for the createBaUnit method
      */
     public static final String CREATE_BA_UNIT = SERVICE_NAME + "createBaUnit";
+   
+    /**
+     * Administrative.createBaUnitArea - Identifier for the createBaUnitArea method
+     */
+    public static final String CREATE_BA_UNIT_AREA = SERVICE_NAME + "createBaUnitArea";
+   
     /**
      * Administrative.saveBaUnit - Identifier for the saveBaUnit method
      */
@@ -74,7 +81,28 @@ public interface AdministrativeClient extends AbstractWSClient {
      * Administrative.terminateBaUnit - Identifier for the terminateBaUnit method
      */
     public static final String TERMINATE_BA_UNIT = SERVICE_NAME + "terminateBaUnit";
+    
+     /**
+     * Administrative.getBaUnitAreas - Identifier for the getBaUnitAreas method
+     */
+    public static final String GET_BA_UNIT_AREAS = SERVICE_NAME + "getBaUnitAreas";
+   
+   
+     /**
+     * Creates a new BA Unit Area for a BaUnitId 
+     *
+     * <p>Requires the {@linkplain RolesConstants#ADMINISTRATIVE_BA_UNIT_SAVE} role.</p>
+     *
+     * @param baUnitId The identifier of the area the BA Unit is being created as part of
+     * @param baUnitAreaTO The details of the BA Unit Area to create
+     * @return The new BA Unit Area
+     * org.sola.webservices.transferobjects.administrative.BaUnitAreaTO) createBaUnit
+     * @throws WebServiceClientException
+     */
+    BaUnitAreaTO createBaUnitArea(String baUnitId, BaUnitAreaTO baUnitAreaTO) throws WebServiceClientException;
 
+    
+    
     /**
      * Creates a new BA Unit with a default status of pending and a default type of
      * basicPropertyUnit. Will also create a new Transaction record for the BA Unit if the Service
@@ -162,4 +190,17 @@ public interface AdministrativeClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     BaUnitTO terminateBaUnit(String baUnitId, String serviceId) throws WebServiceClientException;
+    
+     /**
+     * Retrieves the list of BA Unit Areas associated with the specified BA Unit Id.
+     *
+     * @param baUnitId The Service identifier
+     * @return The list of BA Unit associated with the service or an empty list if the service does
+     * not have any BA Units associated with it.
+     * @throws WebServiceClientException
+     */
+    BaUnitAreaTO getBaUnitAreas(String baUnitId) throws WebServiceClientException;
+
+    
+    
 }
