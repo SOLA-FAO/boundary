@@ -89,13 +89,14 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
     }
 
     @Override
-    public CadastreObjectTO getCadastreObjectByPoint(double x, double y, int srid)
+    public CadastreObjectTO getCadastreObjectByPoint(
+            double x, double y, int srid, String typeCode)
             throws WebServiceClientException {
         CadastreObjectTO result = null;
         final String methodName = CadastreClient.GET_CADASTRE_OBJECT_BY_POINT;
         try {
-            beforeWebMethod(methodName, x, y, srid);
-            result = getPort().getCadastreObjectByPoint(x, y, srid);
+            beforeWebMethod(methodName, x, y, srid, typeCode);
+            result = getPort().getCadastreObjectByPoint(x, y, srid, typeCode);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
@@ -188,13 +189,14 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
 
     @Override
     public CadastreObjectNodeTO getCadastreObjectNode(
-            double xMin, double yMin, double xMax, double yMax, int srid)
+            double xMin, double yMin, double xMax, double yMax, int srid, String cadastreObjectType)
             throws WebServiceClientException {
         CadastreObjectNodeTO result = null;
         final String methodName = CadastreClient.GET_CADASTRE_OBJECT_NODE;
         try {
-            beforeWebMethod(methodName, xMin, yMin, xMax, yMax, srid);
-            result = getPort().getCadastreObjectNode(xMin, yMin, xMax, yMax, srid);
+            beforeWebMethod(methodName, xMin, yMin, xMax, yMax, srid, cadastreObjectType);
+            result = getPort().getCadastreObjectNode(
+                    xMin, yMin, xMax, yMax, srid, cadastreObjectType);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
@@ -205,13 +207,14 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
 
     @Override
     public CadastreObjectNodeTO getCadastreObjectNodePotential(
-            double xMin, double yMin, double xMax, double yMax, int srid)
+            double xMin, double yMin, double xMax, double yMax, int srid, String cadastreObjectType)
             throws WebServiceClientException {
         CadastreObjectNodeTO result = null;
         final String methodName = CadastreClient.GET_CADASTRE_OBJECT_NODE_POTENTIAL;
         try {
-            beforeWebMethod(methodName, xMin, yMin, xMax, yMax, srid);
-            result = getPort().getCadastreObjectNodePotential(xMin, yMin, xMax, yMax, srid);
+            beforeWebMethod(methodName, xMin, yMin, xMax, yMax, srid, cadastreObjectType);
+            result = getPort().getCadastreObjectNodePotential(
+                    xMin, yMin, xMax, yMax, srid, cadastreObjectType);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {

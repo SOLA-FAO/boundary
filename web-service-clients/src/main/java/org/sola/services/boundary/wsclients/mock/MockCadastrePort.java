@@ -171,12 +171,12 @@ public class MockCadastrePort implements Cadastre {
      * @return default = new CadastreObjectTO()
      */
     @Override
-    public CadastreObjectTO getCadastreObjectByPoint(double x, double y, int srid)
+    public CadastreObjectTO getCadastreObjectByPoint(double x, double y, int srid, String typeCode)
             throws SOLAAccessFault, SOLAFault, UnhandledFault {
         CadastreObjectTO defaultResponse = new CadastreObjectTO();
         try {
             return getManager().getResponse(CadastreClient.GET_CADASTRE_OBJECT_BY_POINT,
-                    CadastreObjectTO.class, defaultResponse, x, y, srid);
+                    CadastreObjectTO.class, defaultResponse, x, y, srid, typeCode);
         } catch (Exception ex) {
             processExceptionAccess(ex);
             return null;
@@ -262,11 +262,13 @@ public class MockCadastrePort implements Cadastre {
      */
     @Override
     public CadastreObjectNodeTO getCadastreObjectNode(double xMin, double yMin, double xMax,
-            double yMax, int srid) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+            double yMax, int srid, String cadastreObjectType) 
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
         CadastreObjectNodeTO defaultResponse = new CadastreObjectNodeTO();
         try {
             return getManager().getResponse(CadastreClient.GET_CADASTRE_OBJECT_NODE,
-                    CadastreObjectNodeTO.class, defaultResponse, xMin, yMin, xMax, yMax, srid);
+                    CadastreObjectNodeTO.class, defaultResponse, xMin, yMin, xMax, yMax, srid,
+                    cadastreObjectType);
         } catch (Exception ex) {
             processExceptionAccess(ex);
             return null;
@@ -318,11 +320,13 @@ public class MockCadastrePort implements Cadastre {
      */
     @Override
     public CadastreObjectNodeTO getCadastreObjectNodePotential(double xMin, double yMin,
-            double xMax, double yMax, int srid) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+            double xMax, double yMax, int srid, String cadastreObjectType) 
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
         CadastreObjectNodeTO defaultResponse = new CadastreObjectNodeTO();
         try {
             return getManager().getResponse(CadastreClient.GET_CADASTRE_OBJECT_NODE_POTENTIAL,
-                    CadastreObjectNodeTO.class, defaultResponse, xMin, yMin, xMax, yMax, srid);
+                    CadastreObjectNodeTO.class, defaultResponse, xMin, yMin, xMax, yMax, srid,
+                    cadastreObjectType);
         } catch (Exception ex) {
             processExceptionAccess(ex);
             return null;

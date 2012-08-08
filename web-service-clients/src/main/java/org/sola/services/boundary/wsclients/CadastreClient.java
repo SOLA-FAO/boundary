@@ -123,7 +123,7 @@ public interface CadastreClient extends AbstractWSClient {
      * SRID used by SOLA.
      * @throws WebServiceClientException
      */
-    CadastreObjectTO getCadastreObjectByPoint(double x, double y, int srid)
+    CadastreObjectTO getCadastreObjectByPoint(double x, double y, int srid, String typeCode)
             throws WebServiceClientException;
 
     /**
@@ -174,7 +174,7 @@ public interface CadastreClient extends AbstractWSClient {
      * as the list of cadastre objects used to obtain the node points.
      */
     CadastreObjectNodeTO getCadastreObjectNode(
-            double xMin, double yMin, double xMax, double yMax, int srid);
+            double xMin, double yMin, double xMax, double yMax, int srid, String cadastreObjectType);
 
     /**
      * Unknown
@@ -187,7 +187,7 @@ public interface CadastreClient extends AbstractWSClient {
      * by the cadastre_object table.
      */
     CadastreObjectNodeTO getCadastreObjectNodePotential(
-            double xMin, double yMin, double xMax, double yMax, int srid);
+            double xMin, double yMin, double xMax, double yMax, int srid, String cadastreObjectType);
 
     List<ValidationResult> saveTransactionCadastreRedefinition(
             TransactionCadastreRedefinitionTO transactionTO);

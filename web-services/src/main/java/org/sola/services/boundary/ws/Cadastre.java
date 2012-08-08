@@ -112,12 +112,14 @@ public class Cadastre extends AbstractWebService {
     public CadastreObjectTO GetCadastreObjectByPoint(
             @WebParam(name = "x") double x,
             @WebParam(name = "y") double y,
-            @WebParam(name = "srid") int srid)
+            @WebParam(name = "srid") int srid,
+            @WebParam(name = "cadastreObjectType") String typeCode)
             throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final double xTmp = x;
         final double yTmp = y;
         final int sridTmp = srid;
+        final String typeCodeTmp = typeCode;
         final Object[] result = {null};
 
         runGeneralQuery(wsContext, new Runnable() {
@@ -125,7 +127,7 @@ public class Cadastre extends AbstractWebService {
             @Override
             public void run() {
                 result[0] = GenericTranslator.toTO(
-                        cadastreEJB.getCadastreObjectByPoint(xTmp, yTmp, sridTmp),
+                        cadastreEJB.getCadastreObjectByPoint(xTmp, yTmp, sridTmp, typeCodeTmp),
                         CadastreObjectTO.class);
             }
         });
@@ -301,13 +303,15 @@ public class Cadastre extends AbstractWebService {
             @WebParam(name = "yMin") double yMin,
             @WebParam(name = "xMax") double xMax,
             @WebParam(name = "yMax") double yMax,
-            @WebParam(name = "srid") int srid)
+            @WebParam(name = "srid") int srid,
+            @WebParam(name = "cadastreObjectType") String cadastreObjectType)
             throws SOLAFault, UnhandledFault, SOLAAccessFault {
         final double xMinTmp = xMin;
         final double yMinTmp = yMin;
         final double xMaxTmp = xMax;
         final double yMaxTmp = yMax;
         final int sridTmp = srid;
+        final String cadastreObjectTypeTmp = cadastreObjectType;
         final Object[] result = {null};
 
         runGeneralQuery(wsContext, new Runnable() {
@@ -315,7 +319,7 @@ public class Cadastre extends AbstractWebService {
             @Override
             public void run() {
                 result[0] = GenericTranslator.toTO(cadastreEJB.getCadastreObjectNode(
-                        xMinTmp, yMinTmp, xMaxTmp, yMaxTmp, sridTmp),
+                        xMinTmp, yMinTmp, xMaxTmp, yMaxTmp, sridTmp, cadastreObjectTypeTmp),
                         CadastreObjectNodeTO.class);
             }
         });
@@ -337,13 +341,15 @@ public class Cadastre extends AbstractWebService {
             @WebParam(name = "yMin") double yMin,
             @WebParam(name = "xMax") double xMax,
             @WebParam(name = "yMax") double yMax,
-            @WebParam(name = "srid") int srid)
+            @WebParam(name = "srid") int srid,
+            @WebParam(name = "cadastreObjectType") String cadastreObjectType)
             throws SOLAFault, UnhandledFault, SOLAAccessFault {
         final double xMinTmp = xMin;
         final double yMinTmp = yMin;
         final double xMaxTmp = xMax;
         final double yMaxTmp = yMax;
         final int sridTmp = srid;
+        final String cadastreObjectTypeTmp = cadastreObjectType;
         final Object[] result = {null};
 
         runGeneralQuery(wsContext, new Runnable() {
@@ -351,7 +357,7 @@ public class Cadastre extends AbstractWebService {
             @Override
             public void run() {
                 result[0] = GenericTranslator.toTO(cadastreEJB.getCadastreObjectNodePotential(
-                        xMinTmp, yMinTmp, xMaxTmp, yMaxTmp, sridTmp),
+                        xMinTmp, yMinTmp, xMaxTmp, yMaxTmp, sridTmp, cadastreObjectTypeTmp),
                         CadastreObjectNodeTO.class);
             }
         });
