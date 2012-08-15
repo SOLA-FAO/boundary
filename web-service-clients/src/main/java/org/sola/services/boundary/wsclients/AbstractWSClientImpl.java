@@ -245,24 +245,41 @@ public abstract class AbstractWSClientImpl implements AbstractWSClient {
             throw (WebServiceClientException) e;
         }
 
-        if (SOAPFaultException.class.isAssignableFrom(e.getClass())
-                && e.getMessage().equalsIgnoreCase("Authentication of Username Password Token Failed")) {
-            // User failed to log in so create a more user friendly "failed to authenticate" message
-            throw new WebServiceClientException(ServiceMessage.EXCEPTION_AUTHENTICATION_FAILED,
-                    WebServiceClientExceptionType.AUTHENTICATION_FAILED);
-        }
-
-        if (SOAPFaultException.class.isAssignableFrom(e.getClass())
-                && e.getMessage().equalsIgnoreCase("Invalid Security Header")) {
-            // As of Metro 2.1.1 and Glassfish 3.1.1, Invalid Security Header can mean a number of
-            // things from mis-configured database parameters to failed authentication. Assume
-            // it is failed authentication and raise the appropriate message. 
-            throw new WebServiceClientException(ServiceMessage.EXCEPTION_INVALID_SECURITY_HEADER,
-                    WebServiceClientExceptionType.AUTHENTICATION_FAILED);
-        }
-
-        if (WebServiceException.class.isAssignableFrom(e.getClass())) {
+        // Check for authentication errors. 
+        //
+        // Unfortunately Metro uses Exception Shielding which means that a very generic 
+        // "Invalid Security Header" error is returned for nearly every type of connection problem. 
+        // This is further complicated by the fact Metro returns a different type of exception for 
+        // v2.2 than for version 2.1 (i.e. v2.2 returns WebServiceException whereas previously 
+        // this was a SOAPFaultException). 
+        //
+        // To get specific error messages back from Metro it is necessary to configure the 
+        // com.sun.xml.wss.debug System Property on the Glassfish Application Server with the value 
+        // set to FaultDetail (case sensitive). Setting or changing this property requires a restart
+        // of the Glassfish Application Server. For more details see the source code for the 
+        // com.sun.xml.ws.security.opt.impl.util.SOAPUtil#newSOAPFaultException, line 158. 
+        if (WebServiceException.class.isAssignableFrom(e.getClass())
+                || SOAPFaultException.class.isAssignableFrom(e.getClass())) {
             Object[] parms = {url, e.getLocalizedMessage(), e};
+            if (e.getMessage().matches(".*Authentication of Username Password Token Failed.*")) {
+                // If com.sun.xml.wss.debug system property is set on the application server, the
+                // authentication failed message will be returned to indicate an authentication failure. 
+                throw new WebServiceClientException(ServiceMessage.EXCEPTION_AUTHENTICATION_FAILED,
+                        WebServiceClientExceptionType.AUTHENTICATION_FAILED);
+            }
+            if (e.getMessage().matches(".*Invalid Security Header.*")) {
+                // Generic Metro error message (v2.1-). Assume the most likely cause is a 
+                // user authentication problem and raise the appropriate message. 
+                throw new WebServiceClientException(ServiceMessage.EXCEPTION_INVALID_SECURITY_HEADER,
+                        WebServiceClientExceptionType.AUTHENTICATION_FAILED);
+            }
+            if (e.getMessage().matches(".*Error in Verifying Security in the Inbound Message.*")) {
+                // Generic Metro error message (v2.2+). Assume the most likely cause is a 
+                // user authentication problem and raise the appropriate message. 
+                throw new WebServiceClientException(ServiceMessage.EXCEPTION_INVALID_SECURITY_HEADER,
+                        WebServiceClientExceptionType.AUTHENTICATION_FAILED);
+            }
+            // Raise a generic Service Connection Error message to indicate a more technical fault. 
             throw new WebServiceClientException(ServiceMessage.EXCEPTION_SERVICE_CONNECTION, parms);
         }
 
