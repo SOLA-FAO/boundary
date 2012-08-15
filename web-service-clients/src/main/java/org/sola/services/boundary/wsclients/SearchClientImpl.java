@@ -28,11 +28,7 @@ package org.sola.services.boundary.wsclients;
 import java.util.List;
 import javax.xml.namespace.QName;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
-import org.sola.webservices.search.QueryForSelect;
-import org.sola.webservices.search.ResultForSelectionInfo;
-import org.sola.webservices.search.Search;
-import org.sola.webservices.search.SearchService;
-import org.sola.webservices.search.MapDefinitionTO;
+import org.sola.webservices.search.*;
 import org.sola.webservices.transferobjects.search.*;
 
 /**
@@ -313,6 +309,25 @@ public class SearchClientImpl extends AbstractWSClientImpl implements SearchClie
             processException(methodName, e);
         } finally {
             afterWebMethod(methodName, result, languageCode);
+        }
+        return result;
+    }
+
+    @Override
+    public List<PowerOfAttorneySearchResultTO> searchPowerOfAttorney(PowerOfAttorneySearchParamsTO searchParams) 
+            throws WebServiceClientException {
+        List<PowerOfAttorneySearchResultTO> result = null;
+        final String methodName = SearchClient.SEARCH_POWER_OF_ATTORNEY;
+        if (searchParams.getLocale() == null) {
+            searchParams.setLocale(getLanguageCode());
+        }
+        try {
+            beforeWebMethod(methodName, searchParams);
+            result = getPort().searchPowerOfAttorney(searchParams);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, searchParams);
         }
         return result;
     }

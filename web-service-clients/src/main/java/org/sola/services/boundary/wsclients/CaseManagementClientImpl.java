@@ -618,4 +618,50 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         }
         return result;
     }
+
+    @Override
+    public PowerOfAttorneyTO attachPowerOfAttorneyToTransaction(String serviceId, PowerOfAttorneyTO powerOfAttorney) throws WebServiceClientException {
+        PowerOfAttorneyTO result = null;
+        final String methodName = CaseManagementClient.ATTACH_POWER_OF_ATTORNEY_TO_TRANSACTION;
+        String languageCode = getLanguageCode();
+        try {
+            beforeWebMethod(methodName, serviceId, powerOfAttorney, languageCode);
+            result = getPort().attachPowerOfAttorneyToTransaction(serviceId, powerOfAttorney, languageCode);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, serviceId, powerOfAttorney, languageCode);
+        }
+        return result;
+    }
+
+    @Override
+    public List<PowerOfAttorneyTO> getPowerOfAttorneyByServiceId(String serviceId) throws WebServiceClientException {
+        List<PowerOfAttorneyTO> result = null;
+        final String methodName = CaseManagementClient.GET_POWER_OF_ATTORNEY_BY_SERVICE_ID;
+        try {
+            beforeWebMethod(methodName, serviceId);
+            result = getPort().getPowerOfAttorneyByServiceId(serviceId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, serviceId);
+        }
+        return result;
+    }
+
+    @Override
+    public PowerOfAttorneyTO getPowerOfAttorneyById(String id) throws WebServiceClientException {
+        PowerOfAttorneyTO result = null;
+        final String methodName = CaseManagementClient.GET_POWER_OF_ATTORNEY_BY_ID;
+        try {
+            beforeWebMethod(methodName, id);
+            result = getPort().getPowerOfAttorneyById(id);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, id);
+        }
+        return result;
+    }
 }

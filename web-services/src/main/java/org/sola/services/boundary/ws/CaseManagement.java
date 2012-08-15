@@ -33,29 +33,19 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
-import org.sola.services.boundary.transferobjects.casemanagement.ServiceTO;
-import org.sola.services.boundary.transferobjects.casemanagement.SourceTO;
+import org.sola.services.boundary.transferobjects.casemanagement.*;
 import org.sola.services.common.br.ValidationResult;
 import org.sola.services.common.faults.OptimisticLockingFault;
 import org.sola.services.common.faults.SOLAFault;
 import org.sola.services.common.faults.SOLAValidationFault;
 import org.sola.services.common.faults.UnhandledFault;
 import org.sola.services.ejb.address.businesslogic.AddressEJBLocal;
-import org.sola.services.boundary.transferobjects.casemanagement.AddressTO;
 import org.sola.services.ejb.application.businesslogic.ApplicationEJBLocal;
 import org.sola.services.ejb.application.repository.entities.Application;
-import org.sola.services.boundary.transferobjects.casemanagement.ApplicationLogTO;
-import org.sola.services.boundary.transferobjects.casemanagement.ApplicationTO;
-import org.sola.services.boundary.transferobjects.casemanagement.BrReportTO;
-import org.sola.services.boundary.transferobjects.casemanagement.LodgementTimingTO;
-import org.sola.services.boundary.transferobjects.casemanagement.LodgementViewParamsTO;
-import org.sola.services.boundary.transferobjects.casemanagement.LodgementViewTO;
 import org.sola.services.common.contracts.GenericTranslator;
 import org.sola.services.common.webservices.AbstractWebService;
 import org.sola.services.ejb.application.repository.entities.Service;
 import org.sola.services.ejb.party.businesslogic.PartyEJBLocal;
-import org.sola.services.boundary.transferobjects.casemanagement.PartySummaryTO;
-import org.sola.services.boundary.transferobjects.casemanagement.PartyTO;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.faults.SOLAAccessFault;
 import org.sola.services.ejb.application.repository.entities.LodgementTiming;
@@ -63,6 +53,7 @@ import org.sola.services.ejb.application.repository.entities.LodgementView;
 import org.sola.services.ejb.application.repository.entities.LodgementViewParams;
 import org.sola.services.ejb.party.repository.entities.Party;
 import org.sola.services.ejb.source.businesslogic.SourceEJBLocal;
+import org.sola.services.ejb.source.repository.entities.PowerOfAttorney;
 import org.sola.services.ejb.source.repository.entities.Source;
 import org.sola.services.ejb.system.businesslogic.SystemEJBLocal;
 
@@ -497,6 +488,28 @@ public class CaseManagement extends AbstractWebService {
         return (SourceTO) result[0];
     }
 
+    public PowerOfAttorneyTO attachPowerOfAttorneyToTransaction(
+            @WebParam(name = "serviceId") final String serviceId,
+            @WebParam(name = "powerOfAttorney") final PowerOfAttorneyTO powerOfAttorney,
+            @WebParam(name = "languageCode") final String languageCode)
+            throws SOLAValidationFault, OptimisticLockingFault, SOLAFault, UnhandledFault, SOLAAccessFault {
+        
+        final Object[] result = {null};
+
+        runUpdateValidation(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTO(
+                        sourceEJB.attachPowerOfAttorneyToTransaction(
+                        serviceId, GenericTranslator.fromTO(powerOfAttorney, 
+                        PowerOfAttorney.class, null), languageCode), PowerOfAttorneyTO.class);
+            }
+        });
+
+        return (PowerOfAttorneyTO) result[0];
+    }
+    
     /**
      * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#dettachSourceFromTransaction(java.lang.String)
      * SourceEJB.dettachSourceFromTransaction}
@@ -557,6 +570,34 @@ public class CaseManagement extends AbstractWebService {
     }
 
     /**
+     * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#getPowerOfAttorneyByServiceId(java.lang.String)
+     * SourceEJB.getPowerOfAttorneyByServiceId}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "getPowerOfAttorneyByServiceId")
+    public List<PowerOfAttorneyTO> getPowerOfAttorneyByServiceId(
+            @WebParam(name = "serviceId") final String serviceId) throws SOLAFault, UnhandledFault,
+            SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        sourceEJB.getPowerOfAttorneyByServiceId(serviceId),
+                        PowerOfAttorneyTO.class);
+            }
+        });
+
+        return (List<PowerOfAttorneyTO>) result[0];
+    }
+    
+    /**
      * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#getSources(java.util.List)
      * SourceEJB.getSources}
      *
@@ -610,6 +651,33 @@ public class CaseManagement extends AbstractWebService {
         });
 
         return (SourceTO) result[0];
+    }
+    
+    /**
+     * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#getSourceById(java.lang.String)
+     * SourceEJB.getSourceById}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "getPowerOfAttorneyById")
+    public PowerOfAttorneyTO getPowerOfAttorneyById(
+            @WebParam(name = "id") final String id) throws SOLAFault, UnhandledFault,
+            SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTO(
+                        sourceEJB.getPowerOfAttorneyById(id), PowerOfAttorneyTO.class);
+            }
+        });
+
+        return (PowerOfAttorneyTO) result[0];
     }
 
     /**

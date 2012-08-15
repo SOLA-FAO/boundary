@@ -755,4 +755,47 @@ public class MockCaseManagementPort implements CaseManagement {
             return null;
         }
     }
+
+    @Override
+    public PowerOfAttorneyTO attachPowerOfAttorneyToTransaction(String serviceId, PowerOfAttorneyTO powerOfAttorney, String languageCode) throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, SOLAValidationFault, UnhandledFault {
+        PowerOfAttorneyTO defaultResponse = new PowerOfAttorneyTO();
+        defaultResponse.setId(powerOfAttorney.getId());
+        try {
+            return getManager().getResponse(CaseManagementClient.ATTACH_POWER_OF_ATTORNEY_TO_TRANSACTION,
+                    PowerOfAttorneyTO.class, defaultResponse, serviceId, powerOfAttorney, languageCode);
+        } catch (Exception ex) {
+            processExceptionAll(ex);
+            return null;
+        }
+    }
+
+    @Override
+    public List<PowerOfAttorneyTO> getPowerOfAttorneyByServiceId(String serviceId) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<PowerOfAttorneyTO> defaultResponse = new ArrayList<PowerOfAttorneyTO>();
+        try {
+            return getManager().getResponse(CaseManagementClient.GET_POWER_OF_ATTORNEY_BY_SERVICE_ID,
+                    List.class, defaultResponse, serviceId);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
+    /**
+     * Response Key = CaseManagementClient.GET_POWER_OF_ATTORNEY_BY_ID
+     *
+     * @return default = new SourceTO()
+     */
+    @Override
+    public PowerOfAttorneyTO getPowerOfAttorneyById(String id) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        PowerOfAttorneyTO defaultResponse = new PowerOfAttorneyTO();
+        defaultResponse.setId(id);
+        try {
+            return getManager().getResponse(CaseManagementClient.GET_POWER_OF_ATTORNEY_BY_ID,
+                    PowerOfAttorneyTO.class, defaultResponse, id);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
 }

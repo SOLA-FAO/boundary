@@ -27,7 +27,12 @@ package org.sola.services.boundary.wsclients;
 
 import java.util.List;
 import javax.xml.datatype.XMLGregorianCalendar;
+import org.sola.common.RolesConstants;
+import org.sola.common.SOLAAccessException;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
+import org.sola.webservices.casemanagement.SOLAAccessFault;
+import org.sola.webservices.casemanagement.SOLAFault;
+import org.sola.webservices.casemanagement.UnhandledFault;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.casemanagement.*;
 
@@ -93,6 +98,11 @@ public interface CaseManagementClient extends AbstractWSClient {
      */
     public static final String SAVE_PARTY = SERVICE_NAME + "saveParty";
     /**
+     * CaseManagement.attachPowerOfAttorneyToTransaction - Identifier for the attachPowerOfAttorneyToTransaction
+     * method
+     */
+    public static final String ATTACH_POWER_OF_ATTORNEY_TO_TRANSACTION = SERVICE_NAME + "attachPowerOfAttorneyToTransaction";
+        /**
      * CaseManagement.attachSourceToTransaction - Identifier for the attachSourceToTransaction
      * method
      */
@@ -107,6 +117,10 @@ public interface CaseManagementClient extends AbstractWSClient {
      */
     public static final String GET_SOURCES_BY_SERVICE_ID = SERVICE_NAME + "getSourcesByServiceId";
     /**
+     * CaseManagement.getPowerOfAttorneyByServiceId - Identifier for the getPowerOfAttorneyByServiceId method
+     */
+    public static final String GET_POWER_OF_ATTORNEY_BY_SERVICE_ID = SERVICE_NAME + "getSourcesByServiceId";
+    /**
      * CaseManagement.getSourcesByIds - Identifier for the getSourcesByIds method
      */
     public static final String GET_SOURCES_BY_IDS = SERVICE_NAME + "getSourcesByIds";
@@ -114,6 +128,8 @@ public interface CaseManagementClient extends AbstractWSClient {
      * CaseManagement.getSourceById - Identifier for the getSourceById method
      */
     public static final String GET_SOURCE_BY_ID = SERVICE_NAME + "getSourceById";
+    
+    public static final String GET_POWER_OF_ATTORNEY_BY_ID = SERVICE_NAME + "getPowerOfAttorneyById";
     /**
      * CaseManagement.serviceActionComplete - Identifier for the serviceActionComplete method
      */
@@ -322,6 +338,23 @@ public interface CaseManagementClient extends AbstractWSClient {
      * pending association with another transaction.
      */
     SourceTO attachSourceToTransaction(String serviceId, String sourceId)
+            throws WebServiceClientException;
+    
+    /**
+     * Associates a Power of attorney with a transaction and sets the related source status to
+     * <code>pending</code>. Also validates the source to ensure it does not have any other pending
+     * transaction associations. Note that the original source record is duplicated. Will also
+     * create a new transaction record if one does not already exist for the service.
+     *
+     * <p>Requires the {@linkplain RolesConstants#SOURCE_TRANSACTIONAL} role.</p>
+     *
+     * @param serviceId Identifier of the service the source relates to. Used to determine the
+     * transaction to associate the source with.
+     * @param powerOfAttorney Power of attorney object containing related source.
+     * @throws WebServiceClientException If the source does not exist or the source already has a
+     * pending association with another transaction.
+     */
+    PowerOfAttorneyTO attachPowerOfAttorneyToTransaction(String serviceId, PowerOfAttorneyTO powerOfAttorney)
             throws WebServiceClientException;
 
     /**
@@ -622,4 +655,23 @@ public interface CaseManagementClient extends AbstractWSClient {
      */
     List<ApplicationLogTO> getUserActions(String userName, XMLGregorianCalendar from, XMLGregorianCalendar to)
             throws WebServiceClientException;
+    
+    /**
+     * Retrieves all power of attorney documents associated with the service. 
+     * Uses the transaction associated with the service to determine the documents to return.
+     *
+     * @param serviceId Identifier of the service
+     * @throws WebServiceClientException
+     */
+    List<PowerOfAttorneyTO> getPowerOfAttorneyByServiceId(String serviceId) throws WebServiceClientException;
+    
+    /**
+     * Returns the details for the specified Power of attorney.
+     *
+     * <p>No role is required to execute this method.</p>
+     *
+     * @param id The identifier of the Power of attorney to retrieve.
+     * @throws WebServiceClientException
+     */
+    PowerOfAttorneyTO getPowerOfAttorneyById(String id) throws WebServiceClientException;
 }

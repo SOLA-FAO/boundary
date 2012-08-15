@@ -382,4 +382,22 @@ public class MockSearchPort implements Search {
             return null;
         }
     }
+
+    /**
+     * Response Key = SearchClient.SEARCH_SOURCES
+     *
+     * @return default = new ArrayList<SourceSearchResultTO>()
+     */
+    @Override
+    public List<PowerOfAttorneySearchResultTO> searchPowerOfAttorney(PowerOfAttorneySearchParamsTO searchParams) 
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<PowerOfAttorneySearchResultTO> defaultResponse = new ArrayList<PowerOfAttorneySearchResultTO>();
+        try {
+            return getManager().getResponse(SearchClient.SEARCH_POWER_OF_ATTORNEY,
+                    List.class, defaultResponse, searchParams);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
 }

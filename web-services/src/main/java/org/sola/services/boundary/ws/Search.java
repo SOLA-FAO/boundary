@@ -33,8 +33,6 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
-import org.sola.services.boundary.transferobjects.administrative.RrrTO;
-import org.sola.services.boundary.transferobjects.casemanagement.ServiceTO;
 import org.sola.services.boundary.transferobjects.configuration.ConfigMapLayerTO;
 import org.sola.services.boundary.transferobjects.configuration.MapDefinitionTO;
 import org.sola.services.boundary.transferobjects.search.*;
@@ -272,6 +270,36 @@ public class Search extends AbstractWebService {
         });
 
         return (List<SourceSearchResultTO>) result[0];
+    }
+    
+    /**
+     * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#searchPowerOfAttorney(org.sola.services.ejb.search.repository.entities.PowerOfAttorneySearchParams)
+     * SearchEJB.searchPowerOfAttorney}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "searchPowerOfAttorney")
+    public List<PowerOfAttorneySearchResultTO> searchPowerOfAttorney(
+            @WebParam(name = "searchParams") final PowerOfAttorneySearchParamsTO searchParams)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                PowerOfAttorneySearchParams params = GenericTranslator.fromTO(searchParams,
+                        PowerOfAttorneySearchParams.class, null);
+                result[0] = GenericTranslator.toTOList(
+                        searchEJB.searchPowerOfAttorney(params), PowerOfAttorneySearchResultTO.class);
+
+            }
+        });
+
+        return (List<PowerOfAttorneySearchResultTO>) result[0];
     }
 
     /**

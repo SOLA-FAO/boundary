@@ -78,6 +78,10 @@ public interface SearchClient extends AbstractWSClient {
      */
     public static final String SEARCH_SOURCES = SERVICE_NAME + "searchSources";
     /**
+     * Search.searchPowerOfAttorney - Identifier for the searchPowerOfAttorney method
+     */
+    public static final String SEARCH_POWER_OF_ATTORNEY = SERVICE_NAME + "searchPowerOfAttorney";
+    /**
      * Search.getActiveUsers - Identifier for the getActiveUsers method
      */
     public static final String GET_ACTIVE_USERS = SERVICE_NAME + "getActiveUsers";
@@ -276,4 +280,14 @@ public interface SearchClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     MapDefinitionTO getMapDefinition() throws WebServiceClientException;
+    
+    /**
+     * Executes a search across all Power of attorney using the search criteria provided. 
+     * Partial matches are supported for the document number and the document reference number criteria.
+     *
+     * @param searchParams The criteria to use for the search.
+     * @return A maximum of 101 records that match the search criteria.
+     * @throws WebServiceClientException
+     */
+    List<PowerOfAttorneySearchResultTO> searchPowerOfAttorney(PowerOfAttorneySearchParamsTO searchParams) throws WebServiceClientException;
 }
