@@ -122,6 +122,23 @@ public class WSManager {
      */
     public boolean initWebServices(String userName, char[] userPassword, HashMap<String, String> config)
             throws WebServiceClientException {
+                
+        boolean result = false;
+        if (getSearchService() == null) {
+            setSearchWS(getWSClient(SearchClientImpl.class,
+                    config.get(WSConfig.SOLA_WS_SEARCH_SERVICE_URL.toString()),
+                    userName, userPassword));
+        }
+
+        // Ticket #206 - Check the connection immediately in case the login credentials are invalid
+        try {
+            result = checkConnection();
+        } finally {
+            if (!result) {
+                // Reset the search service so that the invalid login credentials are not cached. 
+                setSearchWS(null);
+            }
+        }
 
         // The spatial service is not secured to improve the performance of spatial navigation. 
         if (getSpatialService() == null) {
@@ -175,12 +192,7 @@ public class WSManager {
                     userName, userPassword));
         }
         
-        if (getSearchService() == null) {
-            setSearchWS(getWSClient(SearchClientImpl.class,
-                    config.get(WSConfig.SOLA_WS_SEARCH_SERVICE_URL.toString()),
-                    userName, userPassword));
-        }
-        return checkConnection();
+        return result; 
     }
 
     /**
