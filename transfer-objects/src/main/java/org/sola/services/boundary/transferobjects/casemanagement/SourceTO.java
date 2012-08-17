@@ -28,6 +28,7 @@
 package org.sola.services.boundary.transferobjects.casemanagement;
 
 import java.util.Date;
+import javax.persistence.Column;
 import org.sola.services.boundary.transferobjects.digitalarchive.DocumentTO;
 import org.sola.services.common.contracts.AbstractIdTO;
 
@@ -48,7 +49,10 @@ public class SourceTO extends AbstractIdTO {
     private DocumentTO archiveDocument;
     private String transactionId;
     private boolean locked;
-
+    private String ownerName;
+    private String version;
+    private String description;
+    
     public SourceTO() {
         super();
     }
@@ -171,5 +175,29 @@ public class SourceTO extends AbstractIdTO {
 
     public void setLocked(boolean locked) {
         this.locked = locked;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 }

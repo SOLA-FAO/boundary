@@ -40,6 +40,9 @@ public class SourceSearchParamsTO extends AbstractTO{
     private Date toRecordationDate;
     private Date fromSubmissionDate;
     private Date toSubmissionDate;
+    private String ownerName;
+    private String version;
+    private String description;
     
     public SourceSearchParamsTO(){
         super();
@@ -108,5 +111,28 @@ public class SourceSearchParamsTO extends AbstractTO{
     public void setTypeCode(String typeCode) {
         this.typeCode = typeCode;
     }
-    
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }   
 }

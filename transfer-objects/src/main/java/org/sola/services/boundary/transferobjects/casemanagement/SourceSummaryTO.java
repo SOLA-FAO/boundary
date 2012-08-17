@@ -41,6 +41,9 @@ public class SourceSummaryTO extends AbstractBasicIdTO{
     private Date recordation;
     private Date submission;
     private String statusCode;
+    private String ownerName;
+    private String version;
+    private String description;
     
     public SourceSummaryTO(){
         super();
@@ -117,5 +120,28 @@ public class SourceSummaryTO extends AbstractBasicIdTO{
     public void setArchiveDocumentId(String archiveDocumentId) {
         this.archiveDocumentId = archiveDocumentId;
     }
-      
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
 }
