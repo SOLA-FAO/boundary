@@ -664,4 +664,19 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         }
         return result;
     }
+
+    @Override
+    public ApplicationTO getApplicationByTransactionId(String transactionId) throws WebServiceClientException {
+        ApplicationTO result = null;
+        final String methodName = CaseManagementClient.GET_APPLICATION_BY_TRANSACTION_ID;
+        try {
+            beforeWebMethod(methodName, transactionId);
+            result = getPort().getApplicationByTransactionId(transactionId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, transactionId);
+        }
+        return result;
+    }
 }

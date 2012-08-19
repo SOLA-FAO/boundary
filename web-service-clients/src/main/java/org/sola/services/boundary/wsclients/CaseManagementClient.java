@@ -130,6 +130,8 @@ public interface CaseManagementClient extends AbstractWSClient {
     public static final String GET_SOURCE_BY_ID = SERVICE_NAME + "getSourceById";
     
     public static final String GET_POWER_OF_ATTORNEY_BY_ID = SERVICE_NAME + "getPowerOfAttorneyById";
+    
+    public static final String GET_APPLICATION_BY_TRANSACTION_ID = SERVICE_NAME + "getApplicationByTransactionId";
     /**
      * CaseManagement.serviceActionComplete - Identifier for the serviceActionComplete method
      */
@@ -674,4 +676,7 @@ public interface CaseManagementClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     PowerOfAttorneyTO getPowerOfAttorneyById(String id) throws WebServiceClientException;
+
+    /** Returns {@link ApplicationTO} by the given transaction ID. */
+    ApplicationTO getApplicationByTransactionId(String transactionId) throws WebServiceClientException;
 }

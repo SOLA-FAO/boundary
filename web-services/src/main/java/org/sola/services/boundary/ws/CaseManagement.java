@@ -680,6 +680,26 @@ public class CaseManagement extends AbstractWebService {
         return (PowerOfAttorneyTO) result[0];
     }
 
+    /** Returns {@link ApplicationTO} by the given transaction ID. */
+    @WebMethod(operationName = "getApplicationByTransactionId")
+    public ApplicationTO getApplicationByTransactionId(
+            @WebParam(name = "transactionId") final String transactionId) throws SOLAFault, UnhandledFault,
+            SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTO(
+                        applicationEJB.getApplicationByTransactionId(transactionId), ApplicationTO.class);
+            }
+        });
+
+        return (ApplicationTO) result[0];
+    }
+            
     /**
      * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#serviceActionComplete(java.lang.String, java.lang.String, int)
      * ApplicationEJB.serviceActionComplete}

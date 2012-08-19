@@ -44,6 +44,7 @@ public class SourceSummaryTO extends AbstractBasicIdTO{
     private String ownerName;
     private String version;
     private String description;
+    private String transactionId;
     
     public SourceSummaryTO(){
         super();
@@ -143,5 +144,13 @@ public class SourceSummaryTO extends AbstractBasicIdTO{
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
     }
 }

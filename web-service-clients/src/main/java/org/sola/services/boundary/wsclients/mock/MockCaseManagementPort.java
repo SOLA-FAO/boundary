@@ -798,4 +798,16 @@ public class MockCaseManagementPort implements CaseManagement {
             return null;
         }
     }
+
+    @Override
+    public ApplicationTO getApplicationByTransactionId(String transactionId) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        ApplicationTO defaultResponse = new ApplicationTO();
+        try {
+            return getManager().getResponse(CaseManagementClient.GET_APPLICATION_BY_TRANSACTION_ID,
+                    ApplicationTO.class, defaultResponse, transactionId);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
 }

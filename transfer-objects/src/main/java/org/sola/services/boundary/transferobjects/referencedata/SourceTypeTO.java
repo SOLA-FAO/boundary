@@ -30,8 +30,17 @@ package org.sola.services.boundary.transferobjects.referencedata;
 import org.sola.services.common.contracts.AbstractCodeTO;
 
 public class SourceTypeTO extends AbstractCodeTO {
-
+    private boolean  forRegistration;
+    
     public SourceTypeTO() {
         super();
+    }
+
+    public boolean isForRegistration() {
+        return forRegistration;
+    }
+
+    public void setForRegistration(boolean forRegistration) {
+        this.forRegistration = forRegistration;
     }
 }
