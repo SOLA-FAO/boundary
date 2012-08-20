@@ -41,6 +41,7 @@ public class SurveyPointTO extends AbstractVersionedTO {
     
     private String id;
     private boolean boundary;
+    private boolean linked;
     private byte[] geom;
     private byte[] originalGeom;
 
@@ -50,6 +51,14 @@ public class SurveyPointTO extends AbstractVersionedTO {
 
     public void setBoundary(boolean boundary) {
         this.boundary = boundary;
+    }
+    
+    public boolean isLinked() {
+        return linked;
+    }
+
+    public void setLinked(boolean linked) {
+        this.linked = linked;
     }
 
     public byte[] getGeom() {
