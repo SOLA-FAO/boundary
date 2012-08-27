@@ -27,6 +27,7 @@
  */
 package org.sola.services.boundary.transferobjects.administrative;
 
+import java.util.Date;
 import org.sola.services.common.contracts.AbstractIdTO;
 
 public class BaUnitNotationTO extends AbstractIdTO {
@@ -37,8 +38,17 @@ public class BaUnitNotationTO extends AbstractIdTO {
     private String statusCode;
     private String referenceNr;
     private boolean locked;
+    private Date changeTime;
 
-    
+    public Date getChangeTime() {
+        return changeTime;
+    }
+
+    public void setChangeTime(Date changeTime) {
+        this.changeTime = changeTime;
+    }
+
+       
     public BaUnitNotationTO(){
         super();
     }
