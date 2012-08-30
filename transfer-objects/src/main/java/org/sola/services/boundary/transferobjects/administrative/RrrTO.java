@@ -55,6 +55,15 @@ public class RrrTO extends AbstractIdTO {
     private List<RrrShareTO> rrrShareList;
     private BaUnitNotationTO notation;
     private List<PartySummaryTO> rightHolderList;
+    private String concatenatedName;
+
+    public String getConcatenatedName() {
+        return concatenatedName;
+    }
+
+    public void setConcatenatedName(String concatenatedName) {
+        this.concatenatedName = concatenatedName;
+    }
     
     public RrrTO(){
         super();
