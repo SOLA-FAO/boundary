@@ -34,6 +34,16 @@ public class UserTO extends UserSummaryTO {
     private String pasword;
     private List<UserGroupTO> userGroups;
     private boolean active;
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     
     public UserTO() {
         super();
