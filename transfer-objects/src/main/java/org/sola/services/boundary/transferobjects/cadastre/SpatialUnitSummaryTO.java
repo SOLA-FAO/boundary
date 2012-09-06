@@ -25,16 +25,12 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.sola.services.boundary.transferobjects.cadastre;
 
 import org.sola.services.common.contracts.AbstractIdTO;
 
 /**
- *
+ * Summary TO for SpatialUnit entity
  * @author soladev
  */
 public class SpatialUnitSummaryTO extends AbstractIdTO {
@@ -45,6 +41,9 @@ public class SpatialUnitSummaryTO extends AbstractIdTO {
     private String levelId;
     private String referencePoint;
 
+    /**
+     * No arg constructor
+     */
     public SpatialUnitSummaryTO() {
         super();
     }

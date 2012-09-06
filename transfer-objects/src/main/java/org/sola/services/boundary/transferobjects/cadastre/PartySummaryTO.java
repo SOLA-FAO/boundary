@@ -29,6 +29,10 @@ package org.sola.services.boundary.transferobjects.cadastre;
 
 import org.sola.services.common.contracts.AbstractBasicIdTO;
 
+/**
+ * Summary TO for party used by Cadastre web service
+ * @author McDowell
+ */
 public class PartySummaryTO extends AbstractBasicIdTO {
     
       private String name;
@@ -36,6 +40,9 @@ public class PartySummaryTO extends AbstractBasicIdTO {
     private String lastName;
     private String typeCode;
 
+    /**
+     * No arg constructor
+     */
     public PartySummaryTO() {
         super();
     }

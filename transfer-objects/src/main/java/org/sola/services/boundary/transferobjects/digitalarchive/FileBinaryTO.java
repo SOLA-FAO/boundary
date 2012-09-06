@@ -38,8 +38,8 @@ public class FileBinaryTO extends FileInfoTO {
         return content;
     }
 
-    public void setContent(byte[] content) {
-        this.content = content;
+    public void setContent(byte[] content) { //NOSONAR
+        this.content = content; //NOSONAR
     }
     
 }

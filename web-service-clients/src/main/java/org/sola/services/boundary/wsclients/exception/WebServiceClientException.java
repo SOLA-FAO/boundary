@@ -93,10 +93,10 @@ public class WebServiceClientException extends RuntimeException {
      * @see org.sola.common.messaging.ServiceMessage
      * @see org.sola.common.messaging.MessageUtility
      */
-    public WebServiceClientException(String messageCode, Object[] messageParameters) {
+    public WebServiceClientException(String messageCode, Object[] messageParameters) { //NOSONAR
         super(messageCode);
         this.type = WebServiceClientExceptionType.CLIENT;
-        this.messageParameters = messageParameters;
+        this.messageParameters = messageParameters; //NOSONAR
     }
     
     /**

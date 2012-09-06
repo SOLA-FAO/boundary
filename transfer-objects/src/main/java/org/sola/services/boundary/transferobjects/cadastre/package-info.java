@@ -25,10 +25,6 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 @XmlSchema(namespace=ServiceConstants.CADASTRE_TO_NAMESPACE)
 package org.sola.services.boundary.transferobjects.cadastre;
 

@@ -25,14 +25,10 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.sola.services.boundary.transferobjects.cadastre;
 
 /**
- *
+ * Custom TO for Cadastre Redefinition
  * @author Elton Manoku
  */
 public class CadastreObjectTargetRedefinitionTO extends CadastreObjectTargetTO{
@@ -44,8 +40,8 @@ public class CadastreObjectTargetRedefinitionTO extends CadastreObjectTargetTO{
         return geomPolygon;
     }
 
-    public void setGeomPolygon(byte[] geomPolygon) {
-        this.geomPolygon = geomPolygon;
+    public void setGeomPolygon(byte[] geomPolygon) { //NOSONAR
+        this.geomPolygon = geomPolygon; //NOSONAR
     }
 
 //    public byte[] getGeomPolygonCurrent() {

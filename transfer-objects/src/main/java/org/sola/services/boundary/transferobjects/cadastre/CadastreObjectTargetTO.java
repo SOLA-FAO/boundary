@@ -25,16 +25,12 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.sola.services.boundary.transferobjects.cadastre;
 
 import org.sola.services.common.contracts.AbstractVersionedTO;
 
 /**
- *
+ * TO for CadastreObjectTarget entity
  * @author manoku
  */
 public class CadastreObjectTargetTO extends AbstractVersionedTO{
@@ -46,8 +42,8 @@ public class CadastreObjectTargetTO extends AbstractVersionedTO{
         return geomPolygonCurrent;
     }
 
-    public void setGeomPolygonCurrent(byte[] geomPolygonCurrent) {
-        this.geomPolygonCurrent = geomPolygonCurrent;
+    public void setGeomPolygonCurrent(byte[] geomPolygonCurrent) { //NOSONAR
+        this.geomPolygonCurrent = geomPolygonCurrent; //NOSONAR
     }
 
     public String getCadastreObjectId() {

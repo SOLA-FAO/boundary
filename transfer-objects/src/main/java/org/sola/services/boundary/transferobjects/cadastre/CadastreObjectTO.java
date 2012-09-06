@@ -32,6 +32,9 @@ import java.util.Date;
 import java.util.List;
 import org.sola.services.common.contracts.AbstractIdTO;
 
+/**
+ * TO for CadastreObject entity
+ */
 public class CadastreObjectTO extends AbstractIdTO {
 
     private String typeCode;
@@ -110,8 +113,8 @@ public class CadastreObjectTO extends AbstractIdTO {
         return geomPolygon;
     }
 
-    public void setGeomPolygon(byte[] geomPolygon) {
-        this.geomPolygon = geomPolygon;
+    public void setGeomPolygon(byte[] geomPolygon) { //NOSONAR
+        this.geomPolygon = geomPolygon; //NOSONAR
     }
 
     public String getTransactionId() {

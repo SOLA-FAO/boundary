@@ -142,8 +142,8 @@ public class ApplicationTO extends AbstractIdTO {
         return location;
     }
 
-    public void setLocation(byte[] location) {
-        this.location = location;
+    public void setLocation(byte[] location) { //NOSONAR
+        this.location = location; //NOSONAR
     }
 
     public BigDecimal getServicesFee() {

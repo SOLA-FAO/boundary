@@ -25,17 +25,13 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.sola.services.boundary.transferobjects.cadastre;
 
 import java.math.BigDecimal;
 import org.sola.services.common.contracts.AbstractIdTO;
 
 /**
- *
+ * Summary TO for RRR used by Cadastre Service
  * @author soladev
  */
 public class rrrSummaryTO extends AbstractIdTO {
@@ -50,6 +46,9 @@ public class rrrSummaryTO extends AbstractIdTO {
 // ba_unit_id character varying(40) NOT NULL,
   private PartySummaryTO party;
 
+  /**
+   * No arg constructor
+   */
     public rrrSummaryTO() {
         super(); 
     }

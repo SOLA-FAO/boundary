@@ -25,10 +25,6 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.sola.services.boundary.transferobjects.cadastre;
 
 import java.util.ArrayList;
@@ -36,7 +32,7 @@ import java.util.List;
 import org.sola.services.common.contracts.AbstractTO;
 
 /**
- *
+ * TO for CadastreObjectNode
  * @author Elton Manoku
  */
 public class CadastreObjectNodeTO extends AbstractTO{
@@ -56,8 +52,8 @@ public class CadastreObjectNodeTO extends AbstractTO{
         return geom;
     }
 
-    public void setGeom(byte[] geom) {
-        this.geom = geom;
+    public void setGeom(byte[] geom) { //NOSONAR
+        this.geom = geom; //NOSONAR
     }
 
     public String getId() {
