@@ -210,4 +210,21 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
         }
         return result;
     }
+     
+     
+    @Override
+    public BaUnitTO getBaUnitWithCadObject(String nameFirstPart, String nameLastPart, String colist) throws WebServiceClientException {
+        BaUnitTO result = null;
+        final String methodName = AdministrativeClient.GET_BA_UNIT_WITH_CAD_OBJECT;
+        try {
+            beforeWebMethod(methodName, nameFirstPart,nameLastPart,colist);
+            result = getPort().getBaUnitWithCadObject(nameFirstPart,nameLastPart,colist);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, nameFirstPart,nameLastPart, colist);
+        }
+        return result;
+    } 
+     
 }

@@ -359,6 +359,38 @@ public class Administrative extends AbstractWebService {
 
         return (BaUnitAreaTO) result[0];
     }
+     
+    
+    /**
+     * See {{@linkplain AdministrativeEJB#getBaUnitById(java.lang.String)
+     * AdministrativeEJB.getBaUnitById}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     */
+    @WebMethod(operationName = "GetBaUnitWithCadObject")
+    public BaUnitTO GetBaUnitWithCadObject(
+            @WebParam(name = "nameFirstpart") String nameFirstpart,
+            @WebParam(name = "nameLastpart") String nameLastpart,
+            @WebParam(name = "colist") String colist)
+            throws SOLAFault, UnhandledFault {
+
+        final String nameFirstpartTmp = nameFirstpart;
+        final String nameLastpartTmp = nameLastpart;
+        final String colistTmp = colist;
+        final Object[] result = {null};
+
+        runOpenQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTO(
+                        administrativeEJB.getBaUnitWithCadObject(nameFirstpartTmp,nameLastpartTmp,colistTmp), BaUnitTO.class);
+            }
+        });
+
+        return (BaUnitTO) result[0];
+    }
 
     
 }

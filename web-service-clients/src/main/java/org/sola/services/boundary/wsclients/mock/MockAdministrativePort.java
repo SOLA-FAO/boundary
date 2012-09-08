@@ -305,4 +305,20 @@ public class MockAdministrativePort implements Administrative {
         }
     }
 
+       /**
+     * Response Key = AdministrativeClient.GET_BA_UNIT_WITH_CAD_OBJECT
+     *
+     * @return default = new BaUnitTO()
+     */
+    @Override
+    public BaUnitTO getBaUnitWithCadObject(String nameFirstPart, String nameLastPart, String colist) throws SOLAFault, UnhandledFault {
+        BaUnitTO defaultResponse = new BaUnitTO();
+        try {
+            return getManager().getResponse(AdministrativeClient.GET_BA_UNIT_WITH_CAD_OBJECT,
+                    BaUnitTO.class, defaultResponse, nameFirstPart,nameLastPart,colist);
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
+            return null;
+        }
+    }
 }

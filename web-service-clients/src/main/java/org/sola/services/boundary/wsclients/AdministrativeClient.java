@@ -86,6 +86,12 @@ public interface AdministrativeClient extends AbstractWSClient {
      * Administrative.getBaUnitAreas - Identifier for the getBaUnitAreas method
      */
     public static final String GET_BA_UNIT_AREAS = SERVICE_NAME + "getBaUnitAreas";
+    
+     /**
+     * Administrative.getBaUnitWithCadObject - Identifier for the getBaUnitWithCadObject method
+     */
+    public static final String GET_BA_UNIT_WITH_CAD_OBJECT = SERVICE_NAME + "getBaUnitWithCadObject";
+   
    
    
      /**
@@ -201,6 +207,15 @@ public interface AdministrativeClient extends AbstractWSClient {
      */
     BaUnitAreaTO getBaUnitAreas(String baUnitId) throws WebServiceClientException;
 
-    
+    /**
+     * Retrieves the BA Unit matching the supplied identifier.
+     *
+     * @param id The BA Unit identifier
+     * * @param coluist list of cadastre objects
+     * @return The BA Unit details or null if the identifier is invalid.
+     * @throws WebServiceClientException
+     */
+    BaUnitTO getBaUnitWithCadObject(String nameFirstPart, String nameLastPart, String colist ) throws WebServiceClientException;
+
     
 }
