@@ -87,7 +87,25 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
         }
         return result;
     }
+    
+    
+     @Override
+    public List<CadastreObjectTO> getCadastreObjectByAllParts(String searchString)
+            throws WebServiceClientException {
+        List<CadastreObjectTO> result = null;
+        final String methodName = CadastreClient.GET_CADASTRE_OBJECT_BY_ALL_PARTS;
+        try {
+            beforeWebMethod(methodName, searchString);
+            result = getPort().getCadastreObjectByAllParts(searchString);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, searchString);
+        }
+        return result;
+    }
 
+    
     @Override
     public CadastreObjectTO getCadastreObjectByPoint(
             double x, double y, int srid, String typeCode)

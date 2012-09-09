@@ -54,6 +54,10 @@ public interface CadastreClient extends AbstractWSClient {
      * Cadastre.getCadastreObjectByParts - Identifier for the getCadastreObjectByParts method
      */
     public static final String GET_CADASTRE_OBJECT_BY_PARTS = SERVICE_NAME + "getCadastreObjectByParts";
+   /**
+     * Cadastre.getCadastreObjectByParts - Identifier for the getCadastreObjectByParts method
+     */
+    public static final String GET_CADASTRE_OBJECT_BY_ALL_PARTS = SERVICE_NAME + "getCadastreObjectByAllParts";
     /**
      * Cadastre.getCadastreObjectByPoint - Identifier for the getCadastreObjectByPoint method
      */
@@ -111,7 +115,19 @@ public interface CadastreClient extends AbstractWSClient {
      */
     List<CadastreObjectTO> getCadastreObjectByParts(String searchString)
             throws WebServiceClientException;
+     /**
+     * Returns a maximum of 10 cadastre objects with current or pending status that have a name first part and/or name last part
+     * that matches the specified search string. This method supports partial matches and is case
+     * insensitive.
+     *
+     * @param searchString The search string to use
+     * @return The list of cadastre objects matching the search string
+     * @throws WebServiceClientException
+     */
+    List<CadastreObjectTO> getCadastreObjectByAllParts(String searchString)
+            throws WebServiceClientException;
 
+    
     /**
      * Returns the cadastre object that is located at the point specified or null if there is no
      * cadastre object at that location. Uses the PostGIS ST_Intersects function to perform the

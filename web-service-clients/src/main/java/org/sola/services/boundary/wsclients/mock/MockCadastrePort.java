@@ -164,7 +164,26 @@ public class MockCadastrePort implements Cadastre {
             return null;
         }
     }
+    
+     /**
+     * Response Key = CadastreClient.GET_CADASTRE_OBJECT_BY_ALL_PARTS
+     *
+     * @return default = new ArrayList<CadastreObjectTO>()
+     */
+    @Override
+    public List<CadastreObjectTO> getCadastreObjectByAllParts(String searchString)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<CadastreObjectTO> defaultResponse = new ArrayList<CadastreObjectTO>();
+        try {
+            return getManager().getResponse(CadastreClient.GET_CADASTRE_OBJECT_BY_ALL_PARTS,
+                    List.class, defaultResponse, searchString);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
 
+    
     /**
      * Response Key = CadastreClient.GET_CADASTRE_OBJECT_BY_POINT
      *

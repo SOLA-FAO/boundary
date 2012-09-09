@@ -99,6 +99,35 @@ public class Cadastre extends AbstractWebService {
 
         return (List<CadastreObjectTO>) result[0];
     }
+    
+     /**
+     * See {@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#getCadastreObjectByAllParts(java.lang.String)
+     * CadastreEJB.getCadastreObjectByAllParts}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetCadastreObjectByAllParts")
+    public List<CadastreObjectTO> GetCadastreObjectByAllParts(
+            @WebParam(name = "searchString") String searchString)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final String searchStringTmp = searchString;
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        cadastreEJB.getCadastreObjectByAllParts(searchStringTmp),
+                        CadastreObjectTO.class);
+            }
+        });
+
+        return (List<CadastreObjectTO>) result[0];
+    }
 
     /**
      * See {@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#getCadastreObjectByPoint(double, double, int)
