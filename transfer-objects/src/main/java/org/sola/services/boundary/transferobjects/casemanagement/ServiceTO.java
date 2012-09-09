@@ -52,7 +52,15 @@ public class ServiceTO extends AbstractIdTO {
     private BigDecimal baseFee; 
     private BigDecimal areaFee;
     private BigDecimal valueFee; 
+    private String concatenatedName;
 
+    public String getConcatenatedName() {
+        return concatenatedName;
+    }
+
+    public void setConcatenatedName(String concatenatedName) {
+        this.concatenatedName = concatenatedName;
+    }
 
     public ServiceTO() {
         super(); 
