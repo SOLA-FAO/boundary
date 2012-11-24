@@ -33,6 +33,7 @@ import org.sola.webservices.cadastre.CadastreService;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectNodeTO;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectTO;
+import org.sola.webservices.transferobjects.transaction.TransactionBulkOperationSpatialTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreRedefinitionTO;
 
@@ -274,4 +275,40 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
         }
         return result;
     }
+
+    @Override
+    public List<ValidationResult> saveTransactionBulkOperationSpatial(
+            TransactionBulkOperationSpatialTO transactionTO) 
+    throws WebServiceClientException {
+        List<ValidationResult> result = null;
+        final String methodName = CadastreClient.SAVE_TRANSACTION_BULK_OPERATION_SPATIAL;
+        String languageCode = this.getLanguageCode();
+        try {
+            beforeWebMethod(methodName, transactionTO, languageCode);
+            result = getPort().saveTransactionBulkOperationSpatial(
+                    transactionTO, languageCode);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, transactionTO, languageCode);
+        }
+        return result;
+    }
+
+    @Override
+    public TransactionBulkOperationSpatialTO getTransactionBulkOperationSpatial(
+            String transactionId) throws WebServiceClientException {
+        TransactionBulkOperationSpatialTO result = null;
+        final String methodName = CadastreClient.GET_TRANSACTION_BULK_OPERATION_SPATIAL;
+        try {
+            beforeWebMethod(methodName, transactionId);
+            result = getPort().getTransactionBulkOperationSpatial(transactionId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, transactionId);
+        }
+        return result;
+    }
+    
 }
