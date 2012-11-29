@@ -29,7 +29,9 @@ import java.util.List;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.transferobjects.administrative.BaUnitAreaTO;
 import org.sola.webservices.transferobjects.administrative.BaUnitTO;
-
+import org.sola.webservices.transferobjects.administrative.SysRegPubDisStateLandTO;
+import org.sola.webservices.transferobjects.administrative.SysRegPubDisOwnerNameTO;
+import org.sola.webservices.transferobjects.administrative.SysRegPubDisParcelNameTO;
 /**
  * Interface for the Administrative Service. Implemented by {@linkplain AdministrativeClientImpl}.
  * To obtain a reference to the Administrative Service, use {@linkplain WSManager#getAdministrative()}
@@ -92,7 +94,22 @@ public interface AdministrativeClient extends AbstractWSClient {
      */
     public static final String GET_BA_UNIT_WITH_CAD_OBJECT = SERVICE_NAME + "getBaUnitWithCadObject";
    
-   
+      /**
+     * Administrative.getCadastreObjects - Identifier for the getCadastreObjects
+     * method
+     */
+    public static final String GET_SYS_REG_REGIST_LISTING = SERVICE_NAME + "getSysRegPubDisParcelNameByLocation";
+    /**
+     * Administrative.getCadastreObjects - Identifier for the getCadastreObjects
+     * method
+     */
+    public static final String GET_SYS_REG_OWNER_LISTING = SERVICE_NAME + "getSysRegPubDisOwnerNameByLocation";
+    /**
+     * Administrative.getCadastreObjects - Identifier for the getCadastreObjects
+     * method
+     */
+    public static final String GET_SYS_REG_STATELAND_LISTING = SERVICE_NAME + "getSysRegPubDisStateLandByLocation";
+
    
      /**
      * Creates a new BA Unit Area for a BaUnitId 
@@ -216,6 +233,41 @@ public interface AdministrativeClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     BaUnitTO getBaUnitWithCadObject(String nameFirstPart, String nameLastPart, String colist ) throws WebServiceClientException;
+    
+     /**
+     * Returns a list of cadastre objects that have a name last part that
+     * matches the specified search string. This method supports partial matches
+     * and is case insensitive.
+     *
+     * @param searchString The search string to use
+     * @return The list of cadastre objects matching the search string
+     * @throws WebServiceClientException
+     */
+    List<SysRegPubDisParcelNameTO> getSysRegPubDisParcelNameByLocation(String searchString)
+            throws WebServiceClientException;
 
+    /**
+     * Returns a list of cadastre objects that have a name last part that
+     * matches the specified search string. This method supports partial matches
+     * and is case insensitive.
+     *
+     * @param searchString The search string to use
+     * @return The list of cadastre objects matching the search string
+     * @throws WebServiceClientException
+     */
+    List<SysRegPubDisOwnerNameTO> getSysRegPubDisOwnerNameByLocation(String searchString)
+            throws WebServiceClientException;
+
+    /**
+     * Returns a list of cadastre objects that have a name last part that
+     * matches the specified search string. This method supports partial matches
+     * and is case insensitive.
+     *
+     * @param searchString The search string to use
+     * @return The list of cadastre objects matching the search string
+     * @throws WebServiceClientException
+     */
+    List<SysRegPubDisStateLandTO> getSysRegPubDisStateLandByLocation(String searchString)
+            throws WebServiceClientException;
     
 }

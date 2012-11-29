@@ -1,26 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO). All rights
- * reserved.
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted
- * provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice,this list of conditions
- * and the following disclaimer. 2. Redistributions in binary form must reproduce the above
- * copyright notice,this list of conditions and the following disclaimer in the documentation and/or
- * other materials provided with the distribution. 3. Neither the name of FAO nor the names of its
- * contributors may be used to endorse or promote products derived from this software without
- * specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
- * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
- * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.wsclients;
@@ -32,6 +36,9 @@ import org.sola.webservices.administrative.Administrative;
 import org.sola.webservices.administrative.AdministrativeService;
 import org.sola.webservices.transferobjects.administrative.BaUnitAreaTO;
 import org.sola.webservices.transferobjects.administrative.BaUnitTO;
+import org.sola.webservices.transferobjects.administrative.SysRegPubDisOwnerNameTO;
+import org.sola.webservices.transferobjects.administrative.SysRegPubDisParcelNameTO;
+import org.sola.webservices.transferobjects.administrative.SysRegPubDisStateLandTO;
 
 /**
  * Implementation class for the {@linkplain AdministrativeClient} interface.
@@ -43,7 +50,8 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
     private static final String LOCAL_PART = "administrative-service";
 
     /**
-     * Creates a web service client class for the web service hosted at the specified URL
+     * Creates a web service client class for the web service hosted at the
+     * specified URL
      *
      * @param url The location of the service WSDL
      */
@@ -85,8 +93,7 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
         }
         return result;
     }
-    
-    
+
     @Override
     public BaUnitAreaTO createBaUnitArea(
             String baUnitId, BaUnitAreaTO baUnitAreaTO) throws WebServiceClientException {
@@ -103,8 +110,6 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
         return result;
     }
 
-    
-    
     @Override
     public BaUnitTO saveBaUnit(
             String serviceId, BaUnitTO baUnitTO) throws WebServiceClientException {
@@ -195,8 +200,8 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
         }
         return result;
     }
-    
-     @Override
+
+    @Override
     public BaUnitAreaTO getBaUnitAreas(String baUnitId) throws WebServiceClientException {
         BaUnitAreaTO result = null;
         final String methodName = AdministrativeClient.GET_BA_UNIT_AREAS;
@@ -210,21 +215,67 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
         }
         return result;
     }
-     
-     
+
     @Override
     public BaUnitTO getBaUnitWithCadObject(String nameFirstPart, String nameLastPart, String colist) throws WebServiceClientException {
         BaUnitTO result = null;
         final String methodName = AdministrativeClient.GET_BA_UNIT_WITH_CAD_OBJECT;
         try {
-            beforeWebMethod(methodName, nameFirstPart,nameLastPart,colist);
-            result = getPort().getBaUnitWithCadObject(nameFirstPart,nameLastPart,colist);
+            beforeWebMethod(methodName, nameFirstPart, nameLastPart, colist);
+            result = getPort().getBaUnitWithCadObject(nameFirstPart, nameLastPart, colist);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
-            afterWebMethod(methodName, result, nameFirstPart,nameLastPart, colist);
+            afterWebMethod(methodName, result, nameFirstPart, nameLastPart, colist);
         }
         return result;
-    } 
-     
+    }
+
+    @Override
+    public List<SysRegPubDisParcelNameTO> getSysRegPubDisParcelNameByLocation(String searchString)
+            throws WebServiceClientException {
+        List<SysRegPubDisParcelNameTO> result = null;
+        final String methodName = AdministrativeClient.GET_SYS_REG_REGIST_LISTING;
+        try {
+            beforeWebMethod(methodName, searchString);
+            result = getPort().getSysRegPubDisParcelNameByLocation(searchString);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, searchString);
+        }
+        return result;
+    }
+
+    @Override
+    public List<SysRegPubDisOwnerNameTO> getSysRegPubDisOwnerNameByLocation(String searchString)
+            throws WebServiceClientException {
+        List<SysRegPubDisOwnerNameTO> result = null;
+        final String methodName = AdministrativeClient.GET_SYS_REG_OWNER_LISTING;
+        try {
+            beforeWebMethod(methodName, searchString);
+            result = getPort().getSysRegPubDisOwnerNameByLocation(searchString);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, searchString);
+        }
+        return result;
+    }
+
+    @Override
+    public List<SysRegPubDisStateLandTO> getSysRegPubDisStateLandByLocation(String searchString)
+            throws WebServiceClientException {
+        List<SysRegPubDisStateLandTO> result = null;
+        final String methodName = AdministrativeClient.GET_SYS_REG_STATELAND_LISTING;
+        try {
+            beforeWebMethod(methodName, searchString);
+            result = getPort().getSysRegPubDisStateLandByLocation(searchString);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, searchString);
+        }
+        return result;
+    }
 }

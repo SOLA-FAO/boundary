@@ -33,8 +33,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
-import org.sola.services.boundary.transferobjects.administrative.BaUnitAreaTO;
-import org.sola.services.boundary.transferobjects.administrative.BaUnitTO;
+import org.sola.services.boundary.transferobjects.administrative.*;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.contracts.GenericTranslator;
 import org.sola.services.common.faults.*;
@@ -392,5 +391,91 @@ public class Administrative extends AbstractWebService {
         return (BaUnitTO) result[0];
     }
 
-    
+   /**
+     * See {@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#getSysRegPubDisParcelNameByLocation(java.lang.String)
+     * CadastreEJB.getSysRegPubDisParcelNameByLocation}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetSysRegPubDisParcelNameByLocation")
+    public List<SysRegPubDisParcelNameTO> GetSysRegPubDisParcelNameByLocation(
+            @WebParam(name = "searchString") String searchString)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final String searchStringTmp = searchString;
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        administrativeEJB.getSysRegPubDisParcelNameByLocation(searchStringTmp),
+                        SysRegPubDisParcelNameTO.class);
+            }
+        });
+
+        return (List<SysRegPubDisParcelNameTO>) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#getSysRegPubDisParcelNameByLocation(java.lang.String)
+     * CadastreEJB.getSysRegPubDisParcelNameByLocation}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetSysRegPubDisOwnerNameByLocation")
+    public List<SysRegPubDisOwnerNameTO> GetSysRegPubDisOwnerNameByLocation(
+            @WebParam(name = "searchString") String searchString)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final String searchStringTmp = searchString;
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        administrativeEJB.getSysRegPubDisOwnerNameByLocation(searchStringTmp),
+                        SysRegPubDisOwnerNameTO.class);
+            }
+        });
+
+        return (List<SysRegPubDisOwnerNameTO>) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#getSysRegPubDisStateLandByLocation(java.lang.String)
+     * CadastreEJB.getSysRegPubDisStateLandByLocation}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetSysRegPubDisStateLandByLocation")
+    public List<SysRegPubDisStateLandTO> GetSysRegPubDisStateLandByLocation(
+            @WebParam(name = "searchString") String searchString)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final String searchStringTmp = searchString;
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        administrativeEJB.getSysRegPubDisStateLandByLocation(searchStringTmp),
+                        SysRegPubDisOwnerNameTO.class);
+            }
+        });
+
+        return (List<SysRegPubDisStateLandTO>) result[0];
+    }
+  
 }

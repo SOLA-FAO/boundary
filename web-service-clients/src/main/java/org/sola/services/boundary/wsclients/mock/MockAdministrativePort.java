@@ -29,8 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.sola.services.boundary.wsclients.AdministrativeClient;
 import org.sola.webservices.administrative.*;
-import org.sola.webservices.transferobjects.administrative.BaUnitAreaTO;
-import org.sola.webservices.transferobjects.administrative.BaUnitTO;
+import org.sola.webservices.transferobjects.administrative.*;
 
 /**
  * Provides a mock implementation for the
@@ -318,6 +317,59 @@ public class MockAdministrativePort implements Administrative {
                     BaUnitTO.class, defaultResponse, nameFirstPart,nameLastPart,colist);
         } catch (Exception ex) {
             processExceptionBasic(ex);
+            return null;
+        }
+    }
+      /**
+     * Response Key = CadastreClient.GET_CADASTRE_OBJECT_BY_PARTS
+     *
+     * @return default = new ArrayList<CadastreObjectTO>()
+     */
+    @Override
+    public List<SysRegPubDisParcelNameTO> getSysRegPubDisParcelNameByLocation(String searchString)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<SysRegPubDisParcelNameTO> defaultResponse = new ArrayList<SysRegPubDisParcelNameTO>();
+        try {
+            return getManager().getResponse(AdministrativeClient.GET_SYS_REG_REGIST_LISTING,
+                    List.class, defaultResponse, searchString);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
+    /**
+     * Response Key = CadastreClient.GET_CADASTRE_OBJECT_BY_PARTS
+     *
+     * @return default = new ArrayList<CadastreObjectTO>()
+     */
+    @Override
+    public List<SysRegPubDisOwnerNameTO> getSysRegPubDisOwnerNameByLocation(String searchString)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<SysRegPubDisOwnerNameTO> defaultResponse = new ArrayList<SysRegPubDisOwnerNameTO>();
+        try {
+            return getManager().getResponse(AdministrativeClient.GET_SYS_REG_OWNER_LISTING,
+                    List.class, defaultResponse, searchString);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
+    /**
+     * Response Key = CadastreClient.GET_CADASTRE_OBJECT_BY_PARTS
+     *
+     * @return default = new ArrayList<CadastreObjectTO>()
+     */
+    @Override
+    public List<SysRegPubDisStateLandTO> getSysRegPubDisStateLandByLocation(String searchString)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<SysRegPubDisStateLandTO> defaultResponse = new ArrayList<SysRegPubDisStateLandTO>();
+        try {
+            return getManager().getResponse(AdministrativeClient.GET_SYS_REG_STATELAND_LISTING,
+                    List.class, defaultResponse, searchString);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
             return null;
         }
     }
