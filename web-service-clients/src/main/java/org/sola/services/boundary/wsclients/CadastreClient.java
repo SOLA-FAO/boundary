@@ -32,7 +32,9 @@ package org.sola.services.boundary.wsclients;
 import java.util.List;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.transferobjects.ValidationResult;
-import org.sola.webservices.transferobjects.cadastre.*;
+import org.sola.webservices.transferobjects.cadastre.CadastreObjectNodeTO;
+import org.sola.webservices.transferobjects.cadastre.CadastreObjectTO;
+import org.sola.webservices.transferobjects.transaction.TransactionBulkOperationSpatialTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreRedefinitionTO;
 
@@ -115,9 +117,21 @@ public interface CadastreClient extends AbstractWSClient {
     public static final String GET_TRANSACTION_CADASTRE_REDFN = SERVICE_NAME + "getTransactionCadastreRedefinition";
 
     /**
-     * Returns a maximum of 10 cadastre objects that have a name first part
-     * and/or name last part that matches the specified search string. This
-     * method supports partial matches and is case insensitive.
+     * Cadastre.getTransactionBulkOperationSpatial - Identifier for the
+     * getTransactionBulkOperationSpatial method
+     */
+    public static final String GET_TRANSACTION_BULK_OPERATION_SPATIAL = SERVICE_NAME + "getTransactionBulkOperationSpatial";
+
+    /**
+     * Cadastre.saveTransactionBulkOperationSpatial - Identifier for the
+     * saveTransactionBulkOperationSpatial method
+     */
+    public static final String SAVE_TRANSACTION_BULK_OPERATION_SPATIAL = SERVICE_NAME + "saveTransactionBulkOperationSpatial";
+
+    /**
+     * Returns a maximum of 10 cadastre objects that have a name first part and/or name last part
+     * that matches the specified search string. This method supports partial matches and is case
+     * insensitive.
      *
      * @param searchString The search string to use
      * @return The list of cadastre objects matching the search string
@@ -226,7 +240,23 @@ public interface CadastreClient extends AbstractWSClient {
      * Approves the changes to cadastre objects as a result of a cadastre
      * redefinition.
      *
-     * @param transactionId The identifier of the transaction
+     * @param serviceId The identifier of the transaction
      */
     TransactionCadastreRedefinitionTO getTransactionCadastreRedefinition(String serviceId);
+
+    /**
+     * Gets a transaction of bulk operation.
+     *
+     * @param transactionId The identifier of the transaction
+     */
+    TransactionBulkOperationSpatialTO getTransactionBulkOperationSpatial(String transactionId);
+    
+    /**
+     * It creates or updates a bulk operation spatial transaction.
+     * @param transactionTO The transaction to create/save.
+     * @return A list of validation results.
+     */
+    List<ValidationResult> saveTransactionBulkOperationSpatial(
+            TransactionBulkOperationSpatialTO transactionTO);
+    
 }

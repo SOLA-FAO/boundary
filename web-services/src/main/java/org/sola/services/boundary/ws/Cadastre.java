@@ -36,7 +36,9 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
-import org.sola.services.boundary.transferobjects.cadastre.*;
+import org.sola.services.boundary.transferobjects.cadastre.CadastreObjectNodeTO;
+import org.sola.services.boundary.transferobjects.cadastre.CadastreObjectTO;
+import org.sola.services.boundary.transferobjects.transaction.TransactionBulkOperationSpatialTO;
 import org.sola.services.boundary.transferobjects.transaction.TransactionCadastreChangeTO;
 import org.sola.services.boundary.transferobjects.transaction.TransactionCadastreRedefinitionTO;
 import org.sola.services.common.ServiceConstants;
@@ -46,6 +48,7 @@ import org.sola.services.common.faults.*;
 import org.sola.services.common.webservices.AbstractWebService;
 import org.sola.services.ejb.cadastre.businesslogic.CadastreEJBLocal;
 import org.sola.services.ejb.transaction.businesslogic.TransactionEJBLocal;
+import org.sola.services.ejb.transaction.repository.entities.TransactionBulkOperationSpatial;
 import org.sola.services.ejb.transaction.repository.entities.TransactionCadastreChange;
 import org.sola.services.ejb.transaction.repository.entities.TransactionCadastreRedefinition;
 import org.sola.services.ejb.transaction.repository.entities.TransactionType;
@@ -466,5 +469,62 @@ public class Cadastre extends AbstractWebService {
         });
 
         return (TransactionCadastreRedefinitionTO) result[0];
+    }
+
+    @WebMethod(operationName = "GetTransactionBulkOperationSpatial")
+    public TransactionBulkOperationSpatialTO GetTransactionBulkOperationSpatial(
+            @WebParam(name = "transactionId") final String transactionId)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTO(
+                        transactionEJB.getTransactionById(transactionId, TransactionBulkOperationSpatial.class),
+                        TransactionBulkOperationSpatialTO.class);
+            }
+        });
+
+        return (TransactionBulkOperationSpatialTO) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.transaction.businesslogic.TransactionEJB#saveTransaction(org.sola.services.ejb.transaction.repository.entities.TransactionBasic,
+     * java.lang.String, java.lang.String) TransactionEJB.saveTransaction}
+     *
+     * @throws SOLAValidationFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "SaveTransactionBulkOperationSpatial")
+    public List<ValidationResult> SaveTransactionBulkOperationSpatial(
+            @WebParam(name = "transactionTO") 
+                    final TransactionBulkOperationSpatialTO transactionTO,
+            @WebParam(name = "languageCode") final String languageCode)
+            throws SOLAValidationFault, OptimisticLockingFault,
+            SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runUpdateValidation(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                TransactionBulkOperationSpatial targetTransaction =
+                        transactionEJB.getTransactionById(
+                        transactionTO.getId(), TransactionBulkOperationSpatial.class);
+                TransactionBulkOperationSpatial transaction = GenericTranslator.fromTO(
+                        transactionTO, TransactionBulkOperationSpatial.class, targetTransaction);
+                result[0] = transactionEJB.saveTransaction(
+                        transaction, TransactionType.BULK_OPERATION_SPATIAL, languageCode);
+            }
+        });
+
+        return (List<ValidationResult>) result[0];
     }
 }
