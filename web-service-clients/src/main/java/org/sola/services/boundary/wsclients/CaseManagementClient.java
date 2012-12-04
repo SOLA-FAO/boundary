@@ -210,6 +210,18 @@ public interface CaseManagementClient extends AbstractWSClient {
      * CaseManagement.getUserActions - Identifier for the getUserActions method
      */
     public static final String GET_USER_ACTIONS = SERVICE_NAME + "getUserActions";
+     /**
+     * Application.getSysRegCertificates - Identifier for the getSysRegCertificates
+     * method
+     */
+    public static final String GET_SYS_REG_CERTIFICATES = SERVICE_NAME + "getSysRegCerificatesByLocation";
+    
+      /**
+     * Application.getSysRegCertificates - Identifier for the getSysRegCertificatesApp
+     * method
+     */
+    public static final String GET_SYS_REG_CERTIFICATES_APP = SERVICE_NAME + "getSysRegCerificatesByApplication";
+    
 
     /**
      * Calculates the lodgement fees as well as the expected completions dates for each service as
@@ -679,4 +691,29 @@ public interface CaseManagementClient extends AbstractWSClient {
 
     /** Returns {@link ApplicationTO} by the given transaction ID. */
     ApplicationTO getApplicationByTransactionId(String transactionId) throws WebServiceClientException;
+    
+      /**
+     * Returns a list of cadastre objects that have a name last part that
+     * matches the specified search string. This method supports partial matches
+     * and is case insensitive.
+     *
+     * @param searchString The search string to use
+     * @return The list of cadastre objects matching the search string
+     * @throws WebServiceClientException
+     */
+    List<SysRegCertificatesTO> getSysRegCertificatesByLocation(String searchString)
+            throws WebServiceClientException;
+
+    
+      /**
+     * Returns a list of cadastre objects that have a name last part that
+     * matches the specified search string. This method supports partial matches
+     * and is case insensitive.
+     *
+     * @param searchString The search string to use
+     * @return The list of cadastre objects matching the search string
+     * @throws WebServiceClientException
+     */
+    List<SysRegCertificatesTO> getSysRegCertificatesByApplication(String searchString, String nr)
+            throws WebServiceClientException;
 }

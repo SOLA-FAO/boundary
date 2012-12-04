@@ -810,4 +810,40 @@ public class MockCaseManagementPort implements CaseManagement {
             return null;
         }
     }
+    
+       /**
+     * Response Key = ApplicationClient.GET_CADASTRE_OBJECT_BY_PARTS
+     *
+     * @return default = new ArrayList<CadastreObjectTO>()
+     */
+    @Override
+    public List<SysRegCertificatesTO> getSysRegCertificatesByLocation(String searchString)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<SysRegCertificatesTO> defaultResponse = new ArrayList<SysRegCertificatesTO>();
+        try {
+            return getManager().getResponse(CaseManagementClient.GET_SYS_REG_CERTIFICATES,
+                    List.class, defaultResponse, searchString);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+        /**
+     * Response Key = ApplicationClient.GET_CADASTRE_OBJECT_BY_PARTS
+     *
+     * @return default = new ArrayList<CadastreObjectTO>()
+     */
+    @Override
+    public List<SysRegCertificatesTO> getSysRegCertificatesByApplication(String searchString, String nr)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<SysRegCertificatesTO> defaultResponse = new ArrayList<SysRegCertificatesTO>();
+        try {
+            return getManager().getResponse(CaseManagementClient.GET_SYS_REG_CERTIFICATES_APP,
+                    List.class, defaultResponse, searchString, nr);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
 }

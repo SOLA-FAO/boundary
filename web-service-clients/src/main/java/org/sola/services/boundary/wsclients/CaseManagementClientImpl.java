@@ -679,4 +679,35 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         }
         return result;
     }
+     @Override
+    public List<SysRegCertificatesTO> getSysRegCertificatesByLocation(String searchString)
+            throws WebServiceClientException {
+        List<SysRegCertificatesTO> result = null;
+        final String methodName = CaseManagementClient.GET_SYS_REG_CERTIFICATES;
+        try {
+            beforeWebMethod(methodName, searchString);
+            result = getPort().getSysRegCertificatesByLocation(searchString);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, searchString);
+        }
+        return result;
+    }
+    @Override
+    public List<SysRegCertificatesTO> getSysRegCertificatesByApplication(String searchString, String nr)
+            throws WebServiceClientException {
+        List<SysRegCertificatesTO> result = null;
+        final String methodName = CaseManagementClient.GET_SYS_REG_CERTIFICATES_APP;
+        try {
+            beforeWebMethod(methodName, searchString, nr);
+            result = getPort().getSysRegCertificatesByApplication(searchString,nr);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, searchString);
+        }
+        return result;
+    }
+
 }

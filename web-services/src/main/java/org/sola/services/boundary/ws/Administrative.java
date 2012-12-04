@@ -392,8 +392,8 @@ public class Administrative extends AbstractWebService {
     }
 
    /**
-     * See {@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#getSysRegPubDisParcelNameByLocation(java.lang.String)
-     * CadastreEJB.getSysRegPubDisParcelNameByLocation}
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getSysRegPubDisParcelNameByLocation(java.lang.String)
+     * AdministrativeEJB.getSysRegPubDisParcelNameByLocation}
      *
      * @throws SOLAFault
      * @throws UnhandledFault
@@ -421,8 +421,8 @@ public class Administrative extends AbstractWebService {
     }
 
     /**
-     * See {@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#getSysRegPubDisParcelNameByLocation(java.lang.String)
-     * CadastreEJB.getSysRegPubDisParcelNameByLocation}
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getSysRegPubDisParcelNameByLocation(java.lang.String)
+     * AdministrativeEJB.getSysRegPubDisParcelNameByLocation}
      *
      * @throws SOLAFault
      * @throws UnhandledFault
@@ -450,8 +450,8 @@ public class Administrative extends AbstractWebService {
     }
 
     /**
-     * See {@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#getSysRegPubDisStateLandByLocation(java.lang.String)
-     * CadastreEJB.getSysRegPubDisStateLandByLocation}
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getSysRegPubDisStateLandByLocation(java.lang.String)
+     * AdministrativeEJB.getSysRegPubDisStateLandByLocation}
      *
      * @throws SOLAFault
      * @throws UnhandledFault

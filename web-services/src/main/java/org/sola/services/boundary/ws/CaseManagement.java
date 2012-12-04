@@ -1290,4 +1290,65 @@ public class CaseManagement extends AbstractWebService {
 
         return (ServiceTO) result[0];
     }
+    
+     /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getSysRegCertificatesByLocation(java.lang.String)
+     * CadastreEJB.getSysRegPubDisParcelNameByLocation}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetSysRegCertificatesByLocation")
+    public List<SysRegCertificatesTO> GetSysRegCertificatesByLocation(
+            @WebParam(name = "searchString") String searchString)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final String searchStringTmp = searchString;
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        applicationEJB.getSysRegCertificatesByLocation(searchStringTmp),
+                        SysRegCertificatesTO.class);
+            }
+        });
+
+        return (List<SysRegCertificatesTO>) result[0];
+    }
+    
+      /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getSysRegCertificatesByApplication(java.lang.String)
+     * CadastreEJB.getSysRegPubDisParcelNameByLocation}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetSysRegCertificatesByApplication")
+    public List<SysRegCertificatesTO> GetSysRegCertificatesByApplication(
+            @WebParam(name = "searchString") String searchString,
+            @WebParam(name = "nr") String nr)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final String searchStringTmp = searchString;
+        final String nrTmp = nr;
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        applicationEJB.getSysRegCertificatesByApplication(searchStringTmp, nrTmp),
+                        SysRegCertificatesTO.class);
+            }
+        });
+
+        return (List<SysRegCertificatesTO>) result[0];
+    }
+    
 }
