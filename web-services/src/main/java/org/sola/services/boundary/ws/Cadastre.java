@@ -297,6 +297,35 @@ public class Cadastre extends AbstractWebService {
     }
 
     /**
+     * See {@linkplain org.sola.services.ejb.transaction.businesslogic.TransactionEJB#getTransactionById(java.lang.String,
+     * java.lang.Class)
+     * TransactionEJB.getTransactionById}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetCadastreChangeById")
+    public TransactionCadastreChangeTO GetTransactionCadastreChangeById(
+            @WebParam(name = "id") final String id)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTO(
+                        transactionEJB.getTransactionById(id, TransactionCadastreChange.class),
+                        TransactionCadastreChangeTO.class);
+            }
+        });
+
+        return (TransactionCadastreChangeTO) result[0];
+    }
+
+    /**
      * See {@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#getCadastreObjects(java.util.List)
      * CadastreEJB.getCadastreObjects}
      *
@@ -526,5 +555,36 @@ public class Cadastre extends AbstractWebService {
         });
 
         return (List<ValidationResult>) result[0];
+    }
+    
+    /**
+     * See {@linkplain org.sola.services.ejb.transaction.businesslogic.TransactionEJB#rejectTransactionById(org.sola.services.ejb.transaction.repository.entities.TransactionBasic,
+     * java.lang.String, java.lang.String) TransactionEJB.rejectTransactionById}
+     *
+     * @throws SOLAValidationFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "RejectTransactionBulkOperationSpatial")
+    public boolean RejectTransactionBulkOperationSpatial(
+            @WebParam(name = "transactionTO") 
+                    final TransactionBulkOperationSpatialTO transactionTO,
+            @WebParam(name = "languageCode") final String languageCode)
+            throws SOLAValidationFault, OptimisticLockingFault,
+            SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runUpdateValidation(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = transactionEJB.rejectTransactionWithId(transactionTO.getId());
+            }
+        });
+
+        return result[0].equals(Boolean.TRUE);
     }
 }

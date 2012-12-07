@@ -91,6 +91,11 @@ public interface CadastreClient extends AbstractWSClient {
      */
     public static final String GET_TRANSACTION_CADASTRE_CHANGE = SERVICE_NAME + "getTransactionCadastreChange";
     /**
+     * Cadastre.getTransactionCadastreChangeById - Identifier for the
+     * getTransactionCadastreChangeById method
+     */
+    public static final String GET_TRANSACTION_CADASTRE_CHANGE_BYID = SERVICE_NAME + "getTransactionCadastreChangeById";
+    /**
      * Cadastre.getCadastreObjects - Identifier for the getCadastreObjects
      * method
      */
@@ -127,6 +132,12 @@ public interface CadastreClient extends AbstractWSClient {
      * saveTransactionBulkOperationSpatial method
      */
     public static final String SAVE_TRANSACTION_BULK_OPERATION_SPATIAL = SERVICE_NAME + "saveTransactionBulkOperationSpatial";
+
+    /**
+     * Cadastre.rejectTransactionBulkOperationSpatial - Identifier for the
+     * rejectTransactionBulkOperationSpatial method
+     */
+    public static final String REJECT_TRANSACTION_BULK_OPERATION_SPATIAL = SERVICE_NAME + "rejectTransactionBulkOperationSpatial";
 
     /**
      * Returns a maximum of 10 cadastre objects that have a name first part and/or name last part
@@ -193,6 +204,7 @@ public interface CadastreClient extends AbstractWSClient {
 
     TransactionCadastreChangeTO getTransactionCadastreChange(String serviceId);
 
+    TransactionCadastreChangeTO getTransactionCadastreChangeById(String id);
     /**
      * Retrieves a list of cadastre object matching the list of ids provided.
      *
@@ -258,5 +270,10 @@ public interface CadastreClient extends AbstractWSClient {
      */
     List<ValidationResult> saveTransactionBulkOperationSpatial(
             TransactionBulkOperationSpatialTO transactionTO);
+    
+    /**
+     * It rejects a bulk operation by removing the uploaded records.
+     */
+    boolean rejectTransactionBulkOperationSpatial(TransactionBulkOperationSpatialTO transactionTO);
     
 }

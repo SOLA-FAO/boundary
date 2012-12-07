@@ -39,8 +39,17 @@ import org.sola.services.boundary.transferobjects.cadastre.SpatialUnitTemporaryT
  * @author Elton Manoku
  */
 public class TransactionBulkOperationSpatialTO extends TransactionTO {
+    
+    private boolean generateFirstPart;
+    private List<SpatialUnitTemporaryTO> spatialUnitTemporaryList;
 
-    List<SpatialUnitTemporaryTO> spatialUnitTemporaryList;
+    public boolean isGenerateFirstPart() {
+        return generateFirstPart;
+    }
+
+    public void setGenerateFirstPart(boolean generateFirstPart) {
+        this.generateFirstPart = generateFirstPart;
+    }
 
     public List<SpatialUnitTemporaryTO> getSpatialUnitTemporaryList() {
         return spatialUnitTemporaryList;

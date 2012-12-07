@@ -194,6 +194,22 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
     }
 
     @Override
+    public TransactionCadastreChangeTO getTransactionCadastreChangeById(String id)
+            throws WebServiceClientException {
+        TransactionCadastreChangeTO result = null;
+        final String methodName = CadastreClient.GET_TRANSACTION_CADASTRE_CHANGE_BYID;
+        try {
+            beforeWebMethod(methodName, id);
+            result = getPort().getCadastreChangeById(id);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, id);
+        }
+        return result;
+    }
+
+    @Override
     public List<CadastreObjectTO> getCadastreObjects(List<String> Ids)
             throws WebServiceClientException {
         List<CadastreObjectTO> result = null;
@@ -313,5 +329,21 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
         }
         return result;
     }
-    
+
+    @Override
+    public boolean rejectTransactionBulkOperationSpatial(
+            TransactionBulkOperationSpatialTO transactionTO) throws WebServiceClientException {
+        TransactionBulkOperationSpatialTO result = null;
+        final String methodName = CadastreClient.REJECT_TRANSACTION_BULK_OPERATION_SPATIAL;
+        try {
+            beforeWebMethod(methodName, transactionTO);
+            return getPort().rejectTransactionBulkOperationSpatial(transactionTO, getLanguageCode());
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, transactionTO);
+        }
+        return false;
+    }
+        
 }

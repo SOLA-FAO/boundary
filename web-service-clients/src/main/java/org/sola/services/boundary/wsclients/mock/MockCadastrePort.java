@@ -265,6 +265,24 @@ public class MockCadastrePort implements Cadastre {
     }
 
     /**
+     * Response Key = CadastreClient.GET_TRANSACTION_CADASTRE_CHANGE_BYID
+     *
+     * @return default = new TransactionCadastreChangeTO()
+     */
+    @Override
+    public TransactionCadastreChangeTO getCadastreChangeById(String id) 
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        TransactionCadastreChangeTO defaultResponse = new TransactionCadastreChangeTO();
+        try {
+            return getManager().getResponse(CadastreClient.GET_TRANSACTION_CADASTRE_CHANGE_BYID,
+                    TransactionCadastreChangeTO.class, defaultResponse, id);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+    
+    /**
      * Response Key = CadastreClient.GET_CADASTRE_OBJECTS
      *
      * @return default = new ArrayList<CadastreObjectTO>()
@@ -406,6 +424,22 @@ public class MockCadastrePort implements Cadastre {
             return null;
         }
     }
-    
-    
+
+    @Override
+    public boolean rejectTransactionBulkOperationSpatial(
+            TransactionBulkOperationSpatialTO transactionTO, String languageCode) 
+            throws OptimisticLockingFault, SOLAAccessFault, SOLAFault,
+            SOLAValidationFault, UnhandledFault {
+        boolean defaultResponse = true;
+        try {
+            return getManager().getResponse(
+                    CadastreClient.REJECT_TRANSACTION_BULK_OPERATION_SPATIAL,
+                    Boolean.class, defaultResponse, 
+                    transactionTO, languageCode);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return false;
+        }
+    }
+        
 }
