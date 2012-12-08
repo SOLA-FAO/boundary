@@ -23,6 +23,15 @@ public class SysRegPubDisOwnerNameTO extends AbstractIdTO {
     private BigDecimal commercial;
     private BigDecimal agricultural;
     private BigDecimal industrial;
+    private String publicNotificationDuration;
+
+    public String getPublicNotificationDuration() {
+        return publicNotificationDuration;
+    }
+
+    public void setPublicNotificationDuration(String publicNotificationDuration) {
+        this.publicNotificationDuration = publicNotificationDuration;
+    }
 
     public String getBaUnitId() {
         return baUnitId;
