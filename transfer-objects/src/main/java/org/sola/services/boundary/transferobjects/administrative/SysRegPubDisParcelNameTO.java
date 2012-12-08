@@ -18,6 +18,15 @@ public class SysRegPubDisParcelNameTO extends AbstractIdTO {
     private String landUsecode;
     private String baUnitId;
     private String concatenatedName;
+    private String publicNotificationDuration;
+
+    public String getPublicNotificationDuration() {
+        return publicNotificationDuration;
+    }
+
+    public void setPublicNotificationDuration(String publicNotificationDuration) {
+        this.publicNotificationDuration = publicNotificationDuration;
+    }
 
   
     public String getBaUnitId() {
