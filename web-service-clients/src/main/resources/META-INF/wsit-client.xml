@@ -14,4 +14,5 @@
     <import location="administrative-service.xml" namespace="http://webservices.sola.org/administrative"/>
     <import location="admin-service.xml" namespace="http://webservices.sola.org/admin"/>
     <!--import location="filestreaming-service.xml" namespace="http://webservices.sola.org/filestreaming"/-->
+    <import location="bulkoperations-service.xml" namespace="http://webservices.sola.org/bulkoperations"/>
 </definitions>

@@ -36,7 +36,6 @@ import org.sola.webservices.cadastre.*;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectNodeTO;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectTO;
-import org.sola.webservices.transferobjects.transaction.TransactionBulkOperationSpatialTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreRedefinitionTO;
 
@@ -396,50 +395,50 @@ public class MockCadastrePort implements Cadastre {
         }
     }
 
-    @Override
-    public List<ValidationResult> saveTransactionBulkOperationSpatial(
-            TransactionBulkOperationSpatialTO transactionTO, 
-            String languageCode) throws OptimisticLockingFault, SOLAAccessFault, 
-            SOLAFault, SOLAValidationFault, UnhandledFault {
-        List<ValidationResult> defaultResponse = new ArrayList<ValidationResult>();
-        try {
-            return getManager().getResponse(CadastreClient.SAVE_TRANSACTION_BULK_OPERATION_SPATIAL,
-                    List.class, defaultResponse, transactionTO, languageCode);
-        } catch (Exception ex) {
-            processExceptionAll(ex);
-            return null;
-        }
-    }
-
-    @Override
-    public TransactionBulkOperationSpatialTO getTransactionBulkOperationSpatial(
-            String transactionId) throws SOLAAccessFault, SOLAFault, UnhandledFault {
-        TransactionBulkOperationSpatialTO defaultResponse = new TransactionBulkOperationSpatialTO();
-        try {
-            return getManager().getResponse(
-                    CadastreClient.GET_TRANSACTION_BULK_OPERATION_SPATIAL,
-                    TransactionBulkOperationSpatialTO.class, defaultResponse, transactionId);
-        } catch (Exception ex) {
-            processExceptionAccess(ex);
-            return null;
-        }
-    }
-
-    @Override
-    public boolean rejectTransactionBulkOperationSpatial(
-            TransactionBulkOperationSpatialTO transactionTO, String languageCode) 
-            throws OptimisticLockingFault, SOLAAccessFault, SOLAFault,
-            SOLAValidationFault, UnhandledFault {
-        boolean defaultResponse = true;
-        try {
-            return getManager().getResponse(
-                    CadastreClient.REJECT_TRANSACTION_BULK_OPERATION_SPATIAL,
-                    Boolean.class, defaultResponse, 
-                    transactionTO, languageCode);
-        } catch (Exception ex) {
-            processExceptionAccess(ex);
-            return false;
-        }
-    }
+//    @Override
+//    public List<ValidationResult> saveTransactionBulkOperationSpatial(
+//            TransactionBulkOperationSpatialTO transactionTO, 
+//            String languageCode) throws OptimisticLockingFault, SOLAAccessFault, 
+//            SOLAFault, SOLAValidationFault, UnhandledFault {
+//        List<ValidationResult> defaultResponse = new ArrayList<ValidationResult>();
+//        try {
+//            return getManager().getResponse(CadastreClient.SAVE_TRANSACTION_BULK_OPERATION_SPATIAL,
+//                    List.class, defaultResponse, transactionTO, languageCode);
+//        } catch (Exception ex) {
+//            processExceptionAll(ex);
+//            return null;
+//        }
+//    }
+//
+//    @Override
+//    public TransactionBulkOperationSpatialTO getTransactionBulkOperationSpatial(
+//            String transactionId) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+//        TransactionBulkOperationSpatialTO defaultResponse = new TransactionBulkOperationSpatialTO();
+//        try {
+//            return getManager().getResponse(
+//                    CadastreClient.GET_TRANSACTION_BULK_OPERATION_SPATIAL,
+//                    TransactionBulkOperationSpatialTO.class, defaultResponse, transactionId);
+//        } catch (Exception ex) {
+//            processExceptionAccess(ex);
+//            return null;
+//        }
+//    }
+//
+//    @Override
+//    public boolean rejectTransactionBulkOperationSpatial(
+//            TransactionBulkOperationSpatialTO transactionTO, String languageCode) 
+//            throws OptimisticLockingFault, SOLAAccessFault, SOLAFault,
+//            SOLAValidationFault, UnhandledFault {
+//        boolean defaultResponse = true;
+//        try {
+//            return getManager().getResponse(
+//                    CadastreClient.REJECT_TRANSACTION_BULK_OPERATION_SPATIAL,
+//                    Boolean.class, defaultResponse, 
+//                    transactionTO, languageCode);
+//        } catch (Exception ex) {
+//            processExceptionAccess(ex);
+//            return false;
+//        }
+//    }
         
 }

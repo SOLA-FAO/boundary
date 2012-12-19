@@ -25,20 +25,29 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
-package org.sola.services.boundary.wsclients;
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package org.sola.services.boundary.transferobjects.transaction;
+
+import java.util.List;
+import org.sola.services.boundary.transferobjects.casemanagement.SourceTO;
 
 /**
- * Enumeration for the configuration keys of the Web-services.
+ *
+ * @author Elton Manoku
  */
-public enum WSConfig {
-    SOLA_WS_CASE_MANAGEMENT_SERVICE_URL, 
-    SOLA_WS_ADMIN_SERVICE_URL,
-    SOLA_WS_REFERENCE_DATA_SERVICE_URL,
-    SOLA_WS_CADASTRE_SERVICE_URL,
-    SOLA_WS_SEARCH_SERVICE_URL,
-    SOLA_WS_DIGITAL_ARCHIVE_URL,
-    SOLA_WS_SPATIAL_SERVICE_URL,
-    SOLA_WS_ADMINISTRATIVE_SERVICE_URL,
-    SOLA_WS_FILE_STREAMING_SERVICE_URL,
-    SOLA_WS_BULK_OPERATIONS_SERVICE_URL
+public class TransactionBulkOperationSourceTO extends TransactionTO {
+    
+    private List<SourceTO> sourceList;
+
+    public List<SourceTO> getSourceList() {
+        return sourceList;
+    }
+
+    public void setSourceList(List<SourceTO> sourceList) {
+        this.sourceList = sourceList;
+    }
+    
 }

@@ -122,24 +122,6 @@ public interface CadastreClient extends AbstractWSClient {
     public static final String GET_TRANSACTION_CADASTRE_REDFN = SERVICE_NAME + "getTransactionCadastreRedefinition";
 
     /**
-     * Cadastre.getTransactionBulkOperationSpatial - Identifier for the
-     * getTransactionBulkOperationSpatial method
-     */
-    public static final String GET_TRANSACTION_BULK_OPERATION_SPATIAL = SERVICE_NAME + "getTransactionBulkOperationSpatial";
-
-    /**
-     * Cadastre.saveTransactionBulkOperationSpatial - Identifier for the
-     * saveTransactionBulkOperationSpatial method
-     */
-    public static final String SAVE_TRANSACTION_BULK_OPERATION_SPATIAL = SERVICE_NAME + "saveTransactionBulkOperationSpatial";
-
-    /**
-     * Cadastre.rejectTransactionBulkOperationSpatial - Identifier for the
-     * rejectTransactionBulkOperationSpatial method
-     */
-    public static final String REJECT_TRANSACTION_BULK_OPERATION_SPATIAL = SERVICE_NAME + "rejectTransactionBulkOperationSpatial";
-
-    /**
      * Returns a maximum of 10 cadastre objects that have a name first part and/or name last part
      * that matches the specified search string. This method supports partial matches and is case
      * insensitive.
@@ -256,24 +238,5 @@ public interface CadastreClient extends AbstractWSClient {
      */
     TransactionCadastreRedefinitionTO getTransactionCadastreRedefinition(String serviceId);
 
-    /**
-     * Gets a transaction of bulk operation.
-     *
-     * @param transactionId The identifier of the transaction
-     */
-    TransactionBulkOperationSpatialTO getTransactionBulkOperationSpatial(String transactionId);
-    
-    /**
-     * It creates or updates a bulk operation spatial transaction.
-     * @param transactionTO The transaction to create/save.
-     * @return A list of validation results.
-     */
-    List<ValidationResult> saveTransactionBulkOperationSpatial(
-            TransactionBulkOperationSpatialTO transactionTO);
-    
-    /**
-     * It rejects a bulk operation by removing the uploaded records.
-     */
-    boolean rejectTransactionBulkOperationSpatial(TransactionBulkOperationSpatialTO transactionTO);
     
 }

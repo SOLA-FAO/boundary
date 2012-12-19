@@ -46,6 +46,7 @@ public class WSManager {
     private SpatialClient spatialWS;
     private FileStreamingClient fileStreamingWS;
     private AbstractWSClient testWS;
+    private BulkOperationsClient bulkOperationsWS;
     
     private WSManager() {
     }
@@ -192,6 +193,12 @@ public class WSManager {
                     userName, userPassword));
         }
         
+        if (getBulkOperationsService() == null) {
+            setBulkOperationsWS(getWSClient(BulkOperationsClientImpl.class,
+                    config.get(WSConfig.SOLA_WS_BULK_OPERATIONS_SERVICE_URL.toString()),
+                    userName, userPassword));
+        }
+
         return result; 
     }
 
@@ -257,6 +264,10 @@ public class WSManager {
     public SpatialClient getSpatialService() {
         return spatialWS;
     }
+
+    public BulkOperationsClient getBulkOperationsService() {
+        return bulkOperationsWS;
+    }
     
     public void setAdminWS(AdminClient adminWS) {
         this.adminWS = adminWS;
@@ -293,4 +304,9 @@ public class WSManager {
     public void setFileStreamingWS(FileStreamingClient fileStreamingWS) {
         this.fileStreamingWS = fileStreamingWS;
     }
+
+    public void setBulkOperationsWS(BulkOperationsClient bulkOperationsWS) {
+        this.bulkOperationsWS = bulkOperationsWS;
+    }
+    
 }

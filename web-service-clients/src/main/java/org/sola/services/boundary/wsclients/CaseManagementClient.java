@@ -30,9 +30,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.sola.common.RolesConstants;
 import org.sola.common.SOLAAccessException;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
-import org.sola.webservices.casemanagement.SOLAAccessFault;
-import org.sola.webservices.casemanagement.SOLAFault;
-import org.sola.webservices.casemanagement.UnhandledFault;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.casemanagement.*;
 
