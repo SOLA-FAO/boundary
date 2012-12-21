@@ -1,26 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO). All rights
- * reserved.
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted
- * provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice,this list of conditions
- * and the following disclaimer. 2. Redistributions in binary form must reproduce the above
- * copyright notice,this list of conditions and the following disclaimer in the documentation and/or
- * other materials provided with the distribution. 3. Neither the name of FAO nor the names of its
- * contributors may be used to endorse or promote products derived from this software without
- * specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
- * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
- * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.wsclients;
@@ -42,8 +46,9 @@ import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientExceptionType;
 
 /**
- * Implementation class for the {@linkplain AbstractWSClient} interface. Also provides common
- * functionality for descendent web service implementation classes.
+ * Implementation class for the {@linkplain AbstractWSClient} interface. Also
+ * provides common functionality for descendent web service implementation
+ * classes.
  *
  * @author amcdowell
  */
@@ -67,8 +72,8 @@ public abstract class AbstractWSClientImpl implements AbstractWSClient {
     }
 
     /**
-     * Default abstract version of checkConnection method that must be overridden in descendent
-     * classes.
+     * Default abstract version of checkConnection method that must be
+     * overridden in descendent classes.
      *
      * @return N/A
      */
@@ -76,20 +81,21 @@ public abstract class AbstractWSClientImpl implements AbstractWSClient {
     public abstract boolean checkConnection();
 
     /**
-     * Triggered before a web method is executed. Can be used to support generic timing or tracing
-     * of all web methods.
+     * Triggered before a web method is executed. Can be used to support generic
+     * timing or tracing of all web methods.
      *
      * @param methodName The name of the web method being executed (e.g.
      * AdminService.checkConnection)
-     * @param params The parameter values for the web method. null if the method does not have any
-     * parameters.
+     * @param params The parameter values for the web method. null if the method
+     * does not have any parameters.
      */
     protected void beforeWebMethod(String methodName, Object... params) {
     }
 
     /**
-     * Triggered after a web method is executed. Can be used to support generic timing or tracing of
-     * all web methods. Must be executed in the finally block to ensure
+     * Triggered after a web method is executed. Can be used to support generic
+     * timing or tracing of all web methods. Must be executed in the finally
+     * block to ensure
      *
      * @param methodName
      * @param retVal
@@ -99,8 +105,8 @@ public abstract class AbstractWSClientImpl implements AbstractWSClient {
     }
 
     /**
-     * Sets the request context parameters for the port. Includes setting the username and password
-     * for each request.
+     * Sets the request context parameters for the port. Includes setting the
+     * username and password for each request.
      *
      * @param port The web service port.
      */
@@ -115,27 +121,31 @@ public abstract class AbstractWSClientImpl implements AbstractWSClient {
     }
 
     /**
-     * Provides a generic method for creating a new port. This will also instantiate the service
-     * object if it is not already instantiated. <p>This method should be used by descendent
-     * implementation classes to obtain a port object that is configured with the appropriate
-     * context parameters. It should be wrapped by a getPort() method. e.g. </p>
+     * Provides a generic method for creating a new port. This will also
+     * instantiate the service object if it is not already instantiated. <p>This
+     * method should be used by descendent implementation classes to obtain a
+     * port object that is configured with the appropriate context parameters.
+     * It should be wrapped by a getPort() method. e.g. </p>
      * <pre>
      *  private CaseManagement getPort() {
      * return getPort(CaseManagement.class, CasemanagementService.class);
      * }
      * </pre>
      *
-     * @param <T> Represents the type of the port interface class (i.e. the service client interface
-     * class)
-     * @param <S> Represents the type of the service class to instantiate. Must extend
+     * @param <T> Represents the type of the port interface class (i.e. the
+     * service client interface class)
+     * @param <S> Represents the type of the service class to instantiate. Must
+     * extend
      * {@linkplain javax.xml.ws.Service}
-     * @param portInterfaceClass The service client interface class to create. e.g.
-     * SecurityClient.class
+     * @param portInterfaceClass The service client interface class to create.
+     * e.g. SecurityClient.class
      * @param serviceClass The service class to use e.g. SecurityService.class
-     * @param features Optional list of web service features to instantiate the port with (e.g.
-     * MTOM)
-     * @return A new port object that implements the service client interface class
-     * @throws WebServiceClientException If an error occurs while instantiating the service object
+     * @param features Optional list of web service features to instantiate the
+     * port with (e.g. MTOM)
+     * @return A new port object that implements the service client interface
+     * class
+     * @throws WebServiceClientException If an error occurs while instantiating
+     * the service object
      */
     protected <T, S extends Service> T getPort(Class<T> portInterfaceClass, Class<S> serviceClass,
             WebServiceFeature... features)
@@ -146,13 +156,16 @@ public abstract class AbstractWSClientImpl implements AbstractWSClient {
     }
 
     /**
-     * Creates a new service object if one does not already exist for the Service Client.
+     * Creates a new service object if one does not already exist for the
+     * Service Client.
      *
-     * @param <T> Represents the type of the service class to instantiate. Must extend
+     * @param <T> Represents the type of the service class to instantiate. Must
+     * extend
      * {@linkplain javax.xml.ws.Service}
      * @param serviceClass The service class to use e.g. SecurityService.class
      * @return An instantiated service object.
-     * @throws WebServiceClientException If an error occurs while instantiating the service class
+     * @throws WebServiceClientException If an error occurs while instantiating
+     * the service class
      */
     protected <T extends Service> T getService(Class<T> serviceClass)
             throws WebServiceClientException {
@@ -193,9 +206,10 @@ public abstract class AbstractWSClientImpl implements AbstractWSClient {
     }
 
     /**
-     * Sets the Url for the service. Using this method has a performed impact. Setting the url will
-     * invalidate the cached service object and a new service object will be created on the next web
-     * method request. This may add several seconds to the request.
+     * Sets the Url for the service. Using this method has a performed impact.
+     * Setting the url will invalidate the cached service object and a new
+     * service object will be created on the next web method request. This may
+     * add several seconds to the request.
      */
     @Override
     public void setUrl(String url) {
@@ -209,9 +223,9 @@ public abstract class AbstractWSClientImpl implements AbstractWSClient {
      * Sets the user credentials to be used for each service request.
      *
      * @param userName The username
-     * @param password The users password. This is handled as a char array to be consistent with
-     * best practice for handling passwords in java. Handling passwords as Strings should be
-     * avoided.
+     * @param password The users password. This is handled as a char array to be
+     * consistent with best practice for handling passwords in java. Handling
+     * passwords as Strings should be avoided.
      */
     @Override
     public void setCredentials(String userName, char[] password) {
@@ -229,12 +243,13 @@ public abstract class AbstractWSClientImpl implements AbstractWSClient {
     }
 
     /**
-     * Processes web service client exceptions such as Authentication Failed, Malformed URLs as well
-     * as Faults thrown by the SOLA Web SErvices. .
+     * Processes web service client exceptions such as Authentication Failed,
+     * Malformed URLs as well as Faults thrown by the SOLA Web SErvices. .
      *
      * @param methodName
      * @param e The exception that was caught
-     * @throws WebServiceClientException A SOLA exception wrapping the underlying service exception.
+     * @throws WebServiceClientException A SOLA exception wrapping the
+     * underlying service exception.
      */
     protected void processException(
             String methodName,
@@ -352,6 +367,12 @@ public abstract class AbstractWSClientImpl implements AbstractWSClient {
         if (org.sola.webservices.administrative.UnhandledFault.class.isAssignableFrom(e.getClass())) {
             org.sola.webservices.administrative.UnhandledFault fault = (org.sola.webservices.administrative.UnhandledFault) e;
             throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    fault.getFaultInfo());
+        }
+
+        if (org.sola.webservices.administrative.SOLAValidationFault.class.isAssignableFrom(e.getClass())) {
+            org.sola.webservices.administrative.SOLAValidationFault fault = (org.sola.webservices.administrative.SOLAValidationFault) e;
+            throw new WebServiceClientException(WebServiceClientExceptionType.SOLA_VALIDATION_FAILED,
                     fault.getFaultInfo());
         }
 //          ###  org.sola.webservices.cadastre ##

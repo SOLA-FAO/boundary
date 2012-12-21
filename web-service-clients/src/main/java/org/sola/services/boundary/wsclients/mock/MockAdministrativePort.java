@@ -326,12 +326,12 @@ public class MockAdministrativePort implements Administrative {
      * @return default = new ArrayList<CadastreObjectTO>()
      */
     @Override
-    public List<SysRegPubDisParcelNameTO> getSysRegPubDisParcelNameByLocation(String searchString)
+    public List<SysRegPubDisParcelNameTO> getSysRegPubDisParcelNameByLocation(String searchString, String languageCode)
             throws SOLAAccessFault, SOLAFault, UnhandledFault {
         List<SysRegPubDisParcelNameTO> defaultResponse = new ArrayList<SysRegPubDisParcelNameTO>();
         try {
             return getManager().getResponse(AdministrativeClient.GET_SYS_REG_REGIST_LISTING,
-                    List.class, defaultResponse, searchString);
+                    List.class, defaultResponse, searchString, languageCode);
         } catch (Exception ex) {
             processExceptionAccess(ex);
             return null;
@@ -344,12 +344,12 @@ public class MockAdministrativePort implements Administrative {
      * @return default = new ArrayList<CadastreObjectTO>()
      */
     @Override
-    public List<SysRegPubDisOwnerNameTO> getSysRegPubDisOwnerNameByLocation(String searchString)
+    public List<SysRegPubDisOwnerNameTO> getSysRegPubDisOwnerNameByLocation(String searchString, String languageCode)
             throws SOLAAccessFault, SOLAFault, UnhandledFault {
         List<SysRegPubDisOwnerNameTO> defaultResponse = new ArrayList<SysRegPubDisOwnerNameTO>();
         try {
             return getManager().getResponse(AdministrativeClient.GET_SYS_REG_OWNER_LISTING,
-                    List.class, defaultResponse, searchString);
+                    List.class, defaultResponse, searchString, languageCode);
         } catch (Exception ex) {
             processExceptionAccess(ex);
             return null;
@@ -362,12 +362,12 @@ public class MockAdministrativePort implements Administrative {
      * @return default = new ArrayList<CadastreObjectTO>()
      */
     @Override
-    public List<SysRegPubDisStateLandTO> getSysRegPubDisStateLandByLocation(String searchString)
+    public List<SysRegPubDisStateLandTO> getSysRegPubDisStateLandByLocation(String searchString, String languageCode)
             throws SOLAAccessFault, SOLAFault, UnhandledFault {
         List<SysRegPubDisStateLandTO> defaultResponse = new ArrayList<SysRegPubDisStateLandTO>();
         try {
             return getManager().getResponse(AdministrativeClient.GET_SYS_REG_STATELAND_LISTING,
-                    List.class, defaultResponse, searchString);
+                    List.class, defaultResponse, searchString, languageCode);
         } catch (Exception ex) {
             processExceptionAccess(ex);
             return null;

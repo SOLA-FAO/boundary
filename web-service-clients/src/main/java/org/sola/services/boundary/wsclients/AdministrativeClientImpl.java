@@ -236,13 +236,14 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
             throws WebServiceClientException {
         List<SysRegPubDisParcelNameTO> result = null;
         final String methodName = AdministrativeClient.GET_SYS_REG_REGIST_LISTING;
+        String languageCode = getLanguageCode();
         try {
-            beforeWebMethod(methodName, searchString);
-            result = getPort().getSysRegPubDisParcelNameByLocation(searchString);
+            beforeWebMethod(methodName, searchString,languageCode);
+            result = getPort().getSysRegPubDisParcelNameByLocation(searchString,languageCode);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
-            afterWebMethod(methodName, result, searchString);
+            afterWebMethod(methodName, result, searchString,languageCode);
         }
         return result;
     }
@@ -252,13 +253,14 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
             throws WebServiceClientException {
         List<SysRegPubDisOwnerNameTO> result = null;
         final String methodName = AdministrativeClient.GET_SYS_REG_OWNER_LISTING;
+        String languageCode = getLanguageCode();
         try {
-            beforeWebMethod(methodName, searchString);
-            result = getPort().getSysRegPubDisOwnerNameByLocation(searchString);
+            beforeWebMethod(methodName, searchString, languageCode);
+            result = getPort().getSysRegPubDisOwnerNameByLocation(searchString,languageCode);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
-            afterWebMethod(methodName, result, searchString);
+            afterWebMethod(methodName, result, searchString,languageCode);
         }
         return result;
     }
@@ -268,13 +270,14 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
             throws WebServiceClientException {
         List<SysRegPubDisStateLandTO> result = null;
         final String methodName = AdministrativeClient.GET_SYS_REG_STATELAND_LISTING;
+        String languageCode = getLanguageCode();
         try {
-            beforeWebMethod(methodName, searchString);
-            result = getPort().getSysRegPubDisStateLandByLocation(searchString);
+            beforeWebMethod(methodName, searchString,languageCode);
+            result = getPort().getSysRegPubDisStateLandByLocation(searchString,languageCode);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
-            afterWebMethod(methodName, result, searchString);
+            afterWebMethod(methodName, result, searchString,languageCode);
         }
         return result;
     }

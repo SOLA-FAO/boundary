@@ -401,18 +401,23 @@ public class Administrative extends AbstractWebService {
      */
     @WebMethod(operationName = "GetSysRegPubDisParcelNameByLocation")
     public List<SysRegPubDisParcelNameTO> GetSysRegPubDisParcelNameByLocation(
-            @WebParam(name = "searchString") String searchString)
-            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+            @WebParam(name = "searchString") String searchString,
+            @WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault, SOLAValidationFault, OptimisticLockingFault{
+
 
         final String searchStringTmp = searchString;
+        final String languageCodeTmp = languageCode;
+
         final Object[] result = {null};
 
-        runGeneralQuery(wsContext, new Runnable() {
+//        runGeneralQuery(wsContext, new Runnable() {
+          runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
                 result[0] = GenericTranslator.toTOList(
-                        administrativeEJB.getSysRegPubDisParcelNameByLocation(searchStringTmp),
+                        administrativeEJB.getSysRegPubDisParcelNameByLocation(searchStringTmp, languageCodeTmp),
                         SysRegPubDisParcelNameTO.class);
             }
         });
@@ -430,18 +435,23 @@ public class Administrative extends AbstractWebService {
      */
     @WebMethod(operationName = "GetSysRegPubDisOwnerNameByLocation")
     public List<SysRegPubDisOwnerNameTO> GetSysRegPubDisOwnerNameByLocation(
-            @WebParam(name = "searchString") String searchString)
-            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+            @WebParam(name = "searchString") String searchString,
+            @WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault, SOLAValidationFault, OptimisticLockingFault {
+
 
         final String searchStringTmp = searchString;
+        final String languageCodeTmp = languageCode;
+
         final Object[] result = {null};
 
-        runGeneralQuery(wsContext, new Runnable() {
+//        runGeneralQuery(wsContext, new Runnable() {
+          runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
                 result[0] = GenericTranslator.toTOList(
-                        administrativeEJB.getSysRegPubDisOwnerNameByLocation(searchStringTmp),
+                        administrativeEJB.getSysRegPubDisOwnerNameByLocation(searchStringTmp, languageCodeTmp),
                         SysRegPubDisOwnerNameTO.class);
             }
         });
@@ -459,18 +469,23 @@ public class Administrative extends AbstractWebService {
      */
     @WebMethod(operationName = "GetSysRegPubDisStateLandByLocation")
     public List<SysRegPubDisStateLandTO> GetSysRegPubDisStateLandByLocation(
-            @WebParam(name = "searchString") String searchString)
-            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+            @WebParam(name = "searchString") String searchString,
+            @WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault, SOLAValidationFault, OptimisticLockingFault{
+
 
         final String searchStringTmp = searchString;
+        final String languageCodeTmp = languageCode;
+
         final Object[] result = {null};
 
-        runGeneralQuery(wsContext, new Runnable() {
+//        runGeneralQuery(wsContext, new Runnable() {
+          runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
                 result[0] = GenericTranslator.toTOList(
-                        administrativeEJB.getSysRegPubDisStateLandByLocation(searchStringTmp),
+                        administrativeEJB.getSysRegPubDisStateLandByLocation(searchStringTmp, languageCodeTmp),
                         SysRegPubDisOwnerNameTO.class);
             }
         });
