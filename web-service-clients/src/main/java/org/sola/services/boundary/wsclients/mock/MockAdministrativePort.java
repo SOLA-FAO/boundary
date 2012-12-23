@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.sola.services.boundary.wsclients.AdministrativeClient;
 import org.sola.webservices.administrative.*;
+import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.administrative.*;
 
 /**
@@ -373,4 +374,24 @@ public class MockAdministrativePort implements Administrative {
             return null;
         }
     }
+    
+    
+     /**
+     * Response Key = CaseManagementClient.APPLICATION_ACTION_WITHDRAW
+     *
+     * @return default = new ArrayList<ValidationResult>()
+     */
+    @Override
+    public List<ValidationResult> publicDisplay(String params, String languageCode)
+            throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, SOLAValidationFault, UnhandledFault {
+        List<ValidationResult> defaultResponse = new ArrayList<ValidationResult>();
+        try {
+            return getManager().getResponse(AdministrativeClient.PUBLIC_DIPLAY,
+                    List.class, defaultResponse, params, languageCode);
+        } catch (Exception ex) {
+            processExceptionAll(ex);
+            return null;
+        }
+    }
+
 }

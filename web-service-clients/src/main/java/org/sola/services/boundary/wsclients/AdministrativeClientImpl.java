@@ -34,6 +34,7 @@ import javax.xml.namespace.QName;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.administrative.Administrative;
 import org.sola.webservices.administrative.AdministrativeService;
+import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.administrative.BaUnitAreaTO;
 import org.sola.webservices.transferobjects.administrative.BaUnitTO;
 import org.sola.webservices.transferobjects.administrative.SysRegPubDisOwnerNameTO;
@@ -278,6 +279,23 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
             processException(methodName, e);
         } finally {
             afterWebMethod(methodName, result, searchString,languageCode);
+        }
+        return result;
+    }
+    
+    @Override
+    public List<ValidationResult> publicDisplay(String params)
+            throws WebServiceClientException {
+        List<ValidationResult> result = null;
+        final String methodName = AdministrativeClient.PUBLIC_DIPLAY;
+        String languageCode = getLanguageCode();
+        try {
+            beforeWebMethod(methodName, params, languageCode);
+            result = getPort().publicDisplay(params, languageCode);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, params, languageCode);
         }
         return result;
     }

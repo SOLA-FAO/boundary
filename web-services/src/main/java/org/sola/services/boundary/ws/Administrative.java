@@ -35,6 +35,7 @@ import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
 import org.sola.services.boundary.transferobjects.administrative.*;
 import org.sola.services.common.ServiceConstants;
+import org.sola.services.common.br.ValidationResult;
 import org.sola.services.common.contracts.GenericTranslator;
 import org.sola.services.common.faults.*;
 import org.sola.services.common.webservices.AbstractWebService;
@@ -492,5 +493,39 @@ public class Administrative extends AbstractWebService {
 
         return (List<SysRegPubDisStateLandTO>) result[0];
     }
-  
+    
+     /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#validatePublicDisplay
+     * ApplicationEJB.applicationActionWithdraw}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
+    @WebMethod(operationName = "PublicDisplay")
+    public List<ValidationResult> PublicDisplay(
+            @WebParam(name = "params") String params,
+            @WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault,
+            OptimisticLockingFault, SOLAValidationFault {
+
+        final String paramsTmp = params;
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runUpdateValidation(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = administrativeEJB.publicDisplay(
+                        paramsTmp, languageCodeTmp);
+            }
+        });
+
+        return (List<ValidationResult>) result[0];
+    }
+
+    
 }

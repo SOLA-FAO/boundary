@@ -27,6 +27,7 @@ package org.sola.services.boundary.wsclients;
 
 import java.util.List;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
+import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.administrative.BaUnitAreaTO;
 import org.sola.webservices.transferobjects.administrative.BaUnitTO;
 import org.sola.webservices.transferobjects.administrative.SysRegPubDisStateLandTO;
@@ -109,6 +110,11 @@ public interface AdministrativeClient extends AbstractWSClient {
      * method
      */
     public static final String GET_SYS_REG_STATELAND_LISTING = SERVICE_NAME + "getSysRegPubDisStateLandByLocation";
+    /**
+     * Administrative.getCadastreObjects - Identifier for the getCadastreObjects
+     * method
+     */
+    public static final String PUBLIC_DIPLAY = SERVICE_NAME + "publicDisplay";
 
    
      /**
@@ -268,6 +274,15 @@ public interface AdministrativeClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<SysRegPubDisStateLandTO> getSysRegPubDisStateLandByLocation(String searchString)
+            throws WebServiceClientException;
+    
+    
+     /* Verifies the brs
+     * @param searchString The search string to use
+     * @return The list of cadastre objects matching the search string
+     * @throws WebServiceClientException
+     */
+    List<ValidationResult> publicDisplay(String params)
             throws WebServiceClientException;
     
 }
