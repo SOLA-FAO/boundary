@@ -1,26 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO). All rights
- * reserved.
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted
- * provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice,this list of conditions
- * and the following disclaimer. 2. Redistributions in binary form must reproduce the above
- * copyright notice,this list of conditions and the following disclaimer in the documentation and/or
- * other materials provided with the distribution. 3. Neither the name of FAO nor the names of its
- * contributors may be used to endorse or promote products derived from this software without
- * specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
- * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
- * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.ws;
@@ -34,16 +38,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.xml.ws.WebServiceContext;
 import org.sola.common.RolesConstants;
-import org.sola.services.boundary.transferobjects.referencedata.ApplicationActionTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.ApplicationStatusTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.AvailabilityStatusTO;
-import org.sola.services.boundary.transferobjects.referencedata.BaUnitRelTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.BaUnitTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.BrSeverityTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.BrTechnicalTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.BrValidationTargetTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.CadastreObjectTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.ChangeStatusTypeTO;
+import org.sola.services.boundary.transferobjects.referencedata.*;
 import org.sola.services.common.faults.FaultUtility;
 import org.sola.services.common.faults.SOLAFault;
 import org.sola.services.common.faults.UnhandledFault;
@@ -51,23 +46,6 @@ import org.sola.services.ejb.application.businesslogic.ApplicationEJBLocal;
 import org.sola.services.common.contracts.GenericTranslator;
 import org.sola.services.common.webservices.AbstractWebService;
 import org.sola.services.ejb.party.businesslogic.PartyEJBLocal;
-import org.sola.services.boundary.transferobjects.referencedata.CommunicationTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.GenderTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.IdTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.MortgageTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.PartyTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.PartyRoleTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.PresentationFormTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.RegistrationStatusTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.RequestCategoryTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.RequestTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.ServiceActionTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.ServiceStatusTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.SourceBaUnitRelationTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.SourceTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.RrrTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.RrrGroupTypeTO;
-import org.sola.services.boundary.transferobjects.referencedata.TypeActionTO;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.contracts.AbstractCodeTO;
 import org.sola.services.common.faults.*;
@@ -715,6 +693,34 @@ public class ReferenceData extends AbstractWebService {
     }
 
     /**
+     * See {@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#getLandUseTypes(java.lang.String)
+     * CadastreEJB.getCadastreObjectTypes}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetLandUseTypes")
+    public List<LandUseTypeTO> GetLandUseTypes(String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        cadastreEJB.getLandUseTypes(languageCodeTmp),
+                        LandUseTypeTO.class);
+            }
+        });
+
+        return (List<LandUseTypeTO>) result[0];
+    }
+
+    /**
      * See {@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#getCadastreObjectTypes(java.lang.String)
      * CadastreEJB.getCadastreObjectTypes}
      *
@@ -799,7 +805,8 @@ public class ReferenceData extends AbstractWebService {
 
     /**
      * Uses the {@linkplain org.sola.services.ejb.system.businesslogic.SystemEJB#getCodeEntityList(java.lang.Class, java.lang.String)
-     * SystemEJB.getCodeEntityList} to retrieve the BrValidationTargetType codes.
+     * SystemEJB.getCodeEntityList} to retrieve the BrValidationTargetType
+     * codes.
      *
      * @throws SOLAFault
      * @throws UnhandledFault

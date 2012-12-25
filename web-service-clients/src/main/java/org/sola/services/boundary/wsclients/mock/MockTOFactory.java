@@ -1,26 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO). All rights
- * reserved.
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted
- * provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice,this list of conditions
- * and the following disclaimer. 2. Redistributions in binary form must reproduce the above
- * copyright notice,this list of conditions and the following disclaimer in the documentation and/or
- * other materials provided with the distribution. 3. Neither the name of FAO nor the names of its
- * contributors may be used to endorse or promote products derived from this software without
- * specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
- * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
- * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 /*
@@ -38,7 +42,8 @@ import org.sola.webservices.transferobjects.security.RoleTO;
 import org.sola.webservices.transferobjects.security.UserTO;
 
 /**
- * Factory to creates mock Transfer Objects that can be used for testing purposes.
+ * Factory to creates mock Transfer Objects that can be used for testing
+ * purposes.
  *
  * @author amcdowell
  * @see MockServiceManager
@@ -73,7 +78,8 @@ public class MockTOFactory {
     }
 
     /**
-     * Creates a default list of communication types <p> SQL query to generate list from DB: </p>
+     * Creates a default list of communication types <p> SQL query to generate
+     * list from DB: </p>
      * <pre>
      * select 'result.add(createCode(CommunicationTypeTO.class, "' || code || '", "' || display_value || '"));'
      * from party.communication_type
@@ -90,7 +96,8 @@ public class MockTOFactory {
     }
 
     /**
-     * Creates a default list of gender types <p> SQL query to generate list from DB: </p>
+     * Creates a default list of gender types <p> SQL query to generate list
+     * from DB: </p>
      * <pre>
      * select 'result.add(createCode(GenderTypeTO.class, "' || code || '", "' || display_value || '"));'
      * from party.gender_type
@@ -353,9 +360,21 @@ public class MockTOFactory {
     }
 
     /**
-     * Creates a default list of request types using generics so that it is possible to also
-     * generate RequestTypeSourceType using the same code. <p> SQL query to generate list from DB:
-     * </p>
+     * Creates a default list of land use types
+     */
+    public static List<LandUseTypeTO> createLandUseTypes() {
+        List<LandUseTypeTO> result = new ArrayList<LandUseTypeTO>();
+        result.add(createCode(LandUseTypeTO.class, "type1", "Type1"));
+        result.add(createCode(LandUseTypeTO.class, "type2", "Type2"));
+        result.add(createCode(LandUseTypeTO.class, "type3", "Type3"));
+
+        return result;
+    }
+
+    /**
+     * Creates a default list of request types using generics so that it is
+     * possible to also generate RequestTypeSourceType using the same code. <p>
+     * SQL query to generate list from DB: </p>
      * <pre>
      * select 'result.add(createRequestType(requestTypeClass, "' || code || '", "' || display_value
      * || '", "' || request_category_code || '", '|| nr_days_to_complete || ', '|| nr_properties_required
@@ -382,7 +401,8 @@ public class MockTOFactory {
     }
 
     /**
-     * Creates a default list of source types <p> SQL query to generate list from DB: </p>
+     * Creates a default list of source types <p> SQL query to generate list
+     * from DB: </p>
      * <pre>
      * select 'result.add(createCode(SourceTypeTO.class, "' || code || '", "' || display_value || '"));'
      * from source.source_type

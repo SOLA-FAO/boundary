@@ -132,6 +132,10 @@ public interface ReferenceDataClient extends AbstractWSClient {
     /**
      * ReferenceData.getCadastreObjectTypes - Identifier for the getCadastreObjectTypes method
      */
+    public static final String GET_LAND_USE_TYPES = SERVICE_NAME + "getLandUseTypes";
+    /**
+     * ReferenceData.getCadastreObjectTypes - Identifier for the getCadastreObjectTypes method
+     */
     public static final String GET_CADASTRE_OBJECT_TYPES = SERVICE_NAME + "getCadastreObjectTypes";
     /**
      * ReferenceData.saveReferenceData - Identifier for the saveReferenceData method
@@ -476,7 +480,25 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<RegistrationStatusTypeTO> getRegistrationStatusTypes(String lang) throws WebServiceClientException;
+    
+    /**
+     * Retrieves all cadastre.land_use_type code values using the default locale of the
+     * client to localize the display values.
+     *
+     * @throws WebServiceClientException
+     */
+    List<LandUseTypeTO> getLandUseTypes() throws WebServiceClientException;
 
+    /**
+     * Retrieves all cadastre.land_use_type code values.
+     *
+     * @param languageCode The language code to use for localization of display values.
+     * @throws WebServiceClientException
+     */
+    List<LandUseTypeTO> getLandUseTypes(String lang) throws WebServiceClientException;
+
+   
+    
     /**
      * Retrieves all cadastre.cadastre_object_type code values using the default locale of the
      * client to localize the display values.
