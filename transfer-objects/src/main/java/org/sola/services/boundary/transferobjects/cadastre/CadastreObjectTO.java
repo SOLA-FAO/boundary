@@ -40,14 +40,6 @@ import org.sola.services.common.contracts.AbstractIdTO;
 public class CadastreObjectTO extends AbstractIdTO {
 
     private String landUseCode;
-
-    public String getLandUseCode() {
-        return landUseCode;
-    }
-
-    public void setLandUseCode(String landUseCode) {
-        this.landUseCode = landUseCode;
-    }
     private String typeCode;
     private Date approvalDatetime;
     private Date historicDatetime;
@@ -61,6 +53,14 @@ public class CadastreObjectTO extends AbstractIdTO {
 
     public CadastreObjectTO() {
         super();
+    }
+
+    public String getLandUseCode() {
+        return landUseCode;
+    }
+
+    public void setLandUseCode(String landUseCode) {
+        this.landUseCode = landUseCode;
     }
 
     public Date getApprovalDatetime() {
