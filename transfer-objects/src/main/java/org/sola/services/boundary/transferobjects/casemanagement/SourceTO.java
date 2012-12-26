@@ -42,6 +42,7 @@ public class SourceTO extends AbstractIdTO {
     private Date acceptance;
     private Date recordation;
     private Date submission;
+    private Date expirationDate;
     private String statusCode;
     private String mainType;
     private String availabilityStatusCode;
@@ -105,6 +106,14 @@ public class SourceTO extends AbstractIdTO {
         this.acceptance = acceptance;
     }
 
+    public Date getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(Date expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+    
     public String getArchiveDocumentId() {
         return archiveDocumentId;
     }
