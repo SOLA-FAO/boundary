@@ -26,6 +26,7 @@
 package org.sola.services.boundary.wsclients.mock;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.sola.services.boundary.wsclients.AdministrativeClient;
 import org.sola.webservices.administrative.*;
@@ -393,5 +394,16 @@ public class MockAdministrativePort implements Administrative {
             return null;
         }
     }
-
+     @Override
+    public List<SysRegManagementTO> getSysRegManagement(SysRegManagementParamsTO sysRegManagementParamsTO, String languageCode)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<SysRegManagementTO> defaultResponse = new ArrayList<SysRegManagementTO>();
+        try {
+            return getManager().getResponse(AdministrativeClient.GET_SYS_REG_MANAGEMENT,
+                    List.class, defaultResponse, sysRegManagementParamsTO, languageCode);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
 }

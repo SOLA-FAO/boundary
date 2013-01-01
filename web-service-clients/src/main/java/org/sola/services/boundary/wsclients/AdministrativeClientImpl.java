@@ -29,17 +29,14 @@
  */
 package org.sola.services.boundary.wsclients;
 
+import java.util.Date;
 import java.util.List;
 import javax.xml.namespace.QName;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.administrative.Administrative;
 import org.sola.webservices.administrative.AdministrativeService;
 import org.sola.webservices.transferobjects.ValidationResult;
-import org.sola.webservices.transferobjects.administrative.BaUnitAreaTO;
-import org.sola.webservices.transferobjects.administrative.BaUnitTO;
-import org.sola.webservices.transferobjects.administrative.SysRegPubDisOwnerNameTO;
-import org.sola.webservices.transferobjects.administrative.SysRegPubDisParcelNameTO;
-import org.sola.webservices.transferobjects.administrative.SysRegPubDisStateLandTO;
+import org.sola.webservices.transferobjects.administrative.*;
 
 /**
  * Implementation class for the {@linkplain AdministrativeClient} interface.
@@ -299,4 +296,22 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
         }
         return result;
     }
+    
+    @Override
+    public List<SysRegManagementTO> getSysRegManagement(SysRegManagementParamsTO sysRegManagementParamsTO)
+            throws WebServiceClientException {
+        List<SysRegManagementTO> result = null;
+        final String methodName = AdministrativeClient.GET_SYS_REG_MANAGEMENT;
+        String languageCode = getLanguageCode();
+        try {
+            beforeWebMethod(methodName, sysRegManagementParamsTO,languageCode);
+            result = getPort().getSysRegManagement(sysRegManagementParamsTO,languageCode);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, sysRegManagementParamsTO,languageCode);
+        }
+        return result;
+    }
+
 }

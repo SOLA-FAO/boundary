@@ -1,31 +1,36 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO). All rights
- * reserved.
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted
- * provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice,this list of conditions
- * and the following disclaimer. 2. Redistributions in binary form must reproduce the above
- * copyright notice,this list of conditions and the following disclaimer in the documentation and/or
- * other materials provided with the distribution. 3. Neither the name of FAO nor the names of its
- * contributors may be used to endorse or promote products derived from this software without
- * specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
- * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
- * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.ws;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -34,6 +39,7 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
 import org.sola.services.boundary.transferobjects.administrative.*;
+import org.sola.services.boundary.transferobjects.casemanagement.LodgementViewParamsTO;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.br.ValidationResult;
 import org.sola.services.common.contracts.GenericTranslator;
@@ -43,6 +49,8 @@ import org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB;
 import org.sola.services.ejb.administrative.businesslogic.AdministrativeEJBLocal;
 import org.sola.services.ejb.administrative.repository.entities.BaUnit;
 import org.sola.services.ejb.administrative.repository.entities.BaUnitArea;
+import org.sola.services.ejb.administrative.repository.entities.SysRegManagement;
+import org.sola.services.ejb.administrative.repository.entities.SysRegManagementParams;
 import org.sola.services.ejb.transaction.businesslogic.TransactionEJBLocal;
 import org.sola.services.ejb.transaction.repository.entities.TransactionBasic;
 
@@ -233,8 +241,8 @@ public class Administrative extends AbstractWebService {
      * Retrieves the list of BA Unit associated with the specified Service.
      *
      * @param serviceId The Service identifier
-     * @return The list of BA Unit associated with the service or an empty list if the service does
-     * not have any BA Units associated with it.
+     * @return The list of BA Unit associated with the service or an empty list
+     * if the service does not have any BA Units associated with it.
      * @throws SOLAFault
      * @throws UnhandledFault
      * @throws SOLAAccessFault
@@ -269,11 +277,11 @@ public class Administrative extends AbstractWebService {
     }
 
     /**
-     * See {@linkplain AdministrativeEJB#getBaUnitByCode(java.lang.String, java.lang.String) 
+     * See {@linkplain AdministrativeEJB#getBaUnitByCode(java.lang.String, java.lang.String)
      * AdministrativeEJB.getBaUnitByCode}
-
+     *
      * @throws SOLAFault
-     * @throws UnhandledFault 
+     * @throws UnhandledFault
      */
     @WebMethod(operationName = "GetBaUnitByCode")
     public BaUnitTO GetBaUnitByCode(
@@ -297,13 +305,13 @@ public class Administrative extends AbstractWebService {
 
         return (BaUnitTO) result[0];
     }
-    
-     /**
-     * See {@linkplain AdministrativeEJB#getBaUnitAreas(java.lang.String) 
-     * AdministrativeEJB.getBaUnitAreas}
 
+    /**
+     * See {@linkplain AdministrativeEJB#getBaUnitAreas(java.lang.String)
+     * AdministrativeEJB.getBaUnitAreas}
+     *
      * @throws SOLAFault
-     * @throws UnhandledFault 
+     * @throws UnhandledFault
      */
     @WebMethod(operationName = "GetBaUnitAreas")
     public BaUnitAreaTO GetBaUnitAreas(
@@ -322,10 +330,10 @@ public class Administrative extends AbstractWebService {
             }
         });
 
-       return (BaUnitAreaTO) result[0];
+        return (BaUnitAreaTO) result[0];
     }
-    
-     /**
+
+    /**
      * See {@linkplain AdministrativeEJB#createBaUnitArea(java.lang.String,
      * org.sola.services.ejb.administrative.repository.entities.BaUnitArea)
      * AdministrativeEJB.createBaUnitArea}
@@ -359,8 +367,7 @@ public class Administrative extends AbstractWebService {
 
         return (BaUnitAreaTO) result[0];
     }
-     
-    
+
     /**
      * See {{@linkplain AdministrativeEJB#getBaUnitById(java.lang.String)
      * AdministrativeEJB.getBaUnitById}
@@ -385,14 +392,14 @@ public class Administrative extends AbstractWebService {
             @Override
             public void run() {
                 result[0] = GenericTranslator.toTO(
-                        administrativeEJB.getBaUnitWithCadObject(nameFirstpartTmp,nameLastpartTmp,colistTmp), BaUnitTO.class);
+                        administrativeEJB.getBaUnitWithCadObject(nameFirstpartTmp, nameLastpartTmp, colistTmp), BaUnitTO.class);
             }
         });
 
         return (BaUnitTO) result[0];
     }
 
-   /**
+    /**
      * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getSysRegPubDisParcelNameByLocation(java.lang.String)
      * AdministrativeEJB.getSysRegPubDisParcelNameByLocation}
      *
@@ -404,7 +411,7 @@ public class Administrative extends AbstractWebService {
     public List<SysRegPubDisParcelNameTO> GetSysRegPubDisParcelNameByLocation(
             @WebParam(name = "searchString") String searchString,
             @WebParam(name = "languageCode") String languageCode)
-            throws SOLAFault, UnhandledFault, SOLAAccessFault, SOLAValidationFault, OptimisticLockingFault{
+            throws SOLAFault, UnhandledFault, SOLAAccessFault, SOLAValidationFault, OptimisticLockingFault {
 
 
         final String searchStringTmp = searchString;
@@ -413,7 +420,7 @@ public class Administrative extends AbstractWebService {
         final Object[] result = {null};
 
 //        runGeneralQuery(wsContext, new Runnable() {
-          runUpdateValidation(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -447,7 +454,7 @@ public class Administrative extends AbstractWebService {
         final Object[] result = {null};
 
 //        runGeneralQuery(wsContext, new Runnable() {
-          runUpdateValidation(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -472,7 +479,7 @@ public class Administrative extends AbstractWebService {
     public List<SysRegPubDisStateLandTO> GetSysRegPubDisStateLandByLocation(
             @WebParam(name = "searchString") String searchString,
             @WebParam(name = "languageCode") String languageCode)
-            throws SOLAFault, UnhandledFault, SOLAAccessFault, SOLAValidationFault, OptimisticLockingFault{
+            throws SOLAFault, UnhandledFault, SOLAAccessFault, SOLAValidationFault, OptimisticLockingFault {
 
 
         final String searchStringTmp = searchString;
@@ -481,7 +488,7 @@ public class Administrative extends AbstractWebService {
         final Object[] result = {null};
 
 //        runGeneralQuery(wsContext, new Runnable() {
-          runUpdateValidation(wsContext, new Runnable() {
+        runUpdateValidation(wsContext, new Runnable() {
 
             @Override
             public void run() {
@@ -493,8 +500,8 @@ public class Administrative extends AbstractWebService {
 
         return (List<SysRegPubDisStateLandTO>) result[0];
     }
-    
-     /**
+
+    /**
      * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#validatePublicDisplay
      * ApplicationEJB.applicationActionWithdraw}
      *
@@ -527,5 +534,36 @@ public class Administrative extends AbstractWebService {
         return (List<ValidationResult>) result[0];
     }
 
-    
+    /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getSysRegPubDisParcelNameByLocation(java.lang.String)
+     * AdministrativeEJB.getSysRegPubDisParcelNameByLocation}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetSysRegManagement")
+    public List<SysRegManagementTO> GetSysRegManagement(
+            @WebParam(name = "SysRegManagementParamsTO") SysRegManagementParamsTO paramsTO,
+            @WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+        final SysRegManagementParamsTO paramsTOTmp = paramsTO;
+        final String languageCodeTmp = languageCode;
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                SysRegManagementParams params = GenericTranslator.fromTO(paramsTOTmp, SysRegManagementParams.class, null);
+                List<SysRegManagement> appList = administrativeEJB.getSysRegManagement(params, languageCodeTmp);
+                result[0] = GenericTranslator.toTOList(
+                        appList, SysRegManagementTO.class);
+
+            }
+        });
+
+        return (List<SysRegManagementTO>) result[0];
+    }
 }
