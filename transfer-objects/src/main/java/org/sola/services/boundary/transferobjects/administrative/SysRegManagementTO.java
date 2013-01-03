@@ -4,7 +4,6 @@
  */
 package org.sola.services.boundary.transferobjects.administrative;
 
-import java.math.BigDecimal;
 import org.sola.services.common.contracts.AbstractIdTO;
 
 /**
@@ -31,12 +30,10 @@ public class SysRegManagementTO extends AbstractIdTO {
 //    private BigDecimal parcelapprovedagricultural;
 //    private BigDecimal sizeapprovedagricultural;
 //    private BigDecimal objection;
-      
-      private Integer counter;
-      private String  descr;
-      
-      
-    
+    private Integer counter;
+    private String descr;
+    private String area;
+
 //    public BigDecimal getApplication() {
 //        return application;
 //    }
@@ -180,7 +177,6 @@ public class SysRegManagementTO extends AbstractIdTO {
 //    public void setSpatial(BigDecimal spatial) {
 //        this.spatial = spatial;
 //    }
-
     public Integer getCounter() {
         return counter;
     }
@@ -195,5 +191,13 @@ public class SysRegManagementTO extends AbstractIdTO {
 
     public void setDescr(String descr) {
         this.descr = descr;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }
