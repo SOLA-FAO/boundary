@@ -4,14 +4,15 @@
  */
 package org.sola.services.boundary.transferobjects.administrative;
 
-
 import java.math.BigDecimal;
 import org.sola.services.common.contracts.AbstractIdTO;
+
 /**
  *
  * @author RizzoM
  */
 public class SysRegPubDisParcelNameTO extends AbstractIdTO {
+
     private String nameFirstpart;
     private String nameLastpart;
     private BigDecimal size;
@@ -19,6 +20,7 @@ public class SysRegPubDisParcelNameTO extends AbstractIdTO {
     private String baUnitId;
     private String concatenatedName;
     private String publicNotificationDuration;
+    private String name;
 
     public String getPublicNotificationDuration() {
         return publicNotificationDuration;
@@ -28,7 +30,6 @@ public class SysRegPubDisParcelNameTO extends AbstractIdTO {
         this.publicNotificationDuration = publicNotificationDuration;
     }
 
-  
     public String getBaUnitId() {
         return baUnitId;
     }
@@ -44,8 +45,8 @@ public class SysRegPubDisParcelNameTO extends AbstractIdTO {
     public void setConcatenatedName(String concatenatedName) {
         this.concatenatedName = concatenatedName;
     }
-    
-    public SysRegPubDisParcelNameTO(){
+
+    public SysRegPubDisParcelNameTO() {
         super();
     }
 
@@ -57,7 +58,6 @@ public class SysRegPubDisParcelNameTO extends AbstractIdTO {
         this.landUsecode = landUsecode;
     }
 
-   
     public String getNameFirstpart() {
         return nameFirstpart;
     }
@@ -81,5 +81,12 @@ public class SysRegPubDisParcelNameTO extends AbstractIdTO {
     public void setSize(BigDecimal size) {
         this.size = size;
     }
-    
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
