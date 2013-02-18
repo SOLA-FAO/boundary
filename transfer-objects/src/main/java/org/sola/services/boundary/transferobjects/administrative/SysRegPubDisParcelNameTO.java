@@ -21,6 +21,8 @@ public class SysRegPubDisParcelNameTO extends AbstractIdTO {
     private String concatenatedName;
     private String publicNotificationDuration;
     private String name;
+    private String objections;
+    
 
     public String getPublicNotificationDuration() {
         return publicNotificationDuration;
@@ -89,4 +91,14 @@ public class SysRegPubDisParcelNameTO extends AbstractIdTO {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getObjections() {
+        return objections;
+    }
+
+    public void setObjections(String objections) {
+        this.objections = objections;
+    }
+    
+    
 }

@@ -17,7 +17,8 @@ public class SysRegPubDisOwnerNameTO extends AbstractIdTO {
     private String nameLastpart;
     private String landUsecode;
     private String baUnitId;
-//    private String concatenatedName;
+    private String objections;
+    private BigDecimal size;
     private String value;
     private BigDecimal residential;
     private BigDecimal commercial;
@@ -114,5 +115,21 @@ public class SysRegPubDisOwnerNameTO extends AbstractIdTO {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public String getObjections() {
+        return objections;
+    }
+
+    public void setObjections(String objections) {
+        this.objections = objections;
+    }
+
+    public BigDecimal getSize() {
+        return size;
+    }
+
+    public void setSize(BigDecimal size) {
+        this.size = size;
     }
 }

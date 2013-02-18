@@ -18,6 +18,8 @@ public class SysRegPubDisStateLandTO extends AbstractIdTO {
     private String landUsecode;
     private String baUnitId;
     private String value;
+    private String objections;
+    private BigDecimal size;
     private BigDecimal residential;
     private BigDecimal commercial;
     private BigDecimal agricultural;
@@ -106,5 +108,21 @@ public class SysRegPubDisStateLandTO extends AbstractIdTO {
 
     public void setValue(String value) {
         this.value = value;
+    }
+    
+    public String getObjections() {
+        return objections;
+    }
+
+    public void setObjections(String objections) {
+        this.objections = objections;
+    }
+
+    public BigDecimal getSize() {
+        return size;
+    }
+
+    public void setSize(BigDecimal size) {
+        this.size = size;
     }
 }
