@@ -43,11 +43,6 @@
     </pluginRepositories>
     <dependencies>
         <dependency>
-            <groupId>org.sola.common</groupId>
-            <artifactId>sola-common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <!-- Glassfish 3.1.2 includes Metro 2.2 so set dependency as provided-->
             <groupId>org.glassfish.metro</groupId>
             <artifactId>webservices-rt</artifactId>

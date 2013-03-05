@@ -28,7 +28,6 @@
 package org.sola.services.boundary.transferobjects.casemanagement;
 
 import java.util.Date;
-import javax.persistence.Column;
 import org.sola.services.boundary.transferobjects.digitalarchive.DocumentTO;
 import org.sola.services.common.contracts.AbstractIdTO;
 
