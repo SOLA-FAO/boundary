@@ -321,8 +321,8 @@
     <wsp:Policy wsu:Id="DigitalArchivePortBindingPolicy">
         <wsp:ExactlyOne>
             <wsp:All>
-                <sc:TrustStore wspp:visibility="private" type="JKS" storepass="changeit" peeralias="xws-security-server" location="cacerts.jks"/>
-            </wsp:All>
+                 <sc:TrustStore wspp:visibility="private" type="JKS" storepass="${wsit.truststore.storepass}" peeralias="${wsit.truststore.peeralias}" location="${wsit.truststore.location}"/>           
+           </wsp:All>
         </wsp:ExactlyOne>
     </wsp:Policy>
 </definitions>

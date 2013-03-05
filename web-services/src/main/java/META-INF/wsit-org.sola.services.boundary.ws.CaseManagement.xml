@@ -846,7 +846,7 @@
                         </sp:UsernameToken>
                     </wsp:Policy>
                 </sp:SignedSupportingTokens>
-                <sc:KeyStore wspp:visibility="private" location="keystore.jks" type="JKS" storepass="changeit" alias="xws-security-server"/>
+                <sc:KeyStore wspp:visibility="private" location="${wsit.keystore.location}" type="JKS" storepass="${wsit.keystore.storepass}" alias="${wsit.keystore.peeralias}"/>
             </wsp:All>
         </wsp:ExactlyOne>
     </wsp:Policy>

@@ -12,6 +12,12 @@
     <version>1.2-SNAPSHOT</version>
     <name>Boundary Web Service Clients</name>
     <url>http://maven.apache.org</url>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <wsit.truststore.storepass>changeit</wsit.truststore.storepass>
+        <wsit.truststore.peeralias>xws-security-server</wsit.truststore.peeralias>
+        <wsit.truststore.location>cacerts.jks</wsit.truststore.location>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -36,6 +42,26 @@
         </dependency>
     </dependencies>
     <build>
+        <resources>
+            <!-- Only filter the WSIT XML files. This will ensure the binary jks
+            file is not corrupted by the filtering process. -->
+            <resource>
+                <!-- Sets filtering to true on the WSIT XML files -->
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <!-- Sets filtering to false on all other files -->
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>**/*.xml</exclude>
+                </excludes>
+            </resource>
+        </resources>
         <plugins>    
             <plugin>
                 <!--
@@ -189,7 +215,7 @@
                     </execution>
                 </executions>
             </plugin>
-                  <!-- Don't forget to use endorsed with JAX-WS 2.2 on Java 6 !! -->
+            <!-- Don't forget to use endorsed with JAX-WS 2.2 on Java 6 !! -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
@@ -232,10 +258,10 @@
                 </executions>
             </plugin>
             <!-- PLEASE LEAVE... 
-                 The jaxws-maven-plugin configuration below is recongized by Netbeans and will
-                 cause the project to display the Web Service References folder. This section 
-                 can be uncommented to allow configuration of the Web Service Client WSIT files using
-                 the Netbeans UI. Note that changes to the WSIT are seldom required. -->
+            The jaxws-maven-plugin configuration below is recongized by Netbeans and will
+            cause the project to display the Web Service References folder. This section 
+            can be uncommented to allow configuration of the Web Service Client WSIT files using
+            the Netbeans UI. Note that changes to the WSIT are seldom required. -->
             <!--plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
@@ -390,9 +416,6 @@
             <url>https://repository.jboss.org/nexus/content/groups/public</url>
         </pluginRepository>
     </pluginRepositories>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 
     <repositories>
         <repository>

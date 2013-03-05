@@ -115,6 +115,26 @@
 
     </dependencies>
     <build>
+      <resources>
+           <!-- Only filter the WSIT XML files. This will ensure the binary jks
+           file is not corrupted by the filtering process. -->
+           <resource>
+               <!-- Sets filtering to true on the WSIT XML files -->
+               <directory>src/main/java/META-INF</directory>
+               <filtering>true</filtering>
+               <includes>
+                   <include>**/*.xml</include>
+               </includes>
+           </resource>
+            <resource>
+                <!-- Sets filtering to false on all other files -->
+                <directory>src/main/java/META-INF</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>**/*.xml</exclude>
+                </excludes>
+            </resource>
+        </resources>
         <plugins>
             <plugin> 
                <!-- This plugin generates the wsdl artifacts for the web services. Maven genenates
@@ -341,10 +361,10 @@
                         <version>2.0.2</version>
                         <configuration>
                             <!-- javaee6 contains upgrades of APIs contained within the JDK itself.
-                                 As such these need to be placed on the bootclasspath, rather than classpath of the
-                                 compiler.
-                                 If you don't make use of these new updated API, you can delete the profile.
-                                 On non-SUN jdk, you will need to create a similar profile for your jdk, with the similar property as sun.boot.class.path in Sun's JDK.-->
+                            As such these need to be placed on the bootclasspath, rather than classpath of the
+                            compiler.
+                            If you don't make use of these new updated API, you can delete the profile.
+                            On non-SUN jdk, you will need to create a similar profile for your jdk, with the similar property as sun.boot.class.path in Sun's JDK.-->
                             <compilerArguments>
                                 <bootclasspath>${settings.localRepository}/javax/javaee-endorsed-api/6.0/javaee-endorsed-api-6.0.jar${path.separator}${sun.boot.class.path}</bootclasspath>
                             </compilerArguments>
@@ -388,5 +408,9 @@
     </profiles>
     <properties>
         <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <wsit.keystore.storepass>changeit</wsit.keystore.storepass>
+        <wsit.keystore.peeralias>xws-security-server</wsit.keystore.peeralias>
+        <wsit.keystore.location>keystore.jks</wsit.keystore.location>
     </properties>
 </project>
