@@ -39,6 +39,8 @@ public class SpatialValueAreaTO extends AbstractVersionedTO{
     private String spatialUnitId;
     private String typeCode;
     private BigDecimal size;
+    private BigDecimal calculatedAreaSize;
+
 
     public String getSpatialUnitId() {
         return spatialUnitId;
@@ -62,6 +64,14 @@ public class SpatialValueAreaTO extends AbstractVersionedTO{
 
     public void setSize(BigDecimal size) {
         this.size = size;
+    }
+    
+     public BigDecimal getCalculatedAreaSize() {
+        return calculatedAreaSize;
+    }
+
+    public void setCalculatedAreaSize(BigDecimal calculatedAreaSize) {
+        this.calculatedAreaSize = calculatedAreaSize;
     }
     
 }

@@ -38,6 +38,7 @@ import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
 import org.sola.services.boundary.transferobjects.cadastre.CadastreObjectNodeTO;
 import org.sola.services.boundary.transferobjects.cadastre.CadastreObjectTO;
+import org.sola.services.boundary.transferobjects.cadastre.SpatialValueAreaTO;
 import org.sola.services.boundary.transferobjects.transaction.TransactionBulkOperationSpatialTO;
 import org.sola.services.boundary.transferobjects.transaction.TransactionCadastreChangeTO;
 import org.sola.services.boundary.transferobjects.transaction.TransactionCadastreRedefinitionTO;
@@ -499,5 +500,33 @@ public class Cadastre extends AbstractWebService {
 
         return (TransactionCadastreRedefinitionTO) result[0];
     }
+    
+     /**
+     * See {{@linkplain CadastreEJB#getSpatialValueArea(java.lang.String)
+     * CadastreEJB.getSpatialValueArea(String colist )}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     */
+    @WebMethod(operationName = "GetSpatialValueArea")
+    public SpatialValueAreaTO GetSpatialValueArea(
+            @WebParam(name = "colist") String colist)
+            throws SOLAFault, UnhandledFault {
 
+        final String colistTmp = colist;
+        final Object[] result = {null};
+
+        runOpenQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTO(
+                        cadastreEJB.getSpatialValueArea(colistTmp), SpatialValueAreaTO.class);
+            }
+        });
+
+        return (SpatialValueAreaTO) result[0];
+    }
+
+    
 }

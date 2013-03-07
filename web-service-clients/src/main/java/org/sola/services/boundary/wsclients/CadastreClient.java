@@ -34,6 +34,7 @@ import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectNodeTO;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectTO;
+import org.sola.webservices.transferobjects.cadastre.SpatialValueAreaTO;
 import org.sola.webservices.transferobjects.transaction.TransactionBulkOperationSpatialTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreRedefinitionTO;
@@ -120,7 +121,10 @@ public interface CadastreClient extends AbstractWSClient {
      * getTransactionCadastreRedefinition method
      */
     public static final String GET_TRANSACTION_CADASTRE_REDFN = SERVICE_NAME + "getTransactionCadastreRedefinition";
-
+    
+    
+    public static final String GET_SPATIAL_VALUE_AREA = SERVICE_NAME + "getSpatialValueArea";
+ 
     /**
      * Returns a maximum of 10 cadastre objects that have a name first part and/or name last part
      * that matches the specified search string. This method supports partial matches and is case
@@ -237,6 +241,17 @@ public interface CadastreClient extends AbstractWSClient {
      * @param serviceId The identifier of the transaction
      */
     TransactionCadastreRedefinitionTO getTransactionCadastreRedefinition(String serviceId);
-
+    
+    
+     /**
+     * Retrieves the BA Unit matching the supplied identifier.
+     *
+     * @param id The BA Unit identifier
+     * * @param coluist list of cadastre objects
+     * @return The BA Unit details or null if the identifier is invalid.
+     * @throws WebServiceClientException
+     */
+   SpatialValueAreaTO getSpatialValueArea(String colist) throws WebServiceClientException;
+    
     
 }

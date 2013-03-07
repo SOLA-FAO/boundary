@@ -36,6 +36,7 @@ import org.sola.webservices.cadastre.*;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectNodeTO;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectTO;
+import org.sola.webservices.transferobjects.cadastre.SpatialValueAreaTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreRedefinitionTO;
 
@@ -376,7 +377,24 @@ public class MockCadastrePort implements Cadastre {
             return null;
         }
     }
-
+    
+          /**
+     * Response Key = AdministrativeClient.GET_SPATIAL_VALUE_AREA
+     *
+     * @return default = new BaUnitTO()
+     */
+    @Override
+    public SpatialValueAreaTO getSpatialValueArea(String colist) throws SOLAFault, UnhandledFault {
+        SpatialValueAreaTO defaultResponse = new SpatialValueAreaTO();
+        try {
+            return getManager().getResponse(CadastreClient.GET_SPATIAL_VALUE_AREA,
+                    SpatialValueAreaTO.class, defaultResponse, colist);
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
+            return null;
+        }
+    }
+    
     /**
      * Response Key = CadastreClient.GET_TRANSACTION_CADASTRE_REDFN
      *

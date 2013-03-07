@@ -37,6 +37,7 @@ import org.sola.webservices.cadastre.CadastreService;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectNodeTO;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectTO;
+import org.sola.webservices.transferobjects.cadastre.SpatialValueAreaTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreRedefinitionTO;
 
@@ -290,6 +291,21 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
             processException(methodName, e);
         } finally {
             afterWebMethod(methodName, result, serviceId);
+        }
+        return result;
+    }
+    
+    @Override
+    public SpatialValueAreaTO getSpatialValueArea(String colist ) throws WebServiceClientException {
+        SpatialValueAreaTO result = null;
+        final String methodName = CadastreClient.GET_SPATIAL_VALUE_AREA;
+        try {
+            beforeWebMethod(methodName,  colist);
+            result = getPort().getSpatialValueArea(colist);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, colist);
         }
         return result;
     }
