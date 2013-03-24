@@ -1,26 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO). All rights
- * reserved.
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted
- * provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice,this list of conditions
- * and the following disclaimer. 2. Redistributions in binary form must reproduce the above
- * copyright notice,this list of conditions and the following disclaimer in the documentation and/or
- * other materials provided with the distribution. 3. Neither the name of FAO nor the names of its
- * contributors may be used to endorse or promote products derived from this software without
- * specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
- * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
- * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.ws;
@@ -48,7 +52,8 @@ import org.sola.services.ejb.search.spatial.QueryForSelect;
 import org.sola.services.ejb.search.spatial.ResultForSelectionInfo;
 
 /**
- * Web Service Boundary class to expose {@linkplain org.sola.services.ejb.search.businesslogic.SearchEJB} methods.
+ * Web Service Boundary class to expose {@linkplain org.sola.services.ejb.search.businesslogic.SearchEJB}
+ * methods.
  */
 @WebService(serviceName = "search-service", targetNamespace = ServiceConstants.SEARCH_WS_NAMESPACE)
 public class Search extends AbstractWebService {
@@ -271,7 +276,7 @@ public class Search extends AbstractWebService {
 
         return (List<SourceSearchResultTO>) result[0];
     }
-    
+
     /**
      * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#searchPowerOfAttorney(org.sola.services.ejb.search.repository.entities.PowerOfAttorneySearchParams)
      * SearchEJB.searchPowerOfAttorney}
@@ -452,6 +457,35 @@ public class Search extends AbstractWebService {
     }
 
     /**
+     * See {@link SearchEJBLocal#searchRightsForExport(org.sola.services.ejb.search.repository.entities.RightsExportParams)
+     * }
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "searchRightsForExport")
+    public List<RightsExportResultTO> searchRightsForExport(@WebParam(name = "searchParams") RightsExportParamsTO searchParams)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] params = {searchParams};
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        searchEJB.searchRightsForExport(GenericTranslator.fromTO(
+                        (RightsExportParamsTO) params[0], RightsExportParams.class, null)),
+                        RightsExportResultTO.class);
+            }
+        });
+
+        return (List<RightsExportResultTO>) result[0];
+    }
+
+    /**
      * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#getSpatialSearchOptions(java.lang.String)
      * SearchEJB.getSpatialSearchOptions}
      *
@@ -512,11 +546,13 @@ public class Search extends AbstractWebService {
     /**
      * Retrieves the map layer configuration data
      *
-     * @param languageCode The language code to use for localization of display values
+     * @param languageCode The language code to use for localization of display
+     * values
      * @return The configuration data for each map layer
      * @throws UnhandledFault
      * @throws SOLAFault
-     * @see org.sola.services.ejb.search.businesslogic.SearchEJB#getMapSettingList()
+     * @see
+     * org.sola.services.ejb.search.businesslogic.SearchEJB#getMapSettingList()
      * @see
      * org.sola.services.ejb.search.businesslogic.SearchEJB#getConfigMapLayerList(java.lang.String)
      */
@@ -531,7 +567,7 @@ public class Search extends AbstractWebService {
             @Override
             public void run() {
                 HashMap<String, String> mapSettings = searchEJB.getMapSettingList();
-                List<ConfigMapLayer> configMapLayerList = 
+                List<ConfigMapLayer> configMapLayerList =
                         searchEJB.getConfigMapLayerList(languageCodeTmp);
                 MapDefinitionTO mapDefinition = new MapDefinitionTO();
                 mapDefinition.setSrid(Integer.parseInt(mapSettings.get("map-srid")));
@@ -555,5 +591,4 @@ public class Search extends AbstractWebService {
 
         return (MapDefinitionTO) result[0];
     }
-    
 }

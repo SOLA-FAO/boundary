@@ -46,7 +46,8 @@ public class RrrTO extends AbstractIdTO {
     private String transactionId;
     private Date expirationDate;
     private Double share;
-    private BigDecimal mortgageAmount;
+    private BigDecimal amount;
+    private Date dueDate;
     private BigDecimal mortgageInterestRate;
     private Integer mortgageRanking;
     private String mortgageTypeCode;
@@ -89,12 +90,20 @@ public class RrrTO extends AbstractIdTO {
         this.expirationDate = expirationDate;
     }
 
-    public BigDecimal getMortgageAmount() {
-        return mortgageAmount;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
-    public void setMortgageAmount(BigDecimal mortgageAmount) {
-        this.mortgageAmount = mortgageAmount;
+    public void setAmount(BigDecimal mortgageAmount) {
+        this.amount = mortgageAmount;
+    }
+
+    public Date getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
     }
 
     public BigDecimal getMortgageInterestRate() {

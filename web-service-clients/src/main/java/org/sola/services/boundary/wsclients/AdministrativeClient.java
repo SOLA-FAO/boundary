@@ -30,6 +30,8 @@ import java.util.List;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.administrative.*;
+import org.sola.webservices.transferobjects.search.RightsExportParamsTO;
+import org.sola.webservices.transferobjects.search.RightsExportResultTO;
 /**
  * Interface for the Administrative Service. Implemented by {@linkplain AdministrativeClientImpl}.
  * To obtain a reference to the Administrative Service, use {@linkplain WSManager#getAdministrative()}
@@ -114,7 +116,6 @@ public interface AdministrativeClient extends AbstractWSClient {
     public static final String PUBLIC_DIPLAY = SERVICE_NAME + "publicDisplay";
     
     public static final String GET_SYS_REG_MANAGEMENT = SERVICE_NAME + "getSysRegManagement";
-   
    
      /**
      * Creates a new BA Unit Area for a BaUnitId 
@@ -286,6 +287,4 @@ public interface AdministrativeClient extends AbstractWSClient {
     
     List<SysRegManagementTO> getSysRegManagement(SysRegManagementParamsTO sysRegManagementParamsTO)
             throws WebServiceClientException;
-
-    
 }

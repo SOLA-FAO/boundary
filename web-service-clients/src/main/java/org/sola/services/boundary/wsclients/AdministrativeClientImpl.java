@@ -37,6 +37,8 @@ import org.sola.webservices.administrative.Administrative;
 import org.sola.webservices.administrative.AdministrativeService;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.administrative.*;
+import org.sola.webservices.transferobjects.search.RightsExportParamsTO;
+import org.sola.webservices.transferobjects.search.RightsExportResultTO;
 
 /**
  * Implementation class for the {@linkplain AdministrativeClient} interface.
@@ -313,5 +315,4 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
         }
         return result;
     }
-
 }

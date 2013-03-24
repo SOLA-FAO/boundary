@@ -400,4 +400,9 @@ public class MockSearchPort implements Search {
             return null;
         }
     }
+
+    @Override
+    public List<RightsExportResultTO> searchRightsForExport(RightsExportParamsTO searchParams) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

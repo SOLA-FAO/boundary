@@ -331,4 +331,19 @@ public class SearchClientImpl extends AbstractWSClientImpl implements SearchClie
         }
         return result;
     }
+
+    @Override
+    public List<RightsExportResultTO> searchRightsForExport(RightsExportParamsTO searchParams) {
+        List<RightsExportResultTO> result = null;
+        final String methodName = SearchClient.SEARCH_RIGHTS_FOR_EXPORT;
+        try {
+            beforeWebMethod(methodName);
+            result = getPort().searchRightsForExport(searchParams);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result);
+        }
+        return result;
+    }
 }

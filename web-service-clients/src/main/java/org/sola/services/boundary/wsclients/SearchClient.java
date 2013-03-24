@@ -114,6 +114,8 @@ public interface SearchClient extends AbstractWSClient {
      * Search.getMapDefinition - Identifier for the getMapDefinition method
      */
     public static final String GET_MAP_DEFINITION = SERVICE_NAME + "getMapDefinition";
+    
+    public static final String SEARCH_RIGHTS_FOR_EXPORT = SERVICE_NAME + "searchRightsForExport";
 
     /**
      * Returns applications that have a lodged or approved status and are assigned to the currently
@@ -290,4 +292,6 @@ public interface SearchClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<PowerOfAttorneySearchResultTO> searchPowerOfAttorney(PowerOfAttorneySearchParamsTO searchParams) throws WebServiceClientException;
+    
+    List<RightsExportResultTO> searchRightsForExport(RightsExportParamsTO searchParams);
 }
