@@ -116,6 +116,8 @@ public interface AdministrativeClient extends AbstractWSClient {
     public static final String PUBLIC_DIPLAY = SERVICE_NAME + "publicDisplay";
     
     public static final String GET_SYS_REG_MANAGEMENT = SERVICE_NAME + "getSysRegManagement";
+    
+    public static final String GET_SYS_REG_STATUS = SERVICE_NAME + "getSysRegStatus";
    
      /**
      * Creates a new BA Unit Area for a BaUnitId 
@@ -286,5 +288,8 @@ public interface AdministrativeClient extends AbstractWSClient {
             throws WebServiceClientException;
     
     List<SysRegManagementTO> getSysRegManagement(SysRegManagementParamsTO sysRegManagementParamsTO)
+            throws WebServiceClientException;
+
+    List<SysRegStatusTO> getSysRegStatus(SysRegManagementParamsTO sysRegManagementParamsTO)
             throws WebServiceClientException;
 }

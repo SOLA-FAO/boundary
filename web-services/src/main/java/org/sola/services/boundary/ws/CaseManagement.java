@@ -1322,7 +1322,7 @@ public class CaseManagement extends AbstractWebService {
     
       /**
      * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getSysRegCertificatesByApplication(java.lang.String)
-     * CadastreEJB.getSysRegPubDisParcelNameByLocation}
+     * CadastreEJB.getSysRegCertificatesByApplication}
      *
      * @throws SOLAFault
      * @throws UnhandledFault
