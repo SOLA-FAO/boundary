@@ -42,13 +42,6 @@ public class SysRegPubDisOwnerNameTO extends AbstractIdTO {
         this.baUnitId = baUnitId;
     }
 
-//    public String getConcatenatedName() {
-//        return concatenatedName;
-//    }
-//
-//    public void setConcatenatedName(String concatenatedName) {
-//        this.concatenatedName = concatenatedName;
-//    }
     public SysRegPubDisOwnerNameTO() {
         super();
     }

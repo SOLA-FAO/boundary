@@ -114,6 +114,8 @@ public interface AdministrativeClient extends AbstractWSClient {
     public static final String PUBLIC_DIPLAY = SERVICE_NAME + "publicDisplay";
     
     public static final String GET_SYS_REG_MANAGEMENT = SERVICE_NAME + "getSysRegManagement";
+    
+    public static final String GET_SYS_REG_STATUS = SERVICE_NAME + "getSysRegStatus";
    
    
      /**
@@ -287,5 +289,7 @@ public interface AdministrativeClient extends AbstractWSClient {
     List<SysRegManagementTO> getSysRegManagement(SysRegManagementParamsTO sysRegManagementParamsTO)
             throws WebServiceClientException;
 
-    
+    List<SysRegStatusTO> getSysRegStatus(SysRegManagementParamsTO sysRegManagementParamsTO)
+            throws WebServiceClientException;
+
 }

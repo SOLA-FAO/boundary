@@ -47,10 +47,7 @@ import org.sola.services.common.faults.*;
 import org.sola.services.common.webservices.AbstractWebService;
 import org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB;
 import org.sola.services.ejb.administrative.businesslogic.AdministrativeEJBLocal;
-import org.sola.services.ejb.administrative.repository.entities.BaUnit;
-import org.sola.services.ejb.administrative.repository.entities.BaUnitArea;
-import org.sola.services.ejb.administrative.repository.entities.SysRegManagement;
-import org.sola.services.ejb.administrative.repository.entities.SysRegManagementParams;
+import org.sola.services.ejb.administrative.repository.entities.*;
 import org.sola.services.ejb.transaction.businesslogic.TransactionEJBLocal;
 import org.sola.services.ejb.transaction.repository.entities.TransactionBasic;
 
@@ -434,8 +431,8 @@ public class Administrative extends AbstractWebService {
     }
 
     /**
-     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getSysRegPubDisParcelNameByLocation(java.lang.String)
-     * AdministrativeEJB.getSysRegPubDisParcelNameByLocation}
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getSysRegPubDisOwnerNameByLocation(java.lang.String)
+     * AdministrativeEJB.getSysRegPubDisOwnerNameByLocation}
      *
      * @throws SOLAFault
      * @throws UnhandledFault
@@ -535,8 +532,8 @@ public class Administrative extends AbstractWebService {
     }
 
     /**
-     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getSysRegPubDisParcelNameByLocation(java.lang.String)
-     * AdministrativeEJB.getSysRegPubDisParcelNameByLocation}
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getSysRegManagement(java.lang.String)
+     * AdministrativeEJB.getSysRegManagement}
      *
      * @throws SOLAFault
      * @throws UnhandledFault
@@ -565,5 +562,38 @@ public class Administrative extends AbstractWebService {
         });
 
         return (List<SysRegManagementTO>) result[0];
+    }
+    
+     /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getSysRegStatus(java.lang.String)
+     * AdministrativeEJB.getSysRegStatus}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetSysRegStatus")
+    public List<SysRegStatusTO> GetSysRegStatus(
+            @WebParam(name = "SysRegManagementParamsTO") SysRegManagementParamsTO paramsTO,
+            @WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+        final SysRegManagementParamsTO paramsTOTmp = paramsTO;
+        final String languageCodeTmp = languageCode;
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                SysRegManagementParams params = GenericTranslator.fromTO(paramsTOTmp, SysRegManagementParams.class, null);
+                List<SysRegStatus> appList = administrativeEJB.getSysRegStatus(params, languageCodeTmp);
+                result[0] = GenericTranslator.toTOList(
+                        appList, SysRegStatusTO.class);
+
+            }
+        });
+
+        return (List<SysRegStatusTO>) result[0];
     }
 }

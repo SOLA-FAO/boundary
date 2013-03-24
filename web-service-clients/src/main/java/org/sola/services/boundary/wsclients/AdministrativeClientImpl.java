@@ -313,5 +313,21 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
         }
         return result;
     }
-
+    
+     @Override
+    public List<SysRegStatusTO> getSysRegStatus(SysRegManagementParamsTO sysRegManagementParamsTO)
+            throws WebServiceClientException {
+        List<SysRegStatusTO> result = null;
+        final String methodName = AdministrativeClient.GET_SYS_REG_STATUS;
+        String languageCode = getLanguageCode();
+        try {
+            beforeWebMethod(methodName, sysRegManagementParamsTO,languageCode);
+            result = getPort().getSysRegStatus(sysRegManagementParamsTO,languageCode);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, sysRegManagementParamsTO,languageCode);
+        }
+        return result;
+    }
 }
