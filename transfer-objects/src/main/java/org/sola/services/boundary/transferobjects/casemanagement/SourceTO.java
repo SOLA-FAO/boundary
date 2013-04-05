@@ -52,6 +52,7 @@ public class SourceTO extends AbstractIdTO {
     private String ownerName;
     private String version;
     private String description;
+    private Date signingDate;
     
     public SourceTO() {
         super();
@@ -159,6 +160,14 @@ public class SourceTO extends AbstractIdTO {
 
     public void setStatusCode(String statusCode) {
         this.statusCode = statusCode;
+    }
+
+    public Date getSigningDate() {
+        return signingDate;
+    }
+
+    public void setSigningDate(Date signingDate) {
+        this.signingDate = signingDate;
     }
 
     public Date getSubmission() {
