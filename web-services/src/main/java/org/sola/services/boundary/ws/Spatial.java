@@ -36,6 +36,7 @@ import org.sola.services.common.faults.UnhandledFault;
 import org.sola.services.common.webservices.AbstractWebService;
 import org.sola.services.ejb.search.businesslogic.SearchEJBLocal;
 import org.sola.services.ejb.search.spatial.QueryForNavigation;
+import org.sola.services.ejb.search.spatial.QueryForPublicDisplayMap;
 import org.sola.services.ejb.search.spatial.ResultForNavigationInfo;
 
 /**
@@ -82,6 +83,31 @@ public class Spatial extends AbstractWebService {
             @Override
             public void run() {
                 result[0] = searchEJB.getSpatialResult(spatialQueryTmp);
+            }
+        });
+
+        return (ResultForNavigationInfo) result[0];
+    }
+
+    /**
+     * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#getSpatialResult(org.sola.services.ejb.search.spatial.QueryForNavigation)
+     * SearchEJB.getSpatialResult}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     */
+    @WebMethod(operationName = "GetSpatialForPublicDisplay")
+    public ResultForNavigationInfo GetSpatialForPublicDisplay(QueryForPublicDisplayMap spatialQuery)
+            throws SOLAFault, UnhandledFault {
+
+        final Object[] result = {null};
+        final QueryForPublicDisplayMap spatialQueryTmp = spatialQuery;
+
+        runUnsecured(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = searchEJB.getSpatialResultForPublicDisplay(spatialQueryTmp);
             }
         });
 

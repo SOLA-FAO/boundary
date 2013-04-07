@@ -28,6 +28,7 @@ package org.sola.services.boundary.wsclients;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.spatial.QueryForNavigation;
 import org.sola.webservices.spatial.ResultForNavigationInfo;
+import org.sola.webservices.spatial.QueryForPublicDisplayMap;
 
 /**
  * Interface for the Spatial Service. Implemented by {@linkplain SpatialClientImpl}. To obtain a
@@ -48,10 +49,16 @@ public interface SpatialClient extends AbstractWSClient {
      * Spatial.checkConnection - Identifier for the checkConnection method
      */
     public static final String CHECK_CONNECTION = SERVICE_NAME + "checkConnection";
+
     /**
      * Spatial.getSpatialForNavigation - Identifier for the getSpatialForNavigation method
      */
     public static final String GET_SPATIAL_FOR_NAVIGATION = SERVICE_NAME + "getSpatialForNavigation";
+
+    /**
+     * Spatial.getSpatialForPublicDisplay - Identifier for the getSpatialForPublicDisplay method
+     */
+    public static final String GET_SPATIAL_FOR_PUBLIC_DISPLAY = SERVICE_NAME + "getSpatialForPublicDisplay";
 
     /**
      * Used for navigation (i.e. pan and zoom) of the Map. Executes a dynamic layer query using the
@@ -65,4 +72,14 @@ public interface SpatialClient extends AbstractWSClient {
      */
     ResultForNavigationInfo getSpatialForNavigation(QueryForNavigation query) throws WebServiceClientException;
 
+    /**
+     * Used for retrieving the features of the layers used for public display.
+     * It sets an extra parameter in the query used to retrieve features.
+     *
+     * @param spatialQuery The parameters to use for the query including the
+     * name of the dynamic layer query to execute.
+     * @return A summary of all spatial objects intersecting the bounding box
+     * @throws WebServiceClientException
+     */
+    ResultForNavigationInfo getSpatialForPublicDisplay(QueryForPublicDisplayMap query) throws WebServiceClientException;
 }

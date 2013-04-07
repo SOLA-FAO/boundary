@@ -50,6 +50,8 @@ public class ConfigMapLayerTO extends AbstractTO {
     private String wmsFormat;
     private String securityUser;
     private String securityPassword;
+    private boolean showInToc;
+    private boolean useInPublicDisplay;
 
     public String getId() {
         return id;
@@ -169,6 +171,14 @@ public class ConfigMapLayerTO extends AbstractTO {
 
     public void setWmsVersion(String wmsVersion) {
         this.wmsVersion = wmsVersion;
+    }
+
+    public boolean isUseInPublicDisplay() {
+        return useInPublicDisplay;
+    }
+
+    public void setUseInPublicDisplay(boolean useInPublicDisplay) {
+        this.useInPublicDisplay = useInPublicDisplay;
     }
     
 }
