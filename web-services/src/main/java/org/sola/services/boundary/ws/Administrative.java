@@ -596,4 +596,37 @@ public class Administrative extends AbstractWebService {
 
         return (List<SysRegStatusTO>) result[0];
     }
+    
+     /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getSysRegProgress(java.lang.String)
+     * AdministrativeEJB.getSysRegProgress}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetSysRegProgress")
+    public List<SysRegProgressTO> GetSysRegProgress(
+            @WebParam(name = "SysRegManagementParamsTO") SysRegManagementParamsTO paramsTO,
+            @WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+        final SysRegManagementParamsTO paramsTOTmp = paramsTO;
+        final String languageCodeTmp = languageCode;
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                SysRegManagementParams params = GenericTranslator.fromTO(paramsTOTmp, SysRegManagementParams.class, null);
+                List<SysRegProgress> appList = administrativeEJB.getSysRegProgress(params, languageCodeTmp);
+                result[0] = GenericTranslator.toTOList(
+                        appList, SysRegProgressTO.class);
+
+            }
+        });
+
+        return (List<SysRegProgressTO>) result[0];
+    }
 }
