@@ -604,4 +604,9 @@ public class MockReferenceDataPort implements ReferenceData {
             return null;
         }
     }
+
+    @Override
+    public List<LeaseConditionTO> getLeaseConditions(String arg0) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

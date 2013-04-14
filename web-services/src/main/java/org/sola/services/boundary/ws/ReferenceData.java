@@ -581,6 +581,33 @@ public class ReferenceData extends AbstractWebService {
 
         return (List<MortgageTypeTO>) result[0];
     }
+    
+    /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getLeaseConditions(java.lang.String) (java.lang.String)
+     * AdministrativeEJB.getLeaseConditions}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "getLeaseConditions")
+    public List<LeaseConditionTO> getLeaseConditions(String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        administrativeEJB.getLeaseConditions(languageCodeTmp), LeaseConditionTO.class);
+            }
+        });
+
+        return (List<LeaseConditionTO>) result[0];
+    }
 
     /**
      * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getRRRGroupTypes(java.lang.String)

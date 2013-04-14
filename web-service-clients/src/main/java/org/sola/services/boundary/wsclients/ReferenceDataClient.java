@@ -158,6 +158,8 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * ReferenceData.getBaUnitRelTypes - Identifier for the getBaUnitRelTypes method
      */
     public static final String GET_BA_UNIT_REL_TYPES = SERVICE_NAME + "getBaUnitRelTypes";
+    
+    public static final String GET_LEASE_CONDITION_TYPES = SERVICE_NAME + "getLeaseConditions";
 
     /**
      * Retrieves all source.source_type code values using the default locale of the client to
@@ -587,4 +589,8 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<BaUnitRelTypeTO> getBaUnitRelTypes() throws WebServiceClientException;
+    
+    List<LeaseConditionTO> getLeaseConditions() throws WebServiceClientException;
+    
+    List<LeaseConditionTO> getLeaseConditions(String lang) throws WebServiceClientException;
 }
