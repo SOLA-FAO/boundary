@@ -109,4 +109,22 @@ public class MockSpatialPort implements Spatial {
             return null;
         }
     }
+
+    /**
+     * Response Key = SpatialClient.GET_SPATIAL_FOR_PUBLIC_DISPLAY
+     *
+     * @return default = new ResultForNavigationInfo()
+     */
+    @Override
+    public ResultForNavigationInfo getSpatialForPublicDisplay(QueryForPublicDisplayMap arg0)
+            throws SOLAFault, UnhandledFault {
+        ResultForNavigationInfo defaultResponse = new ResultForNavigationInfo();
+        try {
+            return getManager().getResponse(SpatialClient.GET_SPATIAL_FOR_PUBLIC_DISPLAY,
+                    ResultForNavigationInfo.class, defaultResponse, arg0);
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
+            return null;
+        }
+    }
 }

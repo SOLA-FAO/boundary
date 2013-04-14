@@ -419,4 +419,17 @@ public class MockAdministrativePort implements Administrative {
             return null;
         }
     }
+    
+     @Override
+    public List<SysRegProgressTO> getSysRegProgress(SysRegManagementParamsTO sysRegManagementParamsTO, String languageCode)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<SysRegProgressTO> defaultResponse = new ArrayList<SysRegProgressTO>();
+        try {
+            return getManager().getResponse(AdministrativeClient.GET_SYS_REG_PROGRESS,
+                    List.class, defaultResponse, sysRegManagementParamsTO, languageCode);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
 }

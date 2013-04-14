@@ -5,6 +5,7 @@
 package org.sola.services.boundary.wsclients;
 
 import java.util.List;
+import javax.jws.WebParam;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.transaction.TransactionBulkOperationSpatialTO;
 import org.sola.webservices.transferobjects.transaction.TransactionBulkOperationSourceTO;
@@ -20,36 +21,41 @@ public interface BulkOperationsClient extends AbstractWSClient {
      */
     public static final String SERVICE_NAME = "BulkOperations.";
     /**
-     * BulkOperations.checkConnection - Identifier for the checkConnection method
+     * BulkOperations.checkConnection - Identifier for the checkConnection
+     * method
      */
     public static final String CHECK_CONNECTION = SERVICE_NAME + "checkConnection";
-    
     /**
-     * BulkOperations.checkConnection - Identifier for the checkConnection method
+     * BulkOperations.checkConnection - Identifier for the checkConnection
+     * method
      */
     public static final String REJECT_TRANSACTION = SERVICE_NAME + "rejectTransaction";
-    
     /**
      * BulkOperations.getTransactionBulkOperationSpatial - Identifier for the
      * getTransactionBulkOperationSpatial method
      */
-    public static final String GET_TRANSACTION_BULK_OPERATION_SPATIAL = 
+    public static final String GET_TRANSACTION_BULK_OPERATION_SPATIAL =
             SERVICE_NAME + "getTransactionBulkOperationSpatial";
-
     /**
      * BulkOperations.saveTransactionBulkOperationSpatial - Identifier for the
      * saveTransactionBulkOperationSpatial method
      */
-    public static final String SAVE_TRANSACTION_BULK_OPERATION_SPATIAL = 
+    public static final String SAVE_TRANSACTION_BULK_OPERATION_SPATIAL =
             SERVICE_NAME + "saveTransactionBulkOperationSpatial";
-
     /**
      * BulkOperations.saveTransactionBulkOperationSource - Identifier for the
      * saveTransactionBulkOperationSource method
      */
-    public static final String SAVE_TRANSACTION_BULK_OPERATION_SOURCE = 
+    public static final String SAVE_TRANSACTION_BULK_OPERATION_SOURCE =
             SERVICE_NAME + "saveTransactionBulkOperationSource";
 
+    /**
+     * BulkOperations.getExtentOfPublicDisplayMap - Identifier for the
+     * getExtentOfPublicDisplayMap method
+     */
+    public static final String GET_EXTENT_OF_PUBLIC_DISPLAY_MAP =
+            SERVICE_NAME + "getExtentOfPublicDisplayMap";
+    
     /**
      * It rejects a bulk operation by removing the uploaded records.
      */
@@ -57,12 +63,12 @@ public interface BulkOperationsClient extends AbstractWSClient {
 
     /**
      * It creates or updates a bulk operation spatial transaction.
+     *
      * @param transactionTO The transaction to create/save.
      * @return A list of validation results.
      */
     List<ValidationResult> saveTransactionBulkOperationSpatial(
             TransactionBulkOperationSpatialTO transactionTO);
-        
 
     /**
      * Gets a transaction of bulk operation.
@@ -71,12 +77,21 @@ public interface BulkOperationsClient extends AbstractWSClient {
      */
     TransactionBulkOperationSpatialTO getTransactionBulkOperationSpatial(String transactionId);
 
-
     /**
      * It creates or updates a bulk operation source transaction.
+     *
      * @param transactionTO The transaction to create/save.
      * @return A list of validation results.
      */
     List<ValidationResult> saveTransactionBulkOperationSource(
             TransactionBulkOperationSourceTO transactionTO);
+
+    /**
+     * It retrieves the extent of the public display map
+     *
+     * @param nameLastPart The filter of the cadastre objects in the public
+     * display map
+     * @return
+     */
+    public byte[] getExtentOfPublicDisplayMap(String nameLastPart);
 }

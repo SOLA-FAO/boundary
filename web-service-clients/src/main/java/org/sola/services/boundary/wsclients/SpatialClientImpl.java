@@ -28,6 +28,7 @@ package org.sola.services.boundary.wsclients;
 import javax.xml.namespace.QName;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.spatial.QueryForNavigation;
+import org.sola.webservices.spatial.QueryForPublicDisplayMap;
 import org.sola.webservices.spatial.ResultForNavigationInfo;
 import org.sola.webservices.spatial.Spatial;
 import org.sola.webservices.spatial.SpatialService;
@@ -84,4 +85,19 @@ public class SpatialClientImpl extends AbstractWSClientImpl implements SpatialCl
         return result;
     }
 
+    @Override
+    public ResultForNavigationInfo getSpatialForPublicDisplay(QueryForPublicDisplayMap query)
+            throws WebServiceClientException {
+        ResultForNavigationInfo result = null;
+        final String methodName = SpatialClient.GET_SPATIAL_FOR_PUBLIC_DISPLAY;
+        try {
+            beforeWebMethod(methodName, query);
+            result = getPort().getSpatialForPublicDisplay(query);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, query);
+        }
+        return result;
+    }
 }
