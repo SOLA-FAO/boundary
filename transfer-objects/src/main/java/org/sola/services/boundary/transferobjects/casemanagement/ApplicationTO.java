@@ -31,28 +31,17 @@ package org.sola.services.boundary.transferobjects.casemanagement;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import org.sola.services.common.contracts.AbstractIdTO;
 
-/**
- *
- * @author dounnaah
- */
-public class ApplicationTO extends AbstractIdTO {
+public class ApplicationTO extends ApplicationSummaryTO {
 
-    private String nr;
-    private Date lodgingDatetime;
-    private Date expectedCompletionDate;
     private String assigneeId;
-    private Date assignedDatetime;
     private byte[] location;
     private String statusCode;
     private BigDecimal servicesFee;
     private BigDecimal tax;
     private BigDecimal totalFee;
     private BigDecimal totalAmountPaid;
-    private boolean feePaid;
     private String receiptRef;
     private String actionCode;
     private String actionNotes;
@@ -66,44 +55,12 @@ public class ApplicationTO extends AbstractIdTO {
         super();
     }
 
-    public Date getAssignedDatetime() {
-        return assignedDatetime;
-    }
-
-    public void setAssignedDatetime(Date assignedDatetime) {
-        this.assignedDatetime = assignedDatetime;
-    }
-
     public PartyTO getContactPerson() {
         return contactPerson;
     }
 
     public void setContactPerson(PartyTO contactPerson) {
         this.contactPerson = contactPerson;
-    }
-
-    public Date getExpectedCompletionDate() {
-        return expectedCompletionDate;
-    }
-
-    public void setExpectedCompletionDate(Date expectedCompletionDate) {
-        this.expectedCompletionDate = expectedCompletionDate;
-    }
-
-    public Date getLodgingDatetime() {
-        return lodgingDatetime;
-    }
-
-    public void setLodgingDatetime(Date lodgingDatetime) {
-        this.lodgingDatetime = lodgingDatetime;
-    }
-
-    public String getNr() {
-        return nr;
-    }
-
-    public void setNr(String nr) {
-        this.nr = nr;
     }
 
     public String getActionCode() {
@@ -120,14 +77,6 @@ public class ApplicationTO extends AbstractIdTO {
 
     public void setAssigneeId(String assigneeLoginName) {
         this.assigneeId = assigneeLoginName;
-    }
-
-    public boolean isFeePaid() {
-        return feePaid;
-    }
-
-    public void setFeePaid(boolean feePaid) {
-        this.feePaid = feePaid;
     }
 
     public String getReceiptRef() {

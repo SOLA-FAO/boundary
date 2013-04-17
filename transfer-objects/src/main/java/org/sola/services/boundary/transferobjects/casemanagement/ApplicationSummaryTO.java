@@ -29,9 +29,9 @@
 package org.sola.services.boundary.transferobjects.casemanagement;
 
 import java.util.Date;
-import org.sola.services.common.contracts.AbstractBasicIdTO;
+import org.sola.services.common.contracts.AbstractIdTO;
 
-public class ApplicationSummaryTO extends AbstractBasicIdTO {
+public class ApplicationSummaryTO extends AbstractIdTO {
 
     private String nr;
     private Date lodgingDatetime;
