@@ -48,13 +48,6 @@ public interface BulkOperationsClient extends AbstractWSClient {
      */
     public static final String SAVE_TRANSACTION_BULK_OPERATION_SOURCE =
             SERVICE_NAME + "saveTransactionBulkOperationSource";
-
-    /**
-     * BulkOperations.getExtentOfPublicDisplayMap - Identifier for the
-     * getExtentOfPublicDisplayMap method
-     */
-    public static final String GET_EXTENT_OF_PUBLIC_DISPLAY_MAP =
-            SERVICE_NAME + "getExtentOfPublicDisplayMap";
     
     /**
      * It rejects a bulk operation by removing the uploaded records.
@@ -86,12 +79,4 @@ public interface BulkOperationsClient extends AbstractWSClient {
     List<ValidationResult> saveTransactionBulkOperationSource(
             TransactionBulkOperationSourceTO transactionTO);
 
-    /**
-     * It retrieves the extent of the public display map
-     *
-     * @param nameLastPart The filter of the cadastre objects in the public
-     * display map
-     * @return
-     */
-    public byte[] getExtentOfPublicDisplayMap(String nameLastPart);
 }

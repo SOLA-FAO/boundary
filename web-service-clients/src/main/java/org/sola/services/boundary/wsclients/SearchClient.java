@@ -117,6 +117,13 @@ public interface SearchClient extends AbstractWSClient {
     
     public static final String SEARCH_RIGHTS_FOR_EXPORT = SERVICE_NAME + "searchRightsForExport";
 
+        /**
+     * Search.getExtentOfPublicDisplayMap - Identifier for the
+     * getExtentOfPublicDisplayMap method
+     */
+    public static final String GET_EXTENT_OF_PUBLIC_DISPLAY_MAP =
+            SERVICE_NAME + "getExtentOfPublicDisplayMap";
+
     /**
      * Returns applications that have a lodged or approved status and are assigned to the currently
      * logged in user.
@@ -294,4 +301,13 @@ public interface SearchClient extends AbstractWSClient {
     List<PowerOfAttorneySearchResultTO> searchPowerOfAttorney(PowerOfAttorneySearchParamsTO searchParams) throws WebServiceClientException;
     
     List<RightsExportResultTO> searchRightsForExport(RightsExportParamsTO searchParams);
+
+    /**
+     * It retrieves the extent of the public display map
+     *
+     * @param nameLastPart The filter of the cadastre objects in the public
+     * display map
+     * @return
+     */
+    public byte[] getExtentOfPublicDisplayMap(String nameLastPart);
 }

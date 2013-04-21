@@ -120,18 +120,4 @@ public class BulkOperationsClientImpl  extends AbstractWSClientImpl implements B
         return result;
     }
 
-    @Override
-    public byte[] getExtentOfPublicDisplayMap(String nameLastPart) throws WebServiceClientException {
-        byte[] result = null;
-        final String methodName = BulkOperationsClient.GET_EXTENT_OF_PUBLIC_DISPLAY_MAP;
-        try {
-            beforeWebMethod(methodName, nameLastPart);
-            result = getPort().getExtentOfPublicDisplayMap(nameLastPart);
-        } catch (Exception e) {
-            processException(methodName, e);
-        } finally {
-            afterWebMethod(methodName, result, nameLastPart);
-        }
-        return result;
-    }
 }

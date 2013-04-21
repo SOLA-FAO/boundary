@@ -405,4 +405,17 @@ public class MockSearchPort implements Search {
     public List<RightsExportResultTO> searchRightsForExport(RightsExportParamsTO searchParams) throws SOLAAccessFault, SOLAFault, UnhandledFault {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public byte[] getExtentOfPublicDisplayMap(String nameLastPart) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        byte[] defaultResponse = new byte[0];
+        try {
+            return getManager().getResponse(SearchClient.GET_EXTENT_OF_PUBLIC_DISPLAY_MAP,
+                    byte[].class, defaultResponse, nameLastPart);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }    
+    }
+    
 }
