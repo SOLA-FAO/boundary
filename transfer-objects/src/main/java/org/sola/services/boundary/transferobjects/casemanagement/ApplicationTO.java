@@ -32,6 +32,7 @@ package org.sola.services.boundary.transferobjects.casemanagement;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import org.sola.services.boundary.transferobjects.cadastre.CadastreObjectTO;
 
 public class ApplicationTO extends ApplicationSummaryTO {
 
@@ -50,7 +51,8 @@ public class ApplicationTO extends ApplicationSummaryTO {
     private List<ServiceTO> serviceList;
     private List<ApplicationPropertyTO> propertyList;
     private List<SourceTO> sourceList;
-
+    private List<CadastreObjectTO> cadastreObjectList;
+    
     public ApplicationTO() {
         super();
     }
@@ -194,5 +196,13 @@ public class ApplicationTO extends ApplicationSummaryTO {
 
     public void setSourceList(List<SourceTO> sourceList) {
         this.sourceList = sourceList;
+    }
+
+    public List<CadastreObjectTO> getCadastreObjectList() {
+        return cadastreObjectList;
+    }
+
+    public void setCadastreObjectList(List<CadastreObjectTO> cadastreObjectList) {
+        this.cadastreObjectList = cadastreObjectList;
     }
 }

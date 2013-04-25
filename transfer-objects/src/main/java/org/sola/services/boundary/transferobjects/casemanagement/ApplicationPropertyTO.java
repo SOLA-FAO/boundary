@@ -51,18 +51,9 @@ public class ApplicationPropertyTO extends AbstractIdTO {
     private boolean verifiedExists;
     private boolean verifiedHasOwners;
     private boolean verifiedLocation;
-    private String landUseCode;
 
     public ApplicationPropertyTO() {
         super();
-    }
-
-    public String getLandUseCode() {
-        return landUseCode;
-    }
-
-    public void setLandUseCode(String landUseCode) {
-        this.landUseCode = landUseCode;
     }
 
     public String getApplicationId() {
