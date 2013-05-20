@@ -48,6 +48,7 @@ import org.sola.services.common.contracts.GenericTranslator;
 import org.sola.services.common.faults.*;
 import org.sola.services.common.webservices.AbstractWebService;
 import org.sola.services.ejb.cadastre.businesslogic.CadastreEJBLocal;
+import org.sola.services.ejb.cadastre.repository.entities.NewCadastreObjectIdentifier;
 import org.sola.services.ejb.transaction.businesslogic.TransactionEJBLocal;
 import org.sola.services.ejb.transaction.repository.entities.TransactionBulkOperationSpatial;
 import org.sola.services.ejb.transaction.repository.entities.TransactionCadastreChange;
@@ -528,5 +529,30 @@ public class Cadastre extends AbstractWebService {
         return (SpatialValueAreaTO) result[0];
     }
 
+     /**
+     * See {{@linkplain CadastreEJB#getNewCadastreObjectIdentifier(byte[], java.lang.String)
+     * CadastreEJB.getNewCadastreObjectIdentifier(byte[], java.lang.String)}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     */
+    @WebMethod(operationName = "GetNewCadastreObjectIdentifier")
+    public NewCadastreObjectIdentifier GetNewCadastreObjectIdentifier(
+            @WebParam(name = "geom") final byte[] geom,
+            @WebParam(name = "cadastreObjectType") final String cadastreObjectType)
+            throws SOLAFault, UnhandledFault {
+
+        final Object[] result = {null};
+
+        runOpenQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = cadastreEJB.getNewCadastreObjectIdentifier(geom, cadastreObjectType);
+            }
+        });
+
+        return (NewCadastreObjectIdentifier) result[0];
+    }
     
 }

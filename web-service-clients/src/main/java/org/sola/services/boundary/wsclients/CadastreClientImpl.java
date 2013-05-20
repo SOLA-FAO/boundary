@@ -34,6 +34,7 @@ import javax.xml.namespace.QName;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.cadastre.Cadastre;
 import org.sola.webservices.cadastre.CadastreService;
+import org.sola.webservices.cadastre.NewCadastreObjectIdentifier;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectNodeTO;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectTO;
@@ -306,6 +307,22 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
             processException(methodName, e);
         } finally {
             afterWebMethod(methodName, result, colist);
+        }
+        return result;
+    }
+
+    @Override
+    public NewCadastreObjectIdentifier getNewCadastreObjectIdentifier(
+            byte[] geom, String cadastreObjectType) throws WebServiceClientException {
+        NewCadastreObjectIdentifier result = null;
+        final String methodName = CadastreClient.GET_NEW_CADASTRE_OBJECT_IDENTIFIER;
+        try {
+            beforeWebMethod(methodName,  geom, cadastreObjectType);
+            result = getPort().getNewCadastreObjectIdentifier(geom, cadastreObjectType);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, geom, cadastreObjectType);
         }
         return result;
     }

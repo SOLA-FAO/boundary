@@ -381,7 +381,7 @@ public class MockCadastrePort implements Cadastre {
           /**
      * Response Key = AdministrativeClient.GET_SPATIAL_VALUE_AREA
      *
-     * @return default = new BaUnitTO()
+     * @return default = new SpatialValueAreaTO()
      */
     @Override
     public SpatialValueAreaTO getSpatialValueArea(String colist) throws SOLAFault, UnhandledFault {
@@ -413,50 +413,23 @@ public class MockCadastrePort implements Cadastre {
         }
     }
 
-//    @Override
-//    public List<ValidationResult> saveTransactionBulkOperationSpatial(
-//            TransactionBulkOperationSpatialTO transactionTO, 
-//            String languageCode) throws OptimisticLockingFault, SOLAAccessFault, 
-//            SOLAFault, SOLAValidationFault, UnhandledFault {
-//        List<ValidationResult> defaultResponse = new ArrayList<ValidationResult>();
-//        try {
-//            return getManager().getResponse(CadastreClient.SAVE_TRANSACTION_BULK_OPERATION_SPATIAL,
-//                    List.class, defaultResponse, transactionTO, languageCode);
-//        } catch (Exception ex) {
-//            processExceptionAll(ex);
-//            return null;
-//        }
-//    }
-//
-//    @Override
-//    public TransactionBulkOperationSpatialTO getTransactionBulkOperationSpatial(
-//            String transactionId) throws SOLAAccessFault, SOLAFault, UnhandledFault {
-//        TransactionBulkOperationSpatialTO defaultResponse = new TransactionBulkOperationSpatialTO();
-//        try {
-//            return getManager().getResponse(
-//                    CadastreClient.GET_TRANSACTION_BULK_OPERATION_SPATIAL,
-//                    TransactionBulkOperationSpatialTO.class, defaultResponse, transactionId);
-//        } catch (Exception ex) {
-//            processExceptionAccess(ex);
-//            return null;
-//        }
-//    }
-//
-//    @Override
-//    public boolean rejectTransactionBulkOperationSpatial(
-//            TransactionBulkOperationSpatialTO transactionTO, String languageCode) 
-//            throws OptimisticLockingFault, SOLAAccessFault, SOLAFault,
-//            SOLAValidationFault, UnhandledFault {
-//        boolean defaultResponse = true;
-//        try {
-//            return getManager().getResponse(
-//                    CadastreClient.REJECT_TRANSACTION_BULK_OPERATION_SPATIAL,
-//                    Boolean.class, defaultResponse, 
-//                    transactionTO, languageCode);
-//        } catch (Exception ex) {
-//            processExceptionAccess(ex);
-//            return false;
-//        }
-//    }
-        
+          /**
+     * Response Key = AdministrativeClient.GET_NEW_CADASTRE_OBJECT_IDENTIFIER
+     *
+     * @return default = new NewCadastreObjectIdentifier()
+     */
+    @Override
+    public NewCadastreObjectIdentifier getNewCadastreObjectIdentifier(byte[] geom, String cadastreObjectType) 
+            throws SOLAFault, UnhandledFault {
+        NewCadastreObjectIdentifier defaultResponse = new NewCadastreObjectIdentifier();
+        try {
+            return getManager().getResponse(CadastreClient.GET_NEW_CADASTRE_OBJECT_IDENTIFIER,
+                    NewCadastreObjectIdentifier.class, defaultResponse, geom, cadastreObjectType);
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
+            return null;
+        }
+    }
+
+  
 }

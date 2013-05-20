@@ -31,6 +31,7 @@ package org.sola.services.boundary.wsclients;
 
 import java.util.List;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
+import org.sola.webservices.cadastre.NewCadastreObjectIdentifier;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectNodeTO;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectTO;
@@ -125,6 +126,8 @@ public interface CadastreClient extends AbstractWSClient {
     
     public static final String GET_SPATIAL_VALUE_AREA = SERVICE_NAME + "getSpatialValueArea";
  
+    public static final String GET_NEW_CADASTRE_OBJECT_IDENTIFIER = SERVICE_NAME + "getNewCadastreObjectIdentifier";
+
     /**
      * Returns a maximum of 10 cadastre objects that have a name first part and/or name last part
      * that matches the specified search string. This method supports partial matches and is case
@@ -254,4 +257,5 @@ public interface CadastreClient extends AbstractWSClient {
    SpatialValueAreaTO getSpatialValueArea(String colist) throws WebServiceClientException;
     
     
+   NewCadastreObjectIdentifier getNewCadastreObjectIdentifier(byte[] geom, String cadastreObjectType);
 }
