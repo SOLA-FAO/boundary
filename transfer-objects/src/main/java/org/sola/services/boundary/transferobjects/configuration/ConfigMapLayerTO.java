@@ -31,7 +31,7 @@ import org.sola.services.common.contracts.AbstractTO;
 
 /**
  *
- * @author Manoku
+ * @author Elton Manoku
  */
 public class ConfigMapLayerTO extends AbstractTO {
 

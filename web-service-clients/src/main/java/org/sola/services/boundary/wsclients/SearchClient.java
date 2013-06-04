@@ -279,7 +279,7 @@ public interface SearchClient extends AbstractWSClient {
      * @return The results of the search
      */
     List<SpatialSearchResultTO> searchSpatialObjects(
-            String queryName, String searchString) throws WebServiceClientException;
+            String queryName, String searchString, int srid) throws WebServiceClientException;
 
     /**
      * Returns the map layer config details from system.config_map_layer table. Also retrieves the

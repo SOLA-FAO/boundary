@@ -38,6 +38,7 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
 import org.sola.services.boundary.transferobjects.configuration.ConfigMapLayerTO;
+import org.sola.services.boundary.transferobjects.configuration.CrsTO;
 import org.sola.services.boundary.transferobjects.configuration.MapDefinitionTO;
 import org.sola.services.boundary.transferobjects.search.*;
 import org.sola.services.common.ServiceConstants;
@@ -524,11 +525,13 @@ public class Search extends AbstractWebService {
     @WebMethod(operationName = "SearchSpatialObjects")
     public List<SpatialSearchResultTO> SearchSpatialObjects(
             @WebParam(name = "queryName") String queryName,
-            @WebParam(name = "searchString") String searchString)
+            @WebParam(name = "searchString") String searchString,
+            @WebParam(name = "srid") int srid)
             throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String queryNameTmp = queryName;
         final String searchStringTmp = searchString;
+        final int sridTmp = srid;
         final Object[] result = {null};
 
         runGeneralQuery(wsContext, new Runnable() {
@@ -536,7 +539,7 @@ public class Search extends AbstractWebService {
             @Override
             public void run() {
                 result[0] = GenericTranslator.toTOList(
-                        searchEJB.searchSpatialObjects(queryNameTmp, searchStringTmp),
+                        searchEJB.searchSpatialObjects(queryNameTmp, searchStringTmp, sridTmp),
                         SpatialSearchResultTO.class);
             }
         });
@@ -569,9 +572,9 @@ public class Search extends AbstractWebService {
                 HashMap<String, String> mapSettings = searchEJB.getMapSettingList();
                 List<ConfigMapLayer> configMapLayerList =
                         searchEJB.getConfigMapLayerList(languageCodeTmp);
+                List<Crs> crsList = searchEJB.getCrsList();
                 MapDefinitionTO mapDefinition = new MapDefinitionTO();
-                mapDefinition.setSrid(Integer.parseInt(mapSettings.get("map-srid")));
-                mapDefinition.setWktOfCrs(mapSettings.get("wkt-of-crs"));
+                mapDefinition.setCrsList(GenericTranslator.toTOList(crsList, CrsTO.class));
                 mapDefinition.setWest(Double.parseDouble(mapSettings.get("map-west")));
                 mapDefinition.setSouth(Double.parseDouble(mapSettings.get("map-south")));
                 mapDefinition.setEast(Double.parseDouble(mapSettings.get("map-east")));

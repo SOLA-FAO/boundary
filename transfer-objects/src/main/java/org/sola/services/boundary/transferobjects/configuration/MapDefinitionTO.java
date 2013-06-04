@@ -33,11 +33,10 @@ import org.sola.services.common.contracts.AbstractTO;
 
 /**
  *
- * @author Manoku
+ * @author Elton Manoku
  */
 public class MapDefinitionTO extends AbstractTO {
-    private int srid = -1;
-    private String wktOfCrs;
+    private List<CrsTO> crsList = new ArrayList<CrsTO>();
     private List<ConfigMapLayerTO> layers = new ArrayList<ConfigMapLayerTO>();
     private double east = -1;
     private double west = -1;
@@ -47,29 +46,14 @@ public class MapDefinitionTO extends AbstractTO {
     private double surveyPointShiftUrbanArea = 5.0;
     private double surveyPointShiftRuralArea = 20.0;
     
-
-
-    /**
-     * @return the srid
-     */
-    public int getSrid() {
-        return srid;
+    public List<CrsTO> getCrsList() {
+        return crsList;
     }
 
-    /**
-     * @param srid the srid to set
-     */
-    public void setSrid(int srid) {
-        this.srid = srid;
+    public void setCrsList(List<CrsTO> crsList) {
+        this.crsList = crsList;
     }
 
-    public String getWktOfCrs() {
-        return wktOfCrs;
-    }
-
-    public void setWktOfCrs(String wktOfCrs) {
-        this.wktOfCrs = wktOfCrs;
-    }
     
     /**
      * @return the layers

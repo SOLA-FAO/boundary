@@ -263,7 +263,7 @@ public class MockSearchPort implements Search {
      * @return default = new ArrayList<SpatialSearchResultTO>()
      */
     @Override
-    public List<SpatialSearchResultTO> searchSpatialObjects(String queryName, String searchString)
+    public List<SpatialSearchResultTO> searchSpatialObjects(String queryName, String searchString, int srid)
             throws SOLAAccessFault, SOLAFault, UnhandledFault {
         List<SpatialSearchResultTO> defaultResponse = new ArrayList<SpatialSearchResultTO>();
         try {
