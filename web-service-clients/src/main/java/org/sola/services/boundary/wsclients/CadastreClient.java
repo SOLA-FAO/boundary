@@ -35,6 +35,7 @@ import org.sola.webservices.cadastre.NewCadastreObjectIdentifier;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectNodeTO;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectTO;
+import org.sola.webservices.transferobjects.cadastre.SpatialUnitGroupTO;
 import org.sola.webservices.transferobjects.cadastre.SpatialValueAreaTO;
 import org.sola.webservices.transferobjects.transaction.TransactionBulkOperationSpatialTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
@@ -128,6 +129,10 @@ public interface CadastreClient extends AbstractWSClient {
  
     public static final String GET_NEW_CADASTRE_OBJECT_IDENTIFIER = SERVICE_NAME + "getNewCadastreObjectIdentifier";
 
+    public static final String GET_SPATIAL_UNIT_GROUPS  = SERVICE_NAME + "getSpatialUnitGroups";
+
+    public static final String SAVE_SPATIAL_UNIT_GROUPS  = SERVICE_NAME + "saveSpatialUnitGroups";
+    
     /**
      * Returns a maximum of 10 cadastre objects that have a name first part and/or name last part
      * that matches the specified search string. This method supports partial matches and is case
@@ -256,6 +261,30 @@ public interface CadastreClient extends AbstractWSClient {
      */
    SpatialValueAreaTO getSpatialValueArea(String colist) throws WebServiceClientException;
     
-    
+   /**
+    * Gets a cadastre object identifier from the server.
+    * @param geom The geometry for which to ask the identifier
+    * @param cadastreObjectType The type of the cadastre object
+    * @return 
+    */ 
    NewCadastreObjectIdentifier getNewCadastreObjectIdentifier(byte[] geom, String cadastreObjectType);
+   
+   /**
+    * It retrieves the spatial unit groups that intersect with the filteringGeometry
+    * and that are of the type: hierarchyLevel.
+    * 
+    * @param filteringGeometry
+    * @param hierarchyLevel
+    * @param srid
+    * @return 
+    */
+   List<SpatialUnitGroupTO> getSpatialUnitGroups(
+            byte[] filteringGeometry, Integer hierarchyLevel, int srid);
+   
+   /**
+    * It saves the list of spatial unit groups.
+    * 
+    * @param items 
+    */
+   void saveSpatialUnitGroups(List<SpatialUnitGroupTO> items);
 }

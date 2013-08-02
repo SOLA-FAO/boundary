@@ -38,6 +38,7 @@ import org.sola.webservices.cadastre.NewCadastreObjectIdentifier;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectNodeTO;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectTO;
+import org.sola.webservices.transferobjects.cadastre.SpatialUnitGroupTO;
 import org.sola.webservices.transferobjects.cadastre.SpatialValueAreaTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreRedefinitionTO;
@@ -327,4 +328,34 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
         return result;
     }
 
+    @Override
+    public void saveSpatialUnitGroups(List<SpatialUnitGroupTO> items) {
+        final String methodName = CadastreClient.SAVE_SPATIAL_UNIT_GROUPS;
+        try {
+            beforeWebMethod(methodName,  items);
+            getPort().saveSpatialUnitGroups(items, this.getLanguageCode());
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, items);
+        }
+    }
+
+    @Override
+    public List<SpatialUnitGroupTO> getSpatialUnitGroups(
+            byte[] filteringGeometry, Integer hierarchyLevel, int srid) {
+        List<SpatialUnitGroupTO> result = null;
+        final String methodName = CadastreClient.GET_SPATIAL_UNIT_GROUPS;
+        try {
+            beforeWebMethod(methodName, filteringGeometry, hierarchyLevel, srid);
+            result = getPort().getSpatialUnitGroups(filteringGeometry, hierarchyLevel, srid);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, filteringGeometry, hierarchyLevel, srid);
+        }
+        return result;
+    }
+
+    
 }

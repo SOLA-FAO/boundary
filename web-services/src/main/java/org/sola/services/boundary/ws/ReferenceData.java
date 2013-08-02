@@ -45,6 +45,7 @@ import org.sola.services.common.faults.UnhandledFault;
 import org.sola.services.ejb.application.businesslogic.ApplicationEJBLocal;
 import org.sola.services.common.contracts.GenericTranslator;
 import org.sola.services.common.webservices.AbstractWebService;
+import org.sola.services.ejb.cadastre.repository.entities.HierarchyLevel;
 import org.sola.services.ejb.party.businesslogic.PartyEJBLocal;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.contracts.AbstractCodeTO;
@@ -910,6 +911,32 @@ public class ReferenceData extends AbstractWebService {
         });
 
         return (List<BaUnitRelTypeTO>) result[0];
+    }
+
+    /**
+     * Uses the {@linkplain org.sola.services.ejb.system.businesslogic.SystemEJB#getCodeEntityList(java.lang.Class, java.lang.String)
+     * SystemEJB.getCodeEntityList} to retrieve the BrTechnicalType codes.
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetHierarchyLevels")
+    public List<HierarchyLevelTO> GetHierarchyLevels(@WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+        final Object[] params = {languageCode};
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                String languageCode = params[0] == null ? null : params[0].toString();
+                result[0] = GenericTranslator.toTOList(cadastreEJB.getHierarchyLevels(languageCode), HierarchyLevelTO.class);
+            }
+        });
+
+        return (List<HierarchyLevelTO>) result[0];
     }
 
     /**

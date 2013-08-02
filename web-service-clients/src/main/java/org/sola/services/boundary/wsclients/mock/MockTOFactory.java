@@ -488,7 +488,18 @@ public class MockTOFactory {
 
         return result;
     }
+    /**
+     * Creates a default list of hierarchy levels
+     */
+    public static List<HierarchyLevelTO> createHierarchyLevels() {
+        List<HierarchyLevelTO> result = new ArrayList<HierarchyLevelTO>();
+        result.add(createCode(HierarchyLevelTO.class, "0", "Hierarchy level 0"));
+        result.add(createCode(HierarchyLevelTO.class, "1", "Hierarchy level 1"));
 
+        return result;
+    }
+
+    
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Security TOs">
     /**
