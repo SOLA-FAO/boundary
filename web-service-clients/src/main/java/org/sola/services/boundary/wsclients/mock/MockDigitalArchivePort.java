@@ -31,7 +31,6 @@ import org.sola.services.boundary.wsclients.DigitalArchiveClient;
 import org.sola.webservices.digitalarchive.*;
 import org.sola.webservices.transferobjects.digitalarchive.DocumentBinaryTO;
 import org.sola.webservices.transferobjects.digitalarchive.DocumentTO;
-import org.sola.webservices.transferobjects.digitalarchive.FileBinaryTO;
 import org.sola.webservices.transferobjects.digitalarchive.FileInfoTO;
 
 /**
@@ -244,7 +243,7 @@ public class MockDigitalArchivePort implements DigitalArchive {
      */
     @Override
     public FileInfoTO getFileBinary(String fileName) throws SOLAAccessFault, SOLAFault, UnhandledFault {
-        FileInfoTO defaultResponse = new FileBinaryTO();
+        FileInfoTO defaultResponse = new FileInfoTO();
         defaultResponse.setName(fileName);
         try {
             return getManager().getResponse(DigitalArchiveClient.GET_FILE_BINARY,
@@ -261,12 +260,12 @@ public class MockDigitalArchivePort implements DigitalArchive {
      * @return default = new FileBinaryTO()
      */
     @Override
-    public FileBinaryTO getFileThumbnail(String fileName) throws SOLAAccessFault, SOLAFault, UnhandledFault {
-        FileBinaryTO defaultResponse = new FileBinaryTO();
+    public FileInfoTO getFileThumbnail(String fileName) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        FileInfoTO defaultResponse = new FileInfoTO();
         defaultResponse.setName(fileName);
         try {
             return getManager().getResponse(DigitalArchiveClient.GET_FILE_THUMBNAIL,
-                    FileBinaryTO.class, defaultResponse, fileName);
+                    FileInfoTO.class, defaultResponse, fileName);
         } catch (Exception ex) {
             processExceptionAccess(ex);
             return null;

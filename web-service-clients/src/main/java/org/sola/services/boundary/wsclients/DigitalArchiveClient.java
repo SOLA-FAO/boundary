@@ -26,9 +26,9 @@
 package org.sola.services.boundary.wsclients;
 
 import java.util.List;
+import org.sola.common.RolesConstants;
 import org.sola.webservices.transferobjects.digitalarchive.DocumentBinaryTO;
 import org.sola.webservices.transferobjects.digitalarchive.DocumentTO;
-import org.sola.webservices.transferobjects.digitalarchive.FileBinaryTO;
 import org.sola.webservices.transferobjects.digitalarchive.FileInfoTO;
 
 /**
@@ -141,7 +141,7 @@ public interface DigitalArchiveClient extends AbstractWSClient {
      * @param fileName The name of the file to load
      * @return A thumbnail image of the file
      */
-    public FileBinaryTO getFileThumbnail(String fileName);
+    public FileInfoTO getFileThumbnail(String fileName);
 
     /**
      * Retrieves the list of all files in the Network Scan Folder. Only meta data about the file is

@@ -234,7 +234,7 @@ public class DigitalArchive extends AbstractWebService {
      * @throws SOLAAccessFault
      */
     @WebMethod(operationName = "GetFileThumbnail")
-    public FileBinaryTO GetFileThumbnail(@WebParam(name = "fileName") String fileName)
+    public FileInfoTO GetFileThumbnail(@WebParam(name = "fileName") String fileName)
             throws SOLAFault, UnhandledFault, SOLAAccessFault {
         //     FLOSS - 813 4       
 
@@ -245,11 +245,11 @@ public class DigitalArchive extends AbstractWebService {
 
             @Override
             public void run() {
-                result[0] = GenericTranslator.toTO(digitalArchiveEJB.getFileThumbnail(fileNameTmp), FileBinaryTO.class);
+                result[0] = GenericTranslator.toTO(digitalArchiveEJB.getFileThumbnail(fileNameTmp), FileInfoTO.class);
             }
         });
 
-        return (FileBinaryTO) result[0];
+        return (FileInfoTO) result[0];
     }
 
     /**

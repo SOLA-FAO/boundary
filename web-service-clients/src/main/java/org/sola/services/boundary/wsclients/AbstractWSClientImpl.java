@@ -135,8 +135,7 @@ public abstract class AbstractWSClientImpl implements AbstractWSClient {
      * @param <T> Represents the type of the port interface class (i.e. the
      * service client interface class)
      * @param <S> Represents the type of the service class to instantiate. Must
-     * extend
-     * {@linkplain javax.xml.ws.Service}
+     * extend {@linkplain javax.xml.ws.Service}
      * @param portInterfaceClass The service client interface class to create.
      * e.g. SecurityClient.class
      * @param serviceClass The service class to use e.g. SecurityService.class
@@ -160,8 +159,7 @@ public abstract class AbstractWSClientImpl implements AbstractWSClient {
      * Service Client.
      *
      * @param <T> Represents the type of the service class to instantiate. Must
-     * extend
-     * {@linkplain javax.xml.ws.Service}
+     * extend {@linkplain javax.xml.ws.Service}
      * @param serviceClass The service class to use e.g. SecurityService.class
      * @return An instantiated service object.
      * @throws WebServiceClientException If an error occurs while instantiating
@@ -454,6 +452,16 @@ public abstract class AbstractWSClientImpl implements AbstractWSClient {
         }
         if (org.sola.webservices.spatial.UnhandledFault.class.isAssignableFrom(e.getClass())) {
             org.sola.webservices.spatial.UnhandledFault fault = (org.sola.webservices.spatial.UnhandledFault) e;
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
+                    fault.getFaultInfo());
+        }
+        if (org.sola.webservices.filestreaming.SOLAFault.class.isAssignableFrom(e.getClass())) {
+            org.sola.webservices.filestreaming.SOLAFault fault = (org.sola.webservices.filestreaming.SOLAFault) e;
+            throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_GENERAL,
+                    fault.getFaultInfo());
+        }
+        if (org.sola.webservices.filestreaming.UnhandledFault.class.isAssignableFrom(e.getClass())) {
+            org.sola.webservices.filestreaming.UnhandledFault fault = (org.sola.webservices.filestreaming.UnhandledFault) e;
             throw new WebServiceClientException(WebServiceClientExceptionType.SERVICE_UNHANDLED,
                     fault.getFaultInfo());
         }
