@@ -27,9 +27,9 @@
  */
 package org.sola.services.boundary.transferobjects.security;
 
-import org.sola.services.common.contracts.AbstractReadWriteTO;
+import org.sola.services.common.contracts.AbstractVersionedTO;
 
-public class GroupRoleTO extends AbstractReadWriteTO {
+public class GroupRoleTO extends AbstractVersionedTO {
     private String roleCode;
     private String groupId;
     
