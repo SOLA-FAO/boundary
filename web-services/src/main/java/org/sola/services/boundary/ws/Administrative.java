@@ -30,7 +30,6 @@
 package org.sola.services.boundary.ws;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -39,7 +38,6 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
 import org.sola.services.boundary.transferobjects.administrative.*;
-import org.sola.services.boundary.transferobjects.casemanagement.LodgementViewParamsTO;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.br.ValidationResult;
 import org.sola.services.common.contracts.GenericTranslator;

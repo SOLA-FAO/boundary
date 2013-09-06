@@ -1,26 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO). All rights
- * reserved.
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted
- * provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice,this list of conditions
- * and the following disclaimer. 2. Redistributions in binary form must reproduce the above
- * copyright notice,this list of conditions and the following disclaimer in the documentation and/or
- * other materials provided with the distribution. 3. Neither the name of FAO nor the names of its
- * contributors may be used to endorse or promote products derived from this software without
- * specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
- * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
- * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.wsclients;
@@ -44,7 +48,8 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
     private static final String LOCAL_PART = "casemanagement-service";
 
     /**
-     * Creates a web service client class for the web service hosted at the specified URL
+     * Creates a web service client class for the web service hosted at the
+     * specified URL
      *
      * @param url The location of the service WSDL
      */
@@ -99,36 +104,6 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
             processException(methodName, e);
         } finally {
             afterWebMethod(methodName, result, application);
-        }
-        return result;
-    }
-
-    @Override
-    public List<LodgementViewTO> getLodgementView(LodgementViewParamsTO lodgementViewParamsTO) throws WebServiceClientException {
-        List<LodgementViewTO> result = null;
-        final String methodName = CaseManagementClient.GET_LODGEMENT_VIEW;
-        try {
-            beforeWebMethod(methodName, lodgementViewParamsTO);
-            result = getPort().getLodgementView(lodgementViewParamsTO);
-        } catch (Exception e) {
-            processException(methodName, e);
-        } finally {
-            afterWebMethod(methodName, result, lodgementViewParamsTO);
-        }
-        return result;
-    }
-
-    @Override
-    public List<LodgementTimingTO> getLodgementTiming(LodgementViewParamsTO lodgementViewParamsTO) throws WebServiceClientException {
-        List<LodgementTimingTO> result = null;
-        final String methodName = CaseManagementClient.GET_LODGEMENT_TIMING;
-        try {
-            beforeWebMethod(methodName, lodgementViewParamsTO);
-            result = getPort().getLodgementTiming(lodgementViewParamsTO);
-        } catch (Exception e) {
-            processException(methodName, e);
-        } finally {
-            afterWebMethod(methodName, result, lodgementViewParamsTO);
         }
         return result;
     }
@@ -679,7 +654,8 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         }
         return result;
     }
-     @Override
+
+    @Override
     public List<SysRegCertificatesTO> getSysRegCertificatesByLocation(String searchString)
             throws WebServiceClientException {
         List<SysRegCertificatesTO> result = null;
@@ -694,6 +670,7 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         }
         return result;
     }
+
     @Override
     public List<SysRegCertificatesTO> getSysRegCertificatesByApplication(String searchString, String nr)
             throws WebServiceClientException {
@@ -701,7 +678,7 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         final String methodName = CaseManagementClient.GET_SYS_REG_CERTIFICATES_APP;
         try {
             beforeWebMethod(methodName, searchString, nr);
-            result = getPort().getSysRegCertificatesByApplication(searchString,nr);
+            result = getPort().getSysRegCertificatesByApplication(searchString, nr);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
@@ -710,4 +687,18 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         return result;
     }
 
+    @Override
+    public List<WorkSummaryTO> getWorkSummary(LodgementViewParamsTO paramsTO) throws WebServiceClientException {
+        List<WorkSummaryTO> result = null;
+        final String methodName = CaseManagementClient.GET_WORK_SUMMARY;
+        try {
+            beforeWebMethod(methodName, paramsTO);
+            result = getPort().getWorkSummary(paramsTO);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, paramsTO);
+        }
+        return result;
+    }
 }

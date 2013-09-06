@@ -48,9 +48,7 @@ import org.sola.services.ejb.application.repository.entities.Service;
 import org.sola.services.ejb.party.businesslogic.PartyEJBLocal;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.faults.SOLAAccessFault;
-import org.sola.services.ejb.application.repository.entities.LodgementTiming;
-import org.sola.services.ejb.application.repository.entities.LodgementView;
-import org.sola.services.ejb.application.repository.entities.LodgementViewParams;
+import org.sola.services.ejb.application.repository.entities.WorkSummary;
 import org.sola.services.ejb.party.repository.entities.Party;
 import org.sola.services.ejb.source.businesslogic.SourceEJBLocal;
 import org.sola.services.ejb.source.repository.entities.PowerOfAttorney;
@@ -227,64 +225,6 @@ public class CaseManagement extends AbstractWebService {
         });
 
         return (PartyTO) result[0];
-    }
-
-    /**
-     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getLodgementView(org.sola.services.ejb.application.repository.entities.LodgementViewParams)
-     * ApplicationEJB.getLodgementView}
-     *
-     * @throws SOLAFault
-     * @throws UnhandledFault
-     * @throws SOLAAccessFault
-     */
-    @WebMethod(operationName = "GetLodgementView")
-    public List<LodgementViewTO> getLodgementView(
-            @WebParam(name = "LodgementViewParamsTO") LodgementViewParamsTO paramsTO)
-            throws SOLAFault, UnhandledFault, SOLAAccessFault {
-
-        final LodgementViewParamsTO paramsTOTmp = paramsTO;
-        final Object[] result = {null};
-
-        runGeneralQuery(wsContext, new Runnable() {
-
-            @Override
-            public void run() {
-                LodgementViewParams params = GenericTranslator.fromTO(paramsTOTmp, LodgementViewParams.class, null);
-                List<LodgementView> appList = applicationEJB.getLodgementView(params);
-                result[0] = GenericTranslator.toTOList(
-                        appList, LodgementViewTO.class);
-            }
-        });
-        return (List<LodgementViewTO>) result[0];
-    }
-
-    /**
-     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getLodgementTiming(org.sola.services.ejb.application.repository.entities.LodgementViewParams)
-     * ApplicationEJB.getLodgementTiming}
-     *
-     * @throws SOLAFault
-     * @throws UnhandledFault
-     * @throws SOLAAccessFault
-     */
-    @WebMethod(operationName = "GetLodgementTiming")
-    public List<LodgementTimingTO> getLodgementTiming(
-            @WebParam(name = "LodgementViewParamsTO") LodgementViewParamsTO paramsTO)
-            throws SOLAFault, UnhandledFault, SOLAAccessFault {
-
-        final LodgementViewParamsTO paramsTOTmp = paramsTO;
-        final Object[] result = {null};
-
-        runGeneralQuery(wsContext, new Runnable() {
-
-            @Override
-            public void run() {
-                LodgementViewParams params = GenericTranslator.fromTO(paramsTOTmp, LodgementViewParams.class, null);
-                List<LodgementTiming> appList = applicationEJB.getLodgementTiming(params);
-                result[0] = GenericTranslator.toTOList(
-                        appList, LodgementTimingTO.class);
-            }
-        });
-        return (List<LodgementTimingTO>) result[0];
     }
 
     /**
@@ -1350,5 +1290,36 @@ public class CaseManagement extends AbstractWebService {
 
         return (List<SysRegCertificatesTO>) result[0];
     }
+    
+   /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getWorkSummary(java.util.Date, java.util.Date)
+     * ApplicationEJB.getWorkSummary}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetWorkSummary")
+    public List<WorkSummaryTO> getWorkSummary(
+            @WebParam(name = "paramsTO") LodgementViewParamsTO paramsTO)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final LodgementViewParamsTO paramsTOTmp = paramsTO;
+        final Object[] result = {null};
+
+        if (paramsTO != null) {
+            runGeneralQuery(wsContext, new Runnable() {
+
+                @Override
+                public void run() {
+                    List<WorkSummary> appList = applicationEJB.getWorkSummary(paramsTOTmp.getFromDate(),
+                            paramsTOTmp.getToDate());
+                    result[0] = GenericTranslator.toTOList(
+                            appList, WorkSummaryTO.class);
+                }
+            });
+        }
+        return (List<WorkSummaryTO>) result[0];
+    }  
     
 }

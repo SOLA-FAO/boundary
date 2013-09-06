@@ -1,26 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations (FAO). All rights
- * reserved.
+ * Copyright (C) 2012 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification, are permitted
- * provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice,this list of conditions
- * and the following disclaimer. 2. Redistributions in binary form must reproduce the above
- * copyright notice,this list of conditions and the following disclaimer in the documentation and/or
- * other materials provided with the distribution. 3. Neither the name of FAO nor the names of its
- * contributors may be used to endorse or promote products derived from this software without
- * specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
- * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
- * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.wsclients.mock;
@@ -35,12 +39,15 @@ import org.sola.webservices.transferobjects.casemanagement.*;
 
 /**
  * Provides a mock implementation for the
- * {@linkplain org.sola.webservices.casemanagement.CaseManagement} interface. Uses the
- * {@linkplain MockServiceManager} to obtain the appropriate mock response for each web method.
- * <p>Each method mocked by this class has a public constant defined that can be used to reference a
- * mock response object from the {@linkplain MockServiceManager}. To set a response object for a web
- * method, use the {@linkplain MockServiceManager#setResponse(String, Object)} method referencing
- * the appropriate web method constant from {@linkplain org.sola.services.boundary.wsclients.CaseManagementClient}.</p>
+ * {@linkplain org.sola.webservices.casemanagement.CaseManagement} interface.
+ * Uses the {@linkplain MockServiceManager} to obtain the appropriate mock
+ * response for each web method.
+ * <p>Each method mocked by this class has a public constant defined that can be
+ * used to reference a mock response object from the
+ * {@linkplain MockServiceManager}. To set a response object for a web method,
+ * use the {@linkplain MockServiceManager#setResponse(String, Object)} method
+ * referencing the appropriate web method constant from
+ * {@linkplain org.sola.services.boundary.wsclients.CaseManagementClient}.</p>
  *
  * @see MockCaseManagementClient
  * @see CaseManagementClient
@@ -58,8 +65,9 @@ public class MockCaseManagementPort implements CaseManagement {
     }
 
     /**
-     * Processes the mock response exception and throws the appropriate service exception or a
-     * MockResponseException if the response exception is not a recognized type.
+     * Processes the mock response exception and throws the appropriate service
+     * exception or a MockResponseException if the response exception is not a
+     * recognized type.
      *
      * @param ex The Mock response exception to process
      */
@@ -79,8 +87,10 @@ public class MockCaseManagementPort implements CaseManagement {
     }
 
     /**
-     * Processes the mock response exception and throws the appropriate service exception or a
-     * MockResponseException if the response exception is not a recognized type. Extends {@linkplain #processExceptionBasic(java.lang.Exception) processExceptionBasic}
+     * Processes the mock response exception and throws the appropriate service
+     * exception or a MockResponseException if the response exception is not a
+     * recognized type. Extends
+     * {@linkplain #processExceptionBasic(java.lang.Exception) processExceptionBasic}
      * to include the SOLAAccessFault;
      *
      * @param ex The Mock response exception to process
@@ -95,8 +105,10 @@ public class MockCaseManagementPort implements CaseManagement {
     }
 
     /**
-     * Processes the mock response exception and throws the appropriate service exception or a
-     * MockResponseException if the response exception is not a recognized type. Extends {@linkplain #processExceptionBasic(java.lang.Exception) processExceptionBasic}
+     * Processes the mock response exception and throws the appropriate service
+     * exception or a MockResponseException if the response exception is not a
+     * recognized type. Extends
+     * {@linkplain #processExceptionBasic(java.lang.Exception) processExceptionBasic}
      * to include the OptimisticLockingFault;
      *
      * @param ex The Mock response exception to process
@@ -111,8 +123,10 @@ public class MockCaseManagementPort implements CaseManagement {
     }
 
     /**
-     * Processes the mock response exception and throws the appropriate service exception or a
-     * MockResponseException if the response exception is not a recognized type. Extends {@linkplain #processExceptionUpdate(java.lang.Exception) processExceptionUpdate}
+     * Processes the mock response exception and throws the appropriate service
+     * exception or a MockResponseException if the response exception is not a
+     * recognized type. Extends
+     * {@linkplain #processExceptionUpdate(java.lang.Exception) processExceptionUpdate}
      * to include the OptimisticLockingFault and SOLAValidationFault;
      *
      * @param ex The Mock response exception to process
@@ -193,24 +207,6 @@ public class MockCaseManagementPort implements CaseManagement {
         try {
             return getManager().getResponse(CaseManagementClient.GET_SOURCES_BY_SERVICE_ID,
                     List.class, defaultResponse, serviceId);
-        } catch (Exception ex) {
-            processExceptionAccess(ex);
-            return null;
-        }
-    }
-
-    /**
-     * Response Key = CaseManagementClient.GET_LODGEMENT_VIEW
-     *
-     * @return default = new ArrayList<LodgementViewTO>()
-     */
-    @Override
-    public List<LodgementViewTO> getLodgementView(LodgementViewParamsTO lodgementViewParamsTO)
-            throws SOLAAccessFault, SOLAFault, UnhandledFault {
-        List<LodgementViewTO> defaultResponse = new ArrayList<LodgementViewTO>();
-        try {
-            return getManager().getResponse(CaseManagementClient.GET_LODGEMENT_VIEW,
-                    List.class, defaultResponse, lodgementViewParamsTO);
         } catch (Exception ex) {
             processExceptionAccess(ex);
             return null;
@@ -410,24 +406,6 @@ public class MockCaseManagementPort implements CaseManagement {
         try {
             return getManager().getResponse(CaseManagementClient.GET_APPLICATION,
                     ApplicationTO.class, defaultResponse, id);
-        } catch (Exception ex) {
-            processExceptionAccess(ex);
-            return null;
-        }
-    }
-
-    /**
-     * Response Key = CaseManagementClient.GET_LODGEMENT_TIMING
-     *
-     * @return default = new ArrayList<LodgementTimingTO>()
-     */
-    @Override
-    public List<LodgementTimingTO> getLodgementTiming(LodgementViewParamsTO lodgementViewParamsTO)
-            throws SOLAAccessFault, SOLAFault, UnhandledFault {
-        List<LodgementTimingTO> defaultResponse = new ArrayList<LodgementTimingTO>();
-        try {
-            return getManager().getResponse(CaseManagementClient.GET_LODGEMENT_TIMING,
-                    List.class, defaultResponse, lodgementViewParamsTO);
         } catch (Exception ex) {
             processExceptionAccess(ex);
             return null;
@@ -810,8 +788,8 @@ public class MockCaseManagementPort implements CaseManagement {
             return null;
         }
     }
-    
-       /**
+
+    /**
      * Response Key = ApplicationClient.GET_CADASTRE_OBJECT_BY_PARTS
      *
      * @return default = new ArrayList<CadastreObjectTO>()
@@ -828,7 +806,8 @@ public class MockCaseManagementPort implements CaseManagement {
             return null;
         }
     }
-        /**
+
+    /**
      * Response Key = ApplicationClient.GET_CADASTRE_OBJECT_BY_PARTS
      *
      * @return default = new ArrayList<CadastreObjectTO>()
@@ -846,4 +825,20 @@ public class MockCaseManagementPort implements CaseManagement {
         }
     }
 
+     /**
+     * Response Key = CaseManagementClient.GET_WORK_SUMMARY
+     *
+     * @return default = new ArrayList<WorkSummaryTO>()
+     */
+    @Override
+    public List<WorkSummaryTO> getWorkSummary(LodgementViewParamsTO paramsTO) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<WorkSummaryTO> defaultResponse = new ArrayList<WorkSummaryTO>();
+        try {
+            return getManager().getResponse(CaseManagementClient.GET_WORK_SUMMARY,
+                    List.class, defaultResponse, paramsTO);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
 }
