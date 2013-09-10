@@ -618,17 +618,17 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
     }
 
     @Override
-    public List<LeaseConditionTO> getLeaseConditions() throws WebServiceClientException {
-        return getLeaseConditions(getLanguageCode());
+    public List<ConditionTypeTO> getConditionTypes() throws WebServiceClientException {
+        return getConditionTypes(getLanguageCode());
     }
 
     @Override
-    public List<LeaseConditionTO> getLeaseConditions(String lang) throws WebServiceClientException {
-        List<LeaseConditionTO> result = null;
-        final String methodName = ReferenceDataClient.GET_LEASE_CONDITION_TYPES;
+    public List<ConditionTypeTO> getConditionTypes(String lang) throws WebServiceClientException {
+        List<ConditionTypeTO> result = null;
+        final String methodName = ReferenceDataClient.GET_CONDITION_TYPES;
         try {
             beforeWebMethod(methodName, lang);
-            result = getPort().getLeaseConditions(lang);
+            result = getPort().getConditionTypes(lang);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {

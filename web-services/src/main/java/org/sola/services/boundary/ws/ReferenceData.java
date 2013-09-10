@@ -584,15 +584,15 @@ public class ReferenceData extends AbstractWebService {
     }
     
     /**
-     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getLeaseConditions(java.lang.String) (java.lang.String)
-     * AdministrativeEJB.getLeaseConditions}
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getConditionTypes(java.lang.String) (java.lang.String)
+     * AdministrativeEJB.getConditionTypes}
      *
      * @throws SOLAFault
      * @throws UnhandledFault
      * @throws SOLAAccessFault
      */
-    @WebMethod(operationName = "getLeaseConditions")
-    public List<LeaseConditionTO> getLeaseConditions(String languageCode)
+    @WebMethod(operationName = "getConditionTypes")
+    public List<ConditionTypeTO> getConditionTypes(String languageCode)
             throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final String languageCodeTmp = languageCode;
@@ -603,11 +603,11 @@ public class ReferenceData extends AbstractWebService {
             @Override
             public void run() {
                 result[0] = GenericTranslator.toTOList(
-                        administrativeEJB.getLeaseConditions(languageCodeTmp), LeaseConditionTO.class);
+                        administrativeEJB.getConditionTypes(languageCodeTmp), ConditionTypeTO.class);
             }
         });
 
-        return (List<LeaseConditionTO>) result[0];
+        return (List<ConditionTypeTO>) result[0];
     }
 
     /**
