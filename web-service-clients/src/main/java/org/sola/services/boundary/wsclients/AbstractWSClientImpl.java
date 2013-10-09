@@ -237,7 +237,7 @@ public abstract class AbstractWSClientImpl implements AbstractWSClient {
      * @return The language from the default locale the client is running under.
      */
     protected String getLanguageCode() {
-        return Locale.getDefault().getLanguage();
+        return Locale.getDefault().getLanguage() + "-" + Locale.getDefault().getCountry();
     }
 
     /**
