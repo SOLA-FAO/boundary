@@ -124,6 +124,13 @@ public interface SearchClient extends AbstractWSClient {
     public static final String GET_EXTENT_OF_PUBLIC_DISPLAY_MAP =
             SERVICE_NAME + "getExtentOfPublicDisplayMap";
 
+        /**
+     * Search.getMapCenterLabel - Identifier for the
+     * getMapCenterLabel method
+     */
+    public static final String GET_MAP_CENTER_LABEL =
+            SERVICE_NAME + "getMapCenterLabel";
+
     /**
      * Returns applications that have a lodged or approved status and are assigned to the currently
      * logged in user.
@@ -310,4 +317,13 @@ public interface SearchClient extends AbstractWSClient {
      * @return
      */
     public byte[] getExtentOfPublicDisplayMap(String nameLastPart);
+    
+        /**
+     * It retrieves the label that need to be printed in the middle of the map.
+     *
+     * @param mapCenterPoint The point of the center of the map
+     * @return
+     */
+    public String getMapCenterLabel(byte[] mapCenterPoint);
+
 }

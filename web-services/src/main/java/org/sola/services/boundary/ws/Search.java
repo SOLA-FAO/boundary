@@ -596,10 +596,9 @@ public class Search extends AbstractWebService {
     }
 
     /**
-     * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#
-     * saveTransactionBulkOperation(
-     * org.sola.services.ejb.source.repository.entities.TransactionBulkOperationSource,
-     * java.lang.String) Source.saveTransactionBulkOperation}
+     * See {@linkplain org.sola.services.ejb.source.businesslogic.SearchEJB#
+     * getExtentOfPublicDisplayMap(
+     * java.lang.String) SearchEJB.getExtentOfPublicDisplayMap}
      *
      * @throws SOLAValidationFault
      * @throws OptimisticLockingFault
@@ -623,5 +622,34 @@ public class Search extends AbstractWebService {
         });
 
         return (byte[]) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.source.businesslogic.SearchEJB#
+     * getMapCenterLabel(
+     * byte[]) SearchEJB.getMapCenterLabel}
+     *
+     * @throws SOLAValidationFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetMapCenterLabel")
+    public String GetMapCenterLabel(
+            @WebParam(name = "mapCenterPoint") final byte[] mapCenterPoint)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = searchEJB.getMapCenterLabel(mapCenterPoint);
+            }
+        });
+
+        return result[0].toString();
     }
 }

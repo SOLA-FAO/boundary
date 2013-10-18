@@ -417,5 +417,17 @@ public class MockSearchPort implements Search {
             return null;
         }    
     }
-    
+
+    @Override
+    public String getMapCenterLabel(byte[] mapCenterPoint) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        String defaultResponse = null;
+        try {
+            return getManager().getResponse(SearchClient.GET_MAP_CENTER_LABEL,
+                    String.class, defaultResponse, mapCenterPoint);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }    
+    }
+        
 }

@@ -361,4 +361,19 @@ public class SearchClientImpl extends AbstractWSClientImpl implements SearchClie
         }
         return result;
     }
+
+    @Override
+    public String getMapCenterLabel(byte[] mapCenterPoint) throws WebServiceClientException {
+        String result = null;
+        final String methodName = SearchClient.GET_MAP_CENTER_LABEL;
+        try {
+            beforeWebMethod(methodName, mapCenterPoint);
+            result = getPort().getMapCenterLabel(mapCenterPoint);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, mapCenterPoint);
+        }
+        return result;
+    }
 }
