@@ -31,6 +31,7 @@ import org.sola.services.boundary.transferobjects.cadastre.PartySummaryTO;
 
 public class PartySearchResultTO extends PartySummaryTO {
     private boolean rightHolder;
+    private String roles;
     
     public PartySearchResultTO(){
         super();
@@ -42,5 +43,13 @@ public class PartySearchResultTO extends PartySummaryTO {
 
     public void setRightHolder(boolean rightHolder) {
         this.rightHolder = rightHolder;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 }

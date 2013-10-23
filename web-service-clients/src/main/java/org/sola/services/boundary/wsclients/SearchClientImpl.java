@@ -157,6 +157,9 @@ public class SearchClientImpl extends AbstractWSClientImpl implements SearchClie
     public List<PartySearchResultTO> searchParties(PartySearchParamsTO searchParams)
             throws WebServiceClientException {
         List<PartySearchResultTO> result = null;
+        if (searchParams.getLocale() == null) {
+            searchParams.setLocale(getLanguageCode());
+        }
         final String methodName = SearchClient.SEARCH_PARTIES;
         try {
             beforeWebMethod(methodName, searchParams);
