@@ -39,6 +39,7 @@ public class SpatialSearchOptionTO extends AbstractTO {
     private String description;
     private int minSearchStrLen;
     private BigDecimal zoomInBuffer;
+    private BigDecimal filterCategory;
 
     public SpatialSearchOptionTO() {
         super();
@@ -91,5 +92,13 @@ public class SpatialSearchOptionTO extends AbstractTO {
     public void setZoomInBuffer(BigDecimal zoomInBuffer) {
         this.zoomInBuffer = zoomInBuffer;
     }
- 
+
+    public BigDecimal getFilterCategory() {
+        return filterCategory;
+    }
+
+    public void setFilterCategory(BigDecimal filterCategory) {
+        this.filterCategory = filterCategory;
+    }
+     
 }

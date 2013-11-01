@@ -36,6 +36,7 @@ public class SpatialSearchResultTO extends AbstractTO {
     private String id;
     private String label;
     private byte[] theGeom;
+    private String filterCategory;
 
     public SpatialSearchResultTO() {
         super(); 
@@ -64,4 +65,13 @@ public class SpatialSearchResultTO extends AbstractTO {
     public void setTheGeom(byte[] theGeom) { //NOSONAR
         this.theGeom = theGeom; //NOSONAR
     }
+
+    public String getFilterCategory() {
+        return filterCategory;
+    }
+
+    public void setFilterCategory(String filterCategory) {
+        this.filterCategory = filterCategory;
+    }
+
 }
