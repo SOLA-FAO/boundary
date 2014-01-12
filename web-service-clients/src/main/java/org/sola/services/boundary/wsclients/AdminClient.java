@@ -120,6 +120,14 @@ public interface AdminClient extends AbstractWSClient {
      * Admin.getSetting - Identifier for the getSetting method
      */
     public static final String GET_SETTING = SERVICE_NAME + "getSetting";
+    /**
+     * Admin.consolidationExtract - Identifier for the consolidationExtract method
+     */
+    public static final String CONSOLIDATION_EXTRACT = SERVICE_NAME + "consolidationExtract";
+    /**
+     * Admin.consolidationConsolidate - Identifier for the consolidationConsolidate method
+     */
+    public static final String CONSOLIDATION_CONSOLIDATE = SERVICE_NAME + "consolidationConsolidate";
 
     /**
      * Returns the details for the currently authenticated user. <p>No role is required to execute
@@ -304,4 +312,8 @@ public interface AdminClient extends AbstractWSClient {
      * @return The override value for the setting or the defaultValue.
      */
     String getSetting(String name, String defaultValue) throws WebServiceClientException;
+    
+    String consolidationExtract() throws WebServiceClientException;
+    
+    String consolidationConsolidate(String pathFileName) throws WebServiceClientException;
 }

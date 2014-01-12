@@ -417,4 +417,16 @@ public class MockAdminPort implements Admin {
             return null;
         }
     }
+
+    @Override
+    public String consolidationExtract() throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String consolidationConsolidate(String languageCode, String fileInServer) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
 }

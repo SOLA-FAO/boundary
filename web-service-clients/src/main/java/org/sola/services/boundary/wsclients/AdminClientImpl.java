@@ -336,4 +336,37 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
         }
         return result;
     }
+
+    @Override
+    public String consolidationExtract() throws WebServiceClientException {
+        String result = null;
+        final String methodName = AdminClient.CONSOLIDATION_EXTRACT;
+        try {
+            beforeWebMethod(methodName);
+            result = getPort().consolidationExtract();
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result);
+        }
+        return result;
+    }
+
+    @Override
+    public String consolidationConsolidate(String pathFileName) throws WebServiceClientException {
+        String result = null;
+        final String methodName = AdminClient.CONSOLIDATION_CONSOLIDATE;
+        try {
+            beforeWebMethod(methodName, pathFileName);
+            getPort().consolidationConsolidate(getLanguageCode(), pathFileName);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, void.class, pathFileName);
+        }
+        
+        return result;
+    }
+    
+    
 }
