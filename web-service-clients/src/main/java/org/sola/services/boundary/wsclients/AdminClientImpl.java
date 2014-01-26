@@ -358,7 +358,7 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
         final String methodName = AdminClient.CONSOLIDATION_CONSOLIDATE;
         try {
             beforeWebMethod(methodName, pathFileName);
-            getPort().consolidationConsolidate(getLanguageCode(), pathFileName);
+            result = getPort().consolidationConsolidate(getLanguageCode(), pathFileName);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
