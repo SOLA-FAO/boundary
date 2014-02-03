@@ -46,7 +46,7 @@
             <!-- Glassfish 3.1.2 includes Metro 2.2 so set dependency as provided-->
             <groupId>org.glassfish.metro</groupId>
             <artifactId>webservices-rt</artifactId>
-            <version>2.2</version>
+            <version>2.3</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -139,7 +139,7 @@
                maven-war-plugin to ensure the WAR is packaged correctly. --> 
                 <groupId>org.jvnet.jax-ws-commons</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
-                <version>2.2</version>
+                <version>2.3</version>
                 <configuration>
                     <resourceDestDir>${basedir}/../wsdl</resourceDestDir>
                     <genWsdl>true</genWsdl>
