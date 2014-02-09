@@ -165,12 +165,12 @@ public class MockCaseManagementPort implements CaseManagement {
      * @return default = application param
      */
     @Override
-    public ApplicationTO createApplication(ApplicationTO application)
+    public ApplicationTO createApplication(ApplicationTO application, String languageCode)
             throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, SOLAValidationFault, UnhandledFault {
         ApplicationTO defaultResponse = application;
         try {
             return getManager().getResponse(CaseManagementClient.CREATE_APPLICATION,
-                    ApplicationTO.class, defaultResponse, application);
+                    ApplicationTO.class, defaultResponse, application, languageCode);
         } catch (Exception ex) {
             processExceptionAll(ex);
             return null;
@@ -219,12 +219,12 @@ public class MockCaseManagementPort implements CaseManagement {
      * @return default = application param
      */
     @Override
-    public ApplicationTO saveApplication(ApplicationTO application)
+    public ApplicationTO saveApplication(ApplicationTO application, String languageCode)
             throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, SOLAValidationFault, UnhandledFault {
         ApplicationTO defaultResponse = application;
         try {
             return getManager().getResponse(CaseManagementClient.SAVE_APPLICATION,
-                    ApplicationTO.class, defaultResponse, application);
+                    ApplicationTO.class, defaultResponse, application, languageCode);
         } catch (Exception ex) {
             processExceptionAll(ex);
             return null;

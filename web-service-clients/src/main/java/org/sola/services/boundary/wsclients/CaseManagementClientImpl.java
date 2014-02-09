@@ -83,7 +83,7 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         final String methodName = CaseManagementClient.CREATE_APPLICATION;
         try {
             beforeWebMethod(methodName, application);
-            result = getPort().createApplication(application);
+            result = getPort().createApplication(application, getLanguageCode());
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
@@ -99,7 +99,7 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         final String methodName = CaseManagementClient.SAVE_APPLICATION;
         try {
             beforeWebMethod(methodName, application);
-            result = getPort().saveApplication(application);
+            result = getPort().saveApplication(application, getLanguageCode());
         } catch (Exception e) {
             processException(methodName, e);
         } finally {

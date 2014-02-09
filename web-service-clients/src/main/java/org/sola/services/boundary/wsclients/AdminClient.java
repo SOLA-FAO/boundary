@@ -313,7 +313,7 @@ public interface AdminClient extends AbstractWSClient {
      */
     String getSetting(String name, String defaultValue) throws WebServiceClientException;
     
-    String consolidationExtract() throws WebServiceClientException;
+    String consolidationExtract(boolean everything, String password) throws WebServiceClientException;
     
-    String consolidationConsolidate(String pathFileName) throws WebServiceClientException;
+    String consolidationConsolidate(String pathFileName, String password) throws WebServiceClientException;
 }

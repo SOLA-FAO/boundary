@@ -99,7 +99,9 @@ public class CaseManagement extends AbstractWebService {
      * @throws SOLAValidationFault
      */
     @WebMethod(operationName = "CreateApplication")
-    public ApplicationTO CreateApplication(@WebParam(name = "application") ApplicationTO application)
+    public ApplicationTO CreateApplication(
+            @WebParam(name = "application") ApplicationTO application,
+            @WebParam(name = "languageCode") final String languageCode)
             throws SOLAFault, UnhandledFault, SOLAAccessFault, OptimisticLockingFault, SOLAValidationFault {
 
         final Object[] params = {application};
@@ -113,7 +115,7 @@ public class CaseManagement extends AbstractWebService {
                 if (application != null) {
                     Application newApp = applicationEJB.createApplication(
                             GenericTranslator.fromTO(application, Application.class,
-                            applicationEJB.getApplication(application.getId())));
+                            applicationEJB.getApplication(application.getId())), languageCode);
                     result[0] = GenericTranslator.toTO(newApp, ApplicationTO.class);
                 }
             }
@@ -133,7 +135,9 @@ public class CaseManagement extends AbstractWebService {
      * @throws SOLAAccessFault
      */
     @WebMethod(operationName = "SaveApplication")
-    public ApplicationTO SaveApplication(@WebParam(name = "application") ApplicationTO application)
+    public ApplicationTO SaveApplication(
+            @WebParam(name = "application") ApplicationTO application,
+            @WebParam(name = "languageCode") final String languageCode)
             throws SOLAFault, UnhandledFault, OptimisticLockingFault,
             SOLAValidationFault, SOLAAccessFault {
 
@@ -149,7 +153,7 @@ public class CaseManagement extends AbstractWebService {
 
                     Application newApp = applicationEJB.saveApplication(
                             GenericTranslator.fromTO(application, Application.class,
-                            applicationEJB.getApplication(application.getId())));
+                            applicationEJB.getApplication(application.getId())), languageCode);
                     result[0] = GenericTranslator.toTO(newApp, ApplicationTO.class);
                 }
             }
