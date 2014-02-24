@@ -62,7 +62,7 @@
                 </excludes>
             </resource>
         </resources>
-        <plugins>    
+        <plugins>   
             <plugin>
                 <!--
                 Imports the WSDL created during the build of the Boundary Web Services project and
@@ -143,9 +143,9 @@
                             <wsdlFiles>
                                 <wsdlFile>DigitalarchiveService.wsdl</wsdlFile>
                             </wsdlFiles>
-                            <staleFile>${project.build.directory}/jaxws/stale/digitialarchive-service.stale</staleFile>                    
+                            <staleFile>${project.build.directory}/jaxws/stale/digitalarchive-service.stale</staleFile>                    
                         </configuration>            
-                        <id>digitialarchive-service</id>
+                        <id>digitalarchive-service</id>
                         <phase>generate-sources</phase>
                     </execution>
                     <execution>
@@ -210,7 +210,7 @@
                             </wsdlFiles>
                             <staleFile>${project.build.directory}/jaxws/stale/bulkoperations.stale</staleFile>                    
                         </configuration>            
-                        <id>nulkoperations-service</id>
+                        <id>bulkoperations-service</id>
                         <phase>generate-sources</phase>
                     </execution>
                 </executions>
@@ -263,9 +263,9 @@
             can be uncommented to allow configuration of the Web Service Client WSIT files using
             the Netbeans UI. Note that changes to the WSIT are seldom required. -->
             <!--plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jaxws-maven-plugin</artifactId>
-                <version>1.12</version>
+                <groupId>org.jvnet.jax-ws-commons</groupId>
+                    <artifactId>jaxws-maven-plugin</artifactId>
+                <version>2.3</version>
                 <executions>
                     <execution>
                         <goals>
@@ -391,6 +391,20 @@
                             <staleFile>${project.build.directory}/jaxws/stale/filestreaming-service.stale</staleFile>
                         </configuration>
                         <id>wsimport-generate-filestreaming-service</id>
+                        <phase>generate-sources</phase>
+                    </execution>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlFiles>
+                                <wsdlFile>localhost_8080/sola/webservices/bulkoperations-service.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <wsdlLocation>http://localhost:8080/sola/webservices/bulkoperations-service?wsdl</wsdlLocation>
+                            <staleFile>${project.build.directory}/jaxws/stale/bulkoperations-service.stale</staleFile>
+                        </configuration>
+                        <id>wsimport-generate-bulkoperations-service</id>
                         <phase>generate-sources</phase>
                     </execution>
                 </executions>

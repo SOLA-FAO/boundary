@@ -1,62 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="http://localhost:8080/sola/cadastre-service?wsdl" uri="wsdl/localhost_8080/sola/cadastre-service.wsdl"/>
-    <system systemId="http://localhost:8080/sola/cadastre-service?xsd=1" uri="wsdl/localhost_8080/sola/cadastre-service.xsd_1.xsd"/>
-    <system systemId="http://localhost:8080/sola/cadastre-service?xsd=2" uri="wsdl/localhost_8080/sola/cadastre-service.xsd_2.xsd"/>
-    <system systemId="http://localhost:8080/sola/cadastre-service?xsd=3" uri="wsdl/localhost_8080/sola/cadastre-service.xsd_3.xsd"/>
-    <system systemId="http://localhost:8080/sola/cadastre-service?xsd=4" uri="wsdl/localhost_8080/sola/cadastre-service.xsd_4.xsd"/>
-    <system systemId="http://localhost:8080/sola/cadastre-service?xsd=5" uri="wsdl/localhost_8080/sola/cadastre-service.xsd_5.xsd"/>
-    <system systemId="http://localhost:8080/sola/casemanagement-service?wsdl" uri="wsdl/localhost_8080/sola/casemanagement-service.wsdl"/>
-    <system systemId="http://localhost:8080/sola/casemanagement-service?xsd=1" uri="wsdl/localhost_8080/sola/casemanagement-service.xsd_1.xsd"/>
-    <system systemId="http://localhost:8080/sola/casemanagement-service?xsd=2" uri="wsdl/localhost_8080/sola/casemanagement-service.xsd_2.xsd"/>
-    <system systemId="http://localhost:8080/sola/casemanagement-service?xsd=3" uri="wsdl/localhost_8080/sola/casemanagement-service.xsd_3.xsd"/>
-    <system systemId="http://localhost:8080/sola/casemanagement-service?xsd=4" uri="wsdl/localhost_8080/sola/casemanagement-service.xsd_4.xsd"/>
-    <system systemId="http://localhost:8080/sola/casemanagement-service?xsd=5" uri="wsdl/localhost_8080/sola/casemanagement-service.xsd_5.xsd"/>
-    <system systemId="file:/C:/SOLA/Project/sola/trunk/code/services/boundary/wsdl/Administrative.wsdl" uri="wsdl/Administrative.wsdl"/>
-    <system systemId="file:/C:/SOLA/Project/sola/trunk/code/services/boundary/wsdl/Administrative_schema1.xsd" uri="wsdl/Administrative_schema1.xsd"/>
-    <system systemId="file:/C:/SOLA/Project/sola/trunk/code/services/boundary/wsdl/Administrative_schema2.xsd" uri="wsdl/Administrative_schema2.xsd"/>
-    <system systemId="file:/C:/SOLA/Project/sola/trunk/code/services/boundary/wsdl/Administrative_schema3.xsd" uri="wsdl/Administrative_schema3.xsd"/>
-    <system systemId="file:/C:/SOLA/Project/sola/trunk/code/services/boundary/wsdl/Administrative_schema4.xsd" uri="wsdl/Administrative_schema4.xsd"/>
-    <system systemId="file:/C:/SOLA/Project/sola/trunk/code/services/boundary/wsdl/Administrative_schema5.xsd" uri="wsdl/Administrative_schema5.xsd"/>
-    <system systemId="file:/C:/SOLA/Project/sola/trunk/code/services/boundary/wsdl/Administrative_schema6.xsd" uri="wsdl/Administrative_schema6.xsd"/>
-    <system systemId="file:/C:/SOLA/Project/sola/trunk/code/services/boundary/wsdl/AdministrativeService.wsdl" uri="wsdl/AdministrativeService.wsdl"/>
-    <system systemId="file:/C:/SOLA/Project/sola/trunk/code/services/boundary/wsdl/AdministrativeService_schema1.xsd" uri="wsdl/AdministrativeService_schema1.xsd"/>
-    <system systemId="file:/C:/SOLA/Project/sola/trunk/code/services/boundary/wsdl/AdministrativeService_schema2.xsd" uri="wsdl/AdministrativeService_schema2.xsd"/>
-    <system systemId="file:/C:/SOLA/Project/sola/trunk/code/services/boundary/wsdl/AdministrativeService_schema3.xsd" uri="wsdl/AdministrativeService_schema3.xsd"/>
-    <system systemId="file:/C:/SOLA/Project/sola/trunk/code/services/boundary/wsdl/AdministrativeService_schema4.xsd" uri="wsdl/AdministrativeService_schema4.xsd"/>
-    <system systemId="file:/C:/SOLA/Project/sola/trunk/code/services/boundary/wsdl/AdministrativeService_schema5.xsd" uri="wsdl/AdministrativeService_schema5.xsd"/>
-    <system systemId="file:/C:/SOLA/Project/sola/trunk/code/services/boundary/wsdl/AdministrativeService_schema6.xsd" uri="wsdl/AdministrativeService_schema6.xsd"/>
-    <system systemId="http://localhost:8080/sola/administrative-service?wsdl" uri="wsdl/localhost_8080/sola/administrative-service.wsdl"/>
-    <system systemId="http://localhost:8080/sola/administrative-service?xsd=1" uri="wsdl/localhost_8080/sola/administrative-service.xsd_1.xsd"/>
-    <system systemId="http://localhost:8080/sola/administrative-service?xsd=2" uri="wsdl/localhost_8080/sola/administrative-service.xsd_2.xsd"/>
-    <system systemId="http://localhost:8080/sola/administrative-service?xsd=3" uri="wsdl/localhost_8080/sola/administrative-service.xsd_3.xsd"/>
-    <system systemId="http://localhost:8080/sola/administrative-service?xsd=4" uri="wsdl/localhost_8080/sola/administrative-service.xsd_4.xsd"/>
-    <system systemId="http://localhost:8080/sola/administrative-service?xsd=5" uri="wsdl/localhost_8080/sola/administrative-service.xsd_5.xsd"/>
-    <system systemId="http://localhost:8080/sola/administrative-service?xsd=6" uri="wsdl/localhost_8080/sola/administrative-service.xsd_6.xsd"/>
-    <system systemId="http://nrc015:8080/sola/webservices/system-service?wsdl" uri="wsdl/nrc015_8080/sola/webservices/system-service.wsdl"/>
-    <system systemId="http://nrc015:8080/sola/webservices/system-service?xsd=1" uri="wsdl/nrc015_8080/sola/webservices/system-service.xsd_1.xsd"/>
-    <system systemId="http://nrc015:8080/sola/webservices/system-service?xsd=2" uri="wsdl/nrc015_8080/sola/webservices/system-service.xsd_2.xsd"/>
-    <system systemId="http://nrc015:8080/sola/webservices/system-service?xsd=3" uri="wsdl/nrc015_8080/sola/webservices/system-service.xsd_3.xsd"/>
-    <system systemId="http://nrc015:8080/sola/webservices/system-service?xsd=4" uri="wsdl/nrc015_8080/sola/webservices/system-service.xsd_4.xsd"/>
-    <system systemId="http://nrc015:8080/sola/webservices/system-service?xsd=5" uri="wsdl/nrc015_8080/sola/webservices/system-service.xsd_5.xsd"/>
-    <system systemId="file:/C:/SOLA/Project/sola/trunk/code/services/boundary/wsdl/AdminService.wsdl" uri="wsdl/AdminService.wsdl"/>
-    <system systemId="file:/C:/SOLA/Project/sola/trunk/code/services/boundary/wsdl/AdminService_schema1.xsd" uri="wsdl/AdminService_schema1.xsd"/>
-    <system systemId="file:/C:/SOLA/Project/sola/trunk/code/services/boundary/wsdl/AdminService_schema2.xsd" uri="wsdl/AdminService_schema2.xsd"/>
-    <system systemId="file:/C:/SOLA/Project/sola/trunk/code/services/boundary/wsdl/AdminService_schema3.xsd" uri="wsdl/AdminService_schema3.xsd"/>
-    <system systemId="file:/C:/SOLA/Project/sola/trunk/code/services/boundary/wsdl/AdminService_schema4.xsd" uri="wsdl/AdminService_schema4.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/digitalarchive-service?wsdl" uri="wsdl/localhost_8080/sola/webservices/digitalarchive-service.wsdl"/>
-    <system systemId="http://localhost:8080/sola/webservices/digitalarchive-service?xsd=1" uri="wsdl/localhost_8080/sola/webservices/digitalarchive-service.xsd_1.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/digitalarchive-service?xsd=2" uri="wsdl/localhost_8080/sola/webservices/digitalarchive-service.xsd_2.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/digitalarchive-service?xsd=3" uri="wsdl/localhost_8080/sola/webservices/digitalarchive-service.xsd_3.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/digitalarchive-service?xsd=4" uri="wsdl/localhost_8080/sola/webservices/digitalarchive-service.xsd_4.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/digitalarchive-service?xsd=5" uri="wsdl/localhost_8080/sola/webservices/digitalarchive-service.xsd_5.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/cadastre-service?wsdl" uri="wsdl/localhost_8080/sola/webservices/cadastre-service.wsdl"/>
-    <system systemId="http://localhost:8080/sola/webservices/cadastre-service?xsd=1" uri="wsdl/localhost_8080/sola/webservices/cadastre-service.xsd_1.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/cadastre-service?xsd=2" uri="wsdl/localhost_8080/sola/webservices/cadastre-service.xsd_2.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/cadastre-service?xsd=3" uri="wsdl/localhost_8080/sola/webservices/cadastre-service.xsd_3.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/cadastre-service?xsd=4" uri="wsdl/localhost_8080/sola/webservices/cadastre-service.xsd_4.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/cadastre-service?xsd=5" uri="wsdl/localhost_8080/sola/webservices/cadastre-service.xsd_5.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/cadastre-service?xsd=6" uri="wsdl/localhost_8080/sola/webservices/cadastre-service.xsd_6.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/casemanagement-service?wsdl" uri="wsdl/localhost_8080/sola/webservices/casemanagement-service.wsdl"/>
+    <system systemId="http://localhost:8080/sola/webservices/casemanagement-service?xsd=1" uri="wsdl/localhost_8080/sola/webservices/casemanagement-service.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/casemanagement-service?xsd=2" uri="wsdl/localhost_8080/sola/webservices/casemanagement-service.xsd_2.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/casemanagement-service?xsd=3" uri="wsdl/localhost_8080/sola/webservices/casemanagement-service.xsd_3.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/casemanagement-service?xsd=4" uri="wsdl/localhost_8080/sola/webservices/casemanagement-service.xsd_4.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/casemanagement-service?xsd=5" uri="wsdl/localhost_8080/sola/webservices/casemanagement-service.xsd_5.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/casemanagement-service?xsd=6" uri="wsdl/localhost_8080/sola/webservices/casemanagement-service.xsd_6.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/casemanagement-service?xsd=7" uri="wsdl/localhost_8080/sola/webservices/casemanagement-service.xsd_7.xsd"/>
     <system systemId="http://localhost:8080/sola/webservices/search-service?wsdl" uri="wsdl/localhost_8080/sola/webservices/search-service.wsdl"/>
     <system systemId="http://localhost:8080/sola/webservices/search-service?xsd=1" uri="wsdl/localhost_8080/sola/webservices/search-service.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/sola/webservices/search-service?xsd=2" uri="wsdl/localhost_8080/sola/webservices/search-service.xsd_2.xsd"/>
@@ -67,12 +18,25 @@
     <system systemId="http://localhost:8080/sola/webservices/search-service?xsd=7" uri="wsdl/localhost_8080/sola/webservices/search-service.xsd_7.xsd"/>
     <system systemId="http://localhost:8080/sola/webservices/search-service?xsd=8" uri="wsdl/localhost_8080/sola/webservices/search-service.xsd_8.xsd"/>
     <system systemId="http://localhost:8080/sola/webservices/search-service?xsd=9" uri="wsdl/localhost_8080/sola/webservices/search-service.xsd_9.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/admin-service?wsdl" uri="wsdl/localhost_8080/sola/webservices/admin-service.wsdl"/>
-    <system systemId="http://localhost:8080/sola/webservices/admin-service?xsd=1" uri="wsdl/localhost_8080/sola/webservices/admin-service.xsd_1.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/admin-service?xsd=2" uri="wsdl/localhost_8080/sola/webservices/admin-service.xsd_2.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/admin-service?xsd=3" uri="wsdl/localhost_8080/sola/webservices/admin-service.xsd_3.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/admin-service?xsd=4" uri="wsdl/localhost_8080/sola/webservices/admin-service.xsd_4.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/admin-service?xsd=5" uri="wsdl/localhost_8080/sola/webservices/admin-service.xsd_5.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/referencedata-service?wsdl" uri="wsdl/localhost_8080/sola/webservices/referencedata-service.wsdl"/>
+    <system systemId="http://localhost:8080/sola/webservices/referencedata-service?xsd=1" uri="wsdl/localhost_8080/sola/webservices/referencedata-service.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/referencedata-service?xsd=2" uri="wsdl/localhost_8080/sola/webservices/referencedata-service.xsd_2.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/referencedata-service?xsd=3" uri="wsdl/localhost_8080/sola/webservices/referencedata-service.xsd_3.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/referencedata-service?xsd=4" uri="wsdl/localhost_8080/sola/webservices/referencedata-service.xsd_4.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/referencedata-service?xsd=5" uri="wsdl/localhost_8080/sola/webservices/referencedata-service.xsd_5.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/spatial-service?wsdl" uri="wsdl/localhost_8080/sola/webservices/spatial-service.wsdl"/>
+    <system systemId="http://localhost:8080/sola/webservices/spatial-service?xsd=1" uri="wsdl/localhost_8080/sola/webservices/spatial-service.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/spatial-service?xsd=2" uri="wsdl/localhost_8080/sola/webservices/spatial-service.xsd_2.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/spatial-service?xsd=3" uri="wsdl/localhost_8080/sola/webservices/spatial-service.xsd_3.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/spatial-service?xsd=4" uri="wsdl/localhost_8080/sola/webservices/spatial-service.xsd_4.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/cadastre-service?wsdl" uri="wsdl/localhost_8080/sola/webservices/cadastre-service.wsdl"/>
+    <system systemId="http://localhost:8080/sola/webservices/cadastre-service?xsd=1" uri="wsdl/localhost_8080/sola/webservices/cadastre-service.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/cadastre-service?xsd=2" uri="wsdl/localhost_8080/sola/webservices/cadastre-service.xsd_2.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/cadastre-service?xsd=3" uri="wsdl/localhost_8080/sola/webservices/cadastre-service.xsd_3.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/cadastre-service?xsd=4" uri="wsdl/localhost_8080/sola/webservices/cadastre-service.xsd_4.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/cadastre-service?xsd=5" uri="wsdl/localhost_8080/sola/webservices/cadastre-service.xsd_5.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/cadastre-service?xsd=6" uri="wsdl/localhost_8080/sola/webservices/cadastre-service.xsd_6.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/cadastre-service?xsd=7" uri="wsdl/localhost_8080/sola/webservices/cadastre-service.xsd_7.xsd"/>
     <system systemId="http://localhost:8080/sola/webservices/administrative-service?wsdl" uri="wsdl/localhost_8080/sola/webservices/administrative-service.wsdl"/>
     <system systemId="http://localhost:8080/sola/webservices/administrative-service?xsd=1" uri="wsdl/localhost_8080/sola/webservices/administrative-service.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/sola/webservices/administrative-service?xsd=2" uri="wsdl/localhost_8080/sola/webservices/administrative-service.xsd_2.xsd"/>
@@ -81,29 +45,31 @@
     <system systemId="http://localhost:8080/sola/webservices/administrative-service?xsd=5" uri="wsdl/localhost_8080/sola/webservices/administrative-service.xsd_5.xsd"/>
     <system systemId="http://localhost:8080/sola/webservices/administrative-service?xsd=6" uri="wsdl/localhost_8080/sola/webservices/administrative-service.xsd_6.xsd"/>
     <system systemId="http://localhost:8080/sola/webservices/administrative-service?xsd=7" uri="wsdl/localhost_8080/sola/webservices/administrative-service.xsd_7.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/referencedata-service?wsdl" uri="wsdl/localhost_8080/sola/webservices/referencedata-service.wsdl"/>
-    <system systemId="http://localhost:8080/sola/webservices/referencedata-service?xsd=1" uri="wsdl/localhost_8080/sola/webservices/referencedata-service.xsd_1.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/referencedata-service?xsd=2" uri="wsdl/localhost_8080/sola/webservices/referencedata-service.xsd_2.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/referencedata-service?xsd=3" uri="wsdl/localhost_8080/sola/webservices/referencedata-service.xsd_3.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/referencedata-service?xsd=4" uri="wsdl/localhost_8080/sola/webservices/referencedata-service.xsd_4.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/referencedata-service?xsd=5" uri="wsdl/localhost_8080/sola/webservices/referencedata-service.xsd_5.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/casemanagement-service?wsdl" uri="wsdl/localhost_8080/sola/webservices/casemanagement-service.wsdl"/>
-    <system systemId="http://localhost:8080/sola/webservices/casemanagement-service?xsd=1" uri="wsdl/localhost_8080/sola/webservices/casemanagement-service.xsd_1.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/casemanagement-service?xsd=2" uri="wsdl/localhost_8080/sola/webservices/casemanagement-service.xsd_2.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/casemanagement-service?xsd=3" uri="wsdl/localhost_8080/sola/webservices/casemanagement-service.xsd_3.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/casemanagement-service?xsd=4" uri="wsdl/localhost_8080/sola/webservices/casemanagement-service.xsd_4.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/casemanagement-service?xsd=5" uri="wsdl/localhost_8080/sola/webservices/casemanagement-service.xsd_5.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/casemanagement-service?xsd=6" uri="wsdl/localhost_8080/sola/webservices/casemanagement-service.xsd_6.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/spatial-service?wsdl" uri="wsdl/localhost_8080/sola/webservices/spatial-service.wsdl"/>
-    <system systemId="http://localhost:8080/sola/webservices/spatial-service?xsd=1" uri="wsdl/localhost_8080/sola/webservices/spatial-service.xsd_1.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/spatial-service?xsd=2" uri="wsdl/localhost_8080/sola/webservices/spatial-service.xsd_2.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/spatial-service?xsd=3" uri="wsdl/localhost_8080/sola/webservices/spatial-service.xsd_3.xsd"/>
-    <system systemId="http://localhost:8080/sola/webservices/spatial-service?xsd=4" uri="wsdl/localhost_8080/sola/webservices/spatial-service.xsd_4.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/administrative-service?xsd=8" uri="wsdl/localhost_8080/sola/webservices/administrative-service.xsd_8.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/admin-service?wsdl" uri="wsdl/localhost_8080/sola/webservices/admin-service.wsdl"/>
+    <system systemId="http://localhost:8080/sola/webservices/admin-service?xsd=1" uri="wsdl/localhost_8080/sola/webservices/admin-service.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/admin-service?xsd=2" uri="wsdl/localhost_8080/sola/webservices/admin-service.xsd_2.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/admin-service?xsd=3" uri="wsdl/localhost_8080/sola/webservices/admin-service.xsd_3.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/admin-service?xsd=4" uri="wsdl/localhost_8080/sola/webservices/admin-service.xsd_4.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/admin-service?xsd=5" uri="wsdl/localhost_8080/sola/webservices/admin-service.xsd_5.xsd"/>
     <system systemId="http://localhost:8080/sola/webservices/filestreaming-service?wsdl" uri="wsdl/localhost_8080/sola/webservices/filestreaming-service.wsdl"/>
     <system systemId="http://localhost:8080/sola/webservices/filestreaming-service?xsd=1" uri="wsdl/localhost_8080/sola/webservices/filestreaming-service.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/sola/webservices/filestreaming-service?xsd=2" uri="wsdl/localhost_8080/sola/webservices/filestreaming-service.xsd_2.xsd"/>
     <system systemId="http://localhost:8080/sola/webservices/filestreaming-service?xsd=3" uri="wsdl/localhost_8080/sola/webservices/filestreaming-service.xsd_3.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/filestreaming-service?xsd=4" uri="wsdl/localhost_8080/sola/webservices/filestreaming-service.xsd_4.xsd"/>
     <system systemId="http://www.w3.org/2005/05/xmlmime" uri="wsdl/www.w3.org/2005/05/xmlmime.xsd"/>
     <system systemId="http://localhost:8080/sola/webservices/bulkoperations-service?wsdl" uri="wsdl/localhost_8080/sola/webservices/bulkoperations-service.wsdl"/>
     <system systemId="http://localhost:8080/sola/webservices/bulkoperations-service?xsd=1" uri="wsdl/localhost_8080/sola/webservices/bulkoperations-service.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/bulkoperations-service?xsd=2" uri="wsdl/localhost_8080/sola/webservices/bulkoperations-service.xsd_2.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/bulkoperations-service?xsd=3" uri="wsdl/localhost_8080/sola/webservices/bulkoperations-service.xsd_3.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/bulkoperations-service?xsd=4" uri="wsdl/localhost_8080/sola/webservices/bulkoperations-service.xsd_4.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/bulkoperations-service?xsd=5" uri="wsdl/localhost_8080/sola/webservices/bulkoperations-service.xsd_5.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/bulkoperations-service?xsd=6" uri="wsdl/localhost_8080/sola/webservices/bulkoperations-service.xsd_6.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/bulkoperations-service?xsd=7" uri="wsdl/localhost_8080/sola/webservices/bulkoperations-service.xsd_7.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/digitalarchive-service?wsdl" uri="wsdl/localhost_8080/sola/webservices/digitalarchive-service.wsdl"/>
+    <system systemId="http://localhost:8080/sola/webservices/digitalarchive-service?xsd=1" uri="wsdl/localhost_8080/sola/webservices/digitalarchive-service.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/digitalarchive-service?xsd=2" uri="wsdl/localhost_8080/sola/webservices/digitalarchive-service.xsd_2.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/digitalarchive-service?xsd=3" uri="wsdl/localhost_8080/sola/webservices/digitalarchive-service.xsd_3.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/digitalarchive-service?xsd=4" uri="wsdl/localhost_8080/sola/webservices/digitalarchive-service.xsd_4.xsd"/>
+    <system systemId="http://localhost:8080/sola/webservices/digitalarchive-service?xsd=5" uri="wsdl/localhost_8080/sola/webservices/digitalarchive-service.xsd_5.xsd"/>
 </catalog>

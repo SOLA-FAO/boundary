@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<definitions 
-    xmlns="http://schemas.xmlsoap.org/wsdl/" 
-    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="search-service" targetNamespace="http%3A%2F%2Fwebservices.sola.org%2Fsearch" xmlns:tns="http%3A%2F%2Fwebservices.sola.org%2Fsearch" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp1="http://www.w3.org/ns/ws-policy" xmlns:fi="http://java.sun.com/xml/ns/wsit/2006/09/policy/fastinfoset/service" xmlns:tcp="http://java.sun.com/xml/ns/wsit/2006/09/policy/soaptcp/service" xmlns:wsaw="http://www.w3.org/2005/08/addressing" xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy" xmlns:sc="http://schemas.sun.com/2006/03/wss/server" xmlns:wspp="http://java.sun.com/xml/ns/wsit/policy" 
->
+ <definitions 
+ xmlns="http://schemas.xmlsoap.org/wsdl/" 
+ xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="search-service" targetNamespace="http%3A%2F%2Fwebservices.sola.org%2Fsearch" xmlns:tns="http%3A%2F%2Fwebservices.sola.org%2Fsearch" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp1="http://www.w3.org/ns/ws-policy" xmlns:fi="http://java.sun.com/xml/ns/wsit/2006/09/policy/fastinfoset/service" xmlns:tcp="http://java.sun.com/xml/ns/wsit/2006/09/policy/soaptcp/service" xmlns:wsaw="http://www.w3.org/2005/08/addressing" xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy" xmlns:sc="http://schemas.sun.com/2006/03/wss/server" xmlns:wspp="http://java.sun.com/xml/ns/wsit/policy" 
+ >
     <message name="CheckConnection"/>
     <message name="CheckConnectionResponse"/>
     <message name="VerifyApplicationProperty"/>
@@ -24,6 +24,8 @@
     <message name="SearchPartiesResponse"/>
     <message name="SearchSources"/>
     <message name="SearchSourcesResponse"/>
+    <message name="searchPowerOfAttorney"/>
+    <message name="searchPowerOfAttorneyResponse"/>
     <message name="GetActiveUsers"/>
     <message name="GetActiveUsersResponse"/>
     <message name="searchUsers"/>
@@ -34,12 +36,18 @@
     <message name="SearchBrResponse"/>
     <message name="searchBaUnit"/>
     <message name="searchBaUnitResponse"/>
+    <message name="searchRightsForExport"/>
+    <message name="searchRightsForExportResponse"/>
     <message name="GetSpatialSearchOptions"/>
     <message name="GetSpatialSearchOptionsResponse"/>
     <message name="SearchSpatialObjects"/>
     <message name="SearchSpatialObjectsResponse"/>
     <message name="GetMapDefinition"/>
     <message name="GetMapDefinitionResponse"/>
+    <message name="GetExtentOfPublicDisplayMap"/>
+    <message name="GetExtentOfPublicDisplayMapResponse"/>
+    <message name="GetMapCenterLabel"/>
+    <message name="GetMapCenterLabelResponse"/>
     <portType name="Search">
         <operation name="CheckConnection">
             <input message="tns:CheckConnection"/>
@@ -83,13 +91,14 @@
         <operation name="SearchParties">
             <input message="tns:SearchParties"/>
             <output message="tns:SearchPartiesResponse"/>
-            <fault name="SOLAFault" message="tns:SOLAFault"/>
-            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
-            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
         </operation>
         <operation name="SearchSources">
             <input message="tns:SearchSources"/>
             <output message="tns:SearchSourcesResponse"/>
+        </operation>
+        <operation name="searchPowerOfAttorney">
+            <input message="tns:searchPowerOfAttorney"/>
+            <output message="tns:searchPowerOfAttorneyResponse"/>
             <fault name="SOLAFault" message="tns:SOLAFault"/>
             <fault name="UnhandledFault" message="tns:UnhandledFault"/>
             <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
@@ -97,9 +106,6 @@
         <operation name="GetActiveUsers">
             <input message="tns:GetActiveUsers"/>
             <output message="tns:GetActiveUsersResponse"/>
-            <fault name="SOLAFault" message="tns:SOLAFault"/>
-            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
-            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
         </operation>
         <operation name="searchUsers">
             <input message="tns:searchUsers"/>
@@ -118,13 +124,17 @@
         <operation name="SearchBr">
             <input message="tns:SearchBr"/>
             <output message="tns:SearchBrResponse"/>
-            <fault name="SOLAFault" message="tns:SOLAFault"/>
-            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
-            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
         </operation>
         <operation name="searchBaUnit">
             <input message="tns:searchBaUnit"/>
             <output message="tns:searchBaUnitResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+        </operation>
+        <operation name="searchRightsForExport">
+            <input message="tns:searchRightsForExport"/>
+            <output message="tns:searchRightsForExportResponse"/>
             <fault name="SOLAFault" message="tns:SOLAFault"/>
             <fault name="UnhandledFault" message="tns:UnhandledFault"/>
             <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
@@ -148,6 +158,20 @@
             <output message="tns:GetMapDefinitionResponse"/>
             <fault name="UnhandledFault" message="tns:UnhandledFault"/>
             <fault name="SOLAFault" message="tns:SOLAFault"/>
+        </operation>
+        <operation name="GetExtentOfPublicDisplayMap">
+            <input message="tns:GetExtentOfPublicDisplayMap"/>
+            <output message="tns:GetExtentOfPublicDisplayMapResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+        </operation>
+        <operation name="GetMapCenterLabel">
+            <input message="tns:GetMapCenterLabel"/>
+            <output message="tns:GetMapCenterLabelResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
         </operation>
     </portType>
     <binding name="SearchPortBinding" type="tns:Search">
@@ -222,11 +246,16 @@
             <output>
                 <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
             </output>
-            <fault name="SOLAFault"/>
-            <fault name="UnhandledFault"/>
-            <fault name="SOLAAccessFault"/>
         </operation>
         <operation name="SearchSources">
+            <input>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
+            </output>
+        </operation>
+        <operation name="searchPowerOfAttorney">
             <input>
                 <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
             </input>
@@ -244,9 +273,6 @@
             <output>
                 <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
             </output>
-            <fault name="SOLAFault"/>
-            <fault name="UnhandledFault"/>
-            <fault name="SOLAAccessFault"/>
         </operation>
         <operation name="searchUsers">
             <input>
@@ -277,11 +303,19 @@
             <output>
                 <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
             </output>
+        </operation>
+        <operation name="searchBaUnit">
+            <input>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
+            </output>
             <fault name="SOLAFault"/>
             <fault name="UnhandledFault"/>
             <fault name="SOLAAccessFault"/>
         </operation>
-        <operation name="searchBaUnit">
+        <operation name="searchRightsForExport">
             <input>
                 <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
             </input>
@@ -323,6 +357,28 @@
             </output>
             <fault name="UnhandledFault"/>
             <fault name="SOLAFault"/>
+        </operation>
+        <operation name="GetExtentOfPublicDisplayMap">
+            <input>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+        </operation>
+        <operation name="GetMapCenterLabel">
+            <input>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#SearchPortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
         </operation>
     </binding>
     <service name="search-service">
@@ -374,8 +430,8 @@
                         </sp:UsernameToken>
                     </wsp:Policy>
                 </sp:SignedSupportingTokens>
-                <sc:KeyStore wspp:visibility="private" location="${wsit.keystore.location}" type="JKS" storepass="${wsit.keystore.storepass}" alias="${wsit.keystore.peeralias}"/>
-            </wsp:All>
+               <sc:KeyStore wspp:visibility="private" location="${wsit.keystore.location}" type="JKS" storepass="${wsit.keystore.storepass}" alias="${wsit.keystore.peeralias}"/>
+             </wsp:All>
         </wsp:ExactlyOne>
     </wsp:Policy>
     <wsp:Policy wsu:Id="SearchPortBinding_CheckConnection_Input_Policy">

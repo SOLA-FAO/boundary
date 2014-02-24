@@ -12,6 +12,8 @@
     <message name="SOLAFault"/>
     <message name="UnhandledFault"/>
     <message name="SOLAAccessFault"/>
+    <message name="GetCadastreObjectByAllParts"/>
+    <message name="GetCadastreObjectByAllPartsResponse"/>
     <message name="GetCadastreObjectByPoint"/>
     <message name="GetCadastreObjectByPointResponse"/>
     <message name="GetCadastreObjectsByBaUnit"/>
@@ -20,10 +22,10 @@
     <message name="GetCadastreObjectsByServiceResponse"/>
     <message name="SaveCadastreChange"/>
     <message name="SaveCadastreChangeResponse"/>
-    <message name="SOLAValidationFault"/>
-    <message name="OptimisticLockingFault"/>
     <message name="GetCadastreChange"/>
     <message name="GetCadastreChangeResponse"/>
+    <message name="GetCadastreChangeById"/>
+    <message name="GetCadastreChangeByIdResponse"/>
     <message name="GetCadastreObjects"/>
     <message name="GetCadastreObjectsResponse"/>
     <message name="GetCadastreObjectNode"/>
@@ -32,8 +34,18 @@
     <message name="GetCadastreObjectNodePotentialResponse"/>
     <message name="SaveCadastreRedefinition"/>
     <message name="SaveCadastreRedefinitionResponse"/>
+    <message name="SOLAValidationFault"/>
+    <message name="OptimisticLockingFault"/>
     <message name="GetCadastreRedefinition"/>
     <message name="GetCadastreRedefinitionResponse"/>
+    <message name="GetSpatialValueArea"/>
+    <message name="GetSpatialValueAreaResponse"/>
+    <message name="GetNewCadastreObjectIdentifier"/>
+    <message name="GetNewCadastreObjectIdentifierResponse"/>
+    <message name="SaveSpatialUnitGroups"/>
+    <message name="SaveSpatialUnitGroupsResponse"/>
+    <message name="GetSpatialUnitGroups"/>
+    <message name="GetSpatialUnitGroupsResponse"/>
     <portType name="Cadastre">
         <operation name="CheckConnection">
             <input message="tns:CheckConnection"/>
@@ -42,6 +54,13 @@
         <operation name="GetCadastreObjectByParts">
             <input message="tns:GetCadastreObjectByParts"/>
             <output message="tns:GetCadastreObjectByPartsResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+        </operation>
+        <operation name="GetCadastreObjectByAllParts">
+            <input message="tns:GetCadastreObjectByAllParts"/>
+            <output message="tns:GetCadastreObjectByAllPartsResponse"/>
             <fault name="SOLAFault" message="tns:SOLAFault"/>
             <fault name="UnhandledFault" message="tns:UnhandledFault"/>
             <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
@@ -70,18 +89,14 @@
         <operation name="SaveCadastreChange">
             <input message="tns:SaveCadastreChange"/>
             <output message="tns:SaveCadastreChangeResponse"/>
-            <fault name="SOLAValidationFault" message="tns:SOLAValidationFault"/>
-            <fault name="OptimisticLockingFault" message="tns:OptimisticLockingFault"/>
-            <fault name="SOLAFault" message="tns:SOLAFault"/>
-            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
-            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
         </operation>
         <operation name="GetCadastreChange">
             <input message="tns:GetCadastreChange"/>
             <output message="tns:GetCadastreChangeResponse"/>
-            <fault name="SOLAFault" message="tns:SOLAFault"/>
-            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
-            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+        </operation>
+        <operation name="GetCadastreChangeById">
+            <input message="tns:GetCadastreChangeById"/>
+            <output message="tns:GetCadastreChangeByIdResponse"/>
         </operation>
         <operation name="GetCadastreObjects">
             <input message="tns:GetCadastreObjects"/>
@@ -116,6 +131,31 @@
         <operation name="GetCadastreRedefinition">
             <input message="tns:GetCadastreRedefinition"/>
             <output message="tns:GetCadastreRedefinitionResponse"/>
+        </operation>
+        <operation name="GetSpatialValueArea">
+            <input message="tns:GetSpatialValueArea"/>
+            <output message="tns:GetSpatialValueAreaResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+        </operation>
+        <operation name="GetNewCadastreObjectIdentifier">
+            <input message="tns:GetNewCadastreObjectIdentifier"/>
+            <output message="tns:GetNewCadastreObjectIdentifierResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+        </operation>
+        <operation name="SaveSpatialUnitGroups">
+            <input message="tns:SaveSpatialUnitGroups"/>
+            <output message="tns:SaveSpatialUnitGroupsResponse"/>
+            <fault name="SOLAValidationFault" message="tns:SOLAValidationFault"/>
+            <fault name="OptimisticLockingFault" message="tns:OptimisticLockingFault"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+        </operation>
+        <operation name="GetSpatialUnitGroups">
+            <input message="tns:GetSpatialUnitGroups"/>
+            <output message="tns:GetSpatialUnitGroupsResponse"/>
             <fault name="SOLAFault" message="tns:SOLAFault"/>
             <fault name="UnhandledFault" message="tns:UnhandledFault"/>
             <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
@@ -132,6 +172,17 @@
             </output>
         </operation>
         <operation name="GetCadastreObjectByParts">
+            <input>
+                <wsp:PolicyReference URI="#CadastrePortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#CadastrePortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+        </operation>
+        <operation name="GetCadastreObjectByAllParts">
             <input>
                 <wsp:PolicyReference URI="#CadastrePortBinding_CheckConnection_Input_Policy"/>
             </input>
@@ -182,11 +233,6 @@
             <output>
                 <wsp:PolicyReference URI="#CadastrePortBinding_CheckConnection_Output_Policy"/>
             </output>
-            <fault name="SOLAValidationFault"/>
-            <fault name="OptimisticLockingFault"/>
-            <fault name="SOLAFault"/>
-            <fault name="UnhandledFault"/>
-            <fault name="SOLAAccessFault"/>
         </operation>
         <operation name="GetCadastreChange">
             <input>
@@ -195,9 +241,14 @@
             <output>
                 <wsp:PolicyReference URI="#CadastrePortBinding_CheckConnection_Output_Policy"/>
             </output>
-            <fault name="SOLAFault"/>
-            <fault name="UnhandledFault"/>
-            <fault name="SOLAAccessFault"/>
+        </operation>
+        <operation name="GetCadastreChangeById">
+            <input>
+                <wsp:PolicyReference URI="#CadastrePortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#CadastrePortBinding_CheckConnection_Output_Policy"/>
+            </output>
         </operation>
         <operation name="GetCadastreObjects">
             <input>
@@ -246,6 +297,47 @@
             <fault name="SOLAAccessFault"/>
         </operation>
         <operation name="GetCadastreRedefinition">
+            <input>
+                <wsp:PolicyReference URI="#CadastrePortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#CadastrePortBinding_CheckConnection_Output_Policy"/>
+            </output>
+        </operation>
+        <operation name="GetSpatialValueArea">
+            <input>
+                <wsp:PolicyReference URI="#CadastrePortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#CadastrePortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+        </operation>
+        <operation name="GetNewCadastreObjectIdentifier">
+            <input>
+                <wsp:PolicyReference URI="#CadastrePortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#CadastrePortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+        </operation>
+        <operation name="SaveSpatialUnitGroups">
+            <input>
+                <wsp:PolicyReference URI="#CadastrePortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#CadastrePortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAValidationFault"/>
+            <fault name="OptimisticLockingFault"/>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+        </operation>
+        <operation name="GetSpatialUnitGroups">
             <input>
                 <wsp:PolicyReference URI="#CadastrePortBinding_CheckConnection_Input_Policy"/>
             </input>
@@ -306,7 +398,7 @@
                         </sp:UsernameToken>
                     </wsp:Policy>
                 </sp:SignedSupportingTokens>
-                <sc:KeyStore wspp:visibility="private" location="${wsit.keystore.location}" type="JKS" storepass="${wsit.keystore.storepass}" alias="${wsit.keystore.peeralias}"/>
+               <sc:KeyStore wspp:visibility="private" location="${wsit.keystore.location}" type="JKS" storepass="${wsit.keystore.storepass}" alias="${wsit.keystore.peeralias}"/>
             </wsp:All>
         </wsp:ExactlyOne>
     </wsp:Policy>

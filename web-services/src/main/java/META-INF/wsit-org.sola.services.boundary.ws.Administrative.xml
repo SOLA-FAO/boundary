@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<definitions 
-    xmlns="http://schemas.xmlsoap.org/wsdl/" 
-    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="administrative-service" targetNamespace="http%3A%2F%2Fwebservices.sola.org%2Fadministrative" xmlns:tns="http%3A%2F%2Fwebservices.sola.org%2Fadministrative" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp1="http://www.w3.org/ns/ws-policy" xmlns:fi="http://java.sun.com/xml/ns/wsit/2006/09/policy/fastinfoset/service" xmlns:tcp="http://java.sun.com/xml/ns/wsit/2006/09/policy/soaptcp/service" xmlns:wsaw="http://www.w3.org/2005/08/addressing" xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy" xmlns:sc="http://schemas.sun.com/2006/03/wss/server" xmlns:wspp="http://java.sun.com/xml/ns/wsit/policy" 
->
+ <definitions 
+ xmlns="http://schemas.xmlsoap.org/wsdl/" 
+ xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="administrative-service" targetNamespace="http%3A%2F%2Fwebservices.sola.org%2Fadministrative" xmlns:tns="http%3A%2F%2Fwebservices.sola.org%2Fadministrative" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp1="http://www.w3.org/ns/ws-policy" xmlns:fi="http://java.sun.com/xml/ns/wsit/2006/09/policy/fastinfoset/service" xmlns:tcp="http://java.sun.com/xml/ns/wsit/2006/09/policy/soaptcp/service" xmlns:wsaw="http://www.w3.org/2005/08/addressing" xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy" xmlns:sc="http://schemas.sun.com/2006/03/wss/server" xmlns:wspp="http://java.sun.com/xml/ns/wsit/policy" 
+ >
     <message name="CheckConnection"/>
     <message name="CheckConnectionResponse"/>
     <message name="CreateBaUnit"/>
@@ -26,6 +26,26 @@
     <message name="GetBaUnitsByServiceIdResponse"/>
     <message name="GetBaUnitByCode"/>
     <message name="GetBaUnitByCodeResponse"/>
+    <message name="GetBaUnitAreas"/>
+    <message name="GetBaUnitAreasResponse"/>
+    <message name="CreateBaUnitArea"/>
+    <message name="CreateBaUnitAreaResponse"/>
+    <message name="GetBaUnitWithCadObject"/>
+    <message name="GetBaUnitWithCadObjectResponse"/>
+    <message name="GetSysRegPubDisParcelNameByLocation"/>
+    <message name="GetSysRegPubDisParcelNameByLocationResponse"/>
+    <message name="GetSysRegPubDisOwnerNameByLocation"/>
+    <message name="GetSysRegPubDisOwnerNameByLocationResponse"/>
+    <message name="GetSysRegPubDisStateLandByLocation"/>
+    <message name="GetSysRegPubDisStateLandByLocationResponse"/>
+    <message name="PublicDisplay"/>
+    <message name="PublicDisplayResponse"/>
+    <message name="GetSysRegManagement"/>
+    <message name="GetSysRegManagementResponse"/>
+    <message name="GetSysRegStatus"/>
+    <message name="GetSysRegStatusResponse"/>
+    <message name="GetSysRegProgress"/>
+    <message name="GetSysRegProgressResponse"/>
     <portType name="Administrative">
         <operation name="CheckConnection">
             <input message="tns:CheckConnection"/>
@@ -83,6 +103,83 @@
             <output message="tns:GetBaUnitByCodeResponse"/>
             <fault name="SOLAFault" message="tns:SOLAFault"/>
             <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+        </operation>
+        <operation name="GetBaUnitAreas">
+            <input message="tns:GetBaUnitAreas"/>
+            <output message="tns:GetBaUnitAreasResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+        </operation>
+        <operation name="CreateBaUnitArea">
+            <input message="tns:CreateBaUnitArea"/>
+            <output message="tns:CreateBaUnitAreaResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+            <fault name="OptimisticLockingFault" message="tns:OptimisticLockingFault"/>
+        </operation>
+        <operation name="GetBaUnitWithCadObject">
+            <input message="tns:GetBaUnitWithCadObject"/>
+            <output message="tns:GetBaUnitWithCadObjectResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+        </operation>
+        <operation name="GetSysRegPubDisParcelNameByLocation">
+            <input message="tns:GetSysRegPubDisParcelNameByLocation"/>
+            <output message="tns:GetSysRegPubDisParcelNameByLocationResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+            <fault name="SOLAValidationFault" message="tns:SOLAValidationFault"/>
+            <fault name="OptimisticLockingFault" message="tns:OptimisticLockingFault"/>
+        </operation>
+        <operation name="GetSysRegPubDisOwnerNameByLocation">
+            <input message="tns:GetSysRegPubDisOwnerNameByLocation"/>
+            <output message="tns:GetSysRegPubDisOwnerNameByLocationResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+            <fault name="SOLAValidationFault" message="tns:SOLAValidationFault"/>
+            <fault name="OptimisticLockingFault" message="tns:OptimisticLockingFault"/>
+        </operation>
+        <operation name="GetSysRegPubDisStateLandByLocation">
+            <input message="tns:GetSysRegPubDisStateLandByLocation"/>
+            <output message="tns:GetSysRegPubDisStateLandByLocationResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+            <fault name="SOLAValidationFault" message="tns:SOLAValidationFault"/>
+            <fault name="OptimisticLockingFault" message="tns:OptimisticLockingFault"/>
+        </operation>
+        <operation name="PublicDisplay">
+            <input message="tns:PublicDisplay"/>
+            <output message="tns:PublicDisplayResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+            <fault name="OptimisticLockingFault" message="tns:OptimisticLockingFault"/>
+            <fault name="SOLAValidationFault" message="tns:SOLAValidationFault"/>
+        </operation>
+        <operation name="GetSysRegManagement">
+            <input message="tns:GetSysRegManagement"/>
+            <output message="tns:GetSysRegManagementResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+        </operation>
+        <operation name="GetSysRegStatus">
+            <input message="tns:GetSysRegStatus"/>
+            <output message="tns:GetSysRegStatusResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+        </operation>
+        <operation name="GetSysRegProgress">
+            <input message="tns:GetSysRegProgress"/>
+            <output message="tns:GetSysRegProgressResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
         </operation>
     </portType>
     <binding name="AdministrativePortBinding" type="tns:Administrative">
@@ -176,6 +273,123 @@
             <fault name="SOLAFault"/>
             <fault name="UnhandledFault"/>
         </operation>
+        <operation name="GetBaUnitAreas">
+            <input>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+        </operation>
+        <operation name="CreateBaUnitArea">
+            <input>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+            <fault name="OptimisticLockingFault"/>
+        </operation>
+        <operation name="GetBaUnitWithCadObject">
+            <input>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+        </operation>
+        <operation name="GetSysRegPubDisParcelNameByLocation">
+            <input>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+            <fault name="SOLAValidationFault"/>
+            <fault name="OptimisticLockingFault"/>
+        </operation>
+        <operation name="GetSysRegPubDisOwnerNameByLocation">
+            <input>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+            <fault name="SOLAValidationFault"/>
+            <fault name="OptimisticLockingFault"/>
+        </operation>
+        <operation name="GetSysRegPubDisStateLandByLocation">
+            <input>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+            <fault name="SOLAValidationFault"/>
+            <fault name="OptimisticLockingFault"/>
+        </operation>
+        <operation name="PublicDisplay">
+            <input>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+            <fault name="OptimisticLockingFault"/>
+            <fault name="SOLAValidationFault"/>
+        </operation>
+        <operation name="GetSysRegManagement">
+            <input>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+        </operation>
+        <operation name="GetSysRegStatus">
+            <input>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+        </operation>
+        <operation name="GetSysRegProgress">
+            <input>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#AdministrativePortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+        </operation>
     </binding>
     <service name="administrative-service">
         <port name="AdministrativePort" binding="tns:AdministrativePortBinding"/>
@@ -226,8 +440,8 @@
                         </sp:UsernameToken>
                     </wsp:Policy>
                 </sp:SignedSupportingTokens>
-                <sc:KeyStore wspp:visibility="private" location="${wsit.keystore.location}" type="JKS" storepass="${wsit.keystore.storepass}" alias="${wsit.keystore.peeralias}"/>
-            </wsp:All>
+               <sc:KeyStore wspp:visibility="private" location="${wsit.keystore.location}" type="JKS" storepass="${wsit.keystore.storepass}" alias="${wsit.keystore.peeralias}"/>
+             </wsp:All>
         </wsp:ExactlyOne>
     </wsp:Policy>
     <wsp:Policy wsu:Id="AdministrativePortBinding_CheckConnection_Input_Policy">

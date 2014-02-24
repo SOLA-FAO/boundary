@@ -7,10 +7,57 @@
  >
     <message name="CheckConnection"/>
     <message name="CheckConnectionResponse"/>
+    <message name="RejectTransaction"/>
+    <message name="RejectTransactionResponse"/>
+    <message name="SOLAValidationFault"/>
+    <message name="OptimisticLockingFault"/>
+    <message name="SOLAFault"/>
+    <message name="UnhandledFault"/>
+    <message name="SOLAAccessFault"/>
+    <message name="GetTransactionBulkOperationSpatial"/>
+    <message name="GetTransactionBulkOperationSpatialResponse"/>
+    <message name="SaveTransactionBulkOperationSpatial"/>
+    <message name="SaveTransactionBulkOperationSpatialResponse"/>
+    <message name="SaveTransactionBulkOperationSource"/>
+    <message name="SaveTransactionBulkOperationSourceResponse"/>
     <portType name="BulkOperations">
         <operation name="CheckConnection">
             <input message="tns:CheckConnection"/>
             <output message="tns:CheckConnectionResponse"/>
+        </operation>
+        <operation name="RejectTransaction">
+            <input message="tns:RejectTransaction"/>
+            <output message="tns:RejectTransactionResponse"/>
+            <fault name="SOLAValidationFault" message="tns:SOLAValidationFault"/>
+            <fault name="OptimisticLockingFault" message="tns:OptimisticLockingFault"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+        </operation>
+        <operation name="GetTransactionBulkOperationSpatial">
+            <input message="tns:GetTransactionBulkOperationSpatial"/>
+            <output message="tns:GetTransactionBulkOperationSpatialResponse"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+        </operation>
+        <operation name="SaveTransactionBulkOperationSpatial">
+            <input message="tns:SaveTransactionBulkOperationSpatial"/>
+            <output message="tns:SaveTransactionBulkOperationSpatialResponse"/>
+            <fault name="SOLAValidationFault" message="tns:SOLAValidationFault"/>
+            <fault name="OptimisticLockingFault" message="tns:OptimisticLockingFault"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
+        </operation>
+        <operation name="SaveTransactionBulkOperationSource">
+            <input message="tns:SaveTransactionBulkOperationSource"/>
+            <output message="tns:SaveTransactionBulkOperationSourceResponse"/>
+            <fault name="SOLAValidationFault" message="tns:SOLAValidationFault"/>
+            <fault name="OptimisticLockingFault" message="tns:OptimisticLockingFault"/>
+            <fault name="SOLAFault" message="tns:SOLAFault"/>
+            <fault name="UnhandledFault" message="tns:UnhandledFault"/>
+            <fault name="SOLAAccessFault" message="tns:SOLAAccessFault"/>
         </operation>
     </portType>
     <binding name="BulkOperationsPortBinding" type="tns:BulkOperations">
@@ -22,6 +69,56 @@
             <output>
                 <wsp:PolicyReference URI="#BulkOperationsPortBinding_CheckConnection_Output_Policy"/>
             </output>
+        </operation>
+        <operation name="RejectTransaction">
+            <input>
+                <wsp:PolicyReference URI="#BulkOperationsPortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#BulkOperationsPortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAValidationFault"/>
+            <fault name="OptimisticLockingFault"/>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+        </operation>
+        <operation name="GetTransactionBulkOperationSpatial">
+            <input>
+                <wsp:PolicyReference URI="#BulkOperationsPortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#BulkOperationsPortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+        </operation>
+        <operation name="SaveTransactionBulkOperationSpatial">
+            <input>
+                <wsp:PolicyReference URI="#BulkOperationsPortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#BulkOperationsPortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAValidationFault"/>
+            <fault name="OptimisticLockingFault"/>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
+        </operation>
+        <operation name="SaveTransactionBulkOperationSource">
+            <input>
+                <wsp:PolicyReference URI="#BulkOperationsPortBinding_CheckConnection_Input_Policy"/>
+            </input>
+            <output>
+                <wsp:PolicyReference URI="#BulkOperationsPortBinding_CheckConnection_Output_Policy"/>
+            </output>
+            <fault name="SOLAValidationFault"/>
+            <fault name="OptimisticLockingFault"/>
+            <fault name="SOLAFault"/>
+            <fault name="UnhandledFault"/>
+            <fault name="SOLAAccessFault"/>
         </operation>
     </binding>
     <service name="bulkoperations-service">
@@ -73,7 +170,7 @@
                         </sp:UsernameToken>
                     </wsp:Policy>
                 </sp:SignedSupportingTokens>
-                <sc:KeyStore wspp:visibility="private" location="${wsit.keystore.location}" type="JKS" storepass="${wsit.keystore.storepass}" alias="${wsit.keystore.peeralias}"/>
+               <sc:KeyStore wspp:visibility="private" location="${wsit.keystore.location}" type="JKS" storepass="${wsit.keystore.storepass}" alias="${wsit.keystore.peeralias}"/>
             </wsp:All>
         </wsp:ExactlyOne>
     </wsp:Policy>
