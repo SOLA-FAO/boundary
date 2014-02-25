@@ -28,6 +28,7 @@
 package org.sola.services.boundary.ws;
 
 import com.sun.xml.ws.developer.StreamingAttachment;
+import java.io.File;
 import javax.activation.DataHandler;
 import javax.annotation.Resource;
 import javax.jws.WebMethod;
@@ -117,6 +118,12 @@ public class FileStreaming extends AbstractWebService {
             throws SOLAFault, UnhandledFault {
 
         final Object[] result = {null};
+        // Ticket #397 - As teh client can be installed on a different OS to the 
+        // server, avoid using system dependent path separators by using
+        // !! in the pathFileName instead. The services can hen replace this value
+        // with the correct separator value. Note that replaceAll fails if File.separator
+        // is // because this has special meaning for regex, so use replace instead.
+        pathFileName = pathFileName.replace(FileUtility.alternatePathSeparator, File.separator); 
         final String tmpPathFileName = pathFileName;
 
         runUnsecured(wsContext, new Runnable() {

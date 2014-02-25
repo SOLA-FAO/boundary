@@ -29,6 +29,7 @@ package org.sola.services.boundary.wsclients;
 
 import com.sun.xml.ws.developer.JAXWSProperties;
 import com.sun.xml.ws.developer.StreamingAttachmentFeature;
+import java.io.File;
 import javax.activation.DataHandler;
 import javax.xml.namespace.QName;
 import javax.xml.ws.BindingProvider;
