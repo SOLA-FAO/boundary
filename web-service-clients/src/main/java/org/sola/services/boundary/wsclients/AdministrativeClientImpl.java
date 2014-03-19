@@ -330,6 +330,22 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
         }
         return result;
     }
+      @Override
+    public List<SysRegGenderTO> getSysRegGender(String params)
+            throws WebServiceClientException {
+        List<SysRegGenderTO> result = null;
+        final String methodName = AdministrativeClient.GET_SYS_REG_GENDER;
+        String languageCode = getLanguageCode();
+        try {
+            beforeWebMethod(methodName, params,languageCode);
+            result = getPort().getSysRegGender(params,languageCode);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, params,languageCode);
+        }
+        return result;
+    }
      
      @Override
     public List<SysRegProgressTO> getSysRegProgress(SysRegManagementParamsTO sysRegManagementParamsTO)

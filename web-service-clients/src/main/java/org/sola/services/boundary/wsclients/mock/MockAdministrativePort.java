@@ -421,6 +421,18 @@ public class MockAdministrativePort implements Administrative {
             return null;
         }
     }
+      @Override
+    public List<SysRegGenderTO> getSysRegGender(String params, String languageCode)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<SysRegGenderTO> defaultResponse = new ArrayList<SysRegGenderTO>();
+        try {
+            return getManager().getResponse(AdministrativeClient.GET_SYS_REG_GENDER,
+                    List.class, defaultResponse, params, languageCode);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
     
      @Override
     public List<SysRegProgressTO> getSysRegProgress(SysRegManagementParamsTO sysRegManagementParamsTO, String languageCode)

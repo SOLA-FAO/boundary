@@ -592,6 +592,39 @@ public class Administrative extends AbstractWebService {
 
         return (List<SysRegStatusTO>) result[0];
     }
+     /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getSysRegGender(java.lang.String)
+     * AdministrativeEJB.getSysRegGender}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetSysRegGender")
+    public List<SysRegGenderTO> GetSysRegGender(
+            @WebParam(name = "params") String params,
+            @WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final String paramsTmp = params;
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                List<SysRegGender> appList = administrativeEJB.getSysRegGender(paramsTmp, languageCodeTmp);
+                result[0] = GenericTranslator.toTOList(
+                        appList, SysRegGenderTO.class);
+
+            }
+        });
+
+        return (List<SysRegGenderTO>) result[0];
+    }
+    
+    
     
      /**
      * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getSysRegProgress(java.lang.String)

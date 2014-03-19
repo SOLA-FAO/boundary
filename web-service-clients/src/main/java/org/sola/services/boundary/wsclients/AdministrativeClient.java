@@ -122,6 +122,9 @@ public interface AdministrativeClient extends AbstractWSClient {
     public static final String GET_SYS_REG_STATUS = SERVICE_NAME + "getSysRegStatus";
     
     public static final String GET_SYS_REG_PROGRESS = SERVICE_NAME + "getSysRegProgress";
+	
+	public static final String GET_SYS_REG_GENDER = SERVICE_NAME + "getSysRegGender";
+   
    
      /**
      * Creates a new BA Unit Area for a BaUnitId 
@@ -299,4 +302,8 @@ public interface AdministrativeClient extends AbstractWSClient {
     
     List<SysRegProgressTO> getSysRegProgress(SysRegManagementParamsTO sysRegManagementParamsTO)
             throws WebServiceClientException;
+	
+	List<SysRegGenderTO> getSysRegGender(String params)
+            throws WebServiceClientException;
+   
 }
