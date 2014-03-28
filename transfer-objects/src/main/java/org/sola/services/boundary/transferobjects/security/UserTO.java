@@ -27,7 +27,6 @@
  */
 package org.sola.services.boundary.transferobjects.security;
 
-import java.util.Date;
 import java.util.List;
 
 public class UserTO extends UserSummaryTO {
@@ -37,6 +36,8 @@ public class UserTO extends UserSummaryTO {
     private List<UserGroupTO> userGroups;
     private boolean active;
     private String password;
+    private String email;
+    private String activationCode;
     private String lastPwordChangeUser;
     private Integer pwordExpiryDays;
 
@@ -50,6 +51,22 @@ public class UserTO extends UserSummaryTO {
 
     public UserTO() {
         super();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
     }
 
     public List<UserGroupTO> getUserGroups() {
