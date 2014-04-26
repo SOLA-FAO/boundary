@@ -33,7 +33,9 @@ import org.sola.webservices.cadastre.NewCadastreObjectIdentifier;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectNodeTO;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectTO;
+import org.sola.webservices.transferobjects.cadastre.LevelTO;
 import org.sola.webservices.transferobjects.cadastre.SpatialUnitGroupTO;
+import org.sola.webservices.transferobjects.cadastre.SpatialUnitTO;
 import org.sola.webservices.transferobjects.cadastre.SpatialValueAreaTO;
 import org.sola.webservices.transferobjects.transaction.TransactionBulkOperationSpatialTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
@@ -131,6 +133,12 @@ public interface CadastreClient extends AbstractWSClient {
 
     public static final String SAVE_SPATIAL_UNIT_GROUPS  = SERVICE_NAME + "saveSpatialUnitGroups";
     
+    public static final String GET_LEVELS  = SERVICE_NAME + "getLevels";
+
+    public static final String GET_SPATIAL_UNITS  = SERVICE_NAME + "getSpatialUnits";
+
+    public static final String SAVE_SPATIAL_UNITS  = SERVICE_NAME + "saveSpatialUnits";
+
     /**
      * Returns a maximum of 10 cadastre objects that have a name first part and/or name last part
      * that matches the specified search string. This method supports partial matches and is case
@@ -285,4 +293,29 @@ public interface CadastreClient extends AbstractWSClient {
     * @param items 
     */
    void saveSpatialUnitGroups(List<SpatialUnitGroupTO> items);
+   
+   /**
+    * Gets the list of editable levels.
+    * @return 
+    */
+   List<LevelTO> getLevels();
+
+   /**
+    * It retrieves the spatial units that intersect with the filteringGeometry
+    * and that are of the type: levelId.
+    * 
+    * @param filteringGeometry
+    * @param levelId
+    * @param srid
+    * @return 
+    */
+   List<SpatialUnitTO> getSpatialUnits(
+            byte[] filteringGeometry, String levelId, int srid);
+
+   /**
+    * It saves the list of spatial units.
+    * 
+    * @param items 
+    */
+   void saveSpatialUnits(List<SpatialUnitTO> items);
 }

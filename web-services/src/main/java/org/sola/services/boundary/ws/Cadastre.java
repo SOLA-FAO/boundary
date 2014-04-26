@@ -37,7 +37,9 @@ import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
 import org.sola.services.boundary.transferobjects.cadastre.CadastreObjectNodeTO;
 import org.sola.services.boundary.transferobjects.cadastre.CadastreObjectTO;
+import org.sola.services.boundary.transferobjects.cadastre.LevelTO;
 import org.sola.services.boundary.transferobjects.cadastre.SpatialUnitGroupTO;
+import org.sola.services.boundary.transferobjects.cadastre.SpatialUnitTO;
 import org.sola.services.boundary.transferobjects.cadastre.SpatialValueAreaTO;
 import org.sola.services.boundary.transferobjects.transaction.TransactionBulkOperationSpatialTO;
 import org.sola.services.boundary.transferobjects.transaction.TransactionCadastreChangeTO;
@@ -49,6 +51,7 @@ import org.sola.services.common.faults.*;
 import org.sola.services.common.webservices.AbstractWebService;
 import org.sola.services.ejb.cadastre.businesslogic.CadastreEJBLocal;
 import org.sola.services.ejb.cadastre.repository.entities.NewCadastreObjectIdentifier;
+import org.sola.services.ejb.cadastre.repository.entities.SpatialUnit;
 import org.sola.services.ejb.cadastre.repository.entities.SpatialUnitGroup;
 import org.sola.services.ejb.transaction.businesslogic.TransactionEJBLocal;
 import org.sola.services.ejb.transaction.repository.entities.TransactionBulkOperationSpatial;
@@ -629,5 +632,106 @@ public class Cadastre extends AbstractWebService {
         });
 
         return (List<SpatialUnitGroupTO>) result[0];
+    }
+     
+    /**
+     * Uses the {@linkplain org.sola.services.ejb.system.businesslogic.SystemEJB#getCodeEntityList(java.lang.Class, java.lang.String)
+     * SystemEJB.getCodeEntityList} to retrieve the BrTechnicalType codes.
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetLevels")
+    public List<LevelTO> GetLevels(@WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+        final Object[] params = {languageCode};
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                String languageCode = params[0] == null ? null : params[0].toString();
+                result[0] = GenericTranslator.toTOList(cadastreEJB.getLevels(languageCode), LevelTO.class);
+            }
+        });
+
+        return (List<LevelTO>) result[0];
+    }
+
+     /**
+     * See {{@linkplain CadastreEJB#getSpatialUnits(byte[], String, Integer)
+     * CadastreEJB.getSpatialUnits(byte[], String, Integer)}
+     * 
+     * @param filteringGeometry 
+     * @param levelId
+     * @param srid 
+     * 
+     * @throws SOLAAccessFault
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     */
+
+     @WebMethod(operationName = "GetSpatialUnits")
+    public List<SpatialUnitTO> GetSpatialUnits(
+            @WebParam(name = "filteringGeometry") final byte[] filteringGeometry,
+            @WebParam(name = "levelId") final String levelId,
+            @WebParam(name = "srid") final int srid)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        cadastreEJB.getSpatialUnits(filteringGeometry, levelId, srid),
+                        SpatialUnitTO.class);
+            }
+        });
+
+        return (List<SpatialUnitTO>) result[0];
+    }
+
+     /**
+     * See {{@linkplain CadastreEJB#saveSpatialUnits(List<SpatialUnitTO>, String)
+     * CadastreEJB.saveSpatialUnits(byte[], Integer, Integer)}
+     * 
+     * @param items 
+     * @param languageCode 
+     * 
+     * @throws SOLAAccessFault
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
+
+    @WebMethod(operationName = "SaveSpatialUnits")
+    public void SaveSpatialUnits(
+            @WebParam(name = "items") List<SpatialUnitTO> items,
+            @WebParam(name = "languageCode") String languageCode)
+            throws SOLAValidationFault, OptimisticLockingFault,
+            SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final List<SpatialUnitTO> itemsTmp = items;
+        final String languageCodeTmp = languageCode;
+
+        runUpdateValidation(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                List<String> ids = new ArrayList<String>();
+                for(SpatialUnitTO item: itemsTmp){
+                    ids.add(item.getId());
+                }
+                List<SpatialUnit> spatialUnitGroupListToSave =
+                        GenericTranslator.fromTOList(itemsTmp, SpatialUnit.class, 
+                        cadastreEJB.getSpatialUnitsByIds(ids));
+                cadastreEJB.saveSpatialUnits(spatialUnitGroupListToSave, languageCodeTmp);
+            }
+        });
     }
 }
