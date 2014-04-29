@@ -34,7 +34,9 @@ import org.sola.webservices.cadastre.*;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectNodeTO;
 import org.sola.webservices.transferobjects.cadastre.CadastreObjectTO;
+import org.sola.webservices.transferobjects.cadastre.LevelTO;
 import org.sola.webservices.transferobjects.cadastre.SpatialUnitGroupTO;
+import org.sola.webservices.transferobjects.cadastre.SpatialUnitTO;
 import org.sola.webservices.transferobjects.cadastre.SpatialValueAreaTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreRedefinitionTO;
@@ -460,5 +462,49 @@ public class MockCadastrePort implements Cadastre {
             throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, 
             SOLAValidationFault, UnhandledFault {
     }
+
+    @Override
+    public List<LevelTO> getLevels(String languageCode) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<LevelTO> defaultResponse = new ArrayList<LevelTO>();
+        
+        try {
+            return getManager().getResponse(CadastreClient.GET_LEVELS,
+                    List.class, defaultResponse);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
   
+       /**
+     * Response Key = CadastreClient.GET_SPATIAL_UNITS
+     *
+     * @return default = new ArrayList<SpatialUnitTO>()
+     */    
+    @Override
+    public List<SpatialUnitTO> getSpatialUnits(
+            byte[] filteringGeometry, String levelId, int srid) 
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<SpatialUnitGroupTO> defaultResponse = new ArrayList<SpatialUnitGroupTO>();
+        
+        try {
+            return getManager().getResponse(CadastreClient.GET_SPATIAL_UNITS,
+                    List.class, defaultResponse, filteringGeometry, levelId, srid);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+    
+   /**
+     * Response Key = CadastreClient.SAVE_SPATIAL_UNITS
+     *
+     */   
+    @Override
+    public void saveSpatialUnits(
+            List<SpatialUnitTO> items, String languageCode) 
+            throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, 
+            SOLAValidationFault, UnhandledFault {
+    }
+    
 }

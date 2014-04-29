@@ -30,15 +30,15 @@ package org.sola.services.boundary.transferobjects.cadastre;
 import org.sola.services.common.contracts.AbstractIdTO;
 
 /**
- * TO for SpatialUnitGroup entity
+ * TO for SpatialUnit entity
  */
-public class SpatialUnitGroupTO extends AbstractIdTO {
+public class SpatialUnitTO extends AbstractIdTO {
 
-    private Integer hierarchyLevel;
+    private String levelId;
     private String label;
     private byte[] geom;
     
-    public SpatialUnitGroupTO() {
+    public SpatialUnitTO() {
         super();
     }
 
@@ -50,12 +50,12 @@ public class SpatialUnitGroupTO extends AbstractIdTO {
         this.geom = geom;
     }
 
-    public Integer getHierarchyLevel() {
-        return hierarchyLevel;
+    public String getLevelId() {
+        return levelId;
     }
 
-    public void setHierarchyLevel(Integer hierarchyLevel) {
-        this.hierarchyLevel = hierarchyLevel;
+    public void setLevelId(String levelId) {
+        this.levelId = levelId;
     }
 
     public String getLabel() {
