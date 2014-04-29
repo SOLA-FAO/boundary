@@ -28,6 +28,7 @@
 package org.sola.services.boundary.transferobjects.casemanagement;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.sola.services.common.contracts.AbstractIdTO;
 
@@ -48,6 +49,7 @@ public class PartyTO extends AbstractIdTO {
     private String preferredCommunicationCode;
     private String typeCode;
     private String genderCode;
+    private Date birthDate;
     private List<PartyRoleTO> roleList;
     private boolean rightHolder;
     
@@ -55,6 +57,14 @@ public class PartyTO extends AbstractIdTO {
 
     public PartyTO() {
         super();
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getEmail() {

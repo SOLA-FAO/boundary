@@ -27,8 +27,13 @@
  */
 package org.sola.services.boundary.transferobjects.referencedata;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import org.sola.services.common.contracts.AbstractCodeTO;
 
+@XmlRootElement(name = "idType")
+@XmlAccessorType(XmlAccessType.NONE)
 public class IdTypeTO extends AbstractCodeTO {
 
     public IdTypeTO() {

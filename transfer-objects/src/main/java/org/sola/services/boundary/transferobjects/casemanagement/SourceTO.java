@@ -28,9 +28,14 @@
 package org.sola.services.boundary.transferobjects.casemanagement;
 
 import java.util.Date;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import org.sola.services.boundary.transferobjects.digitalarchive.DocumentTO;
 import org.sola.services.common.contracts.AbstractIdTO;
 
+@XmlRootElement(name = "source")
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class SourceTO extends AbstractIdTO {
 
     private String laNr;

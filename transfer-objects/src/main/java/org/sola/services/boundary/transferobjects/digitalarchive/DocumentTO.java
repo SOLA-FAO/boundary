@@ -33,9 +33,18 @@ public class DocumentTO extends AbstractIdTO {
     private String nr;
     private String extension;
     private String description;
+    private String mimeType;
     
     public DocumentTO(){
         super();
+    }
+
+    public String getMimeType() {
+        return mimeType;
+    }
+
+    public void setMimeType(String mimeType) {
+        this.mimeType = mimeType;
     }
 
     public String getDescription() {
