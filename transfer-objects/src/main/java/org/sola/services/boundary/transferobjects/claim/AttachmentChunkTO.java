@@ -1,27 +1,16 @@
 package org.sola.services.boundary.transferobjects.claim;
 
 import java.util.Date;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.sola.services.common.contracts.AbstractReadWriteTO;
 
-@XmlRootElement(name = "attachmentChunk")
-@XmlAccessorType(XmlAccessType.NONE)
 public class AttachmentChunkTO extends AbstractReadWriteTO {
     
-    @XmlElement
     private String id;
-    @XmlElement
     private String attachmentId;
-    @XmlElement
     private String claimId;
-    @XmlElement
     private long startPosition;
-    @XmlElement
     private long size;
-    @XmlElement
     private String md5;
     private String userName;
     private Date creationTime;
@@ -78,6 +67,7 @@ public class AttachmentChunkTO extends AbstractReadWriteTO {
         this.md5 = md5;
     }
 
+    @JsonIgnore
     public String getUserName() {
         return userName;
     }
@@ -86,6 +76,7 @@ public class AttachmentChunkTO extends AbstractReadWriteTO {
         this.userName = userName;
     }
 
+    @JsonIgnore
     public Date getCreationTime() {
         return creationTime;
     }

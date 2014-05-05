@@ -1,40 +1,19 @@
 package org.sola.services.boundary.transferobjects.claim;
 
 import java.util.Date;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 import org.sola.services.common.contracts.AbstractReadWriteTO;
 
-@XmlRootElement(name = "claimant")
-@XmlAccessorType(XmlAccessType.NONE)
-@XmlType (propOrder={"id","name", "lastName", "birthDate", 
-    "idTypeCode", "idNumber", "genderCode", "mobilePhone", "phone", 
-    "email", "address"})
 public class ClaimantTO extends AbstractReadWriteTO {
-    @XmlElement
     private String id;
-    @XmlElement
     private String name;
-    @XmlElement
     private String lastName;
-    @XmlElement
     private String idTypeCode;
-    @XmlElement
     private String idNumber;
-    @XmlElement
     private Date birthDate;
-    @XmlElement
     private String genderCode;
-    @XmlElement
     private String mobilePhone;
-    @XmlElement
     private String phone;
-    @XmlElement
     private String email;
-    @XmlElement
     private String address;
     
     public ClaimantTO(){

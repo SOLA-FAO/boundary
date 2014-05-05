@@ -27,13 +27,8 @@
  */
 package org.sola.services.boundary.transferobjects.referencedata;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 import org.sola.services.common.contracts.AbstractCodeTO;
 
-@XmlRootElement(name = "documentType")
-@XmlAccessorType(XmlAccessType.NONE)
 public class SourceTypeTO extends AbstractCodeTO {
     private boolean  forRegistration;
     
