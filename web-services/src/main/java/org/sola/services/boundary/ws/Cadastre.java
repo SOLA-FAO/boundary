@@ -41,7 +41,6 @@ import org.sola.services.boundary.transferobjects.cadastre.LevelTO;
 import org.sola.services.boundary.transferobjects.cadastre.SpatialUnitGroupTO;
 import org.sola.services.boundary.transferobjects.cadastre.SpatialUnitTO;
 import org.sola.services.boundary.transferobjects.cadastre.SpatialValueAreaTO;
-import org.sola.services.boundary.transferobjects.transaction.TransactionBulkOperationSpatialTO;
 import org.sola.services.boundary.transferobjects.transaction.TransactionCadastreChangeTO;
 import org.sola.services.boundary.transferobjects.transaction.TransactionCadastreRedefinitionTO;
 import org.sola.services.common.ServiceConstants;
@@ -54,7 +53,6 @@ import org.sola.services.ejb.cadastre.repository.entities.NewCadastreObjectIdent
 import org.sola.services.ejb.cadastre.repository.entities.SpatialUnit;
 import org.sola.services.ejb.cadastre.repository.entities.SpatialUnitGroup;
 import org.sola.services.ejb.transaction.businesslogic.TransactionEJBLocal;
-import org.sola.services.ejb.transaction.repository.entities.TransactionBulkOperationSpatial;
 import org.sola.services.ejb.transaction.repository.entities.TransactionCadastreChange;
 import org.sola.services.ejb.transaction.repository.entities.TransactionCadastreRedefinition;
 import org.sola.services.ejb.transaction.repository.entities.TransactionType;
@@ -507,7 +505,7 @@ public class Cadastre extends AbstractWebService {
     }
     
      /**
-     * See {{@linkplain CadastreEJB#getSpatialValueArea(java.lang.String)
+     * See {{@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#getSpatialValueArea(java.lang.String)
      * CadastreEJB.getSpatialValueArea(String colist )}
      *
      * @throws SOLAFault
@@ -534,7 +532,7 @@ public class Cadastre extends AbstractWebService {
     }
 
      /**
-     * See {{@linkplain CadastreEJB#getNewCadastreObjectIdentifier(byte[], java.lang.String)
+     * See {{@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#getNewCadastreObjectIdentifier(byte[], java.lang.String)
      * CadastreEJB.getNewCadastreObjectIdentifier(byte[], java.lang.String)}
      *
      * @throws SOLAFault
@@ -560,7 +558,7 @@ public class Cadastre extends AbstractWebService {
     }
     
      /**
-     * See {{@linkplain CadastreEJB#saveSpatialUnitGroups(List<SpatialUnitGroupTO>, String)
+     * See {{@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#saveSpatialUnitGroups(List<SpatialUnitGroupTO>, String)
      * CadastreEJB.saveSpatialUnitGroups(byte[], Integer, Integer)}
      * 
      * @param items 
@@ -600,7 +598,7 @@ public class Cadastre extends AbstractWebService {
     }
 
      /**
-     * See {{@linkplain CadastreEJB#getSpatialUnitGroups(byte[], Integer, Integer)
+     * See {{@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#getSpatialUnitGroups(byte[], Integer, Integer)
      * CadastreEJB.getSpatialUnitGroups(byte[], Integer, Integer)}
      * 
      * @param filteringGeometry 
@@ -661,7 +659,7 @@ public class Cadastre extends AbstractWebService {
     }
 
      /**
-     * See {{@linkplain CadastreEJB#getSpatialUnits(byte[], String, Integer)
+     * See {{@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#getSpatialUnits(byte[], String, Integer)
      * CadastreEJB.getSpatialUnits(byte[], String, Integer)}
      * 
      * @param filteringGeometry 
@@ -696,7 +694,7 @@ public class Cadastre extends AbstractWebService {
     }
 
      /**
-     * See {{@linkplain CadastreEJB#saveSpatialUnits(List<SpatialUnitTO>, String)
+     * See {{@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#saveSpatialUnits(List<SpatialUnitTO>, String)
      * CadastreEJB.saveSpatialUnits(byte[], Integer, Integer)}
      * 
      * @param items 
