@@ -381,4 +381,19 @@ public class SearchClientImpl extends AbstractWSClientImpl implements SearchClie
         }
         return result;
     }
+
+    @Override
+    public List<SpatialResult> getPlanCadastreObjects(String cadastreObjectId) throws WebServiceClientException{
+        List<SpatialResult> result = null;
+        final String methodName = SearchClient.GET_PLAN_CADASTRE_OBJECTS;
+        try {
+            beforeWebMethod(methodName, cadastreObjectId);
+            result = getPort().getPlanCadastreObjects(cadastreObjectId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, cadastreObjectId);
+        }
+        return result;
+    }
 }

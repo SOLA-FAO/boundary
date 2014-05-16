@@ -32,6 +32,7 @@ import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.search.QueryForSelect;
 import org.sola.webservices.search.ResultForSelectionInfo;
 import org.sola.webservices.search.MapDefinitionTO;
+import org.sola.webservices.search.SpatialResult;
 import org.sola.webservices.transferobjects.search.*;
 
 /**
@@ -132,6 +133,13 @@ public interface SearchClient extends AbstractWSClient {
      */
     public static final String GET_MAP_CENTER_LABEL =
             SERVICE_NAME + "getMapCenterLabel";
+
+        /**
+     * Search.getPlanCadastreObjects - Identifier for the
+     * getPlanCadastreObjects method
+     */
+    public static final String GET_PLAN_CADASTRE_OBJECTS =
+            SERVICE_NAME + "getPlanCadastreObjects";
 
     /**
      * Returns applications that have a lodged or approved status and are assigned to the currently
@@ -328,4 +336,11 @@ public interface SearchClient extends AbstractWSClient {
      */
     public String getMapCenterLabel(byte[] mapCenterPoint);
 
+        /**
+     * It retrieves the cadastre objects that are required for producing a title plan.
+     *
+     * @param cadastreObjectId  The id of the target cadastre object
+     * @return
+     */
+    public List<SpatialResult> getPlanCadastreObjects(String cadastreObjectId);
 }
