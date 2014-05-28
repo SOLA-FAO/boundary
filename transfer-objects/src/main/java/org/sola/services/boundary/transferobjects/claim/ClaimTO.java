@@ -17,6 +17,7 @@ public class ClaimTO extends AbstractReadWriteTO {
     private String mappedGeometry;
     private String gpsGeometry;
     private String statusCode;
+    private String typeCode;
     
     public ClaimTO(){
         super();
@@ -116,5 +117,13 @@ public class ClaimTO extends AbstractReadWriteTO {
 
     public void setStatusCode(String statusCode) {
         this.statusCode = statusCode;
+    }
+
+    public String getTypeCode() {
+        return typeCode;
+    }
+
+    public void setTypeCode(String typeCode) {
+        this.typeCode = typeCode;
     }
 }
