@@ -43,6 +43,7 @@ public class RequestTypeTO extends AbstractCodeTO {
     private BigDecimal baseFee;
     private BigDecimal areaBaseFee;
     private BigDecimal valueBaseFee;
+    private String displayGroupName;
     
     public RequestTypeTO() {
         super();
@@ -126,5 +127,13 @@ public class RequestTypeTO extends AbstractCodeTO {
 
     public void setValueBaseFee(BigDecimal valueBaseFee) {
         this.valueBaseFee = valueBaseFee;
+    }
+
+    public String getDisplayGroupName() {
+        return displayGroupName;
+    }
+
+    public void setDisplayGroupName(String displayGroupName) {
+        this.displayGroupName = displayGroupName;
     }
 }
