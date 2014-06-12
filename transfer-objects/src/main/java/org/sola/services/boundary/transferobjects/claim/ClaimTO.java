@@ -12,7 +12,8 @@ public class ClaimTO extends AbstractReadWriteTO {
     private Date decisionDate;
     private String description;
     private String challengedClaimId;
-    private ClaimantTO claimant;
+    private PartyTO claimant;
+    private List<ClaimShareTO> shares;
     private List<AttachmentTO> attachments;
     private String mappedGeometry;
     private String gpsGeometry;
@@ -79,12 +80,20 @@ public class ClaimTO extends AbstractReadWriteTO {
         this.challengedClaimId = challengedClaimId;
     }
 
-    public ClaimantTO getClaimant() {
+    public PartyTO getClaimant() {
         return claimant;
     }
 
-    public void setClaimant(ClaimantTO claimant) {
+    public void setClaimant(PartyTO claimant) {
         this.claimant = claimant;
+    }
+
+    public List<ClaimShareTO> getShares() {
+        return shares;
+    }
+
+    public void setShares(List<ClaimShareTO> shares) {
+        this.shares = shares;
     }
 
     public List<AttachmentTO> getAttachments() {
