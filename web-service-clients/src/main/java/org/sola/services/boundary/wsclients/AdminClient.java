@@ -28,9 +28,13 @@
 package org.sola.services.boundary.wsclients;
 
 import java.util.List;
+import org.sola.common.ConfigConstants;
+import org.sola.common.RolesConstants;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.admin.BrTO;
+import org.sola.webservices.admin.ConfigPanelLauncherTO;
 import org.sola.webservices.admin.LanguageTO;
+import org.sola.webservices.admin.PanelLauncherGroupTO;
 import org.sola.webservices.admin.SettingTO;
 import org.sola.webservices.transferobjects.security.GroupSummaryTO;
 import org.sola.webservices.transferobjects.security.GroupTO;
@@ -130,6 +134,16 @@ public interface AdminClient extends AbstractWSClient {
      * Admin.consolidationConsolidate - Identifier for the consolidationConsolidate method
      */
     public static final String CONSOLIDATION_CONSOLIDATE = SERVICE_NAME + "consolidationConsolidate";
+    
+    /**
+     * Admin.getPanelLauncherConfiguration - Identifier for the getPanelLauncherConfiguration method
+     */
+    public static final String GET_PANEL_LAUNCHER_CONFIG = SERVICE_NAME + "getPanelLauncherConfiguration"; 
+    
+    /**
+     * Admin.getPanelLauncherGroups - Identifier for the getPanelLauncherGroups method
+     */
+    public static final String GET_PANEL_LAUNCHER_GROUPS = SERVICE_NAME + "getPanelLauncherGroups"; 
 
     /**
      * Returns the details for the currently authenticated user. <p>No role is required to execute
@@ -318,4 +332,20 @@ public interface AdminClient extends AbstractWSClient {
     String consolidationExtract(boolean everything, String password) throws WebServiceClientException;
     
     String consolidationConsolidate(String pathFileName, String password) throws WebServiceClientException;
+    
+    /**
+     * Returns the configuration information for the PanelLauncher
+     *
+     * @return The settings from the system.config_panel_launcher table
+     * @throws WebServiceClientException
+     */
+    List<ConfigPanelLauncherTO> getPanelLauncherConfiguration() throws WebServiceClientException;
+    
+    /**
+     * Returns the Panel Launcher Groups
+     *
+     * @return The settings from the system.panel_launcher_group table
+     * @throws WebServiceClientException
+     */
+    List<PanelLauncherGroupTO> getPanelLauncherGroups() throws WebServiceClientException;
 }

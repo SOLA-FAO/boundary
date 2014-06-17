@@ -27,59 +27,18 @@
  * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
-package org.sola.services.boundary.transferobjects.referencedata;
+package org.sola.services.boundary.transferobjects.system;
 
 import org.sola.services.common.contracts.AbstractCodeTO;
 
-public class RrrTypeTO extends AbstractCodeTO {
+/**
+ *
+ * @author soladev
+ */
+public class PanelLauncherGroupTO extends AbstractCodeTO {
 
-    private String rrrGroupTypeCode;
-    private boolean primary;
-    private boolean shareCheck;
-    private boolean partyRequired;
-    private String rrrPanelCode;
-
-    public RrrTypeTO() {
+    public PanelLauncherGroupTO() {
         super();
     }
 
-    public String getRrrGroupTypeCode() {
-        return rrrGroupTypeCode;
-    }
-
-    public void setRrrGroupTypeCode(String rrrGroupTypeCode) {
-        this.rrrGroupTypeCode = rrrGroupTypeCode;
-    }
-
-    public boolean isPrimary() {
-        return primary;
-    }
-
-    public void setPrimary(boolean primary) {
-        this.primary = primary;
-    }
-
-    public boolean isPartyRequired() {
-        return partyRequired;
-    }
-
-    public void setPartyRequired(boolean partyRequired) {
-        this.partyRequired = partyRequired;
-    }
-
-    public boolean isShareCheck() {
-        return shareCheck;
-    }
-
-    public void setShareCheck(boolean shareCheck) {
-        this.shareCheck = shareCheck;
-    }
-
-    public String getRrrPanelCode() {
-        return rrrPanelCode;
-    }
-
-    public void setRrrPanelCode(String rrrPanelCode) {
-        this.rrrPanelCode = rrrPanelCode;
-    }
 }
