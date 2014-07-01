@@ -1,28 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations (FAO).
- * All rights reserved.
+ * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- *    1. Redistributions of source code must retain the above copyright notice,this list
- *       of conditions and the following disclaimer.
- *    2. Redistributions in binary form must reproduce the above copyright notice,this list
- *       of conditions and the following disclaimer in the documentation and/or other
- *       materials provided with the distribution.
- *    3. Neither the name of FAO nor the names of its contributors may be used to endorse or
- *       promote products derived from this software without specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT
- * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.ws;
@@ -97,7 +99,7 @@ public class Administrative extends AbstractWebService {
                 BaUnit newBaUnit = administrativeEJB.createBaUnit(
                         serviceIdTmp,
                         GenericTranslator.fromTO(baUnitTOTmp, BaUnit.class,
-                        administrativeEJB.getBaUnitById(baUnitTOTmp.getId())));
+                                administrativeEJB.getBaUnitById(baUnitTOTmp.getId())));
                 result[0] = GenericTranslator.toTO(newBaUnit, BaUnitTO.class);
             }
         });
@@ -133,13 +135,47 @@ public class Administrative extends AbstractWebService {
                     BaUnit newBaUnit = administrativeEJB.saveBaUnit(
                             serviceIdTmp,
                             GenericTranslator.fromTO(baUnitTOTmp, BaUnit.class,
-                            administrativeEJB.getBaUnitById(baUnitTOTmp.getId())));
+                                    administrativeEJB.getBaUnitById(baUnitTOTmp.getId())));
                     result[0] = GenericTranslator.toTO(newBaUnit, BaUnitTO.class);
                 }
             }
         });
 
         return (BaUnitTO) result[0];
+    }
+
+    /**
+     * See {@linkplain AdministrativeEJB#saveNotation(
+     * org.sola.services.ejb.administrative.repository.entities.BaUnitNotation)
+     * AdministrativeEJB.saveNotation}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     */
+    @WebMethod(operationName = "SaveNotation")
+    public BaUnitNotationTO SaveNotation(
+            @WebParam(name = "notationTO") BaUnitNotationTO notationTO)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault, OptimisticLockingFault {
+
+        final BaUnitNotationTO notationTOTmp = notationTO;
+        final Object[] result = {null};
+
+        runUpdate(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                if (notationTOTmp != null) {
+                    BaUnitNotation newNotation = administrativeEJB.saveNotation(
+                            GenericTranslator.fromTO(notationTOTmp, BaUnitNotation.class,
+                                    administrativeEJB.getEntityById(BaUnitNotation.class, notationTOTmp.getId())));
+                    result[0] = GenericTranslator.toTO(newNotation, BaUnitNotationTO.class);
+                }
+            }
+        });
+
+        return (BaUnitNotationTO) result[0];
     }
 
     /**
@@ -292,7 +328,7 @@ public class Administrative extends AbstractWebService {
             public void run() {
                 result[0] = GenericTranslator.toTO(
                         administrativeEJB.getBaUnitByCode(nameFirstpartTmp,
-                        nameLastpartTmp), BaUnitTO.class);
+                                nameLastpartTmp), BaUnitTO.class);
             }
         });
 
@@ -353,7 +389,7 @@ public class Administrative extends AbstractWebService {
                 BaUnitArea newBaUnitArea = administrativeEJB.createBaUnitArea(
                         baUnitIdTmp,
                         GenericTranslator.fromTO(baUnitAreaTOTmp, BaUnitArea.class,
-                        administrativeEJB.getBaUnitAreas(baUnitIdTmp)));
+                                administrativeEJB.getBaUnitAreas(baUnitIdTmp)));
                 result[0] = GenericTranslator.toTO(newBaUnitArea, BaUnitAreaTO.class);
             }
         });
@@ -406,7 +442,6 @@ public class Administrative extends AbstractWebService {
             @WebParam(name = "languageCode") String languageCode)
             throws SOLAFault, UnhandledFault, SOLAAccessFault, SOLAValidationFault, OptimisticLockingFault {
 
-
         final String searchStringTmp = searchString;
         final String languageCodeTmp = languageCode;
 
@@ -440,7 +475,6 @@ public class Administrative extends AbstractWebService {
             @WebParam(name = "languageCode") String languageCode)
             throws SOLAFault, UnhandledFault, SOLAAccessFault, SOLAValidationFault, OptimisticLockingFault {
 
-
         final String searchStringTmp = searchString;
         final String languageCodeTmp = languageCode;
 
@@ -473,7 +507,6 @@ public class Administrative extends AbstractWebService {
             @WebParam(name = "searchString") String searchString,
             @WebParam(name = "languageCode") String languageCode)
             throws SOLAFault, UnhandledFault, SOLAAccessFault, SOLAValidationFault, OptimisticLockingFault {
-
 
         final String searchStringTmp = searchString;
         final String languageCodeTmp = languageCode;
@@ -559,8 +592,8 @@ public class Administrative extends AbstractWebService {
 
         return (List<SysRegManagementTO>) result[0];
     }
-    
-     /**
+
+    /**
      * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getSysRegStatus(java.lang.String)
      * AdministrativeEJB.getSysRegStatus}
      *
@@ -592,7 +625,8 @@ public class Administrative extends AbstractWebService {
 
         return (List<SysRegStatusTO>) result[0];
     }
-     /**
+
+    /**
      * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getSysRegGender(java.lang.String)
      * AdministrativeEJB.getSysRegGender}
      *
@@ -623,10 +657,8 @@ public class Administrative extends AbstractWebService {
 
         return (List<SysRegGenderTO>) result[0];
     }
-    
-    
-    
-     /**
+
+    /**
      * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getSysRegProgress(java.lang.String)
      * AdministrativeEJB.getSysRegProgress}
      *

@@ -27,6 +27,7 @@
  */
 package org.sola.services.boundary.wsclients.mock;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.sola.services.boundary.wsclients.ReferenceDataClient;
 import org.sola.webservices.referencedata.*;
@@ -619,6 +620,23 @@ public class MockReferenceDataPort implements ReferenceData {
         try {
             return getManager().getResponse(ReferenceDataClient.GET_HIERARCHY_LEVELS,
                     List.class, defaultResponse, languageCode);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+    
+        /**
+     * Response Key = ReferenceDataClient.GET_NOTATION_STATUS_TYPES
+     *
+     * @return default = new ArrayList()
+     */
+    @Override
+    public List<NotationStatusTypeTO> getNotationStatusTypes(String arg0) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<NotationStatusTypeTO> defaultResponse = new ArrayList<NotationStatusTypeTO>();
+        try {
+            return getManager().getResponse(ReferenceDataClient.GET_NOTATION_STATUS_TYPES,
+                    List.class, defaultResponse, arg0);
         } catch (Exception ex) {
             processExceptionAccess(ex);
             return null;

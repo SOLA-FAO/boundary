@@ -1,28 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations (FAO).
- * All rights reserved.
+ * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- *    1. Redistributions of source code must retain the above copyright notice,this list
- *       of conditions and the following disclaimer.
- *    2. Redistributions in binary form must reproduce the above copyright notice,this list
- *       of conditions and the following disclaimer in the documentation and/or other
- *       materials provided with the distribution.
- *    3. Neither the name of FAO nor the names of its contributors may be used to endorse or
- *       promote products derived from this software without specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT
- * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.ws;
@@ -43,7 +45,6 @@ import org.sola.services.common.faults.UnhandledFault;
 import org.sola.services.ejb.application.businesslogic.ApplicationEJBLocal;
 import org.sola.services.common.contracts.GenericTranslator;
 import org.sola.services.common.webservices.AbstractWebService;
-import org.sola.services.ejb.cadastre.repository.entities.HierarchyLevel;
 import org.sola.services.ejb.party.businesslogic.PartyEJBLocal;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.contracts.AbstractCodeTO;
@@ -53,6 +54,7 @@ import org.sola.services.ejb.administrative.businesslogic.AdministrativeEJBLocal
 import org.sola.services.ejb.administrative.repository.entities.BaUnitRelType;
 import org.sola.services.ejb.administrative.repository.entities.BaUnitType;
 import org.sola.services.ejb.administrative.repository.entities.MortgageType;
+import org.sola.services.ejb.administrative.repository.entities.NotationStatusType;
 import org.sola.services.ejb.administrative.repository.entities.RrrGroupType;
 import org.sola.services.ejb.administrative.repository.entities.RrrType;
 import org.sola.services.ejb.administrative.repository.entities.SourceBaUnitRelationType;
@@ -580,7 +582,7 @@ public class ReferenceData extends AbstractWebService {
 
         return (List<MortgageTypeTO>) result[0];
     }
-    
+
     /**
      * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getConditionTypes(java.lang.String) (java.lang.String)
      * AdministrativeEJB.getConditionTypes}
@@ -938,8 +940,37 @@ public class ReferenceData extends AbstractWebService {
     }
 
     /**
-     * Supports saving of all SOLA Reference Data types. <p>Requires the {@linkplain RolesConstants#ADMIN_MANAGE_REFDATA}
-     * role.</p>
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getCodeEntityList(java.lang.Class, java.lang.String)
+     * AdministrativeEJB.getCodeEntityList}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetNotationStatusTypes")
+    public List<NotationStatusTypeTO> GetNotationStatusTypes(String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        administrativeEJB.getCodeEntityList(NotationStatusType.class, languageCodeTmp),
+                        NotationStatusTypeTO.class);
+            }
+        });
+
+        return (List<NotationStatusTypeTO>) result[0];
+    }
+
+    /**
+     * Supports saving of all SOLA Reference Data types.
+     * <p>
+     * Requires the {@linkplain RolesConstants#ADMIN_MANAGE_REFDATA} role.</p>
      *
      * @throws SOLAFault
      * @throws UnhandledFault
@@ -1060,6 +1091,10 @@ public class ReferenceData extends AbstractWebService {
                 } else if (refDataTO instanceof BaUnitRelTypeTO) {
                     codeEntity = administrativeEJB.getCodeEntity(BaUnitRelType.class, refDataTO.getCode());
                     codeEntity = GenericTranslator.fromTO(refDataTO, BaUnitRelType.class, codeEntity);
+                    administrativeEJB.saveCodeEntity(codeEntity);
+                } else if (refDataTO instanceof NotationStatusTypeTO) {
+                    codeEntity = administrativeEJB.getCodeEntity(NotationStatusType.class, refDataTO.getCode());
+                    codeEntity = GenericTranslator.fromTO(refDataTO, NotationStatusType.class, codeEntity);
                     administrativeEJB.saveCodeEntity(codeEntity);
                 }
 
