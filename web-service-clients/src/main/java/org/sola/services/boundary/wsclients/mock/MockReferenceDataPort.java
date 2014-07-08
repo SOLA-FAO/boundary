@@ -642,5 +642,22 @@ public class MockReferenceDataPort implements ReferenceData {
             return null;
         }
     }
+    
+            /**
+     * Response Key = ReferenceDataClient.GET_STATE_LAND_STATUS_TYPES
+     *
+     * @return default = new ArrayList()
+     */
+    @Override
+    public List<StateLandStatusTypeTO> getStateLandStatusTypes(String arg0) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<StateLandStatusTypeTO> defaultResponse = new ArrayList<StateLandStatusTypeTO>();
+        try {
+            return getManager().getResponse(ReferenceDataClient.GET_STATE_LAND_STATUS_TYPES,
+                    List.class, defaultResponse, arg0);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
 
 }

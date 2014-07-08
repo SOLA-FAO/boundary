@@ -676,4 +676,24 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
         }
         return result;
     }
+    
+      @Override
+    public List<StateLandStatusTypeTO> getStateLandStatusTypes() throws WebServiceClientException {
+        return getStateLandStatusTypes(getLanguageCode());
+    }
+
+    @Override
+    public List<StateLandStatusTypeTO> getStateLandStatusTypes(String lang) throws WebServiceClientException {
+        List<StateLandStatusTypeTO> result = null;
+        final String methodName = ReferenceDataClient.GET_STATE_LAND_STATUS_TYPES;
+        try {
+            beforeWebMethod(methodName, lang);
+            result = getPort().getStateLandStatusTypes(lang);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, lang);
+        }
+        return result;
+    }
 }

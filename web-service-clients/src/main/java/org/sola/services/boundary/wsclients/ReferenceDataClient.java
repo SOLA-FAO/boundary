@@ -191,6 +191,11 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * getNotationStatusTypes method
      */
     public static final String GET_NOTATION_STATUS_TYPES = SERVICE_NAME + "getNotationStatusTypes";
+    /**
+     * ReferenceData.getStateStatusTypes - Identifier for the
+     * getStateStatusTypes method
+     */
+    public static final String GET_STATE_LAND_STATUS_TYPES = SERVICE_NAME + "getStateStatusTypes";
 
     /**
      * Retrieves all source.source_type code values using the default locale of
@@ -683,4 +688,20 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<NotationStatusTypeTO> getNotationStatusTypes(String lang) throws WebServiceClientException;
+
+    /**
+     * Retrieves all cadastre.state_land_status_type code values.
+     *
+     * @throws WebServiceClientException
+     */
+    List<StateLandStatusTypeTO> getStateLandStatusTypes() throws WebServiceClientException;
+
+    /**
+     * Retrieves all cadastre.state_land_status_type code values.
+     *
+     * @param languageCode The language code to use for localization of display
+     * values.
+     * @throws WebServiceClientException
+     */
+    List<StateLandStatusTypeTO> getStateLandStatusTypes(String lang) throws WebServiceClientException;
 }

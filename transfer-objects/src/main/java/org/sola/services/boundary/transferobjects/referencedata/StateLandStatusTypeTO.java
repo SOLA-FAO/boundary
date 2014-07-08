@@ -25,85 +25,13 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
-package org.sola.services.boundary.transferobjects.administrative;
+package org.sola.services.boundary.transferobjects.referencedata;
 
-import org.sola.services.common.contracts.AbstractTO;
+import org.sola.services.common.contracts.AbstractCodeTO;
 
-public class BaUnitBasicTO extends AbstractTO {
-    private String id;
-    private String typeCode;
-    private String name;
-    private String nameFirstpart;
-    private String nameLastpart;
-    private String statusCode;
-    private String transactionId;
-    private String description;
-    
-    public BaUnitBasicTO(){
+public class StateLandStatusTypeTO extends AbstractCodeTO {
+
+    public StateLandStatusTypeTO() {
         super();
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNameFirstpart() {
-        return nameFirstpart;
-    }
-
-    public void setNameFirstpart(String nameFirstpart) {
-        this.nameFirstpart = nameFirstpart;
-    }
-
-    public String getNameLastpart() {
-        return nameLastpart;
-    }
-
-    public void setNameLastpart(String nameLastpart) {
-        this.nameLastpart = nameLastpart;
-    }
-
-    public String getStatusCode() {
-        return statusCode;
-    }
-
-    public void setStatusCode(String statusCode) {
-        this.statusCode = statusCode;
-    }
-
-    public String getTransactionId() {
-        return transactionId;
-    }
-
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
-
-    public String getTypeCode() {
-        return typeCode;
-    }
-
-    public void setTypeCode(String typeCode) {
-        this.typeCode = typeCode;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }
