@@ -27,59 +27,56 @@
  * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
-package org.sola.services.boundary.transferobjects.referencedata;
+package org.sola.services.boundary.transferobjects.system;
 
 import org.sola.services.common.contracts.AbstractCodeTO;
 
-public class RrrTypeTO extends AbstractCodeTO {
+/**
+ *
+ * @author soladev
+ */
+public class ConfigPanelLauncherTO extends AbstractCodeTO {
 
-    private String rrrGroupTypeCode;
-    private boolean primary;
-    private boolean shareCheck;
-    private boolean partyRequired;
-    private String rrrPanelCode;
+    private String panelClass;
+    private String cardName;
+    private String messageCode;
+    private String launchGroupCode;
 
-    public RrrTypeTO() {
+    public ConfigPanelLauncherTO() {
         super();
     }
 
-    public String getRrrGroupTypeCode() {
-        return rrrGroupTypeCode;
+    public String getPanelClass() {
+        return panelClass;
     }
 
-    public void setRrrGroupTypeCode(String rrrGroupTypeCode) {
-        this.rrrGroupTypeCode = rrrGroupTypeCode;
+    public void setPanelClass(String panelClass) {
+        this.panelClass = panelClass;
     }
 
-    public boolean isPrimary() {
-        return primary;
+    public String getCardName() {
+        return cardName;
     }
 
-    public void setPrimary(boolean primary) {
-        this.primary = primary;
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
     }
 
-    public boolean isPartyRequired() {
-        return partyRequired;
+    public String getMessageCode() {
+        return messageCode;
     }
 
-    public void setPartyRequired(boolean partyRequired) {
-        this.partyRequired = partyRequired;
+    public void setMessageCode(String messageCode) {
+        this.messageCode = messageCode;
     }
 
-    public boolean isShareCheck() {
-        return shareCheck;
+    public String getLaunchGroupCode() {
+        return launchGroupCode;
     }
 
-    public void setShareCheck(boolean shareCheck) {
-        this.shareCheck = shareCheck;
+    public void setLaunchGroupCode(String launchGroupCode) {
+        this.launchGroupCode = launchGroupCode;
     }
 
-    public String getRrrPanelCode() {
-        return rrrPanelCode;
-    }
 
-    public void setRrrPanelCode(String rrrPanelCode) {
-        this.rrrPanelCode = rrrPanelCode;
-    }
 }
