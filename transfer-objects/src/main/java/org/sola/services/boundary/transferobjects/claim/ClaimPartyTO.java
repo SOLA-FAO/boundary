@@ -3,7 +3,7 @@ package org.sola.services.boundary.transferobjects.claim;
 import java.util.Date;
 import org.sola.services.common.contracts.AbstractReadWriteTO;
 
-public class PartyTO extends AbstractReadWriteTO {
+public class ClaimPartyTO extends AbstractReadWriteTO {
     private String id;
     private String name;
     private String lastName;
@@ -15,8 +15,9 @@ public class PartyTO extends AbstractReadWriteTO {
     private String phone;
     private String email;
     private String address;
+    private boolean person;
     
-    public PartyTO(){
+    public ClaimPartyTO(){
         super();
     }
 
@@ -106,5 +107,13 @@ public class PartyTO extends AbstractReadWriteTO {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public boolean isPerson() {
+        return person;
+    }
+
+    public void setPerson(boolean person) {
+        this.person = person;
     }
 }

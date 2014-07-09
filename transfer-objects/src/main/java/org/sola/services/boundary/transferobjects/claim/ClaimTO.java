@@ -7,12 +7,22 @@ import org.sola.services.common.contracts.AbstractReadWriteTO;
 public class ClaimTO extends AbstractReadWriteTO {
     private String id;
     private String nr;
+    private Date startDate;
+    private String landUseCode;
+    private String notes;
+    private String northAdjacency;
+    private String southAdjacency;
+    private String eastAdjacency;
+    private String westAdjacency;
+    private String assigneeName;
+    private List<ClaimLocationTO> locations;
+    private List<ClaimCommentTO> comments;
     private Date lodgementDate;
     private Date challengeExpiryDate;
     private Date decisionDate;
     private String description;
     private String challengedClaimId;
-    private PartyTO claimant;
+    private ClaimPartyTO claimant;
     private List<ClaimShareTO> shares;
     private List<AttachmentTO> attachments;
     private String mappedGeometry;
@@ -80,11 +90,11 @@ public class ClaimTO extends AbstractReadWriteTO {
         this.challengedClaimId = challengedClaimId;
     }
 
-    public PartyTO getClaimant() {
+    public ClaimPartyTO getClaimant() {
         return claimant;
     }
 
-    public void setClaimant(PartyTO claimant) {
+    public void setClaimant(ClaimPartyTO claimant) {
         this.claimant = claimant;
     }
 
@@ -134,5 +144,85 @@ public class ClaimTO extends AbstractReadWriteTO {
 
     public void setTypeCode(String typeCode) {
         this.typeCode = typeCode;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getLandUseCode() {
+        return landUseCode;
+    }
+
+    public void setLandUseCode(String landUseCode) {
+        this.landUseCode = landUseCode;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public String getNorthAdjacency() {
+        return northAdjacency;
+    }
+
+    public void setNorthAdjacency(String northAdjacency) {
+        this.northAdjacency = northAdjacency;
+    }
+
+    public String getSouthAdjacency() {
+        return southAdjacency;
+    }
+
+    public void setSouthAdjacency(String southAdjacency) {
+        this.southAdjacency = southAdjacency;
+    }
+
+    public String getEastAdjacency() {
+        return eastAdjacency;
+    }
+
+    public void setEastAdjacency(String eastAdjacency) {
+        this.eastAdjacency = eastAdjacency;
+    }
+
+    public String getWestAdjacency() {
+        return westAdjacency;
+    }
+
+    public void setWestAdjacency(String westAdjacency) {
+        this.westAdjacency = westAdjacency;
+    }
+
+    public String getAssigneeName() {
+        return assigneeName;
+    }
+
+    public void setAssigneeName(String assigneeName) {
+        this.assigneeName = assigneeName;
+    }
+
+    public List<ClaimLocationTO> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<ClaimLocationTO> locations) {
+        this.locations = locations;
+    }
+
+    public List<ClaimCommentTO> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<ClaimCommentTO> comments) {
+        this.comments = comments;
     }
 }

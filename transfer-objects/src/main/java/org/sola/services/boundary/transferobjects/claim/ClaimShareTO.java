@@ -8,7 +8,7 @@ public class ClaimShareTO extends AbstractReadWriteTO {
     private String claimId;
     private Short nominator;
     private Short denominator;
-    private List<PartyTO> owners;
+    private List<ClaimPartyTO> owners;
     
     public ClaimShareTO(){
         super();
@@ -46,11 +46,11 @@ public class ClaimShareTO extends AbstractReadWriteTO {
         this.denominator = denominator;
     }
 
-    public List<PartyTO> getOwners() {
+    public List<ClaimPartyTO> getOwners() {
         return owners;
     }
 
-    public void setOwners(List<PartyTO> owners) {
+    public void setOwners(List<ClaimPartyTO> owners) {
         this.owners = owners;
     }
 }
