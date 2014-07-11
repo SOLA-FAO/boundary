@@ -444,4 +444,15 @@ public class MockSearchPort implements Search {
         }    
     }
         
+    @Override
+    public byte[] transform(byte[] geom, int srid) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        byte[] defaultResponse = null;
+        try {
+            return getManager().getResponse(SearchClient.TRANSFORM,
+                    byte[].class, defaultResponse, geom, srid);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }    
+    }
 }

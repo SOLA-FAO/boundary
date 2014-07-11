@@ -396,4 +396,19 @@ public class SearchClientImpl extends AbstractWSClientImpl implements SearchClie
         }
         return result;
     }
+
+    @Override
+    public byte[] transform(byte[] geom, int srid) throws WebServiceClientException {
+        byte[] result = null;
+        final String methodName = SearchClient.TRANSFORM;
+        try {
+            beforeWebMethod(methodName, geom, srid);
+            result = getPort().transform(geom, srid);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result,geom,  srid);
+        }
+        return result;
+    }
 }
