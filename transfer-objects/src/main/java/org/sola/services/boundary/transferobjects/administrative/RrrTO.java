@@ -58,6 +58,7 @@ public class RrrTO extends AbstractIdTO {
     private List<PartySummaryTO> rightHolderList;
     private List<ConditionForRrrTO> conditionsList;
     private String concatenatedName;
+    private String rrrSubTypeCode;
 
     public String getConcatenatedName() {
         return concatenatedName;
@@ -246,6 +247,14 @@ public class RrrTO extends AbstractIdTO {
 
     public void setLocked(boolean locked) {
         this.locked = locked;
+    }
+
+    public String getRrrSubTypeCode() {
+        return rrrSubTypeCode;
+    }
+
+    public void setRrrSubTypeCode(String rrrSubTypeCode) {
+        this.rrrSubTypeCode = rrrSubTypeCode;
     }
 
 }

@@ -53,6 +53,7 @@ import org.sola.services.common.repository.entities.AbstractCodeEntity;
 import org.sola.services.ejb.administrative.businesslogic.AdministrativeEJBLocal;
 import org.sola.services.ejb.administrative.repository.entities.BaUnitRelType;
 import org.sola.services.ejb.administrative.repository.entities.BaUnitType;
+import org.sola.services.ejb.administrative.repository.entities.RrrSubType;
 import org.sola.services.ejb.administrative.repository.entities.MortgageType;
 import org.sola.services.ejb.administrative.repository.entities.NotationStatusType;
 import org.sola.services.ejb.administrative.repository.entities.RrrGroupType;
@@ -995,6 +996,34 @@ public class ReferenceData extends AbstractWebService {
 
         return (List<StateLandStatusTypeTO>) result[0];
     }
+    
+        /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getCodeEntityList(java.lang.Class, java.lang.String)
+     * AdministrativeEJB.getCodeEntityList}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetRrrSubTypes")
+    public List<RrrSubTypeTO> GetRrrSubTypes(String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final String languageCodeTmp = languageCode;
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        administrativeEJB.getCodeEntityList(RrrSubType.class, languageCodeTmp),
+                        RrrSubTypeTO.class);
+            }
+        });
+
+        return (List<RrrSubTypeTO>) result[0];
+    }
 
     /**
      * Supports saving of all SOLA Reference Data types.
@@ -1129,6 +1158,10 @@ public class ReferenceData extends AbstractWebService {
                     codeEntity = cadastreEJB.getCodeEntity(StateLandStatusType.class, refDataTO.getCode());
                     codeEntity = GenericTranslator.fromTO(refDataTO, StateLandStatusType.class, codeEntity);
                     cadastreEJB.saveCodeEntity(codeEntity);
+                }else if (refDataTO instanceof RrrSubTypeTO) {
+                    codeEntity = administrativeEJB.getCodeEntity(RrrSubType.class, refDataTO.getCode());
+                    codeEntity = GenericTranslator.fromTO(refDataTO, RrrSubType.class, codeEntity);
+                    administrativeEJB.saveCodeEntity(codeEntity);
                 }
 
                 result = GenericTranslator.toTO(codeEntity, refDataTO.getClass());

@@ -196,6 +196,10 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * getStateStatusTypes method
      */
     public static final String GET_STATE_LAND_STATUS_TYPES = SERVICE_NAME + "getStateStatusTypes";
+    /**
+     * ReferenceData.getRrrSubTypes - Identifier for the getRrrSubTypes method
+     */
+    public static final String GET_RRR_SUB_TYPES = SERVICE_NAME + "getRrrSubTypes";
 
     /**
      * Retrieves all source.source_type code values using the default locale of
@@ -704,4 +708,20 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<StateLandStatusTypeTO> getStateLandStatusTypes(String lang) throws WebServiceClientException;
+
+    /**
+     * Retrieves all administrative.rrr_sub_type code values.
+     *
+     * @throws WebServiceClientException
+     */
+    List<RrrSubTypeTO> getRrrSubTypes() throws WebServiceClientException;
+
+    /**
+     * Retrieves all administrative.rrr_sub_type code values.
+     *
+     * @param languageCode The language code to use for localization of display
+     * values.
+     * @throws WebServiceClientException
+     */
+    List<RrrSubTypeTO> getRrrSubTypes(String lang) throws WebServiceClientException;
 }

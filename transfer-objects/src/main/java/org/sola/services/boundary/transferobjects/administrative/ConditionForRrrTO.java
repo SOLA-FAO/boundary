@@ -35,6 +35,7 @@ public class ConditionForRrrTO extends AbstractIdTO {
     private String customConditionText;
     private int conditionQuantity;
     private String conditionUnit;
+    private String customConditionName; 
     
     public ConditionForRrrTO(){
         super();
@@ -78,5 +79,13 @@ public class ConditionForRrrTO extends AbstractIdTO {
 
     public void setRrrId(String rrrId) {
         this.rrrId = rrrId;
+    }
+
+    public String getCustomConditionName() {
+        return customConditionName;
+    }
+
+    public void setCustomConditionName(String customConditionName) {
+        this.customConditionName = customConditionName;
     }
 }
