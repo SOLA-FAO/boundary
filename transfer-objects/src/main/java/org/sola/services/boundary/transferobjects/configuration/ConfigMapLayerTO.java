@@ -38,6 +38,7 @@ import org.sola.services.common.contracts.AbstractTO;
 public class ConfigMapLayerTO extends AbstractTO {
 
     private String id;
+    private boolean active;
     private String typeCode;
     private String url;
     private String wmsLayers;
@@ -63,6 +64,22 @@ public class ConfigMapLayerTO extends AbstractTO {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public boolean isShowInToc() {
+        return showInToc;
+    }
+
+    public void setShowInToc(boolean showInToc) {
+        this.showInToc = showInToc;
     }
     
     public String getShapeLocation() {
