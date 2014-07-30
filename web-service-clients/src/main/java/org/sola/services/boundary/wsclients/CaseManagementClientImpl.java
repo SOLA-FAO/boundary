@@ -180,6 +180,21 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         }
         return result;
     }
+    
+        @Override
+    public List<PartySummaryTO> getPartiesByRole(String partyRole) throws WebServiceClientException {
+        List<PartySummaryTO> result = null;
+        final String methodName = CaseManagementClient.GET_PARTIES_BY_ROLE;
+        try {
+            beforeWebMethod(methodName);
+            result = getPort().getPartiesByRole(partyRole);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result);
+        }
+        return result;
+    }
 
     @Override
     public ApplicationTO calculateFee(ApplicationTO application) throws WebServiceClientException {

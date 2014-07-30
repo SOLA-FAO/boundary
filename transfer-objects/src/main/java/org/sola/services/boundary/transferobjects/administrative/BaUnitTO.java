@@ -33,6 +33,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.sola.services.boundary.transferobjects.cadastre.CadastreObjectTO;
+import org.sola.services.boundary.transferobjects.casemanagement.PartyTO;
 import org.sola.services.boundary.transferobjects.casemanagement.SourceTO;
 import org.sola.services.common.contracts.AbstractIdTO;
 
@@ -54,6 +55,7 @@ public class BaUnitTO extends AbstractIdTO {
     private BigDecimal calculatedAreaSize;
     private String landUseCode;
     private String description;
+    private List<PartyTO> partyList;
 
     public BigDecimal getCalculatedAreaSize() {
         return calculatedAreaSize;
@@ -206,5 +208,13 @@ public class BaUnitTO extends AbstractIdTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<PartyTO> getPartyList() {
+        return partyList;
+    }
+
+    public void setPartyList(List<PartyTO> partyList) {
+        this.partyList = partyList;
     }
 }

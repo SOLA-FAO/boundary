@@ -45,6 +45,9 @@ public class BaUnitSearchResultTO extends AbstractTO {
     private String locality;
     private String propertyManager;
     private String typeCode;
+    private String activeJobs;
+    private String actionStatusCode;
+    private String notationText;
 
     public BaUnitSearchResultTO() {
         super();
@@ -144,5 +147,29 @@ public class BaUnitSearchResultTO extends AbstractTO {
 
     public void setTypeCode(String typeCode) {
         this.typeCode = typeCode;
+    }
+
+    public String getActiveJobs() {
+        return activeJobs;
+    }
+
+    public void setActiveJobs(String activeJobs) {
+        this.activeJobs = activeJobs;
+    }
+
+    public String getActionStatusCode() {
+        return actionStatusCode;
+    }
+
+    public void setActionStatusCode(String actionStatusCode) {
+        this.actionStatusCode = actionStatusCode;
+    }
+
+    public String getNotationText() {
+        return notationText;
+    }
+
+    public void setNotationText(String notationText) {
+        this.notationText = notationText;
     }
 }

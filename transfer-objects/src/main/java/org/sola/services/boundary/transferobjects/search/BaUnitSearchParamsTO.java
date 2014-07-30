@@ -44,6 +44,7 @@ public class BaUnitSearchParamsTO extends AbstractTO {
     private String planNumber;
     private String propertyManager;
     private String interestRefNum;
+    private String description;
 
     public BaUnitSearchParamsTO() {
         super();
@@ -135,5 +136,13 @@ public class BaUnitSearchParamsTO extends AbstractTO {
 
     public void setInterestRefNum(String interestRefNum) {
         this.interestRefNum = interestRefNum;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

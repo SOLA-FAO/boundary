@@ -36,7 +36,7 @@ public class ApplicationSearchResultTO extends ApplicationSummaryTO {
     private String assigneeName;
     private String contactPerson;
     private String agent;
-    private String serviceList; 
+    private String serviceList;
     
     public ApplicationSearchResultTO(){
         super();
@@ -88,5 +88,8 @@ public class ApplicationSearchResultTO extends ApplicationSummaryTO {
 
     public void setServiceList(String serviceList) {
         this.serviceList = serviceList;
-    }   
+    } 
+    
+    
+    
 }

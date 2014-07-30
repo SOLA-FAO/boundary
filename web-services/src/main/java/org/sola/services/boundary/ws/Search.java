@@ -1,28 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations (FAO).
- * All rights reserved.
+ * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- *    1. Redistributions of source code must retain the above copyright notice,this list
- *       of conditions and the following disclaimer.
- *    2. Redistributions in binary form must reproduce the above copyright notice,this list
- *       of conditions and the following disclaimer in the documentation and/or other
- *       materials provided with the distribution.
- *    3. Neither the name of FAO nor the names of its contributors may be used to endorse or
- *       promote products derived from this software without specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT
- * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.ws;
@@ -51,8 +53,8 @@ import org.sola.services.ejb.search.spatial.QueryForSelect;
 import org.sola.services.ejb.search.spatial.ResultForSelectionInfo;
 
 /**
- * Web Service Boundary class to expose {@linkplain org.sola.services.ejb.search.businesslogic.SearchEJB}
- * methods.
+ * Web Service Boundary class to expose
+ * {@linkplain org.sola.services.ejb.search.businesslogic.SearchEJB} methods.
  */
 @WebService(serviceName = "search-service", targetNamespace = ServiceConstants.SEARCH_WS_NAMESPACE)
 public class Search extends AbstractWebService {
@@ -93,8 +95,8 @@ public class Search extends AbstractWebService {
 
             @Override
             public void run() {
-                PropertyVerifier propertyVerifier =
-                        searchEJB.getPropertyVerifier(applicationNumber, firstPart, lastPart);
+                PropertyVerifier propertyVerifier
+                        = searchEJB.getPropertyVerifier(applicationNumber, firstPart, lastPart);
                 result[0] = GenericTranslator.toTO(
                         propertyVerifier, PropertyVerifierTO.class);
             }
@@ -446,7 +448,7 @@ public class Search extends AbstractWebService {
                 if (searchParams != null) {
                     result[0] = GenericTranslator.toTOList(
                             searchEJB.searchBaUnits(GenericTranslator.fromTO(
-                            searchParams, BaUnitSearchParams.class, null)),
+                                            searchParams, BaUnitSearchParams.class, null)),
                             BaUnitSearchResultTO.class);
                 }
             }
@@ -476,7 +478,7 @@ public class Search extends AbstractWebService {
             public void run() {
                 result[0] = GenericTranslator.toTOList(
                         searchEJB.searchRightsForExport(GenericTranslator.fromTO(
-                        (RightsExportParamsTO) params[0], RightsExportParams.class, null)),
+                                        (RightsExportParamsTO) params[0], RightsExportParams.class, null)),
                         RightsExportResultTO.class);
             }
         });
@@ -568,8 +570,8 @@ public class Search extends AbstractWebService {
             @Override
             public void run() {
                 HashMap<String, String> mapSettings = searchEJB.getMapSettingList();
-                List<ConfigMapLayer> configMapLayerList =
-                        searchEJB.getConfigMapLayerList(languageCodeTmp);
+                List<ConfigMapLayer> configMapLayerList
+                        = searchEJB.getConfigMapLayerList(languageCodeTmp);
                 List<Crs> crsList = searchEJB.getCrsList();
                 MapDefinitionTO mapDefinition = new MapDefinitionTO();
                 mapDefinition.setCrsList(GenericTranslator.toTOList(crsList, CrsTO.class));
@@ -650,7 +652,7 @@ public class Search extends AbstractWebService {
 
         return result[0].toString();
     }
-    
+
     /**
      * See {@linkplain org.sola.services.ejb.source.businesslogic.SearchEJB#
      * getPlanCadastreObjects(
@@ -663,7 +665,7 @@ public class Search extends AbstractWebService {
     @WebMethod(operationName = "GetPlanCadastreObjects")
     public List<SpatialResult> GetPlanCadastreObjects(
             @WebParam(name = "cadastreObjectId") final String cadastreObjectId)
-       throws SOLAFault, UnhandledFault, SOLAAccessFault {
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final Object[] result = {null};
 
@@ -675,6 +677,62 @@ public class Search extends AbstractWebService {
             }
         });
 
-        return (List<SpatialResult>)result[0];
+        return (List<SpatialResult>) result[0];
+    }
+
+    /**
+     * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#getAssignedJobs(java.lang.String)
+     * SearchEJB.getAssignedJobs}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetAssignedJobs")
+    public List<ApplicationSearchResultTO> GetAssignedJobs(@WebParam(name = "locale") String locale)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final String localeTmp = locale;
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                List<ApplicationSearchResult> appList = searchEJB.getAssignedJobs(localeTmp);
+                result[0] = GenericTranslator.toTOList(
+                        appList, ApplicationSearchResultTO.class);
+            }
+        });
+
+        return (List<ApplicationSearchResultTO>) result[0];
+    }
+    
+        /**
+     * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#getPropertiesToAction(java.lang.String)
+     * SearchEJB.getPropertiesToAction}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetPropertiesToAction")
+    public List<BaUnitSearchResultTO> GetPropertiesToAction(@WebParam(name = "locale") String locale)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final String localeTmp = locale;
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                List<BaUnitSearchResult> appList = searchEJB.getPropertiesToAction(localeTmp);
+                result[0] = GenericTranslator.toTOList(
+                        appList, BaUnitSearchResultTO.class);
+            }
+        });
+
+        return (List<BaUnitSearchResultTO>) result[0];
     }
 }

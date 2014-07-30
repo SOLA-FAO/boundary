@@ -39,6 +39,7 @@ public class ApplicationSummaryTO extends AbstractIdTO {
     private String agentId;
     private String contactPersonId;
     private boolean feePaid;
+    private String description;
     
     public ApplicationSummaryTO() {
         super();
@@ -98,5 +99,13 @@ public class ApplicationSummaryTO extends AbstractIdTO {
 
     public void setNr(String nr) {
         this.nr = nr;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -1,28 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations (FAO).
- * All rights reserved.
+ * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- *    1. Redistributions of source code must retain the above copyright notice,this list
- *       of conditions and the following disclaimer.
- *    2. Redistributions in binary form must reproduce the above copyright notice,this list
- *       of conditions and the following disclaimer in the documentation and/or other
- *       materials provided with the distribution.
- *    3. Neither the name of FAO nor the names of its contributors may be used to endorse or
- *       promote products derived from this software without specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT
- * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.ws;
@@ -58,11 +60,11 @@ import org.sola.services.ejb.source.repository.entities.Source;
 import org.sola.services.ejb.system.businesslogic.SystemEJBLocal;
 
 /**
- * Web Service Boundary class to expose Case Management functionality available on  
- * {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB}, 
- * {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB}, 
+ * Web Service Boundary class to expose Case Management functionality available
+ * on  {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB}, 
+ * {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB},
  * {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB} and
- * {@linkplain org.sola.services.ejb.address.businesslogic.AddressEJB}. 
+ * {@linkplain org.sola.services.ejb.address.businesslogic.AddressEJB}.
  */
 @WebService(serviceName = "casemanagement-service", targetNamespace = ServiceConstants.CASE_MAN_WS_NAMESPACE)
 public class CaseManagement extends AbstractWebService {
@@ -117,7 +119,7 @@ public class CaseManagement extends AbstractWebService {
                 if (application != null) {
                     Application newApp = applicationEJB.createApplication(
                             GenericTranslator.fromTO(application, Application.class,
-                            applicationEJB.getApplication(application.getId())), languageCode);
+                                    applicationEJB.getApplication(application.getId())), languageCode);
                     result[0] = GenericTranslator.toTO(newApp, ApplicationTO.class);
                 }
             }
@@ -155,7 +157,7 @@ public class CaseManagement extends AbstractWebService {
 
                     Application newApp = applicationEJB.saveApplication(
                             GenericTranslator.fromTO(application, Application.class,
-                            applicationEJB.getApplication(application.getId())), languageCode);
+                                    applicationEJB.getApplication(application.getId())), languageCode);
                     result[0] = GenericTranslator.toTO(newApp, ApplicationTO.class);
                 }
             }
@@ -188,7 +190,7 @@ public class CaseManagement extends AbstractWebService {
                 if (sourceTO != null) {
                     Source source = sourceEJB.saveSource(
                             GenericTranslator.fromTO(sourceTO, Source.class,
-                            sourceEJB.getSourceById(sourceTO.getId())));
+                                    sourceEJB.getSourceById(sourceTO.getId())));
                     result[0] = GenericTranslator.toTO(source, SourceTO.class);
                 }
             }
@@ -224,7 +226,7 @@ public class CaseManagement extends AbstractWebService {
 
                     Party newParty = partyEJB.saveParty(
                             GenericTranslator.fromTO(party, Party.class,
-                            partyEJB.getParty(party.getId())));
+                                    partyEJB.getParty(party.getId())));
                     result[0] = GenericTranslator.toTO(newParty, PartyTO.class);
                 }
             }
@@ -338,6 +340,31 @@ public class CaseManagement extends AbstractWebService {
     }
 
     /**
+     * See {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB#getPartiesByRole(java.lang.String)
+     * PartyEJB.getPartiesByRole}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetPartiesByRole")
+    public List<PartySummaryTO> GetPartiesByRole(final String partyRole) throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(partyEJB.getPartiesByRole(partyRole),
+                        PartySummaryTO.class);
+            }
+        });
+
+        return (List<PartySummaryTO>) result[0];
+    }
+
+    /**
      * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getUserActions(java.lang.String, java.util.Date, java.util.Date)
      * ApplicationEJB.getUserActions}
      *
@@ -439,7 +466,7 @@ public class CaseManagement extends AbstractWebService {
             @WebParam(name = "powerOfAttorney") final PowerOfAttorneyTO powerOfAttorney,
             @WebParam(name = "languageCode") final String languageCode)
             throws SOLAValidationFault, OptimisticLockingFault, SOLAFault, UnhandledFault, SOLAAccessFault {
-        
+
         final Object[] result = {null};
 
         runUpdateValidation(wsContext, new Runnable() {
@@ -448,14 +475,14 @@ public class CaseManagement extends AbstractWebService {
             public void run() {
                 result[0] = GenericTranslator.toTO(
                         sourceEJB.attachPowerOfAttorneyToTransaction(
-                        serviceId, GenericTranslator.fromTO(powerOfAttorney, 
-                        PowerOfAttorney.class, null), languageCode), PowerOfAttorneyTO.class);
+                                serviceId, GenericTranslator.fromTO(powerOfAttorney,
+                                        PowerOfAttorney.class, null), languageCode), PowerOfAttorneyTO.class);
             }
         });
 
         return (PowerOfAttorneyTO) result[0];
     }
-    
+
     /**
      * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#dettachSourceFromTransaction(java.lang.String)
      * SourceEJB.dettachSourceFromTransaction}
@@ -542,7 +569,7 @@ public class CaseManagement extends AbstractWebService {
 
         return (List<PowerOfAttorneyTO>) result[0];
     }
-    
+
     /**
      * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#getSources(java.util.List)
      * SourceEJB.getSources}
@@ -598,7 +625,7 @@ public class CaseManagement extends AbstractWebService {
 
         return (SourceTO) result[0];
     }
-    
+
     /**
      * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#getSourceById(java.lang.String)
      * SourceEJB.getSourceById}
@@ -626,7 +653,9 @@ public class CaseManagement extends AbstractWebService {
         return (PowerOfAttorneyTO) result[0];
     }
 
-    /** Returns {@link ApplicationTO} by the given transaction ID. */
+    /**
+     * Returns {@link ApplicationTO} by the given transaction ID.
+     */
     @WebMethod(operationName = "getApplicationByTransactionId")
     public ApplicationTO getApplicationByTransactionId(
             @WebParam(name = "transactionId") final String transactionId) throws SOLAFault, UnhandledFault,
@@ -645,7 +674,7 @@ public class CaseManagement extends AbstractWebService {
 
         return (ApplicationTO) result[0];
     }
-            
+
     /**
      * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#serviceActionComplete(java.lang.String, java.lang.String, int)
      * ApplicationEJB.serviceActionComplete}
@@ -1236,8 +1265,8 @@ public class CaseManagement extends AbstractWebService {
 
         return (ServiceTO) result[0];
     }
-    
-     /**
+
+    /**
      * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getSysRegCertificatesByLocation(java.lang.String)
      * CadastreEJB.getSysRegPubDisParcelNameByLocation}
      *
@@ -1265,8 +1294,8 @@ public class CaseManagement extends AbstractWebService {
 
         return (List<SysRegCertificatesTO>) result[0];
     }
-    
-      /**
+
+    /**
      * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getSysRegCertificatesByApplication(java.lang.String)
      * CadastreEJB.getSysRegCertificatesByApplication}
      *
@@ -1296,8 +1325,8 @@ public class CaseManagement extends AbstractWebService {
 
         return (List<SysRegCertificatesTO>) result[0];
     }
-    
-   /**
+
+    /**
      * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getWorkSummary(java.util.Date, java.util.Date)
      * ApplicationEJB.getWorkSummary}
      *
@@ -1326,6 +1355,6 @@ public class CaseManagement extends AbstractWebService {
             });
         }
         return (List<WorkSummaryTO>) result[0];
-    }  
-    
+    }
+
 }
