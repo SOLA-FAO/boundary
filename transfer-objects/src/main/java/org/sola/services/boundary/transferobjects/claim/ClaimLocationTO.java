@@ -7,6 +7,7 @@ public class ClaimLocationTO extends AbstractReadWriteTO {
     private String claimId;
     private String mappedLocation;
     private String gpsLocation;
+    private String description;
     
     public ClaimLocationTO(){
         super();
@@ -42,5 +43,13 @@ public class ClaimLocationTO extends AbstractReadWriteTO {
 
     public void setGpsLocation(String gpsLocation) {
         this.gpsLocation = gpsLocation;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
