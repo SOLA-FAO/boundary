@@ -41,6 +41,7 @@ public class UserTO extends UserSummaryTO {
     private String activationCode;
     private String lastPwordChangeUser;
     private Integer pwordExpiryDays;
+    private List<UserTeamTO> userTeams;
 
     public String getPassword() {
         return password;
@@ -124,6 +125,14 @@ public class UserTO extends UserSummaryTO {
 
     public void setPwordExpiryDays(Integer pwordExpiryDays) {
         this.pwordExpiryDays = pwordExpiryDays;
+    }
+
+    public List<UserTeamTO> getUserTeams() {
+        return userTeams;
+    }
+
+    public void setUserTeams(List<UserTeamTO> userTeams) {
+        this.userTeams = userTeams;
     }
     
 }

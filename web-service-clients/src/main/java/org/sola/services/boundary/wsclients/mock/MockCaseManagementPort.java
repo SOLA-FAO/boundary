@@ -545,12 +545,12 @@ public class MockCaseManagementPort implements CaseManagement {
      * @return default = new ArrayList<ValidationResult>()
      */
     @Override
-    public List<ValidationResult> applicationActionAssign(String applicationId, String userId, String languageCode, int rowVersion)
+    public List<ValidationResult> applicationActionAssign(String applicationId, String userId, String teamId, String languageCode, int rowVersion)
             throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, SOLAValidationFault, UnhandledFault {
         List<ValidationResult> defaultResponse = new ArrayList<ValidationResult>();
         try {
             return getManager().getResponse(CaseManagementClient.APPLICATION_ACTION_ASSIGN,
-                    List.class, defaultResponse, applicationId, userId, languageCode, rowVersion);
+                    List.class, defaultResponse, applicationId, userId, teamId, languageCode, rowVersion);
         } catch (Exception ex) {
             processExceptionAll(ex);
             return null;

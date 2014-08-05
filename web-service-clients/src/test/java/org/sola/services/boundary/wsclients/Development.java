@@ -79,7 +79,7 @@ public class Development {
         
         System.out.println("Test Application actions");
         System.out.println("Test assign:" 
-                + result.applicationActionAssign(app.getId(), "1000", app.getRowVersion()));
+                + result.applicationActionAssign(app.getId(), "1000", null, app.getRowVersion()));
         //System.out.println("Validate result:" + result.validate("3009").size());
     }        
 

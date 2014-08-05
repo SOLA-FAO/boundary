@@ -662,13 +662,14 @@ public interface CaseManagementClient extends AbstractWSClient {
      *
      * @param applicationId The application to perform the action against
      * @param userId Identifier of the user to assign to the application
+     * @param teamId Identifier of the team to assign the application
      * @param rowVersion The current row version of the service
      * @return The results of the validation performed as part of the service
      * action.
      * @throws WebServiceClientException
      */
     List<ValidationResult> applicationActionAssign(
-            String applicationId, String userId, int rowVersion) throws WebServiceClientException;
+            String applicationId, String userId, String teamId, int rowVersion) throws WebServiceClientException;
 
     /**
      * Updates the status of the application to the value indicated by the

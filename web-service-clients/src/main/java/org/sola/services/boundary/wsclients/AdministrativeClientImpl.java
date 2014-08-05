@@ -36,8 +36,6 @@ import org.sola.webservices.administrative.Administrative;
 import org.sola.webservices.administrative.AdministrativeService;
 import org.sola.webservices.transferobjects.ValidationResult;
 import org.sola.webservices.transferobjects.administrative.*;
-import org.sola.webservices.transferobjects.search.RightsExportParamsTO;
-import org.sola.webservices.transferobjects.search.RightsExportResultTO;
 
 /**
  * Implementation class for the {@linkplain AdministrativeClient} interface.
@@ -379,5 +377,18 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
             afterWebMethod(methodName, result, notationTO);
         }
         return result;
+    }
+
+    @Override
+    public void assignTeam(List<BaUnitBasicTO> properties, String teamId) throws WebServiceClientException {
+        final String methodName = AdministrativeClient.ASSIGN_TEAM;
+        try {
+            beforeWebMethod(methodName, properties, teamId);
+            getPort().assignTeam(properties, teamId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, null, properties, teamId);
+        }
     }
 }

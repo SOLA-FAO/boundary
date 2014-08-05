@@ -139,6 +139,10 @@ public interface AdministrativeClient extends AbstractWSClient {
      * Administrative.saveNotation - Identifier for the saveNotation method
      */
     public static final String SAVE_NOTATION = SERVICE_NAME + "saveNotation";
+    /**
+     * Administrative.assignTeam - Identifier for the assignTeam method
+     */
+    public static final String ASSIGN_TEAM = SERVICE_NAME + "assignTeam";
 
     /**
      * Creates a new BA Unit Area for a BaUnitId
@@ -179,7 +183,7 @@ public interface AdministrativeClient extends AbstractWSClient {
     /**
      * Saves any updates to an existing BA Unit. Can also be used to create a
      * new BA Unit, however this method does not set any default values on the
-     * BA Unit like null     {@linkplain #createBaUnit(java.lang.String, org.sola.webservices.transferobjects.administrative.BaUnitTO)
+     * BA Unit like null null null     {@linkplain #createBaUnit(java.lang.String, org.sola.webservices.transferobjects.administrative.BaUnitTO)
      * createBaUnit}. Will also create a new Transaction record for the BA Unit
      * if the Service is not already associated to a Transaction.
      *
@@ -348,4 +352,18 @@ public interface AdministrativeClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     BaUnitNotationTO saveNotation(BaUnitNotationTO notation) throws WebServiceClientException;
+
+    /**
+     * Sets the team for a list of property records. To remove all teams from
+     * the property, set teamId to NULL
+     * <p>
+     * Requires the {@linkplain RolesConstants#ADMINISTRATIVE_BA_UNIT_SAVE} or
+     * {@linkplain RolesConstants#ADMINISTRATIVE_ASSIGN_TEAM} role.</p>
+     * 
+     * @param properties THe list of properties to update
+     * @param teamId The id of the team to set. If NULL, the current team
+     * assigned to the properties is removed.
+     * @throws WebServiceClientException
+     */
+    void assignTeam(List<BaUnitBasicTO> properties, String teamId) throws WebServiceClientException;
 }

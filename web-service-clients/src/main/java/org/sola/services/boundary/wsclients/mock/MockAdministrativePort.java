@@ -478,4 +478,19 @@ public class MockAdministrativePort implements Administrative {
         }
     }
 
+    /**
+     * Response Key = AdministrativeClient.assignTeam
+     *
+     */
+    @Override
+    public void assignTeam(List<BaUnitBasicTO> properties, String teamId)
+            throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, UnhandledFault {
+        try {
+            getManager().getResponse(AdministrativeClient.ASSIGN_TEAM,
+                    BaUnitNotationTO.class, null, properties, teamId);
+        } catch (Exception ex) {
+            processExceptionUpdate(ex);
+        }
+    }
+
 }

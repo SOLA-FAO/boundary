@@ -41,6 +41,7 @@ public class BaUnitBasicTO extends AbstractTO {
     private String statusCode;
     private String transactionId;
     private String description;
+    private int rowVersion;
 
     public BaUnitBasicTO() {
         super();
@@ -108,5 +109,13 @@ public class BaUnitBasicTO extends AbstractTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getRowVersion() {
+        return rowVersion;
+    }
+
+    public void setRowVersion(int rowVersion) {
+        this.rowVersion = rowVersion;
     }
 }

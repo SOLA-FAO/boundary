@@ -1144,6 +1144,7 @@ public class CaseManagement extends AbstractWebService {
     public List<ValidationResult> ApplicationActionAssign(
             @WebParam(name = "applicationId") String applicationId,
             @WebParam(name = "userId") String userId,
+            @WebParam(name = "teamId") String teamId,
             @WebParam(name = "languageCode") String languageCode,
             @WebParam(name = "rowVersion") int rowVersion)
             throws SOLAFault, UnhandledFault, SOLAAccessFault,
@@ -1151,6 +1152,7 @@ public class CaseManagement extends AbstractWebService {
 
         final String applicationIdTmp = applicationId;
         final String userIdTmp = userId;
+        final String teamIdTmp = teamId;
         final String languageCodeTmp = languageCode;
         final int rowVersionTmp = rowVersion;
         final Object[] result = {null};
@@ -1160,7 +1162,7 @@ public class CaseManagement extends AbstractWebService {
             @Override
             public void run() {
                 result[0] = applicationEJB.applicationActionAssign(
-                        applicationIdTmp, userIdTmp, languageCodeTmp, rowVersionTmp);
+                        applicationIdTmp, userIdTmp, teamIdTmp, languageCodeTmp, rowVersionTmp);
             }
         });
 

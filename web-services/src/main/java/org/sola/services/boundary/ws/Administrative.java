@@ -690,4 +690,31 @@ public class Administrative extends AbstractWebService {
 
         return (List<SysRegProgressTO>) result[0];
     }
+
+    /**
+     * See {@linkplain AdministrativeEJB#assignTeam(java.util.List, java.lang.String) 
+     * AdministrativeEJB.assignTeam}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     */
+    @WebMethod(operationName = "AssignTeam")
+    public void assignTeam(
+            @WebParam(name = "propertyList") final List<BaUnitBasicTO> propertyList,
+            @WebParam(name = "teamId") final String teamId)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault, OptimisticLockingFault {
+
+        runUpdate(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                administrativeEJB.assignTeam(
+                        GenericTranslator.fromTOList(propertyList, 
+                                BaUnitBasic.class, null), teamId);
+            }
+
+        });
+    }
 }

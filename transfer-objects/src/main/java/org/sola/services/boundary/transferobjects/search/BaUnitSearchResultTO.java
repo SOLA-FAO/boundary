@@ -48,6 +48,7 @@ public class BaUnitSearchResultTO extends AbstractTO {
     private String activeJobs;
     private String actionStatusCode;
     private String notationText;
+    private int rowVersion; 
 
     public BaUnitSearchResultTO() {
         super();
@@ -171,5 +172,13 @@ public class BaUnitSearchResultTO extends AbstractTO {
 
     public void setNotationText(String notationText) {
         this.notationText = notationText;
+    }
+
+    public int getRowVersion() {
+        return rowVersion;
+    }
+
+    public void setRowVersion(int rowVersion) {
+        this.rowVersion = rowVersion;
     }
 }
