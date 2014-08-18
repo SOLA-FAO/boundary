@@ -29,6 +29,7 @@ public class ClaimTO extends AbstractReadWriteTO {
     private String gpsGeometry;
     private String statusCode;
     private String typeCode;
+    private String recorderName;
     
     public ClaimTO(){
         super();
@@ -224,5 +225,13 @@ public class ClaimTO extends AbstractReadWriteTO {
 
     public void setComments(List<ClaimCommentTO> comments) {
         this.comments = comments;
+    }
+
+    public String getRecorderName() {
+        return recorderName;
+    }
+
+    public void setRecorderName(String recorderName) {
+        this.recorderName = recorderName;
     }
 }
