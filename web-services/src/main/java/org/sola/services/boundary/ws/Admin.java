@@ -610,8 +610,8 @@ public class Admin extends AbstractWebService {
 
         return (List<ConfigPanelLauncherTO>) result[0];
     }
-    
-        /**
+
+    /**
      * Returns the configuration information for the PanelLauncherGroup
      *
      * @throws SOLAFault
@@ -633,5 +633,24 @@ public class Admin extends AbstractWebService {
         });
 
         return (List<PanelLauncherGroupTO>) result[0];
+    }
+
+    /**
+     * Clears / flushes the contents of the Repository Cache.
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "FlushCache")
+    public void FlushCache()
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        runGeneralQuery(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                adminEJB.flushCache();
+            }
+        });
     }
 }

@@ -461,8 +461,8 @@ public class MockAdminPort implements Admin {
         }
 
     }
-    
-        /**
+
+    /**
      * Response Key = AdminClient.GET_PANEL_LAUNCHER_CONFIG
      *
      * @return default = new ArrayList<PanelLauncherGroupTO>()
@@ -476,8 +476,20 @@ public class MockAdminPort implements Admin {
             processExceptionBasic(ex);
             return null;
         }
-
     }
-    
+
+    /**
+     * Response Key = AdminClient.FLUSH_CACHE
+     *
+     */
+    @Override
+    public void flushCache() throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        boolean defaultResponse = false;   
+        try {
+            getManager().getResponse(AdminClient.FLUSH_CACHE, Boolean.class, defaultResponse);
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
+        }
+    }
 
 }
