@@ -8,7 +8,8 @@ public class ClaimSearchParamsTO extends AbstractTO {
     String claimantName;
     String statusCode;
     String languageCode;
-    String recorderName;
+    boolean searchByUser = false;
+    String claimNumber;
     Date lodgementDateFrom;
     Date lodgementDateTo;
     
@@ -22,6 +23,14 @@ public class ClaimSearchParamsTO extends AbstractTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getClaimNumber() {
+        return claimNumber;
+    }
+
+    public void setClaimNumber(String claimNumber) {
+        this.claimNumber = claimNumber;
     }
 
     public String getClaimantName() {
@@ -64,11 +73,11 @@ public class ClaimSearchParamsTO extends AbstractTO {
         this.languageCode = languageCode;
     }
 
-    public String getRecorderName() {
-        return recorderName;
+    public boolean isSearchByUser() {
+        return searchByUser;
     }
 
-    public void setRecorderName(String recorderName) {
-        this.recorderName = recorderName;
+    public void setSearchByUser(boolean searchByUser) {
+        this.searchByUser = searchByUser;
     }
 }
