@@ -42,6 +42,7 @@ import org.sola.webservices.transferobjects.cadastre.SpatialUnitTO;
 import org.sola.webservices.transferobjects.cadastre.SpatialValueAreaTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreRedefinitionTO;
+import org.sola.webservices.transferobjects.transaction.TransactionStateLandTO;
 
 /**
  * Implementation class for the {@linkplain CadastreClient} interface.
@@ -400,5 +401,39 @@ public class CadastreClientImpl extends AbstractWSClientImpl implements Cadastre
         } finally {
             afterWebMethod(methodName, items);
         }
+    }
+    
+        @Override
+    public List<ValidationResult> saveStateLandChange(
+            TransactionStateLandTO transactionTO)
+            throws WebServiceClientException {
+        List<ValidationResult> result = null;
+        final String methodName = CadastreClient.SAVE_STATE_LAND_CHANGE;
+        String languageCode = this.getLanguageCode();
+        try {
+            beforeWebMethod(methodName, transactionTO, languageCode);
+            result = getPort().saveStateLandChange(transactionTO, languageCode);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, transactionTO, languageCode);
+        }
+        return result;
+    }
+    
+        @Override
+    public TransactionStateLandTO getStateLandChange(String serviceId)
+            throws WebServiceClientException {
+        TransactionStateLandTO result = null;
+        final String methodName = CadastreClient.GET_STATE_LAND_CHANGE;
+        try {
+            beforeWebMethod(methodName, serviceId);
+            result = getPort().getStateLandChange(serviceId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, serviceId);
+        }
+        return result;
     }
 }

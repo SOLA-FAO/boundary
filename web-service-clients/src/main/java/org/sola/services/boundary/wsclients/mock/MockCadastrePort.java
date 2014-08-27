@@ -40,6 +40,7 @@ import org.sola.webservices.transferobjects.cadastre.SpatialUnitTO;
 import org.sola.webservices.transferobjects.cadastre.SpatialValueAreaTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreRedefinitionTO;
+import org.sola.webservices.transferobjects.transaction.TransactionStateLandTO;
 
 /**
  * Provides a mock implementation for the
@@ -505,6 +506,44 @@ public class MockCadastrePort implements Cadastre {
             List<SpatialUnitTO> items, String languageCode) 
             throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, 
             SOLAValidationFault, UnhandledFault {
+    }
+    
+    
+        /**
+     * Response Key = CadastreClient.SAVE_STATE_LAND_CHANGE
+     *
+     * @return default = new ArrayList<ValidationResult>()
+     */
+    @Override
+    public List<ValidationResult> saveStateLandChange(TransactionStateLandTO transactionTO,
+            String languageCode) throws OptimisticLockingFault, SOLAAccessFault, SOLAFault,
+            SOLAValidationFault, UnhandledFault {
+        List<ValidationResult> defaultResponse = new ArrayList<ValidationResult>();
+        try {
+            return getManager().getResponse(CadastreClient.SAVE_STATE_LAND_CHANGE,
+                    List.class, defaultResponse, transactionTO, languageCode);
+        } catch (Exception ex) {
+            processExceptionAll(ex);
+            return null;
+        }
+    }
+    
+        /**
+     * Response Key = CadastreClient.GET_STATE_LAND_CHANGE
+     *
+     * @return default = new TransactionStateLandTO()
+     */
+    @Override
+    public TransactionStateLandTO getStateLandChange(String serviceId)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        TransactionStateLandTO defaultResponse = new TransactionStateLandTO();
+        try {
+            return getManager().getResponse(CadastreClient.GET_STATE_LAND_CHANGE,
+                    TransactionStateLandTO.class, defaultResponse, serviceId);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
     }
     
 }

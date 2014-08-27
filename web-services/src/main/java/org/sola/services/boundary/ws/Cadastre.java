@@ -1,28 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations (FAO).
- * All rights reserved.
+ * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- *    1. Redistributions of source code must retain the above copyright notice,this list
- *       of conditions and the following disclaimer.
- *    2. Redistributions in binary form must reproduce the above copyright notice,this list
- *       of conditions and the following disclaimer in the documentation and/or other
- *       materials provided with the distribution.
- *    3. Neither the name of FAO nor the names of its contributors may be used to endorse or
- *       promote products derived from this software without specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT
- * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.ws;
@@ -43,6 +45,7 @@ import org.sola.services.boundary.transferobjects.cadastre.SpatialUnitTO;
 import org.sola.services.boundary.transferobjects.cadastre.SpatialValueAreaTO;
 import org.sola.services.boundary.transferobjects.transaction.TransactionCadastreChangeTO;
 import org.sola.services.boundary.transferobjects.transaction.TransactionCadastreRedefinitionTO;
+import org.sola.services.boundary.transferobjects.transaction.TransactionStateLandTO;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.br.ValidationResult;
 import org.sola.services.common.contracts.GenericTranslator;
@@ -55,10 +58,12 @@ import org.sola.services.ejb.cadastre.repository.entities.SpatialUnitGroup;
 import org.sola.services.ejb.transaction.businesslogic.TransactionEJBLocal;
 import org.sola.services.ejb.transaction.repository.entities.TransactionCadastreChange;
 import org.sola.services.ejb.transaction.repository.entities.TransactionCadastreRedefinition;
+import org.sola.services.ejb.transaction.repository.entities.TransactionStateLand;
 import org.sola.services.ejb.transaction.repository.entities.TransactionType;
 
 /**
- * Web Service Boundary class to expose {@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB}
+ * Web Service Boundary class to expose
+ * {@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB}
  * methods.
  */
 @WebService(serviceName = "cadastre-service", targetNamespace = ServiceConstants.CADASTRE_WS_NAMESPACE)
@@ -257,13 +262,13 @@ public class Cadastre extends AbstractWebService {
 
             @Override
             public void run() {
-                TransactionCadastreChange targetTransaction =
-                        transactionEJB.getTransactionById(
-                        transactionTO.getId(), TransactionCadastreChange.class);
+                TransactionCadastreChange targetTransaction
+                        = transactionEJB.getTransactionById(
+                                transactionTO.getId(), TransactionCadastreChange.class);
                 TransactionCadastreChange transactionCadastreChange = GenericTranslator.fromTO(
                         transactionTO, TransactionCadastreChange.class, targetTransaction);
-                result[0] = transactionEJB.saveTransaction(
-                        transactionCadastreChange, TransactionType.CADASTRE_CHANGE, languageCodeTmp);
+                result[0] = transactionEJB.saveTransaction(transactionCadastreChange,
+                        TransactionType.CADASTRE_CHANGE, languageCodeTmp);
             }
         });
 
@@ -458,12 +463,12 @@ public class Cadastre extends AbstractWebService {
 
             @Override
             public void run() {
-                TransactionCadastreRedefinition targetTransaction =
-                        transactionEJB.getTransactionById(
-                        transactionTOTmp.getId(), TransactionCadastreRedefinition.class);
-                TransactionCadastreRedefinition transactionCadastreRedefinition =
-                        GenericTranslator.fromTO(
-                        transactionTOTmp, TransactionCadastreRedefinition.class, targetTransaction);
+                TransactionCadastreRedefinition targetTransaction
+                        = transactionEJB.getTransactionById(
+                                transactionTOTmp.getId(), TransactionCadastreRedefinition.class);
+                TransactionCadastreRedefinition transactionCadastreRedefinition
+                        = GenericTranslator.fromTO(
+                                transactionTOTmp, TransactionCadastreRedefinition.class, targetTransaction);
 
                 result[0] = transactionEJB.saveTransaction(transactionCadastreRedefinition,
                         TransactionType.REDEFINE_CADASTRE, languageCodeTmp);
@@ -496,15 +501,15 @@ public class Cadastre extends AbstractWebService {
             public void run() {
                 result[0] = GenericTranslator.toTO(
                         transactionEJB.getTransactionByServiceId(
-                        serviceIdTmp, false, TransactionCadastreRedefinition.class),
+                                serviceIdTmp, false, TransactionCadastreRedefinition.class),
                         TransactionCadastreRedefinitionTO.class);
             }
         });
 
         return (TransactionCadastreRedefinitionTO) result[0];
     }
-    
-     /**
+
+    /**
      * See {{@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#getSpatialValueArea(java.lang.String)
      * CadastreEJB.getSpatialValueArea(String colist )}
      *
@@ -531,7 +536,7 @@ public class Cadastre extends AbstractWebService {
         return (SpatialValueAreaTO) result[0];
     }
 
-     /**
+    /**
      * See {{@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#getNewCadastreObjectIdentifier(byte[], java.lang.String)
      * CadastreEJB.getNewCadastreObjectIdentifier(byte[], java.lang.String)}
      *
@@ -556,21 +561,20 @@ public class Cadastre extends AbstractWebService {
 
         return (NewCadastreObjectIdentifier) result[0];
     }
-    
-     /**
+
+    /**
      * See {{@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#saveSpatialUnitGroups(List<SpatialUnitGroupTO>, String)
      * CadastreEJB.saveSpatialUnitGroups(byte[], Integer, Integer)}
-     * 
-     * @param items 
-     * @param languageCode 
-     * 
+     *
+     * @param items
+     * @param languageCode
+     *
      * @throws SOLAAccessFault
      * @throws SOLAFault
      * @throws UnhandledFault
      * @throws OptimisticLockingFault
      * @throws SOLAValidationFault
      */
-
     @WebMethod(operationName = "SaveSpatialUnitGroups")
     public void SaveSpatialUnitGroups(
             @WebParam(name = "items") List<SpatialUnitGroupTO> items,
@@ -586,31 +590,30 @@ public class Cadastre extends AbstractWebService {
             @Override
             public void run() {
                 List<String> ids = new ArrayList<String>();
-                for(SpatialUnitGroupTO item: itemsTmp){
+                for (SpatialUnitGroupTO item : itemsTmp) {
                     ids.add(item.getId());
                 }
-                List<SpatialUnitGroup> spatialUnitGroupListToSave =
-                        GenericTranslator.fromTOList(itemsTmp, SpatialUnitGroup.class, 
-                        cadastreEJB.getSpatialUnitGroupsByIds(ids));
+                List<SpatialUnitGroup> spatialUnitGroupListToSave
+                        = GenericTranslator.fromTOList(itemsTmp, SpatialUnitGroup.class,
+                                cadastreEJB.getSpatialUnitGroupsByIds(ids));
                 cadastreEJB.saveSpatialUnitGroups(spatialUnitGroupListToSave, languageCodeTmp);
             }
         });
     }
 
-     /**
+    /**
      * See {{@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#getSpatialUnitGroups(byte[], Integer, Integer)
      * CadastreEJB.getSpatialUnitGroups(byte[], Integer, Integer)}
-     * 
-     * @param filteringGeometry 
-     * @param hierarchyLevel 
-     * @param srid 
-     * 
+     *
+     * @param filteringGeometry
+     * @param hierarchyLevel
+     * @param srid
+     *
      * @throws SOLAAccessFault
      * @throws SOLAFault
      * @throws UnhandledFault
      */
-
-     @WebMethod(operationName = "GetSpatialUnitGroups")
+    @WebMethod(operationName = "GetSpatialUnitGroups")
     public List<SpatialUnitGroupTO> GetSpatialUnitGroups(
             @WebParam(name = "filteringGeometry") final byte[] filteringGeometry,
             @WebParam(name = "hierarchyLevel") final Integer hierarchyLevel,
@@ -631,7 +634,7 @@ public class Cadastre extends AbstractWebService {
 
         return (List<SpatialUnitGroupTO>) result[0];
     }
-     
+
     /**
      * Uses the {@linkplain org.sola.services.ejb.system.businesslogic.SystemEJB#getCodeEntityList(java.lang.Class, java.lang.String)
      * SystemEJB.getCodeEntityList} to retrieve the BrTechnicalType codes.
@@ -658,20 +661,19 @@ public class Cadastre extends AbstractWebService {
         return (List<LevelTO>) result[0];
     }
 
-     /**
+    /**
      * See {{@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#getSpatialUnits(byte[], String, Integer)
      * CadastreEJB.getSpatialUnits(byte[], String, Integer)}
-     * 
-     * @param filteringGeometry 
+     *
+     * @param filteringGeometry
      * @param levelId
-     * @param srid 
-     * 
+     * @param srid
+     *
      * @throws SOLAAccessFault
      * @throws SOLAFault
      * @throws UnhandledFault
      */
-
-     @WebMethod(operationName = "GetSpatialUnits")
+    @WebMethod(operationName = "GetSpatialUnits")
     public List<SpatialUnitTO> GetSpatialUnits(
             @WebParam(name = "filteringGeometry") final byte[] filteringGeometry,
             @WebParam(name = "levelId") final String levelId,
@@ -693,20 +695,19 @@ public class Cadastre extends AbstractWebService {
         return (List<SpatialUnitTO>) result[0];
     }
 
-     /**
+    /**
      * See {{@linkplain org.sola.services.ejb.cadastre.businesslogic.CadastreEJB#saveSpatialUnits(List<SpatialUnitTO>, String)
      * CadastreEJB.saveSpatialUnits(byte[], Integer, Integer)}
-     * 
-     * @param items 
-     * @param languageCode 
-     * 
+     *
+     * @param items
+     * @param languageCode
+     *
      * @throws SOLAAccessFault
      * @throws SOLAFault
      * @throws UnhandledFault
      * @throws OptimisticLockingFault
      * @throws SOLAValidationFault
      */
-
     @WebMethod(operationName = "SaveSpatialUnits")
     public void SaveSpatialUnits(
             @WebParam(name = "items") List<SpatialUnitTO> items,
@@ -722,14 +723,78 @@ public class Cadastre extends AbstractWebService {
             @Override
             public void run() {
                 List<String> ids = new ArrayList<String>();
-                for(SpatialUnitTO item: itemsTmp){
+                for (SpatialUnitTO item : itemsTmp) {
                     ids.add(item.getId());
                 }
-                List<SpatialUnit> spatialUnitGroupListToSave =
-                        GenericTranslator.fromTOList(itemsTmp, SpatialUnit.class, 
-                        cadastreEJB.getSpatialUnitsByIds(ids));
+                List<SpatialUnit> spatialUnitGroupListToSave
+                        = GenericTranslator.fromTOList(itemsTmp, SpatialUnit.class,
+                                cadastreEJB.getSpatialUnitsByIds(ids));
                 cadastreEJB.saveSpatialUnits(spatialUnitGroupListToSave, languageCodeTmp);
             }
         });
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.transaction.businesslogic.TransactionEJB#saveTransaction(org.sola.services.ejb.transaction.repository.entities.TransactionBasic,
+     * java.lang.String, java.lang.String) TransactionEJB.saveTransaction}
+     *
+     * @throws SOLAValidationFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "SaveStateLandChange")
+    public List<ValidationResult> SaveStateLandChange(
+            final @WebParam(name = "transactionStateLandTO") TransactionStateLandTO transactionTO,
+            final @WebParam(name = "languageCode") String languageCode)
+            throws SOLAValidationFault, OptimisticLockingFault,
+            SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runUpdateValidation(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                TransactionStateLand targetTransaction
+                        = transactionEJB.getTransactionById(
+                                transactionTO.getId(), TransactionStateLand.class);
+                result[0] = transactionEJB.saveTransaction(GenericTranslator.fromTO(
+                        transactionTO, TransactionStateLand.class, targetTransaction),
+                        TransactionType.CHANGE_STATE_LAND_PARCELS, languageCode);
+            }
+        });
+
+        return (List<ValidationResult>) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.transaction.businesslogic.TransactionEJB#getTransactionByServiceId(java.lang.String,
+     * boolean, java.lang.Class)
+     * TransactionEJB.getTransactionByServiceId}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetStateLandChange")
+    public TransactionStateLandTO GetStateLandChange(
+            final @WebParam(name = "serviceId") String serviceId)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTO(
+                        transactionEJB.getTransactionByServiceId(serviceId, false, TransactionStateLand.class),
+                        TransactionStateLandTO.class);
+            }
+        });
+
+        return (TransactionStateLandTO) result[0];
     }
 }

@@ -25,58 +25,25 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.sola.services.boundary.transferobjects.transaction;
 
 import java.util.List;
 import org.sola.services.boundary.transferobjects.cadastre.CadastreObjectTO;
-import org.sola.services.boundary.transferobjects.cadastre.CadastreObjectTargetTO;
-import org.sola.services.boundary.transferobjects.cadastre.SurveyPointTO;
 
 /**
  *
- * @author Elton Manoku
+ * @author soladev
  */
-public class TransactionCadastreChangeTO extends TransactionTO {
+public class TransactionStateLandTO extends TransactionTO {
 
-    List<CadastreObjectTO> CadastreObjectList;
-    List<SurveyPointTO> surveyPointList;
-    private List<CadastreObjectTargetTO> cadastreObjectTargetList;
-    private List<TransactionSourceTO> transactionSourceList;
+    private List<CadastreObjectTO> stateLandParcels;
 
-    public List<CadastreObjectTO> getCadastreObjectList() {
-        return CadastreObjectList;
+    public List<CadastreObjectTO> getStateLandParcels() {
+        return stateLandParcels;
     }
 
-    public void setCadastreObjectList(List<CadastreObjectTO> CadastreObjectList) {
-        this.CadastreObjectList = CadastreObjectList;
-    }
-
-    public List<SurveyPointTO> getSurveyPointList() {
-        return surveyPointList;
-    }
-
-    public void setSurveyPointList(List<SurveyPointTO> surveyPointList) {
-        this.surveyPointList = surveyPointList;
-    }
-
-    public List<CadastreObjectTargetTO> getCadastreObjectTargetList() {
-        return cadastreObjectTargetList;
-    }
-
-    public void setCadastreObjectTargetList(List<CadastreObjectTargetTO> cadastreObjectTargetList) {
-        this.cadastreObjectTargetList = cadastreObjectTargetList;
-    }
-
-    public List<TransactionSourceTO> getTransactionSourceList() {
-        return transactionSourceList;
-    }
-
-    public void setTransactionSourceList(List<TransactionSourceTO> transactionSourceList) {
-        this.transactionSourceList = transactionSourceList;
+    public void setStateLandParcels(List<CadastreObjectTO> stateLandParcels) {
+        this.stateLandParcels = stateLandParcels;
     }
 
 }

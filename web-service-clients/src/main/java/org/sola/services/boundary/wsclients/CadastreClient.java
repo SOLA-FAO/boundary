@@ -1,28 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations (FAO).
- * All rights reserved.
+ * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- *    1. Redistributions of source code must retain the above copyright notice,this list
- *       of conditions and the following disclaimer.
- *    2. Redistributions in binary form must reproduce the above copyright notice,this list
- *       of conditions and the following disclaimer in the documentation and/or other
- *       materials provided with the distribution.
- *    3. Neither the name of FAO nor the names of its contributors may be used to endorse or
- *       promote products derived from this software without specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT
- * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.wsclients;
@@ -37,13 +39,14 @@ import org.sola.webservices.transferobjects.cadastre.LevelTO;
 import org.sola.webservices.transferobjects.cadastre.SpatialUnitGroupTO;
 import org.sola.webservices.transferobjects.cadastre.SpatialUnitTO;
 import org.sola.webservices.transferobjects.cadastre.SpatialValueAreaTO;
-import org.sola.webservices.transferobjects.transaction.TransactionBulkOperationSpatialTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreChangeTO;
 import org.sola.webservices.transferobjects.transaction.TransactionCadastreRedefinitionTO;
+import org.sola.webservices.transferobjects.transaction.TransactionStateLandTO;
 
 /**
- * Interface for the Cadastre Service. Implemented by {@linkplain CadastreClientImpl}.
- * To obtain a reference to the Cadastre Service, use {@linkplain WSManager#getCadastreService()}
+ * Interface for the Cadastre Service. Implemented by
+ * {@linkplain CadastreClientImpl}. To obtain a reference to the Cadastre
+ * Service, use {@linkplain WSManager#getCadastreService()}
  *
  * @see CadastreClientImpl
  * @see WSManager#getCadastreService()
@@ -123,26 +126,36 @@ public interface CadastreClient extends AbstractWSClient {
      * getTransactionCadastreRedefinition method
      */
     public static final String GET_TRANSACTION_CADASTRE_REDFN = SERVICE_NAME + "getTransactionCadastreRedefinition";
-    
-    
+
     public static final String GET_SPATIAL_VALUE_AREA = SERVICE_NAME + "getSpatialValueArea";
- 
+
     public static final String GET_NEW_CADASTRE_OBJECT_IDENTIFIER = SERVICE_NAME + "getNewCadastreObjectIdentifier";
 
-    public static final String GET_SPATIAL_UNIT_GROUPS  = SERVICE_NAME + "getSpatialUnitGroups";
+    public static final String GET_SPATIAL_UNIT_GROUPS = SERVICE_NAME + "getSpatialUnitGroups";
 
-    public static final String SAVE_SPATIAL_UNIT_GROUPS  = SERVICE_NAME + "saveSpatialUnitGroups";
-    
-    public static final String GET_LEVELS  = SERVICE_NAME + "getLevels";
+    public static final String SAVE_SPATIAL_UNIT_GROUPS = SERVICE_NAME + "saveSpatialUnitGroups";
 
-    public static final String GET_SPATIAL_UNITS  = SERVICE_NAME + "getSpatialUnits";
+    public static final String GET_LEVELS = SERVICE_NAME + "getLevels";
 
-    public static final String SAVE_SPATIAL_UNITS  = SERVICE_NAME + "saveSpatialUnits";
+    public static final String GET_SPATIAL_UNITS = SERVICE_NAME + "getSpatialUnits";
+
+    public static final String SAVE_SPATIAL_UNITS = SERVICE_NAME + "saveSpatialUnits";
 
     /**
-     * Returns a maximum of 10 cadastre objects that have a name first part and/or name last part
-     * that matches the specified search string. This method supports partial matches and is case
-     * insensitive.
+     * Cadastre.saveStateLandChange - Identifier for the saveStateLandChange
+     * method
+     */
+    public static final String SAVE_STATE_LAND_CHANGE = SERVICE_NAME + "saveStateLandChange";
+    /**
+     * Cadastre.getStateLandChange - Identifier for the getStateLandChange
+     * method
+     */
+    public static final String GET_STATE_LAND_CHANGE = SERVICE_NAME + "getStateLandChange";
+
+    /**
+     * Returns a maximum of 10 cadastre objects that have a name first part
+     * and/or name last part that matches the specified search string. This
+     * method supports partial matches and is case insensitive.
      *
      * @param searchString The search string to use
      * @return The list of cadastre objects matching the search string
@@ -205,6 +218,7 @@ public interface CadastreClient extends AbstractWSClient {
     TransactionCadastreChangeTO getTransactionCadastreChange(String serviceId);
 
     TransactionCadastreChangeTO getTransactionCadastreChangeById(String id);
+
     /**
      * Retrieves a list of cadastre object matching the list of ids provided.
      *
@@ -215,9 +229,10 @@ public interface CadastreClient extends AbstractWSClient {
     /**
      * Retrieves all node points from the underlying cadastre objects that
      * intersect the specified bounding box coordinates. All of the node points
-     * within the bounding box are used to create a single geometry - {@linkplain CadastreObjectNode#geom}.
-     * The cadastre objects used as the source of the node points are also
-     * captured in the {@linkplain CadastreObjectNode#cadastreObjectList}.
+     * within the bounding box are used to create a single geometry -
+     * {@linkplain CadastreObjectNode#geom}. The cadastre objects used as the
+     * source of the node points are also captured in the
+     * {@linkplain CadastreObjectNode#cadastreObjectList}.
      *
      * @param xMin The xMin ordinate of the bounding box
      * @param yMin The yMin ordinate of the bounding box
@@ -255,9 +270,8 @@ public interface CadastreClient extends AbstractWSClient {
      * @param serviceId The identifier of the transaction
      */
     TransactionCadastreRedefinitionTO getTransactionCadastreRedefinition(String serviceId);
-    
-    
-     /**
+
+    /**
      * Retrieves the BA Unit matching the supplied identifier.
      *
      * @param id The BA Unit identifier
@@ -265,57 +279,77 @@ public interface CadastreClient extends AbstractWSClient {
      * @return The BA Unit details or null if the identifier is invalid.
      * @throws WebServiceClientException
      */
-   SpatialValueAreaTO getSpatialValueArea(String colist) throws WebServiceClientException;
-    
-   /**
-    * Gets a cadastre object identifier from the server.
-    * @param geom The geometry for which to ask the identifier
-    * @param cadastreObjectType The type of the cadastre object
-    * @return 
-    */ 
-   NewCadastreObjectIdentifier getNewCadastreObjectIdentifier(byte[] geom, String cadastreObjectType);
-   
-   /**
-    * It retrieves the spatial unit groups that intersect with the filteringGeometry
-    * and that are of the type: hierarchyLevel.
-    * 
-    * @param filteringGeometry
-    * @param hierarchyLevel
-    * @param srid
-    * @return 
-    */
-   List<SpatialUnitGroupTO> getSpatialUnitGroups(
-            byte[] filteringGeometry, Integer hierarchyLevel, int srid);
-   
-   /**
-    * It saves the list of spatial unit groups.
-    * 
-    * @param items 
-    */
-   void saveSpatialUnitGroups(List<SpatialUnitGroupTO> items);
-   
-   /**
-    * Gets the list of editable levels.
-    * @return 
-    */
-   List<LevelTO> getLevels();
+    SpatialValueAreaTO getSpatialValueArea(String colist) throws WebServiceClientException;
 
-   /**
-    * It retrieves the spatial units that intersect with the filteringGeometry
-    * and that are of the type: levelId.
-    * 
-    * @param filteringGeometry
-    * @param levelId
-    * @param srid
-    * @return 
-    */
-   List<SpatialUnitTO> getSpatialUnits(
+    /**
+     * Gets a cadastre object identifier from the server.
+     *
+     * @param geom The geometry for which to ask the identifier
+     * @param cadastreObjectType The type of the cadastre object
+     * @return
+     */
+    NewCadastreObjectIdentifier getNewCadastreObjectIdentifier(byte[] geom, String cadastreObjectType);
+
+    /**
+     * It retrieves the spatial unit groups that intersect with the
+     * filteringGeometry and that are of the type: hierarchyLevel.
+     *
+     * @param filteringGeometry
+     * @param hierarchyLevel
+     * @param srid
+     * @return
+     */
+    List<SpatialUnitGroupTO> getSpatialUnitGroups(
+            byte[] filteringGeometry, Integer hierarchyLevel, int srid);
+
+    /**
+     * It saves the list of spatial unit groups.
+     *
+     * @param items
+     */
+    void saveSpatialUnitGroups(List<SpatialUnitGroupTO> items);
+
+    /**
+     * Gets the list of editable levels.
+     *
+     * @return
+     */
+    List<LevelTO> getLevels();
+
+    /**
+     * It retrieves the spatial units that intersect with the filteringGeometry
+     * and that are of the type: levelId.
+     *
+     * @param filteringGeometry
+     * @param levelId
+     * @param srid
+     * @return
+     */
+    List<SpatialUnitTO> getSpatialUnits(
             byte[] filteringGeometry, String levelId, int srid);
 
-   /**
-    * It saves the list of spatial units.
-    * 
-    * @param items 
-    */
-   void saveSpatialUnits(List<SpatialUnitTO> items);
+    /**
+     * It saves the list of spatial units.
+     *
+     * @param items
+     */
+    void saveSpatialUnits(List<SpatialUnitTO> items);
+
+    /**
+     * Can be used to create a new state land parcels or save any updates to the
+     * details of an existing state land parcel.
+     *
+     * @param transactionTO Transaction TO grouping the changes required to one
+     * or more state land parcels
+     * @return The cadastre object after the save is completed.
+     */
+    List<ValidationResult> saveStateLandChange(TransactionStateLandTO transactionTO);
+
+    /**
+     * Retrieves a set of state land parcels being edited for this service.
+     *
+     * @param serviceId
+     * @return
+     */
+    TransactionStateLandTO getStateLandChange(String serviceId);
 }
