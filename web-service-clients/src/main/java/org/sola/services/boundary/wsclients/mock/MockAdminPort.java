@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.sola.services.boundary.wsclients.AdminClient;
 import org.sola.webservices.admin.*;
+import org.sola.webservices.transferobjects.EntityTable;
 import org.sola.webservices.transferobjects.security.GroupSummaryTO;
 import org.sola.webservices.transferobjects.security.GroupTO;
 import org.sola.webservices.transferobjects.security.RoleTO;
@@ -484,11 +485,26 @@ public class MockAdminPort implements Admin {
      */
     @Override
     public void flushCache() throws SOLAAccessFault, SOLAFault, UnhandledFault {
-        boolean defaultResponse = false;   
+        boolean defaultResponse = false;
         try {
             getManager().getResponse(AdminClient.FLUSH_CACHE, Boolean.class, defaultResponse);
         } catch (Exception ex) {
             processExceptionBasic(ex);
+        }
+    }
+
+    /**
+     * Response Key = AdminClient.SAVE_SECURITY_CLASSIFICATIONS
+     *
+     */
+    @Override
+    public boolean saveSecurityClassifications(List<String> entityIds, EntityTable entityTable,
+            String classificationCode, String redactCode) throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, UnhandledFault {
+        try {
+            return getManager().getResponse(AdminClient.SAVE_SECURITY_CLASSIFICATIONS, Boolean.class, false);
+        } catch (Exception ex) {
+            processExceptionUpdate(ex);
+            return false;
         }
     }
 

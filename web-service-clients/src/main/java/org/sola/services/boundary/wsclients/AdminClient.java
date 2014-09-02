@@ -36,6 +36,7 @@ import org.sola.webservices.admin.ConfigPanelLauncherTO;
 import org.sola.webservices.admin.LanguageTO;
 import org.sola.webservices.admin.PanelLauncherGroupTO;
 import org.sola.webservices.admin.SettingTO;
+import org.sola.webservices.transferobjects.EntityTable;
 import org.sola.webservices.transferobjects.security.GroupSummaryTO;
 import org.sola.webservices.transferobjects.security.GroupTO;
 import org.sola.webservices.transferobjects.security.RoleTO;
@@ -148,7 +149,13 @@ public interface AdminClient extends AbstractWSClient {
      /**
      * Admin.flushCache - Identifier for the flushCache method
      */
-    public static final String FLUSH_CACHE = SERVICE_NAME + "flushCache"; 
+    public static final String FLUSH_CACHE = SERVICE_NAME + "flushCache";
+    /**
+     * Admin.saveSecurityClassifications - Identifier for the saveSecurityClassifications method
+     */
+    public static final String SAVE_SECURITY_CLASSIFICATIONS = SERVICE_NAME + "saveSecurityClassifications";
+    
+    
 
     /**
      * Returns the details for the currently authenticated user. <p>No role is required to execute
@@ -362,4 +369,19 @@ public interface AdminClient extends AbstractWSClient {
      * Requires the {@linkplain RolesConstants#ADMIN_MANAGE_REFDATA} role. </p>
      */
     boolean flushCache() throws WebServiceClientException; 
+    
+    /**
+     * Updates the security classifications for a list of entities and
+     * identified by the entityTable and entity ids
+     * <p>
+     * Requires the {@linkplain RolesConstants#CLASSIFICATION_CHANGE_CLASS} role. </p>
+     *
+     * @param entityIds The ids of the entities to update
+     * @param entityTable Enumeration indicating the entity table to update
+     * @param classificationCode The new classification code to assign to the
+     * entities
+     * @param redactCode The new redactCode to assign to the entities
+     */
+     boolean saveSecurityClassifications(List<String> entityIds, EntityTable entityTable,
+            String classificationCode, String redactCode);
 }

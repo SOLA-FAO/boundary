@@ -47,6 +47,7 @@ import org.sola.services.boundary.transferobjects.system.ConfigPanelLauncherTO;
 import org.sola.services.boundary.transferobjects.system.LanguageTO;
 import org.sola.services.boundary.transferobjects.system.PanelLauncherGroupTO;
 import org.sola.services.boundary.transferobjects.system.SettingTO;
+import org.sola.services.common.EntityTable;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.contracts.GenericTranslator;
 import org.sola.services.common.faults.*;
@@ -652,5 +653,39 @@ public class Admin extends AbstractWebService {
                 adminEJB.flushCache();
             }
         });
+    }
+
+    /**
+     * Updates the security classifications for a list of entities and
+     * identified by the entityTable and entity ids
+     *
+     * @param entityIds The ids of the entities to update
+     * @param entityTable Enumeration indicating the entity table to update
+     * @param classificationCode The new classification code to assign to the
+     * entities
+     * @param redactCode The new redactCode to assign to the entities
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     */
+    @WebMethod(operationName = "SaveSecurityClassifications")
+    public boolean SaveSecurityClassifications(
+            @WebParam(name = "entityIds") final List<String> entityIds,
+            @WebParam(name = "entityTable") final EntityTable entityTable,
+            @WebParam(name = "classificationCode") final String classificationCode,
+            @WebParam(name = "redactCode") final String redactCode)
+            throws OptimisticLockingFault, SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        runUpdate(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                adminEJB.saveSecurityClassifications(entityIds, entityTable,
+                        classificationCode, redactCode);
+            }
+        });
+
+        return true;
     }
 }

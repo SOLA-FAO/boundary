@@ -33,6 +33,7 @@ import java.util.List;
 import javax.xml.namespace.QName;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.admin.*;
+import org.sola.webservices.transferobjects.EntityTable;
 import org.sola.webservices.transferobjects.security.GroupSummaryTO;
 import org.sola.webservices.transferobjects.security.GroupTO;
 import org.sola.webservices.transferobjects.security.UserTO;
@@ -415,6 +416,21 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
             result = false;
         } finally {
             afterWebMethod(methodName, result);
+        }
+        return result;
+    }
+
+    @Override
+    public boolean saveSecurityClassifications(List<String> entityIds, EntityTable entityTable, String classificationCode, String redactCode) {
+        final String methodName = AdminClient.SAVE_SECURITY_CLASSIFICATIONS;
+        boolean result = false;
+        try {
+            beforeWebMethod(methodName, entityIds, entityTable, classificationCode, redactCode);
+            result = getPort().saveSecurityClassifications(entityIds, entityTable, classificationCode, redactCode);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, null, entityIds, entityTable, classificationCode, redactCode);
         }
         return result;
     }
