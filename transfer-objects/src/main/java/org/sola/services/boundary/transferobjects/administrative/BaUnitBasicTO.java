@@ -41,6 +41,7 @@ public class BaUnitBasicTO extends AbstractTO {
     private String statusCode;
     private String transactionId;
     private String description;
+    private String stateLandStatusCode;
     private int rowVersion;
 
     public BaUnitBasicTO() {
@@ -117,5 +118,13 @@ public class BaUnitBasicTO extends AbstractTO {
 
     public void setRowVersion(int rowVersion) {
         this.rowVersion = rowVersion;
+    }
+
+    public String getStateLandStatusCode() {
+        return stateLandStatusCode;
+    }
+
+    public void setStateLandStatusCode(String stateLandStatusCode) {
+        this.stateLandStatusCode = stateLandStatusCode;
     }
 }

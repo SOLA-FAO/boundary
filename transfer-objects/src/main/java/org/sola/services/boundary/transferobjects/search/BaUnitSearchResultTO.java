@@ -48,6 +48,7 @@ public class BaUnitSearchResultTO extends AbstractTO {
     private String activeJobs;
     private String actionStatusCode;
     private String notationText;
+    private String stateLandStatusCode;
     private int rowVersion; 
 
     public BaUnitSearchResultTO() {
@@ -172,6 +173,14 @@ public class BaUnitSearchResultTO extends AbstractTO {
 
     public void setNotationText(String notationText) {
         this.notationText = notationText;
+    }
+
+    public String getStateLandStatusCode() {
+        return stateLandStatusCode;
+    }
+
+    public void setStateLandStatusCode(String stateLandStatusCode) {
+        this.stateLandStatusCode = stateLandStatusCode;
     }
 
     public int getRowVersion() {
