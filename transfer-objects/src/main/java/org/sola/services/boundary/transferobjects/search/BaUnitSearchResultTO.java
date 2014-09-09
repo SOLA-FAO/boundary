@@ -29,20 +29,22 @@
  */
 package org.sola.services.boundary.transferobjects.search;
 
+import java.math.BigDecimal;
 import org.sola.services.common.contracts.AbstractTO;
 
 public class BaUnitSearchResultTO extends AbstractTO {
 
     private String id;
     private String name;
-    private String nameFirstPart;
-    private String nameLastPart;
+    private String nameFirstpart;
+    private String nameLastpart;
     private String statusCode;
     private String rightholders;
     private String description;
     private String landUseCode;
     private String parcels;
     private String locality;
+    private BigDecimal area;
     private String propertyManager;
     private String typeCode;
     private String activeJobs;
@@ -71,20 +73,20 @@ public class BaUnitSearchResultTO extends AbstractTO {
         this.name = name;
     }
 
-    public String getNameFirstPart() {
-        return nameFirstPart;
+    public String getNameFirstpart() {
+        return nameFirstpart;
     }
 
-    public void setNameFirstPart(String nameFirstPart) {
-        this.nameFirstPart = nameFirstPart;
+    public void setNameFirstpart(String nameFirstPart) {
+        this.nameFirstpart = nameFirstPart;
     }
 
-    public String getNameLastPart() {
-        return nameLastPart;
+    public String getNameLastpart() {
+        return nameLastpart;
     }
 
-    public void setNameLastPart(String nameLastPart) {
-        this.nameLastPart = nameLastPart;
+    public void setNameLastpart(String nameLastPart) {
+        this.nameLastpart = nameLastPart;
     }
 
     public String getRightholders() {
@@ -133,6 +135,14 @@ public class BaUnitSearchResultTO extends AbstractTO {
 
     public void setLocality(String locality) {
         this.locality = locality;
+    }
+
+    public BigDecimal getArea() {
+        return area;
+    }
+
+    public void setArea(BigDecimal area) {
+        this.area = area;
     }
 
     public String getPropertyManager() {

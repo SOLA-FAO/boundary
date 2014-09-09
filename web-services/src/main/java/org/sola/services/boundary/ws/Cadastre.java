@@ -51,6 +51,7 @@ import org.sola.services.common.br.ValidationResult;
 import org.sola.services.common.contracts.GenericTranslator;
 import org.sola.services.common.faults.*;
 import org.sola.services.common.webservices.AbstractWebService;
+import org.sola.services.ejb.application.businesslogic.ApplicationEJBLocal;
 import org.sola.services.ejb.cadastre.businesslogic.CadastreEJBLocal;
 import org.sola.services.ejb.cadastre.repository.entities.NewCadastreObjectIdentifier;
 import org.sola.services.ejb.cadastre.repository.entities.SpatialUnit;
@@ -73,6 +74,8 @@ public class Cadastre extends AbstractWebService {
     private CadastreEJBLocal cadastreEJB;
     @EJB
     private TransactionEJBLocal transactionEJB;
+    @EJB
+    private ApplicationEJBLocal applicationEJB;
     @Resource
     private WebServiceContext wsContext;
 
@@ -763,6 +766,9 @@ public class Cadastre extends AbstractWebService {
                 result[0] = transactionEJB.saveTransaction(GenericTranslator.fromTO(
                         transactionTO, TransactionStateLand.class, targetTransaction),
                         TransactionType.CHANGE_STATE_LAND_PARCELS, languageCode);
+                
+                // Link any new parcels to the application
+                applicationEJB.linkServiceObjectsToApplication(transactionTO.getFromServiceId());
             }
         });
 

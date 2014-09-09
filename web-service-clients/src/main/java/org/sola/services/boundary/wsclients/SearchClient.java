@@ -160,6 +160,12 @@ public interface SearchClient extends AbstractWSClient {
     public static final String GET_PROPERTIES_TO_ACTION = SERVICE_NAME + "getPropertiesToAction";
 
     /**
+     * Search.getUnderlyingTitles - Identifier for the getUnderlyingTitles
+     * method
+     */
+    public static final String GET_UNDERLYING_TITLES = SERVICE_NAME + "getUnderlyingTitles";
+
+    /**
      * Returns applications that have a lodged or approved status and are
      * assigned to the currently logged in user.
      *
@@ -416,4 +422,18 @@ public interface SearchClient extends AbstractWSClient {
      * @return A maximum of 100 properties that match the search criteria,
      */
     List<BaUnitSearchResultTO> getPropertiesToAction() throws WebServiceClientException;
+
+    /**
+     * Retrieves a list of property records that are overlapped by the specified
+     * state land parcel. Used to determine the property titles underlying the
+     * state land parcel.
+     *
+     * <p>
+     * Requires the {@linkplain RolesConstants#ADMINISTRATIVE_BA_UNIT_SAVE}
+     * role.</p>
+     *
+     * @param parcelId The identifier of the State Land Parcel to obtain
+     * underlying titles for.
+     */
+    List<BaUnitSearchResultTO> getUnderlyingTitles(String parcelId) throws WebServiceClientException;
 }

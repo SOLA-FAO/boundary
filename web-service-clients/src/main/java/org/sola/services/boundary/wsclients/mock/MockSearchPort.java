@@ -487,5 +487,23 @@ public class MockSearchPort implements Search {
             return null;
         }
     }
+    
+      /**
+     * Response Key = SearchClient.GET_UNDERLYING_TITLES
+     *
+     * @return default = new ArrayList<BaUnitSearchResultTO>()
+     */
+    @Override
+    public List<BaUnitSearchResultTO> getUnderlyingTitles(String parcelId)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<BaUnitSearchResultTO> defaultResponse = new ArrayList<BaUnitSearchResultTO>();
+        try {
+            return getManager().getResponse(SearchClient.GET_UNDERLYING_TITLES,
+                    List.class, defaultResponse, parcelId);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
 
 }

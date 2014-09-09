@@ -43,7 +43,7 @@ public class BaUnitBasicTO extends AbstractTO {
     private String description;
     private String stateLandStatusCode;
     private int rowVersion;
-
+    
     public BaUnitBasicTO() {
         super();
     }

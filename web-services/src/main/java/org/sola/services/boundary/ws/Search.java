@@ -707,8 +707,8 @@ public class Search extends AbstractWebService {
 
         return (List<ApplicationSearchResultTO>) result[0];
     }
-    
-        /**
+
+    /**
      * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#getPropertiesToAction(java.lang.String)
      * SearchEJB.getPropertiesToAction}
      *
@@ -728,6 +728,34 @@ public class Search extends AbstractWebService {
             @Override
             public void run() {
                 List<BaUnitSearchResult> appList = searchEJB.getPropertiesToAction(localeTmp);
+                result[0] = GenericTranslator.toTOList(
+                        appList, BaUnitSearchResultTO.class);
+            }
+        });
+
+        return (List<BaUnitSearchResultTO>) result[0];
+    }
+
+    /**
+     * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#getUnderlyingTitles(java.lang.String)
+     * SearchEJB.getUnderlyingTitles}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetUnderlyingTitles")
+    public List<BaUnitSearchResultTO> GetUnderlyingTitles(
+            final @WebParam(name = "parcelId") String parcelId)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                List<BaUnitSearchResult> appList = searchEJB.getUnderlyingTitles(parcelId);
                 result[0] = GenericTranslator.toTOList(
                         appList, BaUnitSearchResultTO.class);
             }

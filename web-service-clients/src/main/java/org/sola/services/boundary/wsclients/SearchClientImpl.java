@@ -431,4 +431,19 @@ public class SearchClientImpl extends AbstractWSClientImpl implements SearchClie
         }
         return result;
     }
+
+    @Override
+    public List<BaUnitSearchResultTO> getUnderlyingTitles(String parcelId) throws WebServiceClientException {
+        List<BaUnitSearchResultTO> result = null;
+        final String methodName = SearchClient.GET_UNDERLYING_TITLES;
+        try {
+            beforeWebMethod(methodName, parcelId);
+            result = getPort().getUnderlyingTitles(parcelId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, parcelId);
+        }
+        return result;
+    }
 }
