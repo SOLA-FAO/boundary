@@ -30,6 +30,7 @@ public class ClaimTO extends AbstractReadWriteTO {
     private String statusCode;
     private String typeCode;
     private String recorderName;
+    private int version;
     
     public ClaimTO(){
         super();
@@ -233,5 +234,13 @@ public class ClaimTO extends AbstractReadWriteTO {
 
     public void setRecorderName(String recorderName) {
         this.recorderName = recorderName;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 }

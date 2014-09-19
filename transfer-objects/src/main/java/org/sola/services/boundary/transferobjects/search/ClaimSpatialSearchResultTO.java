@@ -5,6 +5,7 @@ import org.sola.services.common.contracts.AbstractTO;
 public class ClaimSpatialSearchResultTO extends AbstractTO {
     private String id;
     private String statusCode;
+    private int version;
     
     public ClaimSpatialSearchResultTO(){
         super();
@@ -24,5 +25,13 @@ public class ClaimSpatialSearchResultTO extends AbstractTO {
 
     public void setStatusCode(String statusCode) {
         this.statusCode = statusCode;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 }
