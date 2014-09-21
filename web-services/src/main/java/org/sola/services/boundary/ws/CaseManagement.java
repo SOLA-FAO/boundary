@@ -1328,4 +1328,38 @@ public class CaseManagement extends AbstractWebService {
         return (List<WorkSummaryTO>) result[0];
     }  
     
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#applicationActionTransfer(java.lang.String, java.lang.String, int)
+     * ApplicationEJB.applicationActionTransfer}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
+    @WebMethod(operationName = "ApplicationActionTransfer")
+    public List<ValidationResult> ApplicationActionTransfer(
+            @WebParam(name = "applicationId") String applicationId,
+            @WebParam(name = "languageCode") String languageCode,
+            @WebParam(name = "rowVersion") int rowVersion)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault,
+            OptimisticLockingFault, SOLAValidationFault {
+
+        final String applicationIdTmp = applicationId;
+        final String languageCodeTmp = languageCode;
+        final int rowVersionTmp = rowVersion;
+        final Object[] result = {null};
+
+        runUpdateValidation(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = applicationEJB.applicationActionTransfer(
+                        applicationIdTmp, languageCodeTmp, rowVersionTmp);
+            }
+        });
+
+        return (List<ValidationResult>) result[0];
+    }
 }

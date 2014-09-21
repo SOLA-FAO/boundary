@@ -232,6 +232,12 @@ public interface CaseManagementClient extends AbstractWSClient {
     public static final String GET_WORK_SUMMARY = SERVICE_NAME + "getWorkSummary";
 
     /**
+     * CaseManagement.applicationActionTransfer - Identifier for the
+     * applicationActionTransfer method
+     */
+    public static final String APPLICATION_ACTION_TRANSFER = SERVICE_NAME + "applicationActionTransfer";
+
+    /**
      * Calculates the lodgement fees as well as the expected completions dates
      * for each service as well as the application.
      *
@@ -756,4 +762,20 @@ public interface CaseManagementClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<WorkSummaryTO> getWorkSummary(LodgementViewParamsTO paramsTO) throws WebServiceClientException;
+
+    /**
+     * Updates the status of the application to the value indicated by the
+     * <code>status_to_set</code> in the
+     * <code>application.application_action_type</code> table for the
+     * <code>transfer</code> code. (i.e. completed). <p>Requires the
+     * {@linkplain RolesConstants#APPLICATION_TRANSFER} role.</p>
+     *
+     * @param applicationId The application to perform the action against
+     * @param rowVersion The current row version of the service
+     * @return The results of the validation performed as part of the service
+     * action.
+     * @throws WebServiceClientException
+     */
+    List<ValidationResult> applicationActionTransfer(
+            String applicationId, int rowVersion) throws WebServiceClientException;
 }

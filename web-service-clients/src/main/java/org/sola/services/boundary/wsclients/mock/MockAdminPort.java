@@ -30,7 +30,9 @@
 package org.sola.services.boundary.wsclients.mock;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.xml.datatype.XMLGregorianCalendar;
 import org.sola.services.boundary.wsclients.AdminClient;
 import org.sola.webservices.admin.*;
 import org.sola.webservices.transferobjects.security.GroupSummaryTO;
@@ -436,13 +438,22 @@ public class MockAdminPort implements Admin {
     }
 
     @Override
-    public String consolidationExtract(boolean everything, String password) throws SOLAAccessFault, SOLAFault, UnhandledFault {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String consolidationExtract(String processName, boolean everything, String password) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        String defaultResponse = "";
+        try {
+            return getManager().getResponse(AdminClient.CONSOLIDATION_EXTRACT, String.class, defaultResponse);
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
+            return null;
+        }
     }
 
     @Override
-    public String consolidationConsolidate(String languageCode, String fileInServer, String password) throws SOLAAccessFault, SOLAFault, UnhandledFault {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void consolidationConsolidate(String processName, String languageCode, String fileInServer, String password) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        try {
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
+        }
     }
 
     /**
@@ -461,8 +472,8 @@ public class MockAdminPort implements Admin {
         }
 
     }
-    
-        /**
+
+    /**
      * Response Key = AdminClient.GET_PANEL_LAUNCHER_CONFIG
      *
      * @return default = new ArrayList<PanelLauncherGroupTO>()
@@ -476,8 +487,51 @@ public class MockAdminPort implements Admin {
             processExceptionBasic(ex);
             return null;
         }
-
     }
-    
 
+    @Override
+    public void startProcessProgress(String processName, int maximumValue) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        try {
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
+        }
+    }
+
+    @Override
+    public void startProcessProgressUsingBr(String processName, String brNameToGenerateMaximumValue) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        try {
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
+        }
+    }
+
+    @Override
+    public Integer getProcessProgress(String processName, Boolean inPercentage) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        Integer defaultResponse = null;
+        try {
+            return getManager().getResponse(AdminClient.PROCESS_PROGRESS_GET, Integer.class, defaultResponse);
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
+            return null;
+        }
+    }
+
+    @Override
+    public void setProcessProgress(String processName, int progressValue) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        try {
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
+        }
+    }
+
+    @Override
+    public String getProcessLog(String processName) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        String defaultResponse = null;
+        try {
+            return getManager().getResponse(AdminClient.PROCESS_LOG_GET, String.class, defaultResponse);
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
+            return null;
+        }
+    }
 }

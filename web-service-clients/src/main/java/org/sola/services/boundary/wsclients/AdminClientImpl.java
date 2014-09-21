@@ -30,6 +30,7 @@
 package org.sola.services.boundary.wsclients;
 
 import java.util.List;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.admin.*;
@@ -343,12 +344,12 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
     }
 
     @Override
-    public String consolidationExtract(boolean everything, String password) throws WebServiceClientException {
+    public String consolidationExtract(String processName, boolean everything, String password) throws WebServiceClientException {
         String result = null;
         final String methodName = AdminClient.CONSOLIDATION_EXTRACT;
         try {
             beforeWebMethod(methodName);
-            result = getPort().consolidationExtract(everything, password);
+            result = getPort().consolidationExtract(processName, everything, password);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
@@ -358,19 +359,18 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
     }
 
     @Override
-    public String consolidationConsolidate(String pathFileName, String password) throws WebServiceClientException {
-        String result = null;
+    public void consolidationConsolidate(String processName, String pathFileName, String password) throws WebServiceClientException {
+
         final String methodName = AdminClient.CONSOLIDATION_CONSOLIDATE;
         try {
             beforeWebMethod(methodName, pathFileName);
-            result = getPort().consolidationConsolidate(getLanguageCode(), pathFileName, password);
+            getPort().consolidationConsolidate(processName, getLanguageCode(), pathFileName, password);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
             afterWebMethod(methodName, void.class, pathFileName);
         }
 
-        return result;
     }
 
     @Override
@@ -403,4 +403,72 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
         return result;
     }
 
+    @Override
+    public void startProcessProgress(String processName, int maximumValue) throws WebServiceClientException {
+        final String methodName = AdminClient.PROCESS_PROGRESS_START;
+        try {
+            beforeWebMethod(methodName, processName, maximumValue);
+            getPort().startProcessProgress(processName, maximumValue);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, void.class, processName, maximumValue);
+        }
+    }
+
+    @Override
+    public void startProcessProgressUsingBr(String processName, String brNameToGenerateMaximumValue) throws WebServiceClientException {
+        final String methodName = AdminClient.PROCESS_PROGRESS_USING_BR_START;
+        try {
+            beforeWebMethod(methodName, processName, brNameToGenerateMaximumValue);
+            getPort().startProcessProgressUsingBr(processName, brNameToGenerateMaximumValue);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, void.class, processName, brNameToGenerateMaximumValue);
+        }
+    }
+
+    @Override
+    public Integer getProcessProgress(String processName, Boolean inPercentage) throws WebServiceClientException {
+        Integer result = null;
+        final String methodName = AdminClient.PROCESS_PROGRESS_GET;
+        try {
+            beforeWebMethod(methodName, processName, inPercentage);
+            result = getPort().getProcessProgress(processName, inPercentage);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, Integer.class, processName, inPercentage);
+        }
+        return result;
+    }
+
+    @Override
+    public void setProcessProgress(String processName, int progressValue) throws WebServiceClientException {
+        final String methodName = AdminClient.PROCESS_PROGRESS_SET;
+        try {
+            beforeWebMethod(methodName, processName, progressValue);
+            getPort().setProcessProgress(processName, progressValue);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, void.class, processName, progressValue);
+        }
+    }
+
+    @Override
+    public String getProcessLog(String processName) throws WebServiceClientException {
+        String result = null;
+        final String methodName = AdminClient.PROCESS_LOG_GET;
+        try {
+            beforeWebMethod(methodName, processName);
+            result = getPort().getProcessLog(processName);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, String.class, processName);
+        }
+        return result;
+    }
 }
