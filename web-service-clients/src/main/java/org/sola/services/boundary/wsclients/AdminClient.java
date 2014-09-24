@@ -28,8 +28,8 @@
 package org.sola.services.boundary.wsclients;
 
 import java.util.List;
+import javax.xml.datatype.XMLGregorianCalendar;
 import org.sola.common.ConfigConstants;
-import org.sola.common.RolesConstants;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.admin.BrTO;
 import org.sola.webservices.admin.ConfigPanelLauncherTO;
@@ -145,6 +145,30 @@ public interface AdminClient extends AbstractWSClient {
      */
     public static final String GET_PANEL_LAUNCHER_GROUPS = SERVICE_NAME + "getPanelLauncherGroups"; 
 
+    /**
+     * Admin.startProcessProgress - Identifier for the startProcessProgress method
+     */
+    public static final String PROCESS_PROGRESS_START = SERVICE_NAME + "startProcessProgress"; 
+
+    /**
+     * Admin.startProcessProgressUsingBr - Identifier for the startProcessProgressUsingBr method
+     */
+    public static final String PROCESS_PROGRESS_USING_BR_START = SERVICE_NAME + "startProcessProgressUsingBr"; 
+
+    /**
+     * Admin.getProcessProgress - Identifier for the getProcessProgress method
+     */
+    public static final String PROCESS_PROGRESS_GET = SERVICE_NAME + "getProcessProgress"; 
+
+        /**
+     * Admin.setProcessProgress - Identifier for the setProcessProgress method
+     */
+    public static final String PROCESS_PROGRESS_SET = SERVICE_NAME + "setProcessProgress"; 
+
+    /**
+     * Admin.getProcessLog - Identifier for the getProcessLog method
+     */
+    public static final String PROCESS_LOG_GET = SERVICE_NAME + "getProcessLog"; 
     /**
      * Returns the details for the currently authenticated user. <p>No role is required to execute
      * this method.</p>
@@ -329,9 +353,27 @@ public interface AdminClient extends AbstractWSClient {
      */
     String getSetting(String name, String defaultValue) throws WebServiceClientException;
     
-    String consolidationExtract(boolean everything, String password) throws WebServiceClientException;
-    
-    String consolidationConsolidate(String pathFileName, String password) throws WebServiceClientException;
+    /**
+     * It extracts the records from the database for the consolidation process.
+     * 
+     * @param processName
+     * @param everything
+     * @param password
+     * @return
+     * @throws WebServiceClientException 
+     */
+    String consolidationExtract(String processName, boolean everything, String password) throws WebServiceClientException;
+
+    /**
+     * It consolidate the records extracted from another system.
+     * 
+     * @param processName
+     * @param pathFileName
+     * @param password
+     * @return
+     * @throws WebServiceClientException 
+     */
+    void consolidationConsolidate(String processName, String pathFileName, String password) throws WebServiceClientException;
     
     /**
      * Returns the configuration information for the PanelLauncher
@@ -348,4 +390,63 @@ public interface AdminClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<PanelLauncherGroupTO> getPanelLauncherGroups() throws WebServiceClientException;
+    
+    /**
+     * It starts a process progress in the server.
+     * 
+     * @param processName The name of the process to identify. If it is already found it will
+     * be overridden.
+     * @param maximumValue Maximum value the progress can get.
+     * 
+     * @throws WebServiceClientException 
+     */
+    void startProcessProgress(String processName, int maximumValue) throws WebServiceClientException;
+
+    /**
+     * It starts a process progress in the server.
+     * 
+     * @param processName The name of the process to identify. If it is already found it will
+     * be overridden.
+     * @param brNameToGenerateMaximumValue The BR name that will generate the maximum value the progress can get.
+     * 
+     * @throws WebServiceClientException 
+     */
+    void startProcessProgressUsingBr(String processName, String brNameToGenerateMaximumValue) throws WebServiceClientException;
+
+    /**
+     * Gets the value of the process progress.
+     * 
+     * @param processName The name of the process.
+     * @param inPercentage True: The value in percentage, otherwise the absolute value.
+     * 
+     * @return 
+     * 
+     * @throws WebServiceClientException 
+     */
+    Integer getProcessProgress(String processName, Boolean inPercentage) throws WebServiceClientException;
+    
+    
+    /**
+     * Sets the process progress value.
+     * 
+     * @param processName The name of the process.
+     * @param progressValue The value to set.
+     * 
+     * @throws WebServiceClientException 
+     */
+    void setProcessProgress(String processName, int progressValue) throws WebServiceClientException;
+
+    /**
+     * Gets the process log.
+     * 
+     * @param processName The name of the process.
+     * @param fromTime From the moment the log has to be checked.
+     * @param toTime Until the moment the log has to be checked. 
+     * If not present, the current time is used.
+     * 
+     * @return 
+     * 
+     * @throws WebServiceClientException 
+     */
+    String getProcessLog(String processName) throws WebServiceClientException;
 }

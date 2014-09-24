@@ -29,6 +29,7 @@
  */
 package org.sola.services.boundary.ws;
 
+import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -544,6 +545,7 @@ public class Admin extends AbstractWebService {
      */
     @WebMethod(operationName = "ConsolidationExtract")
     public String ConsolidationExtract(
+            @WebParam(name = "processName") final String processName,
             @WebParam(name = "everything") final boolean everything,
             @WebParam(name = "password") final String password)
             throws SOLAFault, UnhandledFault, SOLAAccessFault {
@@ -553,7 +555,7 @@ public class Admin extends AbstractWebService {
         runGeneralQuery(wsContext, new Runnable() {
             @Override
             public void run() {
-                result[0] = adminEJB.consolidationExtract(everything, password);
+                result[0] = adminEJB.consolidationExtract(processName, everything, password);
             }
         });
 
@@ -569,22 +571,20 @@ public class Admin extends AbstractWebService {
      * @throws SOLAAccessFault
      */
     @WebMethod(operationName = "ConsolidationConsolidate")
-    public String ConsolidationConsolidate(
+    public void ConsolidationConsolidate(
+            @WebParam(name = "processName") final String processName,
             @WebParam(name = "languageCode") final String languageCode,
             @WebParam(name = "fileInServer") final String fileInServer,
             @WebParam(name = "password") final String password)
             throws SOLAValidationFault, OptimisticLockingFault, SOLAFault, UnhandledFault, SOLAAccessFault {
 
-        final Object[] result = {null};
-
         runUpdateValidation(wsContext, new Runnable() {
             @Override
             public void run() {
-                result[0] = adminEJB.consolidationConsolidate(languageCode, fileInServer, password);
+                adminEJB.consolidationConsolidate(processName, languageCode, fileInServer, password);
             }
         });
 
-        return (String) result[0];
     }
 
     /**
@@ -633,5 +633,122 @@ public class Admin extends AbstractWebService {
         });
 
         return (List<PanelLauncherGroupTO>) result[0];
+    }
+    
+    /**
+     * See {@linkplain org.sola.services.ejbs.admin.businesslogic.AdminEJB#startProcessProgressUsingBr(String, int)
+     * AdminEJB.startProcessProgressUsingBr}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "StartProcessProgress")
+    public void StartProcessProgress(
+            @WebParam(name = "processName") final String processName,
+            @WebParam(name = "maximumValue") final int maximumValue)
+            throws SOLAValidationFault, OptimisticLockingFault, SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        runUpdateValidation(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                adminEJB.startProcessProgress(processName, maximumValue);
+            }
+        });
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejbs.admin.businesslogic.AdminEJB#startProcessProgressUsingBr(String, String)
+     * AdminEJB.startProcessProgressUsingBr}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "StartProcessProgressUsingBr")
+    public void StartProcessProgressUsingBr(
+            @WebParam(name = "processName") final String processName,
+            @WebParam(name = "brNameToGenerateMaximumValue") final String brNameToGenerateMaximumValue)
+            throws SOLAValidationFault, OptimisticLockingFault, SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        runUpdateValidation(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                adminEJB.startProcessProgressUsingBr(processName, brNameToGenerateMaximumValue);
+            }
+        });
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejbs.admin.businesslogic.AdminEJB#getProcessProgress()
+     * AdminEJB.getProcessProgress}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetProcessProgress")
+    public Integer GetProcessProgress(
+            @WebParam(name = "processName") final String processName,
+            @WebParam(name = "inPercentage") final Boolean inPercentage)
+            throws SOLAValidationFault, OptimisticLockingFault, SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runUpdateValidation(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                result[0] = adminEJB.getProcessProgress(processName, inPercentage);
+            }
+        });
+
+        return Integer.parseInt(result[0].toString());
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejbs.admin.businesslogic.AdminEJB#setProcessProgress(String, int)
+     * AdminEJB.setProcessProgress}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "SetProcessProgress")
+    public void SetProcessProgress(
+            @WebParam(name = "processName") final String processName,
+            @WebParam(name = "progressValue") final int progressValue)
+            throws SOLAValidationFault, OptimisticLockingFault, SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        runUpdateValidation(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                adminEJB.setProcessProgress(processName, progressValue);
+            }
+        });
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejbs.admin.businesslogic.AdminEJB#getProcessLog(String)
+     * AdminEJB.getProcessLog}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetProcessLog")
+    public String GetProcessLog(
+            @WebParam(name = "processName") final String processName)
+            throws SOLAValidationFault, OptimisticLockingFault, SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runUpdateValidation(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                result[0] = adminEJB.getProcessLog(processName);
+            }
+        });
+
+        return result[0].toString();
     }
 }

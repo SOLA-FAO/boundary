@@ -839,4 +839,22 @@ public class MockCaseManagementPort implements CaseManagement {
             return null;
         }
     }
+
+    /**
+     * Response Key = CaseManagementClient.APPLICATION_ACTION_TRANSFER
+     *
+     * @return default = new ArrayList<ValidationResult>()
+     */
+    @Override
+    public List<ValidationResult> applicationActionTransfer(String applicationId, String languageCode, int rowVersion)
+            throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, SOLAValidationFault, UnhandledFault {
+        List<ValidationResult> defaultResponse = new ArrayList<ValidationResult>();
+        try {
+            return getManager().getResponse(CaseManagementClient.APPLICATION_ACTION_TRANSFER,
+                    List.class, defaultResponse, applicationId, languageCode, rowVersion);
+        } catch (Exception ex) {
+            processExceptionAll(ex);
+            return null;
+        }
+    }
 }
