@@ -31,6 +31,7 @@ public class ClaimTO extends AbstractReadWriteTO {
     private String typeCode;
     private String recorderName;
     private int version;
+    private FormPayloadTO dyanamicForm;
     
     public ClaimTO(){
         super();
@@ -242,5 +243,13 @@ public class ClaimTO extends AbstractReadWriteTO {
 
     public void setVersion(int version) {
         this.version = version;
+    }
+
+    public FormPayloadTO getDyanamicForm() {
+        return dyanamicForm;
+    }
+
+    public void setDyanamicForm(FormPayloadTO dyanamicForm) {
+        this.dyanamicForm = dyanamicForm;
     }
 }
