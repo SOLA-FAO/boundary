@@ -202,6 +202,12 @@ public interface ReferenceDataClient extends AbstractWSClient {
     public static final String GET_RRR_SUB_TYPES = SERVICE_NAME + "getRrrSubTypes";
 
     /**
+     * ReferenceData.getChecklistGroups - Identifier for the getChecklistGroups
+     * method
+     */
+    public static final String GET_CHECKLIST_GROUPS = SERVICE_NAME + "getChecklistGroups";
+
+    /**
      * Retrieves all source.source_type code values using the default locale of
      * the client to localize the display values.
      *
@@ -724,4 +730,20 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<RrrSubTypeTO> getRrrSubTypes(String lang) throws WebServiceClientException;
+
+    /**
+     * Retrieves all administrative.checklist_group code values.
+     *
+     * @throws WebServiceClientException
+     */
+    List<ChecklistGroupTO> getChecklistGroups() throws WebServiceClientException;
+
+    /**
+     * Retrieves all administrative.checklist_group code values.
+     *
+     * @param languageCode The language code to use for localization of display
+     * values.
+     * @throws WebServiceClientException
+     */
+    List<ChecklistGroupTO> getChecklistGroups(String lang) throws WebServiceClientException;
 }

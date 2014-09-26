@@ -52,6 +52,7 @@ import org.sola.services.ejb.application.repository.entities.Service;
 import org.sola.services.ejb.party.businesslogic.PartyEJBLocal;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.faults.SOLAAccessFault;
+import org.sola.services.ejb.application.repository.entities.ServiceChecklistItem;
 import org.sola.services.ejb.application.repository.entities.WorkSummary;
 import org.sola.services.ejb.party.repository.entities.Party;
 import org.sola.services.ejb.source.businesslogic.SourceEJBLocal;
@@ -61,7 +62,7 @@ import org.sola.services.ejb.system.businesslogic.SystemEJBLocal;
 
 /**
  * Web Service Boundary class to expose Case Management functionality available
- * on  {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB}, 
+ * on null {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB},
  * {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB},
  * {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB} and
  * {@linkplain org.sola.services.ejb.address.businesslogic.AddressEJB}.
@@ -1357,6 +1358,66 @@ public class CaseManagement extends AbstractWebService {
             });
         }
         return (List<WorkSummaryTO>) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#saveServiceChecklistItem(java.lang.String, java.util.List)
+     * ApplicationEJB.saveServiceChecklistItem}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
+    @WebMethod(operationName = "SaveServiceChecklistItem")
+    public List<ServiceChecklistItemTO> SaveServiceChecklistItem(
+            final @WebParam(name = "checklistGroupCode") String checklistGroupCode,
+            final @WebParam(name = "serviceChecklistItem") List<ServiceChecklistItemTO> serviceChecklist)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault,
+            OptimisticLockingFault, SOLAValidationFault {
+        final Object[] result = {null};
+
+        runUpdateValidation(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                if (serviceChecklist != null && serviceChecklist.size() > 0) {
+                    String serviceId = serviceChecklist.get(0).getServiceId();
+                    List<ServiceChecklistItem> params = GenericTranslator.fromTOList(serviceChecklist, ServiceChecklistItem.class,
+                            applicationEJB.getServiceChecklistItem(serviceId));
+                    List<ServiceChecklistItem> checklistItemList = applicationEJB.saveServiceChecklistItem(checklistGroupCode, params);
+                    result[0] = GenericTranslator.toTOList(checklistItemList, ServiceChecklistItemTO.class);
+                }
+            }
+        });
+
+        return (List<ServiceChecklistItemTO>) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getServiceChecklistItem(java.lang.String)
+     * ApplicationEJB.getServiceChecklistItem}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetServiceChecklistItem")
+    public List<ServiceChecklistItemTO> GetServiceChecklistItem(
+            final @WebParam(name = "serviceId") String serviceId)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        applicationEJB.getServiceChecklistItem(serviceId),
+                        ServiceChecklistItemTO.class);
+            }
+        });
+        return (List<ServiceChecklistItemTO>) result[0];
     }
 
 }

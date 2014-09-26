@@ -684,4 +684,21 @@ public class MockReferenceDataPort implements ReferenceData {
         }
     }
 
+    /**
+     * Response Key = ReferenceDataClient.GET_CHECKLIST_GROUPS
+     *
+     * @return default = new ArrayList()
+     */
+    @Override
+    public List<ChecklistGroupTO> getChecklistGroups(String arg0) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<ChecklistGroupTO> defaultResponse = new ArrayList<ChecklistGroupTO>();
+        try {
+            return getManager().getResponse(ReferenceDataClient.GET_CHECKLIST_GROUPS,
+                    List.class, defaultResponse, arg0);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
 }

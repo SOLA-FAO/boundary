@@ -753,7 +753,8 @@ public class MockCaseManagementPort implements CaseManagement {
     }
 
     @Override
-    public PowerOfAttorneyTO attachPowerOfAttorneyToTransaction(String serviceId, PowerOfAttorneyTO powerOfAttorney, String languageCode) throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, SOLAValidationFault, UnhandledFault {
+    public PowerOfAttorneyTO attachPowerOfAttorneyToTransaction(String serviceId, PowerOfAttorneyTO powerOfAttorney, String languageCode)
+            throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, SOLAValidationFault, UnhandledFault {
         PowerOfAttorneyTO defaultResponse = new PowerOfAttorneyTO();
         defaultResponse.setId(powerOfAttorney.getId());
         try {
@@ -854,6 +855,43 @@ public class MockCaseManagementPort implements CaseManagement {
         try {
             return getManager().getResponse(CaseManagementClient.GET_WORK_SUMMARY,
                     List.class, defaultResponse, paramsTO);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
+    /**
+     * Response Key = CaseManagementClient.SAVE_SERVICE_CHECKLIST_ITEM
+     *
+     * @return default = new ArrayList<ServiceChecklistItemTO>()
+     */
+    @Override
+    public List<ServiceChecklistItemTO> saveServiceChecklistItem(String checklistGroupCode,
+            List<ServiceChecklistItemTO> serviceChecklist)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault, OptimisticLockingFault, SOLAValidationFault {
+        List<ServiceChecklistItemTO> defaultResponse = new ArrayList<ServiceChecklistItemTO>();
+        try {
+            return getManager().getResponse(CaseManagementClient.SAVE_SERVICE_CHECKLIST_ITEM,
+                    List.class, defaultResponse, checklistGroupCode, serviceChecklist);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
+    /**
+     * Response Key = CaseManagementClient.GET_SERVICE_CHECKLIST_ITEM
+     *
+     * @return default = new ArrayList<ServiceChecklistItemTO>()
+     */
+    @Override
+    public List<ServiceChecklistItemTO> getServiceChecklistItem(String serviceId)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<ServiceChecklistItemTO> defaultResponse = new ArrayList<ServiceChecklistItemTO>();
+        try {
+            return getManager().getResponse(CaseManagementClient.GET_SERVICE_CHECKLIST_ITEM,
+                    List.class, defaultResponse, serviceId);
         } catch (Exception ex) {
             processExceptionAccess(ex);
             return null;

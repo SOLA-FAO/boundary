@@ -238,6 +238,18 @@ public interface CaseManagementClient extends AbstractWSClient {
     public static final String GET_WORK_SUMMARY = SERVICE_NAME + "getWorkSummary";
 
     /**
+     * CaseManagement.saveServiceChecklistItem - Identifier for the
+     * saveServiceChecklistItem method
+     */
+    public static final String SAVE_SERVICE_CHECKLIST_ITEM = SERVICE_NAME + "saveServiceChecklistItem";
+
+    /**
+     * CaseManagement.getServiceChecklistItem - Identifier for the
+     * getServiceChecklistItem method
+     */
+    public static final String GET_SERVICE_CHECKLIST_ITEM = SERVICE_NAME + "getServiceChecklistItem";
+
+    /**
      * Calculates the lodgement fees as well as the expected completions dates
      * for each service as well as the application.
      *
@@ -803,4 +815,31 @@ public interface CaseManagementClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<PartySummaryTO> getPartiesByRole(String partyRole) throws WebServiceClientException;
+
+    /**
+     * Saves changes to all checklist items associated to a service.
+     * <p>
+     * Requires the {@linkplain RolesConstants#SERVICE_START_CHECKLIST}
+     * role.</p>
+     *
+     * @param checklistGroupCode
+     * @param serviceChecklist
+     * @return the list of checklist items for the service after they have been
+     * saved.
+     * @throws WebServiceClientException
+     */
+    List<ServiceChecklistItemTO> saveServiceChecklistItem(String checklistGroupCode, 
+            List<ServiceChecklistItemTO> serviceChecklist)
+            throws WebServiceClientException;
+
+    /**
+     * Retrieves all checklist items associated to a service.
+     * <p>
+     * Requires the {@linkplain RolesConstants#APPLICATION_VIEW_APPS} role.</p>
+     *
+     * @param serviceId Id of the service to retrieve checklist items for
+     * @return The checklist items
+     */
+    List<ServiceChecklistItemTO> getServiceChecklistItem(String serviceId) throws WebServiceClientException;
+
 }
