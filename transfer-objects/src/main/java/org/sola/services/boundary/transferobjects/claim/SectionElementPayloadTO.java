@@ -6,7 +6,7 @@ import org.sola.services.common.contracts.AbstractReadWriteTO;
 public class SectionElementPayloadTO extends AbstractReadWriteTO {
     private String id;
     private String sectionPayloadId;
-    private List<FieldPayloadTO> fieldsList;
+    private List<FieldPayloadTO> fieldPayloadList;
     
     public String getId() {
         return id;
@@ -16,12 +16,12 @@ public class SectionElementPayloadTO extends AbstractReadWriteTO {
         this.id = id;
     }
 
-    public List<FieldPayloadTO> getFieldsList() {
-        return fieldsList;
+    public List<FieldPayloadTO> getFieldPayloadList() {
+        return fieldPayloadList;
     }
 
-    public void setFieldsList(List<FieldPayloadTO> fieldsList) {
-        this.fieldsList = fieldsList;
+    public void setFieldPayloadList(List<FieldPayloadTO> fieldPayloadList) {
+        this.fieldPayloadList = fieldPayloadList;
     }
 
     public String getSectionPayloadId() {
