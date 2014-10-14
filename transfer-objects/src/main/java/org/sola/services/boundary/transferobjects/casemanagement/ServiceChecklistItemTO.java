@@ -35,6 +35,7 @@ import org.sola.services.common.contracts.AbstractVersionedTO;
  */
 public class ServiceChecklistItemTO extends AbstractVersionedTO {
 
+    private String id;
     private String serviceId;
     private String itemCode;
     private String result;
@@ -45,6 +46,14 @@ public class ServiceChecklistItemTO extends AbstractVersionedTO {
 
     public ServiceChecklistItemTO() {
         super();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getServiceId() {
