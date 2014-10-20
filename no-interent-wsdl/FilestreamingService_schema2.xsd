@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://webservices.sola.org/filestreaming" xmlns:ns1="http://webservices.sola.org/faults/" xmlns:tns="http://webservices.sola.org/filestreaming" xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:import namespace="http://webservices.sola.org/faults/" schemaLocation="FilestreamingService_schema3.xsd"/>
+
+  <xs:import namespace="http://www.w3.org/2005/05/xmlmime" schemaLocation="xmlmime.xml"/>
+  <xs:element name="CheckConnection" type="tns:CheckConnection"/>
+
+  <xs:element name="CheckConnectionResponse" type="tns:CheckConnectionResponse"/>
+
+  <xs:element name="Download" type="tns:Download"/>
+
+  <xs:element name="DownloadResponse" type="tns:DownloadResponse"/>
+
+  <xs:element name="SOLAFault" nillable="true" type="ns1:faultInfoBean"/>
+
+  <xs:element name="UnhandledFault" nillable="true" type="ns1:faultInfoBean"/>
+
+  <xs:element name="Upload" type="tns:Upload"/>
+
+  <xs:element name="UploadResponse" type="tns:UploadResponse"/>
+
+  <xs:complexType name="CheckConnection">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="CheckConnectionResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Download">
+    <xs:sequence>
+      <xs:element name="pathFileName" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DownloadResponse">
+    <xs:sequence>
+      <xs:element name="return" xmime:expectedContentTypes="application/octet-stream" type="xs:base64Binary" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Upload">
+    <xs:sequence>
+      <xs:element name="fileContent" xmime:expectedContentTypes="application/octet-stream" type="xs:base64Binary" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="UploadResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+
