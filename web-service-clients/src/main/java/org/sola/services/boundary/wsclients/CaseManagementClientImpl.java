@@ -749,4 +749,20 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         }
         return result;
     }
+
+    @Override
+    public ServiceTO saveService(ServiceTO service)
+            throws WebServiceClientException {
+        ServiceTO result = null;
+        final String methodName = CaseManagementClient.SAVE_SERVICE;
+        try {
+            beforeWebMethod(methodName, service);
+            result = getPort().saveService(service);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, service);
+        }
+        return result;
+    }
 }

@@ -897,4 +897,22 @@ public class MockCaseManagementPort implements CaseManagement {
             return null;
         }
     }
+
+    /**
+     * Response Key = CaseManagementClient.SAVE_SERVICE
+     *
+     * @return default = new ServiceTO()
+     */
+    @Override
+    public ServiceTO saveService(ServiceTO service)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault, OptimisticLockingFault, SOLAValidationFault {
+        ServiceTO defaultResponse = new ServiceTO();
+        try {
+            return getManager().getResponse(CaseManagementClient.SAVE_SERVICE,
+                    ServiceTO.class, defaultResponse, service);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
 }

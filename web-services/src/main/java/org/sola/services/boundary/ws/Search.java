@@ -608,7 +608,7 @@ public class Search extends AbstractWebService {
      */
     @WebMethod(operationName = "GetExtentOfPublicDisplayMap")
     public byte[] GetExtentOfPublicDisplayMap(
-            @WebParam(name = "nameLastPart") final String nameLastPart)
+            @WebParam(name = "filterParam") final String filterParam)
             throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final Object[] result = {null};
@@ -617,7 +617,7 @@ public class Search extends AbstractWebService {
 
             @Override
             public void run() {
-                result[0] = searchEJB.getExtentOfPublicDisplayMap(nameLastPart);
+                result[0] = searchEJB.getExtentOfPublicDisplayMap(filterParam);
             }
         });
 

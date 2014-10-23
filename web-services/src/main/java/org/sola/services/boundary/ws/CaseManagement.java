@@ -1420,4 +1420,31 @@ public class CaseManagement extends AbstractWebService {
         return (List<ServiceChecklistItemTO>) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#saveService(org.sola.services.ejb.application.repository.entities.Service)
+     * ApplicationEJB.saveService}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "SaveService")
+    public ServiceTO SaveService(
+            final @WebParam(name = "service") ServiceTO service)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault, OptimisticLockingFault, SOLAValidationFault {
+
+        final ServiceTO[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTO(applicationEJB.saveService(
+                        GenericTranslator.fromTO(service, Service.class,
+                                applicationEJB.getService(service.getId()))),
+                        ServiceTO.class);
+            }
+        });
+        return result[0];
+    }
+
 }

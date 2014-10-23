@@ -248,6 +248,10 @@ public interface CaseManagementClient extends AbstractWSClient {
      * getServiceChecklistItem method
      */
     public static final String GET_SERVICE_CHECKLIST_ITEM = SERVICE_NAME + "getServiceChecklistItem";
+    /**
+     * CaseManagement.saveService - Identifier for the saveService method
+     */
+    public static final String SAVE_SERVICE = SERVICE_NAME + "saveService";
 
     /**
      * Calculates the lodgement fees as well as the expected completions dates
@@ -828,7 +832,7 @@ public interface CaseManagementClient extends AbstractWSClient {
      * saved.
      * @throws WebServiceClientException
      */
-    List<ServiceChecklistItemTO> saveServiceChecklistItem(String checklistGroupCode, 
+    List<ServiceChecklistItemTO> saveServiceChecklistItem(String checklistGroupCode,
             List<ServiceChecklistItemTO> serviceChecklist)
             throws WebServiceClientException;
 
@@ -841,5 +845,15 @@ public interface CaseManagementClient extends AbstractWSClient {
      * @return The checklist items
      */
     List<ServiceChecklistItemTO> getServiceChecklistItem(String serviceId) throws WebServiceClientException;
+
+    /**
+     * Saves changes a service / task.
+     * <p>
+     * Requires the {@linkplain RolesConstants#APPLICATION_EDIT_APPS} role.</p>
+     *
+     * @param service
+     * @return the saved service saved.
+     */
+    ServiceTO saveService(ServiceTO service) throws WebServiceClientException;
 
 }
