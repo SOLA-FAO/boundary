@@ -899,6 +899,42 @@ public class MockCaseManagementPort implements CaseManagement {
     }
 
     /**
+     * Response Key = CaseManagementClient.SAVE_PUBLIC_DISPLAY_ITEM
+     *
+     * @return default = new ServiceTO()
+     */
+    @Override
+    public PublicDisplayItemTO savePublicDisplayItem(PublicDisplayItemTO publicDisplayItem)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault, OptimisticLockingFault, SOLAValidationFault {
+        PublicDisplayItemTO defaultResponse = new PublicDisplayItemTO();
+        try {
+            return getManager().getResponse(CaseManagementClient.SAVE_PUBLIC_DISPLAY_ITEM,
+                    PublicDisplayItemTO.class, defaultResponse, publicDisplayItem);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
+    /**
+     * Response Key = CaseManagementClient.GET_PUBLIC_DISPLAY_ITEMS
+     *
+     * @return default = new ArrayList<PublicDisplayItemTO>()
+     */
+    @Override
+    public List<PublicDisplayItemTO> getPublicDisplayItems(String serviceId)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<PublicDisplayItemTO> defaultResponse = new ArrayList<PublicDisplayItemTO>();
+        try {
+            return getManager().getResponse(CaseManagementClient.GET_PUBLIC_DISPLAY_ITEMS,
+                    List.class, defaultResponse, serviceId);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
+    /**
      * Response Key = CaseManagementClient.SAVE_SERVICE
      *
      * @return default = new ServiceTO()

@@ -63,6 +63,8 @@ import org.sola.services.ejb.application.repository.entities.ApplicationActionTy
 import org.sola.services.ejb.application.repository.entities.ApplicationStatusType;
 import org.sola.services.ejb.application.repository.entities.ChecklistGroup;
 import org.sola.services.ejb.application.repository.entities.ChecklistItem;
+import org.sola.services.ejb.application.repository.entities.PublicDisplayItemStatus;
+import org.sola.services.ejb.application.repository.entities.PublicDisplayItemType;
 import org.sola.services.ejb.application.repository.entities.RequestCategoryType;
 import org.sola.services.ejb.application.repository.entities.RequestType;
 import org.sola.services.ejb.application.repository.entities.TypeAction;
@@ -1054,6 +1056,58 @@ public class ReferenceData extends AbstractWebService {
     }
 
     /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getCodeEntityList(java.lang.Class, java.lang.String)
+     * AdministrativeEJB.getCodeEntityList}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetPublicDisplayItemTypes")
+    public List<PublicDisplayItemTypeTO> GetPublicDisplayItemTypes(@WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+        final Object[] params = {languageCode};
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                String languageCode = params[0] == null ? null : params[0].toString();
+                result[0] = GenericTranslator.toTOList(applicationEJB.getCodeEntityList(
+                        PublicDisplayItemType.class, languageCode), PublicDisplayItemTypeTO.class);
+            }
+        });
+
+        return (List<PublicDisplayItemTypeTO>) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getCodeEntityList(java.lang.Class, java.lang.String)
+     * AdministrativeEJB.getCodeEntityList}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetPublicDisplayItemStatusTypes")
+    public List<PublicDisplayItemStatusTO> GetPublicDisplayItemStatusTypes(@WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+        final Object[] params = {languageCode};
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                String languageCode = params[0] == null ? null : params[0].toString();
+                result[0] = GenericTranslator.toTOList(applicationEJB.getCodeEntityList(
+                        PublicDisplayItemStatus.class, languageCode), PublicDisplayItemStatusTO.class);
+            }
+        });
+
+        return (List<PublicDisplayItemStatusTO>) result[0];
+    }
+
+    /**
      * Supports saving of all SOLA Reference Data types.
      * <p>
      * Requires the {@linkplain RolesConstants#ADMIN_MANAGE_REFDATA} role.</p>
@@ -1197,6 +1251,14 @@ public class ReferenceData extends AbstractWebService {
                 } else if (refDataTO instanceof ChecklistGroupTO) {
                     codeEntity = applicationEJB.getCodeEntity(ChecklistGroup.class, refDataTO.getCode());
                     codeEntity = GenericTranslator.fromTO(refDataTO, ChecklistGroup.class, codeEntity);
+                    applicationEJB.saveCodeEntity(codeEntity);
+                } else if (refDataTO instanceof PublicDisplayItemTypeTO) {
+                    codeEntity = applicationEJB.getCodeEntity(PublicDisplayItemType.class, refDataTO.getCode());
+                    codeEntity = GenericTranslator.fromTO(refDataTO, PublicDisplayItemType.class, codeEntity);
+                    applicationEJB.saveCodeEntity(codeEntity);
+                } else if (refDataTO instanceof PublicDisplayItemStatusTO) {
+                    codeEntity = applicationEJB.getCodeEntity(PublicDisplayItemStatus.class, refDataTO.getCode());
+                    codeEntity = GenericTranslator.fromTO(refDataTO, PublicDisplayItemStatus.class, codeEntity);
                     applicationEJB.saveCodeEntity(codeEntity);
                 }
 

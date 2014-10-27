@@ -52,6 +52,7 @@ import org.sola.services.ejb.application.repository.entities.Service;
 import org.sola.services.ejb.party.businesslogic.PartyEJBLocal;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.faults.SOLAAccessFault;
+import org.sola.services.ejb.application.repository.entities.PublicDisplayItem;
 import org.sola.services.ejb.application.repository.entities.ServiceChecklistItem;
 import org.sola.services.ejb.application.repository.entities.WorkSummary;
 import org.sola.services.ejb.party.repository.entities.Party;
@@ -1442,6 +1443,59 @@ public class CaseManagement extends AbstractWebService {
                         GenericTranslator.fromTO(service, Service.class,
                                 applicationEJB.getService(service.getId()))),
                         ServiceTO.class);
+            }
+        });
+        return result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getPublicDisplayItems(java.lang.String)
+     * ApplicationEJB.getPublicDisplayItems}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetPublicDisplayItems")
+    public List<PublicDisplayItemTO> GetPublicDisplayItems(
+            final @WebParam(name = "serviceId") String serviceId)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        applicationEJB.getPublicDisplayItems(serviceId),
+                        PublicDisplayItemTO.class);
+            }
+        });
+        return (List<PublicDisplayItemTO>) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#savePublicDisplayItem(org.sola.services.ejb.application.repository.entities.PublicDisplayItem)
+     * ApplicationEJB.savePublicDisplayItem}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "SavePublicDisplayItem")
+    public PublicDisplayItemTO SavePublicDisplayItem(
+            final @WebParam(name = "publicDisplayItem") PublicDisplayItemTO publicDisplayItem)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault, OptimisticLockingFault, SOLAValidationFault {
+
+        final PublicDisplayItemTO[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTO(applicationEJB.savePublicDisplayItem(
+                        GenericTranslator.fromTO(publicDisplayItem, PublicDisplayItem.class,
+                                applicationEJB.getPublicDisplayItem(publicDisplayItem.getId()))),
+                        PublicDisplayItemTO.class);
             }
         });
         return result[0];

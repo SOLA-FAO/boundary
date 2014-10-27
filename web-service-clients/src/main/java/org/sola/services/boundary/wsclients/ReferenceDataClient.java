@@ -30,6 +30,7 @@
 package org.sola.services.boundary.wsclients;
 
 import java.util.List;
+import org.sola.common.RolesConstants;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.transferobjects.AbstractCodeTO;
 import org.sola.webservices.transferobjects.referencedata.*;
@@ -206,7 +207,17 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * method
      */
     public static final String GET_CHECKLIST_GROUPS = SERVICE_NAME + "getChecklistGroups";
-
+    
+        /**
+     * ReferenceData.getPublicDisplayTypes - Identifier for the getPublicDisplayTypes
+     * method
+     */
+    public static final String GET_PUBLIC_DISPLAY_TYPES = SERVICE_NAME + "getPublicDisplayTypes";
+        /**
+     * ReferenceData.getPublicDisplayStatusTypes - Identifier for the getPublicDisplayStatusTypes
+     * method
+     */
+    public static final String GET_PUBLIC_DISPLAY_STATUS_TYPES = SERVICE_NAME + "getPublicDisplayStatusTypes";
     /**
      * Retrieves all source.source_type code values using the default locale of
      * the client to localize the display values.
@@ -746,4 +757,36 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<ChecklistGroupTO> getChecklistGroups(String lang) throws WebServiceClientException;
+    
+        /**
+     * Retrieves all application.public_display_type code values.
+     *
+     * @throws WebServiceClientException
+     */
+    List<PublicDisplayItemTypeTO> getPublicDisplayTypes() throws WebServiceClientException;
+
+    /**
+     * Retrieves all application.public_display_type code values.
+     *
+     * @param languageCode The language code to use for localization of display
+     * values.
+     * @throws WebServiceClientException
+     */
+    List<PublicDisplayItemTypeTO> getPublicDisplayTypes(String lang) throws WebServiceClientException;
+            /**
+     * Retrieves all application.public_display_type code values.
+     *
+     * @throws WebServiceClientException
+     */
+    List<PublicDisplayItemStatusTO> getPublicDisplayStatusTypes() throws WebServiceClientException;
+
+    /**
+     * Retrieves all application.public_display_status code values.
+     *
+     * @param languageCode The language code to use for localization of display
+     * values.
+     * @throws WebServiceClientException
+     */
+    List<PublicDisplayItemStatusTO> getPublicDisplayStatusTypes(String lang) throws WebServiceClientException;
+      
 }

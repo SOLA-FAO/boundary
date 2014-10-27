@@ -701,4 +701,38 @@ public class MockReferenceDataPort implements ReferenceData {
         }
     }
 
+    /**
+     * Response Key = ReferenceDataClient.GET_PUBLIC_DISPLAY_TYPES
+     *
+     * @return default = new ArrayList()
+     */
+    @Override
+    public List<PublicDisplayItemTypeTO> getPublicDisplayItemTypes(String arg0) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<PublicDisplayItemTypeTO> defaultResponse = new ArrayList<PublicDisplayItemTypeTO>();
+        try {
+            return getManager().getResponse(ReferenceDataClient.GET_PUBLIC_DISPLAY_TYPES,
+                    List.class, defaultResponse, arg0);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
+    /**
+     * Response Key = ReferenceDataClient.GET_PUBLIC_DISPLAY_STATUS_TYPES
+     *
+     * @return default = new ArrayList()
+     */
+    @Override
+    public List<PublicDisplayItemStatusTO> getPublicDisplayItemStatusTypes(String arg0) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<PublicDisplayItemStatusTO> defaultResponse = new ArrayList<PublicDisplayItemStatusTO>();
+        try {
+            return getManager().getResponse(ReferenceDataClient.GET_PUBLIC_DISPLAY_STATUS_TYPES,
+                    List.class, defaultResponse, arg0);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
 }

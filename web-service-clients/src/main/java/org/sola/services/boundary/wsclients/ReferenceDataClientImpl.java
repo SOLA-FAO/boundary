@@ -736,4 +736,44 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
         }
         return result;
     }
+
+    @Override
+    public List<PublicDisplayItemTypeTO> getPublicDisplayTypes() throws WebServiceClientException {
+        return getPublicDisplayTypes(getLanguageCode());
+    }
+
+    @Override
+    public List<PublicDisplayItemTypeTO> getPublicDisplayTypes(String lang) throws WebServiceClientException {
+        List<PublicDisplayItemTypeTO> result = null;
+        final String methodName = ReferenceDataClient.GET_PUBLIC_DISPLAY_TYPES;
+        try {
+            beforeWebMethod(methodName, lang);
+            result = getPort().getPublicDisplayItemTypes(lang);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, lang);
+        }
+        return result;
+    }
+
+    @Override
+    public List<PublicDisplayItemStatusTO> getPublicDisplayStatusTypes() throws WebServiceClientException {
+        return getPublicDisplayStatusTypes(getLanguageCode());
+    }
+
+    @Override
+    public List<PublicDisplayItemStatusTO> getPublicDisplayStatusTypes(String lang) throws WebServiceClientException {
+        List<PublicDisplayItemStatusTO> result = null;
+        final String methodName = ReferenceDataClient.GET_PUBLIC_DISPLAY_TYPES;
+        try {
+            beforeWebMethod(methodName, lang);
+            result = getPort().getPublicDisplayItemStatusTypes(lang);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, lang);
+        }
+        return result;
+    }
 }
