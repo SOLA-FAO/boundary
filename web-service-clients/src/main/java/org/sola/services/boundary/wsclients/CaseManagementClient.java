@@ -252,15 +252,21 @@ public interface CaseManagementClient extends AbstractWSClient {
      * CaseManagement.saveService - Identifier for the saveService method
      */
     public static final String SAVE_SERVICE = SERVICE_NAME + "saveService";
-        /**
+    /**
      * CaseManagement.getPublicDisplayItems - Identifier for the
      * getPublicDisplayItems method
      */
     public static final String GET_PUBLIC_DISPLAY_ITEMS = SERVICE_NAME + "getPublicDisplayItems";
     /**
-     * CaseManagement.savePublicDisplayItem - Identifier for the savePublicDisplayItem method
+     * CaseManagement.savePublicDisplayItem - Identifier for the
+     * savePublicDisplayItem method
      */
     public static final String SAVE_PUBLIC_DISPLAY_ITEM = SERVICE_NAME + "savePublicDisplayItem";
+    /**
+     * CaseManagement.savePublicDisplayItems - Identifier for the
+     * savePublicDisplayItems method
+     */
+    public static final String SAVE_PUBLIC_DISPLAY_ITEMS = SERVICE_NAME + "savePublicDisplayItems";
 
     /**
      * Calculates the lodgement fees as well as the expected completions dates
@@ -864,8 +870,8 @@ public interface CaseManagementClient extends AbstractWSClient {
      * @return the saved service saved.
      */
     ServiceTO saveService(ServiceTO service) throws WebServiceClientException;
-    
-        /**
+
+    /**
      * Retrieves all public display items associated to a service.
      * <p>
      * Requires the {@linkplain RolesConstants#APPLICATION_VIEW_APPS} role.</p>
@@ -878,12 +884,24 @@ public interface CaseManagementClient extends AbstractWSClient {
     /**
      * Saves changes a public display item.
      * <p>
-     * Requires the {@linkplain RolesConstants#APPLICATION_EDIT_APPS} role.</p>
+     * Requires the {@linkplain RolesConstants#SERVICE_START_PUBLIC_DISPLAY}
+     * role.</p>
      *
      * @param publicDisplayItem
      * @return the saved item.
      */
     PublicDisplayItemTO savePublicDisplayItem(PublicDisplayItemTO publicDisplayItem) throws WebServiceClientException;
 
+    /**
+     * Saves changes to all public display items associated to a service.
+     * <p>
+     * Requires the {@linkplain RolesConstants#SERVICE_START_PUBLIC_DISPLAY}
+     * role.</p>
+     *
+     * @param itemList
+     * @return the list of display items for the service after they have been
+     * saved.
+     */
+    List<PublicDisplayItemTO> savePublicDisplayItems(List<PublicDisplayItemTO> itemList) throws WebServiceClientException;
 
 }

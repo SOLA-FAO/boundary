@@ -1501,4 +1501,37 @@ public class CaseManagement extends AbstractWebService {
         return result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#savePublicDisplayItems(java.util.List) 
+     * ApplicationEJB.savePublicDisplayItems}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
+    @WebMethod(operationName = "SavePublicDisplayItems")
+    public List<PublicDisplayItemTO> SavePublicDisplayItems(
+            final @WebParam(name = "itemList") List<PublicDisplayItemTO> itemList)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault,
+            OptimisticLockingFault, SOLAValidationFault {
+        final Object[] result = {null};
+
+        runUpdateValidation(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                if (itemList != null && itemList.size() > 0) {
+                    String serviceId = itemList.get(0).getServiceId();
+                    List<PublicDisplayItem> params = GenericTranslator.fromTOList(itemList, PublicDisplayItem.class,
+                            applicationEJB.getPublicDisplayItems(serviceId));
+                    List<PublicDisplayItem> tmpItemList = applicationEJB.savePublicDisplayItems(params);
+                    result[0] = GenericTranslator.toTOList(tmpItemList, PublicDisplayItemTO.class);
+                }
+            }
+        });
+
+        return (List<PublicDisplayItemTO>) result[0];
+    }
+
 }

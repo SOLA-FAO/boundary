@@ -797,4 +797,23 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         }
         return result;
     }
+
+    @Override
+    public List<PublicDisplayItemTO> savePublicDisplayItems(List<PublicDisplayItemTO> itemList)
+            throws WebServiceClientException {
+
+        List<PublicDisplayItemTO> result = null;
+        final String methodName = CaseManagementClient.SAVE_PUBLIC_DISPLAY_ITEMS;
+        try {
+            beforeWebMethod(methodName, itemList);
+            result = getPort().savePublicDisplayItems(itemList);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, itemList);
+        }
+        return result;
+
+    }
+
 }
