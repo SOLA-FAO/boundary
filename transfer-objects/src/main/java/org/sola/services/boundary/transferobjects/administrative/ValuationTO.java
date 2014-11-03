@@ -62,15 +62,7 @@ public class ValuationTO extends AbstractIdTO {
         sourceList.add(source);
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    /**
+     /**
      * @return the nr
      */
     public String getNr() {
@@ -194,35 +186,5 @@ public class ValuationTO extends AbstractIdTO {
      */
     public void setTransactionId(String transcationId) {
         this.transactionId = transcationId;
-    }
-
-    /**
-     * @return the classificationCode
-     */
-    @Override
-    public String getClassificationCode() {
-        return classificationCode;
-    }
-
-    /**
-     * @param classificationCode the classificationCode to set
-     */
-    public void setClassificationCode(String classificationCode) {
-        this.classificationCode = classificationCode;
-    }
-
-    /**
-     * @return the redactCode
-     */
-    @Override
-    public String getRedactCode() {
-        return redactCode;
-    }
-
-    /**
-     * @param redactCode the redactCode to set
-     */
-    public void setRedactCode(String redactCode) {
-        this.redactCode = redactCode;
     }
 }
