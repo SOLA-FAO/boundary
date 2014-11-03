@@ -189,7 +189,7 @@ public class Administrative extends AbstractWebService {
      * @throws OptimisticLockingFault
      */
     @WebMethod(operationName = "SaveValuation")
-    public BaUnitTO SaveValuation(
+    public ValuationTO SaveValuation(
             @WebParam(name = "serviceId") String serviceId,
             @WebParam(name = "valuationTO") ValuationTO valuationTO)
             throws SOLAFault, UnhandledFault, SOLAAccessFault, OptimisticLockingFault {
@@ -212,7 +212,7 @@ public class Administrative extends AbstractWebService {
             }
         });
 
-        return (BaUnitTO) result[0];
+        return (ValuationTO) result[0];
     }
     
      /**
