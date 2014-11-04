@@ -734,5 +734,22 @@ public class MockReferenceDataPort implements ReferenceData {
             return null;
         }
     }
+    
+    /**
+     * Response Key = ReferenceDataClient.GET_VALUATION_TYPES
+     *
+     * @return default = new ArrayList()
+     */
+    @Override
+    public List<ValuationTypeTO> getValuationTypes(String arg0) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<ValuationTypeTO> defaultResponse = new ArrayList<ValuationTypeTO>();
+        try {
+            return getManager().getResponse(ReferenceDataClient.GET_VALUATION_TYPES,
+                    List.class, defaultResponse, arg0);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
 
 }

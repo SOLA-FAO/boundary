@@ -776,4 +776,24 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
         }
         return result;
     }
+    
+     @Override
+    public List<ValuationTypeTO> getValuationTypes() throws WebServiceClientException {
+        return getValuationTypes(getLanguageCode());
+    }
+
+    @Override
+    public List<ValuationTypeTO> getValuationTypes(String lang) throws WebServiceClientException {
+        List<ValuationTypeTO> result = null;
+        final String methodName = ReferenceDataClient.GET_VALUATION_TYPES;
+        try {
+            beforeWebMethod(methodName, lang);
+            result = getPort().getValuationTypes(lang);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, lang);
+        }
+        return result;
+    }
 }

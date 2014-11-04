@@ -38,7 +38,6 @@ import org.sola.services.common.contracts.AbstractIdTO;
 
 public class ValuationTO extends AbstractIdTO {
 
-    private String id;
     private String nr;
     private String baUnitId;
     private BigDecimal amount;
@@ -48,20 +47,12 @@ public class ValuationTO extends AbstractIdTO {
     private String source;
     private String description;
     private String transactionId;
-    private String classificationCode;
-    private String redactCode;
 
     public ValuationTO() {
         super();
     }
 
-    public void addSource(SourceTO source) {
-        if (sourceList == null) {
-            sourceList = new ArrayList<SourceTO>();
-        }
-        sourceList.add(source);
-    }
-
+    
      /**
      * @return the nr
      */

@@ -407,6 +407,25 @@ public class MockAdministrativePort implements Administrative {
             return null;
         }
     }
+    
+    /**
+     * Response Key = AdministrativeClient.GET_VALUATIONS
+     *
+     * @return java.lang.List<ValuationTO>()
+     */
+    @Override
+    public List<ValuationTO> getValuations(String serviceId)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<ValuationTO> defaultResponse = new ArrayList<ValuationTO>();
+        try {
+            return getManager().getResponse(AdministrativeClient.GET_VALUATIONS,
+                    List.class, defaultResponse);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+    
 
     @Override
     public List<SysRegManagementTO> getSysRegManagement(SysRegManagementParamsTO sysRegManagementParamsTO, String languageCode)
@@ -477,6 +496,52 @@ public class MockAdministrativePort implements Administrative {
             return null;
         }
     }
+    
+    /**
+     * Response Key = AdministrativeClient.SAVE_VALUATION
+     *
+     * @return valuationTO 
+     */
+    @Override
+    public ValuationTO saveValuation(String serviceId, ValuationTO valuationTO)
+            throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, UnhandledFault {
+        ValuationTO defaultResponse = valuationTO;
+        try {
+            return getManager().getResponse(AdministrativeClient.SAVE_VALUATION,
+                    ValuationTO.class, defaultResponse, valuationTO, serviceId);
+        } catch (Exception ex) {
+            processExceptionUpdate(ex);
+            return null;
+        }
+    }
+
+    /**
+     * 
+     *  Response Key = AdministrativeClient.SAVE_VALUATIONS
+     * 
+     * @param itemList
+     * @param serviceId
+     * @return
+     * @throws OptimisticLockingFault
+     * @throws SOLAAccessFault
+     * @throws SOLAFault
+     * @throws SOLAValidationFault
+     * @throws UnhandledFault 
+     */
+    @Override
+    public List<ValuationTO> saveValuations(List<ValuationTO> itemList, String serviceId)
+            throws OptimisticLockingFault, SOLAAccessFault, SOLAFault,
+            SOLAValidationFault, UnhandledFault {
+        List<ValuationTO> defaultResponse = itemList;
+        try {
+            return getManager().getResponse(AdministrativeClient.SAVE_VALUATIONS,
+                    List.class, defaultResponse, itemList);
+        } catch (Exception ex) {
+            processExceptionUpdate(ex);
+            return null;
+        }
+    }
+    
 
     /**
      * Response Key = AdministrativeClient.assignTeam

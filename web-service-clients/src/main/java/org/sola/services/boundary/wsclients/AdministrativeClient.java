@@ -127,6 +127,22 @@ public interface AdministrativeClient extends AbstractWSClient {
      * method
      */
     public static final String PUBLIC_DIPLAY = SERVICE_NAME + "publicDisplay";
+    /**
+     * Administrative.getValuations - Identifier for the getValuations
+     * method
+     */
+    public static final String GET_VALUATIONS = SERVICE_NAME + "getValuations";
+    /**
+     * Administrative.getValuations - Identifier for the saveValuation
+     * method
+     */
+    public static final String SAVE_VALUATION = SERVICE_NAME + "saveValuation";
+    /**
+     * Administrative.saveValuations - Identifier for the saveValuations
+     * method
+     */
+    public static final String SAVE_VALUATIONS = SERVICE_NAME + "saveValuations";
+    
 
     public static final String GET_SYS_REG_MANAGEMENT = SERVICE_NAME + "getSysRegManagement";
 

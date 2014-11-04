@@ -761,6 +761,32 @@ public class Administrative extends AbstractWebService {
 
         return (List<SysRegProgressTO>) result[0];
     }
+    
+    /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getValuations(java.lang.String)
+     * AdministrativeEJB.getValuations}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetValuations")
+    public List<ValuationTO> GetValuations(
+            final @WebParam(name = "serviceId") String serviceId)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        administrativeEJB.getValuations(serviceId),
+                        ValuationTO.class);
+            }
+        });
+        return (List<ValuationTO>) result[0];
+    }
 
     /**
      * See {@linkplain AdministrativeEJB#assignTeam(java.util.List, java.lang.String) 
