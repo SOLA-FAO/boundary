@@ -297,6 +297,57 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
     }
 
     @Override
+    public List<ValuationTO> getValuations(String serviceId) throws WebServiceClientException {
+        List<ValuationTO> result = null;
+        final String methodName = AdministrativeClient.GET_VALUATIONS;
+        String languageCode = getLanguageCode();
+        try {
+            beforeWebMethod(methodName, serviceId, languageCode);
+            result = getPort().getValuations(serviceId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, serviceId, languageCode);
+        }
+        return result;
+    }
+
+    @Override
+    public ValuationTO saveValuation(String serviceId, ValuationTO valuationTO)
+            throws WebServiceClientException {
+        ValuationTO result = null;
+        final String methodName = AdministrativeClient.SAVE_VALUATION;
+        String languageCode = getLanguageCode();
+        try {
+            beforeWebMethod(methodName, serviceId, valuationTO, languageCode);
+            result = getPort().saveValuation(serviceId, valuationTO);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, serviceId, valuationTO, languageCode);
+        }
+        return result;
+    }
+
+    @Override
+    public List<ValuationTO> saveValuations(List<ValuationTO> itemList, String serviceId)
+            throws WebServiceClientException {
+        List<ValuationTO> result = null;
+        final String methodName = AdministrativeClient.SAVE_VALUATIONS;
+        String languageCode = getLanguageCode();
+        try {
+            beforeWebMethod(methodName, serviceId, itemList, languageCode);
+            result = getPort().saveValuations(itemList, serviceId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, serviceId, itemList, languageCode);
+        }
+        return result;
+
+    }
+
+    @Override
     public List<SysRegManagementTO> getSysRegManagement(SysRegManagementParamsTO sysRegManagementParamsTO)
             throws WebServiceClientException {
         List<SysRegManagementTO> result = null;

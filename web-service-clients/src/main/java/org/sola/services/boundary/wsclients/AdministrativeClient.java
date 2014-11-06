@@ -343,6 +343,11 @@ public interface AdministrativeClient extends AbstractWSClient {
      */
     List<ValidationResult> publicDisplay(String params)
             throws WebServiceClientException;
+    
+    List<ValuationTO> getValuations(String serviceId)throws WebServiceClientException;
+    ValuationTO saveValuation(String serviceId, ValuationTO valuationTO)throws WebServiceClientException;
+    List<ValuationTO> saveValuations(List<ValuationTO> itemList, String serviceId)throws WebServiceClientException;
+    
 
     List<SysRegManagementTO> getSysRegManagement(SysRegManagementParamsTO sysRegManagementParamsTO)
             throws WebServiceClientException;
