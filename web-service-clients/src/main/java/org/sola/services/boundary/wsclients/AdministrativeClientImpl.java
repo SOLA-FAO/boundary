@@ -302,12 +302,12 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
         final String methodName = AdministrativeClient.GET_VALUATIONS;
         String languageCode = getLanguageCode();
         try {
-            beforeWebMethod(methodName, serviceId, languageCode);
+            beforeWebMethod(methodName, serviceId);
             result = getPort().getValuations(serviceId);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
-            afterWebMethod(methodName, result, serviceId, languageCode);
+            afterWebMethod(methodName, result, serviceId);
         }
         return result;
     }
@@ -317,14 +317,13 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
             throws WebServiceClientException {
         ValuationTO result = null;
         final String methodName = AdministrativeClient.SAVE_VALUATION;
-        String languageCode = getLanguageCode();
         try {
-            beforeWebMethod(methodName, serviceId, valuationTO, languageCode);
+            beforeWebMethod(methodName, serviceId, valuationTO);
             result = getPort().saveValuation(serviceId, valuationTO);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
-            afterWebMethod(methodName, result, serviceId, valuationTO, languageCode);
+            afterWebMethod(methodName, result, serviceId, valuationTO);
         }
         return result;
     }
