@@ -34,6 +34,7 @@ public class UserSummaryTO extends AbstractIdTO {
     private String firstName;
     private String lastName;
     private String description;
+    private String userName;
 
     public UserSummaryTO() {
         super();
@@ -61,6 +62,14 @@ public class UserSummaryTO extends AbstractIdTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
 

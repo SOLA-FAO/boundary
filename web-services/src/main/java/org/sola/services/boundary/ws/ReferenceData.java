@@ -61,8 +61,11 @@ import org.sola.services.ejb.administrative.repository.entities.RrrType;
 import org.sola.services.ejb.administrative.repository.entities.SourceBaUnitRelationType;
 import org.sola.services.ejb.application.repository.entities.ApplicationActionType;
 import org.sola.services.ejb.application.repository.entities.ApplicationStatusType;
+import org.sola.services.ejb.application.repository.entities.Authority;
 import org.sola.services.ejb.application.repository.entities.ChecklistGroup;
 import org.sola.services.ejb.application.repository.entities.ChecklistItem;
+import org.sola.services.ejb.application.repository.entities.NotifyRelationshipType;
+import org.sola.services.ejb.application.repository.entities.ObjectionStatus;
 import org.sola.services.ejb.application.repository.entities.PublicDisplayItemStatus;
 import org.sola.services.ejb.application.repository.entities.PublicDisplayItemType;
 import org.sola.services.ejb.application.repository.entities.RequestCategoryType;
@@ -1108,6 +1111,84 @@ public class ReferenceData extends AbstractWebService {
     }
 
     /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getCodeEntityList(java.lang.Class, java.lang.String)
+     * AdministrativeEJB.getCodeEntityList}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetAuthorityTypes")
+    public List<AuthorityTO> GetAuthorityTypes(@WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+        final Object[] params = {languageCode};
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                String languageCode = params[0] == null ? null : params[0].toString();
+                result[0] = GenericTranslator.toTOList(applicationEJB.getCodeEntityList(
+                        Authority.class, languageCode), AuthorityTO.class);
+            }
+        });
+
+        return (List<AuthorityTO>) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getCodeEntityList(java.lang.Class, java.lang.String)
+     * AdministrativeEJB.getCodeEntityList}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetObjectionStatusTypes")
+    public List<ObjectionStatusTO> GetObjectionStatusTypes(@WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+        final Object[] params = {languageCode};
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                String languageCode = params[0] == null ? null : params[0].toString();
+                result[0] = GenericTranslator.toTOList(applicationEJB.getCodeEntityList(
+                        ObjectionStatus.class, languageCode), ObjectionStatusTO.class);
+            }
+        });
+
+        return (List<ObjectionStatusTO>) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getCodeEntityList(java.lang.Class, java.lang.String)
+     * AdministrativeEJB.getCodeEntityList}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetNotifyRelationshipTypes")
+    public List<NotifyRelationshipTypeTO> GetNotifyRelationshipTypes(@WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+        final Object[] params = {languageCode};
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                String languageCode = params[0] == null ? null : params[0].toString();
+                result[0] = GenericTranslator.toTOList(applicationEJB.getCodeEntityList(
+                        NotifyRelationshipType.class, languageCode), NotifyRelationshipTypeTO.class);
+            }
+        });
+
+        return (List<NotifyRelationshipTypeTO>) result[0];
+    }
+
+    /**
      * Supports saving of all SOLA Reference Data types.
      * <p>
      * Requires the {@linkplain RolesConstants#ADMIN_MANAGE_REFDATA} role.</p>
@@ -1259,6 +1340,18 @@ public class ReferenceData extends AbstractWebService {
                 } else if (refDataTO instanceof PublicDisplayItemStatusTO) {
                     codeEntity = applicationEJB.getCodeEntity(PublicDisplayItemStatus.class, refDataTO.getCode());
                     codeEntity = GenericTranslator.fromTO(refDataTO, PublicDisplayItemStatus.class, codeEntity);
+                    applicationEJB.saveCodeEntity(codeEntity);
+                } else if (refDataTO instanceof AuthorityTO) {
+                    codeEntity = applicationEJB.getCodeEntity(Authority.class, refDataTO.getCode());
+                    codeEntity = GenericTranslator.fromTO(refDataTO, Authority.class, codeEntity);
+                    applicationEJB.saveCodeEntity(codeEntity);
+                } else if (refDataTO instanceof ObjectionStatusTO) {
+                    codeEntity = applicationEJB.getCodeEntity(ObjectionStatus.class, refDataTO.getCode());
+                    codeEntity = GenericTranslator.fromTO(refDataTO, ObjectionStatus.class, codeEntity);
+                    applicationEJB.saveCodeEntity(codeEntity);
+                } else if (refDataTO instanceof NotifyRelationshipTypeTO) {
+                    codeEntity = applicationEJB.getCodeEntity(NotifyRelationshipType.class, refDataTO.getCode());
+                    codeEntity = GenericTranslator.fromTO(refDataTO, NotifyRelationshipType.class, codeEntity);
                     applicationEJB.saveCodeEntity(codeEntity);
                 }
 

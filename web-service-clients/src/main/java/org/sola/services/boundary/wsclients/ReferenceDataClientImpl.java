@@ -776,4 +776,64 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
         }
         return result;
     }
+    
+    @Override
+    public List<AuthorityTO> getAuthorityTypes() throws WebServiceClientException {
+        return getAuthorityTypes(getLanguageCode());
+    }
+
+    @Override
+    public List<AuthorityTO> getAuthorityTypes(String lang) throws WebServiceClientException {
+        List<AuthorityTO> result = null;
+        final String methodName = ReferenceDataClient.GET_AUTHORITY_TYPES;
+        try {
+            beforeWebMethod(methodName, lang);
+            result = getPort().getAuthorityTypes(lang);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, lang);
+        }
+        return result;
+    }
+    
+    @Override
+    public List<ObjectionStatusTO> getObjectionStatusTypes() throws WebServiceClientException {
+        return getObjectionStatusTypes(getLanguageCode());
+    }
+
+    @Override
+    public List<ObjectionStatusTO> getObjectionStatusTypes(String lang) throws WebServiceClientException {
+        List<ObjectionStatusTO> result = null;
+        final String methodName = ReferenceDataClient.GET_OBJECTION_STATUS_TYPES;
+        try {
+            beforeWebMethod(methodName, lang);
+            result = getPort().getObjectionStatusTypes(lang);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, lang);
+        }
+        return result;
+    }
+    
+    @Override
+    public List<NotifyRelationshipTypeTO> getNotifyRelationshipTypes() throws WebServiceClientException {
+        return getNotifyRelationshipTypes(getLanguageCode());
+    }
+
+    @Override
+    public List<NotifyRelationshipTypeTO> getNotifyRelationshipTypes(String lang) throws WebServiceClientException {
+        List<NotifyRelationshipTypeTO> result = null;
+        final String methodName = ReferenceDataClient.GET_NOTIFY_RELATIONSHIP_TYPES;
+        try {
+            beforeWebMethod(methodName, lang);
+            result = getPort().getNotifyRelationshipTypes(lang);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, lang);
+        }
+        return result;
+    }
 }

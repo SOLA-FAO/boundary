@@ -52,6 +52,8 @@ import org.sola.services.ejb.application.repository.entities.Service;
 import org.sola.services.ejb.party.businesslogic.PartyEJBLocal;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.faults.SOLAAccessFault;
+import org.sola.services.ejb.application.repository.entities.Notify;
+import org.sola.services.ejb.application.repository.entities.Objection;
 import org.sola.services.ejb.application.repository.entities.PublicDisplayItem;
 import org.sola.services.ejb.application.repository.entities.ServiceChecklistItem;
 import org.sola.services.ejb.application.repository.entities.WorkSummary;
@@ -1502,7 +1504,7 @@ public class CaseManagement extends AbstractWebService {
     }
 
     /**
-     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#savePublicDisplayItems(java.util.List) 
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#savePublicDisplayItems(java.util.List)
      * ApplicationEJB.savePublicDisplayItems}
      *
      * @throws SOLAFault
@@ -1532,6 +1534,122 @@ public class CaseManagement extends AbstractWebService {
         });
 
         return (List<PublicDisplayItemTO>) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getObjections(java.lang.String)
+     * ApplicationEJB.getObjections}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetObjections")
+    public List<ObjectionTO> GetObjections(
+            final @WebParam(name = "serviceId") String serviceId)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        applicationEJB.getObjections(serviceId), ObjectionTO.class);
+            }
+        });
+        return (List<ObjectionTO>) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#saveObjections(java.util.List)
+     * ApplicationEJB.saveObjections}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
+    @WebMethod(operationName = "SaveObjections")
+    public List<ObjectionTO> SaveObjections(
+            final @WebParam(name = "objections") List<ObjectionTO> objections)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault,
+            OptimisticLockingFault, SOLAValidationFault {
+        final Object[] result = {null};
+
+        runUpdateValidation(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                if (objections != null && objections.size() > 0) {
+                    String serviceId = objections.get(0).getServiceId();
+                    List<Objection> params = GenericTranslator.fromTOList(objections, Objection.class,
+                            applicationEJB.getObjections(serviceId));
+                    List<Objection> tmpObjections = applicationEJB.saveObjections(params);
+                    result[0] = GenericTranslator.toTOList(tmpObjections, ObjectionTO.class);
+                }
+            }
+        });
+
+        return (List<ObjectionTO>) result[0];
+    }
+    
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getNotifyParties(java.lang.String)
+     * ApplicationEJB.getNotifyParties}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetNotifyParties")
+    public List<NotifyTO> GetNotifyParties(
+            final @WebParam(name = "serviceId") String serviceId)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        applicationEJB.getNotifyParties(serviceId, true), NotifyTO.class);
+            }
+        });
+        return (List<NotifyTO>) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#saveNotifyParties(java.util.List)
+     * ApplicationEJB.saveNotifyParties}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
+    @WebMethod(operationName = "SaveNotifyParties")
+    public List<NotifyTO> SaveNotifyParties(
+            final @WebParam(name = "notifications") List<NotifyTO> notifications)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault,
+            OptimisticLockingFault, SOLAValidationFault {
+        final Object[] result = {null};
+
+        runUpdateValidation(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                if (notifications != null && notifications.size() > 0) {
+                    String serviceId = notifications.get(0).getServiceId();
+                    List<Notify> params = GenericTranslator.fromTOList(notifications, Notify.class,
+                            applicationEJB.getNotifyParties(serviceId, false));
+                    List<Notify> tmpNotifications = applicationEJB.saveNotifyParties(params);
+                    result[0] = GenericTranslator.toTOList(tmpNotifications, NotifyTO.class);
+                }
+            }
+        });
+
+        return (List<NotifyTO>) result[0];
     }
 
 }
