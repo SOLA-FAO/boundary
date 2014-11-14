@@ -951,4 +951,94 @@ public class MockCaseManagementPort implements CaseManagement {
             return null;
         }
     }
+
+    /**
+     * Response Key = CaseManagementClient.SAVE_PUBLIC_DISPLAY_ITEMS
+     *
+     * @return default = new ArrayList<PublicDisplayItemTO>()
+     */
+    @Override
+    public List<PublicDisplayItemTO> savePublicDisplayItems(List<PublicDisplayItemTO> itemList)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault, OptimisticLockingFault, SOLAValidationFault {
+        List<PublicDisplayItemTO> defaultResponse = new ArrayList<PublicDisplayItemTO>();
+        try {
+            return getManager().getResponse(CaseManagementClient.SAVE_PUBLIC_DISPLAY_ITEMS,
+                    List.class, defaultResponse, itemList);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
+    /**
+     * Response Key = CaseManagementClient.GET_OBJECTIONS
+     *
+     * @return default = new ArrayList<ObjectionTO>()
+     */
+    @Override
+    public List<ObjectionTO> getObjections(String serviceId)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<ObjectionTO> defaultResponse = new ArrayList<ObjectionTO>();
+        try {
+            return getManager().getResponse(CaseManagementClient.GET_OBJECTIONS,
+                    List.class, defaultResponse, serviceId);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
+    /**
+     * Response Key = CaseManagementClient.SAVE_OBJECTIONS
+     *
+     * @return default = new ArrayList<ObjectionTO>()
+     */
+    @Override
+    public List<ObjectionTO> saveObjections(List<ObjectionTO> objections)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault, OptimisticLockingFault, SOLAValidationFault {
+        List<ObjectionTO> defaultResponse = new ArrayList<ObjectionTO>();
+        try {
+            return getManager().getResponse(CaseManagementClient.SAVE_OBJECTIONS,
+                    List.class, defaultResponse, objections);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
+    /**
+     * Response Key = CaseManagementClient.GET_NOTIFY_PARTIES
+     *
+     * @return default = new ArrayList<NotifyTO>()
+     */
+    @Override
+    public List<NotifyTO> getNotifyParties(String serviceId)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<NotifyTO> defaultResponse = new ArrayList<NotifyTO>();
+        try {
+            return getManager().getResponse(CaseManagementClient.GET_NOTIFY_PARTIES,
+                    List.class, defaultResponse, serviceId);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
+    /**
+     * Response Key = CaseManagementClient.SAVE_NOTIFY_PARTIES
+     *
+     * @return default = new ArrayList<NotifyTO>()
+     */
+    @Override
+    public List<NotifyTO> saveNotifyParties(List<NotifyTO> notifications)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault, OptimisticLockingFault, SOLAValidationFault {
+        List<NotifyTO> defaultResponse = new ArrayList<NotifyTO>();
+        try {
+            return getManager().getResponse(CaseManagementClient.SAVE_NOTIFY_PARTIES,
+                    List.class, defaultResponse, notifications);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
 }

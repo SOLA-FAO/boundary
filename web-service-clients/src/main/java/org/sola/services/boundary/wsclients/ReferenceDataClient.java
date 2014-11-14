@@ -207,15 +207,15 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * method
      */
     public static final String GET_CHECKLIST_GROUPS = SERVICE_NAME + "getChecklistGroups";
-    
-        /**
-     * ReferenceData.getPublicDisplayTypes - Identifier for the getPublicDisplayTypes
-     * method
+
+    /**
+     * ReferenceData.getPublicDisplayTypes - Identifier for the
+     * getPublicDisplayTypes method
      */
     public static final String GET_PUBLIC_DISPLAY_TYPES = SERVICE_NAME + "getPublicDisplayTypes";
-        /**
-     * ReferenceData.getPublicDisplayStatusTypes - Identifier for the getPublicDisplayStatusTypes
-     * method
+    /**
+     * ReferenceData.getPublicDisplayStatusTypes - Identifier for the
+     * getPublicDisplayStatusTypes method
      */
     public static final String GET_PUBLIC_DISPLAY_STATUS_TYPES = SERVICE_NAME + "getPublicDisplayStatusTypes";
         /**
@@ -226,6 +226,22 @@ public interface ReferenceDataClient extends AbstractWSClient {
 
     
     
+    /**
+     * ReferenceData.getAuthorityTypes - Identifier for the getAuthorityTypes
+     * method
+     */
+    public static final String GET_AUTHORITY_TYPES = SERVICE_NAME + "getAuthorityTypes";
+    /**
+     * ReferenceData.getObjectionStatusTypes - Identifier for the
+     * getObjectionStatusTypes method
+     */
+    public static final String GET_OBJECTION_STATUS_TYPES = SERVICE_NAME + "getObjectionStatusTypes";
+    /**
+     * ReferenceData.getNotifyRelationshipTypes - Identifier for the
+     * getNotifyRelationshipTypes method
+     */
+    public static final String GET_NOTIFY_RELATIONSHIP_TYPES = SERVICE_NAME + "getNotifyRelationshipTypes";
+
     /**
      * Retrieves all source.source_type code values using the default locale of
      * the client to localize the display values.
@@ -765,8 +781,8 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<ChecklistGroupTO> getChecklistGroups(String lang) throws WebServiceClientException;
-    
-        /**
+
+    /**
      * Retrieves all application.public_display_type code values.
      *
      * @throws WebServiceClientException
@@ -781,7 +797,8 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<PublicDisplayItemTypeTO> getPublicDisplayTypes(String lang) throws WebServiceClientException;
-            /**
+
+    /**
      * Retrieves all application.public_display_type code values.
      *
      * @throws WebServiceClientException
@@ -802,13 +819,58 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<ValuationTypeTO> getValuationTypes() throws WebServiceClientException;
+    
+    List<ValuationTypeTO> getValuationTypes(String lang) throws WebServiceClientException;
+      
      /**
      * Retrieves all application.public_display_status code values.
+
+    /**
+     * Retrieves all application.authority code values.
+     *
+     * @throws WebServiceClientException
+     */
+    List<AuthorityTO> getAuthorityTypes() throws WebServiceClientException;
+
+    /**
+     * Retrieves all application.authority code values.
      *
      * @param languageCode The language code to use for localization of display
      * values.
      * @throws WebServiceClientException
      */
-    List<ValuationTypeTO> getValuationTypes(String lang) throws WebServiceClientException;
-      
+    List<AuthorityTO> getAuthorityTypes(String lang) throws WebServiceClientException;
+
+    /**
+     * Retrieves all application.objection_status code values.
+     *
+     * @throws WebServiceClientException
+     */
+    List<ObjectionStatusTO> getObjectionStatusTypes() throws WebServiceClientException;
+
+    /**
+     * Retrieves all application.objection_status code values.
+     *
+     * @param languageCode The language code to use for localization of display
+     * values.
+     * @throws WebServiceClientException
+     */
+    List<ObjectionStatusTO> getObjectionStatusTypes(String lang) throws WebServiceClientException;
+
+    /**
+     * Retrieves all application.notify_relationship_type code values.
+     *
+     * @throws WebServiceClientException
+     */
+    List<NotifyRelationshipTypeTO> getNotifyRelationshipTypes() throws WebServiceClientException;
+
+    /**
+     * Retrieves all application.notify_relationship_type code values.
+     *
+     * @param languageCode The language code to use for localization of display
+     * values.
+     * @throws WebServiceClientException
+     */
+    List<NotifyRelationshipTypeTO> getNotifyRelationshipTypes(String lang) throws WebServiceClientException;
+
 }

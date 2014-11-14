@@ -734,7 +734,7 @@ public class MockReferenceDataPort implements ReferenceData {
             return null;
         }
     }
-    
+
     /**
      * Response Key = ReferenceDataClient.GET_VALUATION_TYPES
      *
@@ -745,6 +745,56 @@ public class MockReferenceDataPort implements ReferenceData {
         List<ValuationTypeTO> defaultResponse = new ArrayList<ValuationTypeTO>();
         try {
             return getManager().getResponse(ReferenceDataClient.GET_VALUATION_TYPES,
+                    List.class, defaultResponse, arg0);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
+    /**
+     * Response Key = ReferenceDataClient.GET_AUTHORITY_TYPES
+     *
+     * @return default = new ArrayList()
+     */
+    public List<AuthorityTO> getAuthorityTypes(String arg0) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<AuthorityTO> defaultResponse = new ArrayList<AuthorityTO>();
+        try {
+            return getManager().getResponse(ReferenceDataClient.GET_AUTHORITY_TYPES,
+                    List.class, defaultResponse, arg0);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
+    /**
+     * Response Key = ReferenceDataClient.GET_OBJECTION_STATUS_TYPES
+     *
+     * @return default = new ArrayList()
+     */
+    @Override
+    public List<ObjectionStatusTO> getObjectionStatusTypes(String arg0) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<ObjectionStatusTO> defaultResponse = new ArrayList<ObjectionStatusTO>();
+        try {
+            return getManager().getResponse(ReferenceDataClient.GET_OBJECTION_STATUS_TYPES,
+                    List.class, defaultResponse, arg0);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
+    /**
+     * Response Key = ReferenceDataClient.GET_NOTIFY_RELATIONSHIP_TYPES
+     *
+     * @return default = new ArrayList()
+     */
+    @Override
+    public List<NotifyRelationshipTypeTO> getNotifyRelationshipTypes(String arg0) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<NotifyRelationshipTypeTO> defaultResponse = new ArrayList<NotifyRelationshipTypeTO>();
+        try {
+            return getManager().getResponse(ReferenceDataClient.GET_NOTIFY_RELATIONSHIP_TYPES,
                     List.class, defaultResponse, arg0);
         } catch (Exception ex) {
             processExceptionAccess(ex);

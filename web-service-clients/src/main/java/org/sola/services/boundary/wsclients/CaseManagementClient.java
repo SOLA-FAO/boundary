@@ -252,15 +252,39 @@ public interface CaseManagementClient extends AbstractWSClient {
      * CaseManagement.saveService - Identifier for the saveService method
      */
     public static final String SAVE_SERVICE = SERVICE_NAME + "saveService";
-        /**
+    /**
      * CaseManagement.getPublicDisplayItems - Identifier for the
      * getPublicDisplayItems method
      */
     public static final String GET_PUBLIC_DISPLAY_ITEMS = SERVICE_NAME + "getPublicDisplayItems";
     /**
-     * CaseManagement.savePublicDisplayItem - Identifier for the savePublicDisplayItem method
+     * CaseManagement.savePublicDisplayItem - Identifier for the
+     * savePublicDisplayItem method
      */
     public static final String SAVE_PUBLIC_DISPLAY_ITEM = SERVICE_NAME + "savePublicDisplayItem";
+    /**
+     * CaseManagement.savePublicDisplayItems - Identifier for the
+     * savePublicDisplayItems method
+     */
+    public static final String SAVE_PUBLIC_DISPLAY_ITEMS = SERVICE_NAME + "savePublicDisplayItems";
+    /**
+     * CaseManagement.getObjections - Identifier for the getObjections method
+     */
+    public static final String GET_OBJECTIONS = SERVICE_NAME + "getObjections";
+    /**
+     * CaseManagement.saveObjections - Identifier for the saveObjections method
+     */
+    public static final String SAVE_OBJECTIONS = SERVICE_NAME + "saveObjections";
+    /**
+     * CaseManagement.getNotifyParties - Identifier for the getNotifyParties
+     * method
+     */
+    public static final String GET_NOTIFY_PARTIES = SERVICE_NAME + "getNotifyParties";
+    /**
+     * CaseManagement.saveNotifyParties - Identifier for the saveNotifyParties
+     * method
+     */
+    public static final String SAVE_NOTIFY_PARTIES = SERVICE_NAME + "saveNotifyParties";
 
     /**
      * Calculates the lodgement fees as well as the expected completions dates
@@ -864,8 +888,8 @@ public interface CaseManagementClient extends AbstractWSClient {
      * @return the saved service saved.
      */
     ServiceTO saveService(ServiceTO service) throws WebServiceClientException;
-    
-        /**
+
+    /**
      * Retrieves all public display items associated to a service.
      * <p>
      * Requires the {@linkplain RolesConstants#APPLICATION_VIEW_APPS} role.</p>
@@ -878,12 +902,67 @@ public interface CaseManagementClient extends AbstractWSClient {
     /**
      * Saves changes a public display item.
      * <p>
-     * Requires the {@linkplain RolesConstants#APPLICATION_EDIT_APPS} role.</p>
+     * Requires the {@linkplain RolesConstants#SERVICE_START_PUBLIC_DISPLAY}
+     * role.</p>
      *
      * @param publicDisplayItem
      * @return the saved item.
      */
     PublicDisplayItemTO savePublicDisplayItem(PublicDisplayItemTO publicDisplayItem) throws WebServiceClientException;
 
+    /**
+     * Saves changes to all public display items associated to a service.
+     * <p>
+     * Requires the {@linkplain RolesConstants#SERVICE_START_PUBLIC_DISPLAY}
+     * role.</p>
+     *
+     * @param itemList
+     * @return the list of display items for the service after they have been
+     * saved.
+     */
+    List<PublicDisplayItemTO> savePublicDisplayItems(List<PublicDisplayItemTO> itemList) throws WebServiceClientException;
+
+    /**
+     * Retrieves all objections associated to a service.
+     * <p>
+     * Requires the {@linkplain RolesConstants#APPLICATION_VIEW_APPS} role.</p>
+     *
+     * @param serviceId Id of the service to retrieve objections for
+     * @return Objection records
+     */
+    List<ObjectionTO> getObjections(String serviceId) throws WebServiceClientException;
+
+    /**
+     * Saves changes to all objections associated to a service.
+     * <p>
+     * Requires the {@linkplain RolesConstants#SERVICE_START_OBJECTIONS}
+     * role.</p>
+     *
+     * @param objections
+     * @return the list of objections for the service after they have been
+     * saved.
+     */
+    List<ObjectionTO> saveObjections(List<ObjectionTO> objections) throws WebServiceClientException;
+
+    /**
+     * Retrieves all notification parties associated to a service.
+     * <p>
+     * Requires the {@linkplain RolesConstants#APPLICATION_VIEW_APPS} role.</p>
+     *
+     * @param serviceId Id of the service to retrieve notification parties for
+     * @return Notify records
+     */
+    List<NotifyTO> getNotifyParties(String serviceId) throws WebServiceClientException;
+
+    /**
+     * Saves changes to all notification parties associated to a service.
+     * <p>
+     * Requires the {@linkplain RolesConstants#SERVICE_START_NOTIFY} role.</p>
+     *
+     * @param notifications
+     * @return the list of notification parties for the service after they have
+     * been saved.
+     */
+    List<NotifyTO> saveNotifyParties(List<NotifyTO> notifications) throws WebServiceClientException;
 
 }

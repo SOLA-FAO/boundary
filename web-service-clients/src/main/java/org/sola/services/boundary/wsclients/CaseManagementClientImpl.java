@@ -797,4 +797,82 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         }
         return result;
     }
+
+    @Override
+    public List<PublicDisplayItemTO> savePublicDisplayItems(List<PublicDisplayItemTO> itemList)
+            throws WebServiceClientException {
+
+        List<PublicDisplayItemTO> result = null;
+        final String methodName = CaseManagementClient.SAVE_PUBLIC_DISPLAY_ITEMS;
+        try {
+            beforeWebMethod(methodName, itemList);
+            result = getPort().savePublicDisplayItems(itemList);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, itemList);
+        }
+        return result;
+    }
+
+    @Override
+    public List<ObjectionTO> getObjections(String serviceId) throws WebServiceClientException {
+        List<ObjectionTO> result = null;
+        final String methodName = CaseManagementClient.GET_OBJECTIONS;
+        try {
+            beforeWebMethod(methodName, serviceId);
+            result = getPort().getObjections(serviceId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, serviceId);
+        }
+        return result;
+    }
+
+    @Override
+    public List<ObjectionTO> saveObjections(List<ObjectionTO> objections) throws WebServiceClientException {
+        List<ObjectionTO> result = null;
+        final String methodName = CaseManagementClient.SAVE_OBJECTIONS;
+        try {
+            beforeWebMethod(methodName, objections);
+            result = getPort().saveObjections(objections);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, objections);
+        }
+        return result;
+    }
+
+    @Override
+    public List<NotifyTO> getNotifyParties(String serviceId) throws WebServiceClientException {
+        List<NotifyTO> result = null;
+        final String methodName = CaseManagementClient.GET_NOTIFY_PARTIES;
+        try {
+            beforeWebMethod(methodName, serviceId);
+            result = getPort().getNotifyParties(serviceId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, serviceId);
+        }
+        return result;
+    }
+
+    @Override
+    public List<NotifyTO> saveNotifyParties(List<NotifyTO> notifications) throws WebServiceClientException {
+        List<NotifyTO> result = null;
+        final String methodName = CaseManagementClient.SAVE_NOTIFY_PARTIES;
+        try {
+            beforeWebMethod(methodName, notifications);
+            result = getPort().saveNotifyParties(notifications);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, notifications);
+        }
+        return result;
+    }
+
 }
