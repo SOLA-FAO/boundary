@@ -44,6 +44,7 @@ public class ValuationTO extends AbstractIdTO {
     private Date valuationDate;
     private String typeCode;
     private List<SourceTO> sourceList;
+    private List<BaUnitBasicTO> propertyList;
     private String source;
     private String description;
     private String transactionId;
@@ -178,4 +179,14 @@ public class ValuationTO extends AbstractIdTO {
     public void setTransactionId(String transcationId) {
         this.transactionId = transcationId;
     }
+
+    public List<BaUnitBasicTO> getPropertyList() {
+        return propertyList;
+    }
+
+    public void setPropertyList(List<BaUnitBasicTO> propertyList) {
+        this.propertyList = propertyList;
+    }
+    
+    
 }
