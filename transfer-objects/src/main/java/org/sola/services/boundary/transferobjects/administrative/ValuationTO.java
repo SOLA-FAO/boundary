@@ -30,7 +30,6 @@
 package org.sola.services.boundary.transferobjects.administrative;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.sola.services.boundary.transferobjects.casemanagement.SourceTO;
@@ -44,7 +43,7 @@ public class ValuationTO extends AbstractIdTO {
     private Date valuationDate;
     private String typeCode;
     private List<SourceTO> sourceList;
-    private List<BaUnitBasicTO> propertyList;
+    private BaUnitBasicTO baUnitBasic;
     private String source;
     private String description;
     private String transactionId;
@@ -180,13 +179,15 @@ public class ValuationTO extends AbstractIdTO {
         this.transactionId = transcationId;
     }
 
-    public List<BaUnitBasicTO> getPropertyList() {
-        return propertyList;
+    public BaUnitBasicTO getBaUnitBasic() {
+        return baUnitBasic;
     }
 
-    public void setPropertyList(List<BaUnitBasicTO> propertyList) {
-        this.propertyList = propertyList;
+    public void setBaUnitBasic(BaUnitBasicTO baUnitBasic) {
+        this.baUnitBasic = baUnitBasic;
     }
+
+  
     
     
 }
