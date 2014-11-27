@@ -29,6 +29,7 @@
  */
 package org.sola.services.boundary.transferobjects.administrative;
 
+import java.math.BigDecimal;
 import org.sola.services.common.contracts.AbstractTO;
 
 public class BaUnitBasicTO extends AbstractTO {
@@ -43,6 +44,7 @@ public class BaUnitBasicTO extends AbstractTO {
     private String description;
     private String stateLandStatusCode;
     private int rowVersion;
+    private BigDecimal area;
     
     public BaUnitBasicTO() {
         super();
@@ -127,4 +129,13 @@ public class BaUnitBasicTO extends AbstractTO {
     public void setStateLandStatusCode(String stateLandStatusCode) {
         this.stateLandStatusCode = stateLandStatusCode;
     }
+
+    public BigDecimal getArea() {
+        return area;
+    }
+
+    public void setArea(BigDecimal area) {
+        this.area = area;
+    }
+    
 }
