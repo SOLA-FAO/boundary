@@ -218,6 +218,14 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * getPublicDisplayStatusTypes method
      */
     public static final String GET_PUBLIC_DISPLAY_STATUS_TYPES = SERVICE_NAME + "getPublicDisplayStatusTypes";
+        /**
+     * ReferenceData.getValuationTypes - Identifier for the getValuationTypes
+     * method
+     */
+    public static final String GET_VALUATION_TYPES = SERVICE_NAME + "getValuationTypes";
+
+    
+    
     /**
      * ReferenceData.getAuthorityTypes - Identifier for the getAuthorityTypes
      * method
@@ -805,6 +813,17 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<PublicDisplayItemStatusTO> getPublicDisplayStatusTypes(String lang) throws WebServiceClientException;
+    /**
+     * Retrieves all administrative.VALUATION_TYPE code values.
+     *
+     * @throws WebServiceClientException
+     */
+    List<ValuationTypeTO> getValuationTypes() throws WebServiceClientException;
+    
+    List<ValuationTypeTO> getValuationTypes(String lang) throws WebServiceClientException;
+      
+     /**
+     * Retrieves all application.public_display_status code values.
 
     /**
      * Retrieves all application.authority code values.

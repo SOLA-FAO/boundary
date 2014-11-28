@@ -127,6 +127,22 @@ public interface AdministrativeClient extends AbstractWSClient {
      * method
      */
     public static final String PUBLIC_DIPLAY = SERVICE_NAME + "publicDisplay";
+    /**
+     * Administrative.getValuations - Identifier for the getValuations
+     * method
+     */
+    public static final String GET_VALUATIONS = SERVICE_NAME + "getValuations";
+    /**
+     * Administrative.getValuations - Identifier for the saveValuation
+     * method
+     */
+    public static final String SAVE_VALUATION = SERVICE_NAME + "saveValuation";
+    /**
+     * Administrative.saveValuations - Identifier for the saveValuations
+     * method
+     */
+    public static final String SAVE_VALUATIONS = SERVICE_NAME + "saveValuations";
+    
 
     public static final String GET_SYS_REG_MANAGEMENT = SERVICE_NAME + "getSysRegManagement";
 
@@ -327,6 +343,37 @@ public interface AdministrativeClient extends AbstractWSClient {
      */
     List<ValidationResult> publicDisplay(String params)
             throws WebServiceClientException;
+    /**
+     * Returns all Valuations that are associated to the specified service
+     *
+     * @param serviceId The Service identifier
+     */
+    List<ValuationTO> getValuations(String serviceId)throws WebServiceClientException;
+     /**
+     * Saves any updates to an existing Valuation. Can also be used to create a
+     * new Valuation, however this method does not set any default values on the
+     * Valuation like null null null null null null null null null null null
+     * null .It will also create a new Transaction record for the Valuation if
+     * the Service is not already associated to a Transaction.
+     *
+     * @param serviceId The identifier of the Service the Valuation is being
+     * created as part of
+     * @param valuation The details of the Valuation to create
+     * @return The updated Valuation
+     */
+    ValuationTO saveValuation(String serviceId, ValuationTO valuationTO)throws WebServiceClientException;
+    /**
+     * Used to save a list of valuations. Can also be used to save a single valuation
+     * if the items list contains 1 valuation element. If the passed argument
+     * serviceId is not null a new transaction is created if one is not already associated 
+     * associated with this list.
+     * 
+     * @param items
+     * @param serviceId
+     * @return list of saved valuations.
+     */
+    List<ValuationTO> saveValuations(List<ValuationTO> itemList, String serviceId)throws WebServiceClientException;
+    
 
     List<SysRegManagementTO> getSysRegManagement(SysRegManagementParamsTO sysRegManagementParamsTO)
             throws WebServiceClientException;

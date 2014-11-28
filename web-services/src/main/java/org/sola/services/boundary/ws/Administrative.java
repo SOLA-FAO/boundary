@@ -143,7 +143,7 @@ public class Administrative extends AbstractWebService {
 
         return (BaUnitTO) result[0];
     }
-
+    
     /**
      * See {@linkplain AdministrativeEJB#saveNotation(
      * org.sola.services.ejb.administrative.repository.entities.BaUnitNotation)
@@ -176,6 +176,77 @@ public class Administrative extends AbstractWebService {
         });
 
         return (BaUnitNotationTO) result[0];
+    }
+    
+     /**
+     * See {@linkplain AdministrativeEJB#saveValuation(java.lang.String,
+     * org.sola.services.ejb.administrative.repository.entities.Valuation)
+     * AdministrativeEJB.saveValuation}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     */
+    @WebMethod(operationName = "SaveValuation")
+    public ValuationTO SaveValuation(
+            @WebParam(name = "serviceId") String serviceId,
+            @WebParam(name = "valuationTO") ValuationTO valuationTO)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault, OptimisticLockingFault {
+
+        final String serviceIdTmp = serviceId;
+        final ValuationTO valuationTOTmp = valuationTO;
+        final Object[] result = {null};
+
+        runUpdate(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                if (valuationTOTmp != null) {
+                    Valuation valuation = administrativeEJB.saveValuation(
+                            serviceIdTmp,
+                            GenericTranslator.fromTO(valuationTOTmp, Valuation.class,
+                                    administrativeEJB.getEntityById(Valuation.class, valuationTOTmp.getId())));
+                    result[0] = GenericTranslator.toTO(valuation, ValuationTO.class);
+                }
+            }
+        });
+
+        return (ValuationTO) result[0];
+    }
+    
+     /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.AdministrativeEJB#saveValuations(java.util.List, java.lang.String) 
+     * AdministrativeEJB.saveValuations}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
+    @WebMethod(operationName = "SaveValuations")
+    public List<ValuationTO> SaveValuations(
+            final @WebParam(name = "itemList") List<ValuationTO> itemList,
+            final @WebParam(name = "serviceId") String serviceId)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault,
+            OptimisticLockingFault, SOLAValidationFault {
+        final Object[] result = {null};
+
+        runUpdateValidation(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                if (itemList != null && itemList.size() > 0) {
+                    
+                    List<Valuation> params = GenericTranslator.fromTOList(itemList, Valuation.class,
+                            administrativeEJB.getValuations(serviceId));
+                    List<Valuation> tmpItemList = administrativeEJB.saveValuations(params, serviceId);
+                    result[0] = GenericTranslator.toTOList(tmpItemList, ValuationTO.class);
+                }
+            }
+        });
+
+        return (List<ValuationTO>) result[0];
     }
 
     /**
@@ -689,6 +760,32 @@ public class Administrative extends AbstractWebService {
         });
 
         return (List<SysRegProgressTO>) result[0];
+    }
+    
+    /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getValuations(java.lang.String)
+     * AdministrativeEJB.getValuations}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetValuations")
+    public List<ValuationTO> GetValuations(
+            final @WebParam(name = "serviceId") String serviceId)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        administrativeEJB.getValuations(serviceId),
+                        ValuationTO.class);
+            }
+        });
+        return (List<ValuationTO>) result[0];
     }
 
     /**

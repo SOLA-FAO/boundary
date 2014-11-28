@@ -734,13 +734,29 @@ public class MockReferenceDataPort implements ReferenceData {
             return null;
         }
     }
-    
+
+    /**
+     * Response Key = ReferenceDataClient.GET_VALUATION_TYPES
+     *
+     * @return default = new ArrayList()
+     */
+    @Override
+    public List<ValuationTypeTO> getValuationTypes(String arg0) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<ValuationTypeTO> defaultResponse = new ArrayList<ValuationTypeTO>();
+        try {
+            return getManager().getResponse(ReferenceDataClient.GET_VALUATION_TYPES,
+                    List.class, defaultResponse, arg0);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
     /**
      * Response Key = ReferenceDataClient.GET_AUTHORITY_TYPES
      *
      * @return default = new ArrayList()
      */
-    @Override
     public List<AuthorityTO> getAuthorityTypes(String arg0) throws SOLAAccessFault, SOLAFault, UnhandledFault {
         List<AuthorityTO> defaultResponse = new ArrayList<AuthorityTO>();
         try {
@@ -751,7 +767,7 @@ public class MockReferenceDataPort implements ReferenceData {
             return null;
         }
     }
-    
+
     /**
      * Response Key = ReferenceDataClient.GET_OBJECTION_STATUS_TYPES
      *
@@ -768,7 +784,7 @@ public class MockReferenceDataPort implements ReferenceData {
             return null;
         }
     }
-    
+
     /**
      * Response Key = ReferenceDataClient.GET_NOTIFY_RELATIONSHIP_TYPES
      *
