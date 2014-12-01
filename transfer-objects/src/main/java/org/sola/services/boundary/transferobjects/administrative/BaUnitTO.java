@@ -57,6 +57,7 @@ public class BaUnitTO extends AbstractIdTO {
     private String description;
     private String stateLandStatusCode;
     private List<PartyTO> partyList;
+    private List<ValuationTO> valuationList;
 
     public BigDecimal getCalculatedAreaSize() {
         return calculatedAreaSize;
@@ -226,4 +227,13 @@ public class BaUnitTO extends AbstractIdTO {
     public void setPartyList(List<PartyTO> partyList) {
         this.partyList = partyList;
     }
+
+    public List<ValuationTO> getValuationList() {
+        return valuationList;
+    }
+
+    public void setValuationList(List<ValuationTO> valuationList) {
+        this.valuationList = valuationList;
+    }
+    
 }
