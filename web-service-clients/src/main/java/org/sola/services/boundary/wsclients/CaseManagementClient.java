@@ -285,6 +285,16 @@ public interface CaseManagementClient extends AbstractWSClient {
      * method
      */
     public static final String SAVE_NOTIFY_PARTIES = SERVICE_NAME + "saveNotifyParties";
+    /**
+     * CaseManagement.getNegotiations - Identifier for the getNegotiations
+     * method
+     */
+    public static final String GET_NEGOTIATIONS = SERVICE_NAME + "getNegotiations";
+    /**
+     * CaseManagement.saveNegotiations - Identifier for the saveNegotiations
+     * method
+     */
+    public static final String SAVE_NEGOTIATIONS = SERVICE_NAME + "saveNegotiations";
 
     /**
      * Calculates the lodgement fees as well as the expected completions dates
@@ -964,5 +974,27 @@ public interface CaseManagementClient extends AbstractWSClient {
      * been saved.
      */
     List<NotifyTO> saveNotifyParties(List<NotifyTO> notifications) throws WebServiceClientException;
+    
+    /**
+     * Retrieves all negotiations associated to a service.
+     * <p>
+     * Requires the {@linkplain RolesConstants#APPLICATION_VIEW_APPS} role.</p>
+     *
+     * @param serviceId Id of the service to retrieve negotiations for
+     * @return Negotiations records
+     */
+    List<NegotiateTO> getNegotiations(String serviceId) throws WebServiceClientException;
+
+    /**
+     * Saves changes to all Negotiate records associated to a service.
+     * <p>
+     * Requires the {@linkplain RolesConstants#SERVICE_START_NEGOTIATE}
+     * role.</p>
+     *
+     * @param negotiations
+     * @return the list of negotiations for the service after they have been
+     * saved.
+     */
+    List<NegotiateTO> saveNegotiations(List<NegotiateTO> negotiations) throws WebServiceClientException;
 
 }

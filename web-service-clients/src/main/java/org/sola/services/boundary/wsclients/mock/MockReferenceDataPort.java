@@ -802,4 +802,38 @@ public class MockReferenceDataPort implements ReferenceData {
         }
     }
 
+    /**
+     * Response Key = ReferenceDataClient.GET_NEGOTIATE_STATUS_TYPES
+     *
+     * @return default = new ArrayList()
+     */
+    @Override
+    public List<NegotiateStatusTO> getNegotiateStatusTypes(String arg0) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<NegotiateStatusTO> defaultResponse = new ArrayList<NegotiateStatusTO>();
+        try {
+            return getManager().getResponse(ReferenceDataClient.GET_NEGOTIATE_STATUS_TYPES,
+                    List.class, defaultResponse, arg0);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
+    /**
+     * Response Key = ReferenceDataClient.GET_NEGOTIATE_TYPES
+     *
+     * @return default = new ArrayList()
+     */
+    @Override
+    public List<NegotiateTypeTO> getNegotiateTypes(String arg0) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<NegotiateTypeTO> defaultResponse = new ArrayList<NegotiateTypeTO>();
+        try {
+            return getManager().getResponse(ReferenceDataClient.GET_NEGOTIATE_TYPES,
+                    List.class, defaultResponse, arg0);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
 }

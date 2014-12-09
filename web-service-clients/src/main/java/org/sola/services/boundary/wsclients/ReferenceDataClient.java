@@ -218,14 +218,12 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * getPublicDisplayStatusTypes method
      */
     public static final String GET_PUBLIC_DISPLAY_STATUS_TYPES = SERVICE_NAME + "getPublicDisplayStatusTypes";
-        /**
+    /**
      * ReferenceData.getValuationTypes - Identifier for the getValuationTypes
      * method
      */
     public static final String GET_VALUATION_TYPES = SERVICE_NAME + "getValuationTypes";
 
-    
-    
     /**
      * ReferenceData.getAuthorityTypes - Identifier for the getAuthorityTypes
      * method
@@ -241,6 +239,16 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * getNotifyRelationshipTypes method
      */
     public static final String GET_NOTIFY_RELATIONSHIP_TYPES = SERVICE_NAME + "getNotifyRelationshipTypes";
+    /**
+     * ReferenceData.getNegotiateTypes - Identifier for the getNegotiateTypes
+     * method
+     */
+    public static final String GET_NEGOTIATE_TYPES = SERVICE_NAME + "getNegotiateTypes";
+    /**
+     * ReferenceData.getNegotiateStatusTypes - Identifier for the
+     * getNegotiateStatusTypes method
+     */
+    public static final String GET_NEGOTIATE_STATUS_TYPES = SERVICE_NAME + "getNegotiateStatusTypes";
 
     /**
      * Retrieves all source.source_type code values using the default locale of
@@ -813,19 +821,20 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<PublicDisplayItemStatusTO> getPublicDisplayStatusTypes(String lang) throws WebServiceClientException;
+
     /**
      * Retrieves all administrative.VALUATION_TYPE code values.
      *
      * @throws WebServiceClientException
      */
     List<ValuationTypeTO> getValuationTypes() throws WebServiceClientException;
-    
+
     List<ValuationTypeTO> getValuationTypes(String lang) throws WebServiceClientException;
-      
-     /**
-     * Retrieves all application.public_display_status code values.
 
     /**
+     * Retrieves all application.public_display_status code values.
+     *
+     * /**
      * Retrieves all application.authority code values.
      *
      * @throws WebServiceClientException
@@ -873,4 +882,35 @@ public interface ReferenceDataClient extends AbstractWSClient {
      */
     List<NotifyRelationshipTypeTO> getNotifyRelationshipTypes(String lang) throws WebServiceClientException;
 
+    /**
+     * Retrieves all application.negotiate_status code values.
+     *
+     * @throws WebServiceClientException
+     */
+    List<NegotiateStatusTO> getNegotiateStatusTypes() throws WebServiceClientException;
+
+    /**
+     * Retrieves all application.negotiate_status code values.
+     *
+     * @param languageCode The language code to use for localization of display
+     * values.
+     * @throws WebServiceClientException
+     */
+    List<NegotiateStatusTO> getNegotiateStatusTypes(String lang) throws WebServiceClientException;
+
+    /**
+     * Retrieves all application.negotiate_type code values.
+     *
+     * @throws WebServiceClientException
+     */
+    List<NegotiateTypeTO> getNegotiateTypes() throws WebServiceClientException;
+
+    /**
+     * Retrieves all application.negotiate_type code values.
+     *
+     * @param languageCode The language code to use for localization of display
+     * values.
+     * @throws WebServiceClientException
+     */
+    List<NegotiateTypeTO> getNegotiateTypes(String lang) throws WebServiceClientException;
 }

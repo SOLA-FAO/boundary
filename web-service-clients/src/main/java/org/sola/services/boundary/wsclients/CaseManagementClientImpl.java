@@ -861,6 +861,36 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
     }
 
     @Override
+    public List<NegotiateTO> saveNegotiations(List<NegotiateTO> negotiations) throws WebServiceClientException {
+        List<NegotiateTO> result = null;
+        final String methodName = CaseManagementClient.SAVE_NEGOTIATIONS;
+        try {
+            beforeWebMethod(methodName, negotiations);
+            result = getPort().saveNegotiations(negotiations);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, negotiations);
+        }
+        return result;
+    }
+
+    @Override
+    public List<NegotiateTO> getNegotiations(String serviceId) throws WebServiceClientException {
+        List<NegotiateTO> result = null;
+        final String methodName = CaseManagementClient.GET_NEGOTIATIONS;
+        try {
+            beforeWebMethod(methodName, serviceId);
+            result = getPort().getNegotiations(serviceId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, serviceId);
+        }
+        return result;
+    }
+
+    @Override
     public List<NotifyTO> saveNotifyParties(List<NotifyTO> notifications) throws WebServiceClientException {
         List<NotifyTO> result = null;
         final String methodName = CaseManagementClient.SAVE_NOTIFY_PARTIES;
