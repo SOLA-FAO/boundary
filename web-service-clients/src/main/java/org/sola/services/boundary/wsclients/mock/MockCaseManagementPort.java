@@ -1041,4 +1041,40 @@ public class MockCaseManagementPort implements CaseManagement {
             return null;
         }
     }
+
+    /**
+     * Response Key = CaseManagementClient.GET_NEGOTIATIONS
+     *
+     * @return default = new ArrayList<NegotiateTO>()
+     */
+    @Override
+    public List<NegotiateTO> getNegotiations(String serviceId)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<NegotiateTO> defaultResponse = new ArrayList<NegotiateTO>();
+        try {
+            return getManager().getResponse(CaseManagementClient.GET_NEGOTIATIONS,
+                    List.class, defaultResponse, serviceId);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
+    /**
+     * Response Key = CaseManagementClient.SAVE_NEGOTIATIONS
+     *
+     * @return default = new ArrayList<NegotiateTO>()
+     */
+    @Override
+    public List<NegotiateTO> saveNegotiations(List<NegotiateTO> negotiations)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault, OptimisticLockingFault, SOLAValidationFault {
+        List<NegotiateTO> defaultResponse = new ArrayList<NegotiateTO>();
+        try {
+            return getManager().getResponse(CaseManagementClient.SAVE_NEGOTIATIONS,
+                    List.class, defaultResponse, negotiations);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
 }

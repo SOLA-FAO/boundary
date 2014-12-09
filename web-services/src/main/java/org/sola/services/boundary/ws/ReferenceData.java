@@ -65,6 +65,8 @@ import org.sola.services.ejb.application.repository.entities.ApplicationStatusTy
 import org.sola.services.ejb.application.repository.entities.Authority;
 import org.sola.services.ejb.application.repository.entities.ChecklistGroup;
 import org.sola.services.ejb.application.repository.entities.ChecklistItem;
+import org.sola.services.ejb.application.repository.entities.NegotiateStatus;
+import org.sola.services.ejb.application.repository.entities.NegotiateType;
 import org.sola.services.ejb.application.repository.entities.NotifyRelationshipType;
 import org.sola.services.ejb.application.repository.entities.ObjectionStatus;
 import org.sola.services.ejb.application.repository.entities.PublicDisplayItemStatus;
@@ -1110,7 +1112,7 @@ public class ReferenceData extends AbstractWebService {
 
         return (List<PublicDisplayItemStatusTO>) result[0];
     }
-    
+
     /**
      * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getCodeEntityList(java.lang.String)
      * AdministrativeEJB.getCodeEntityList}
@@ -1133,7 +1135,7 @@ public class ReferenceData extends AbstractWebService {
                         ValuationType.class, languageCode), ValuationTypeTO.class);
             }
         });
-      return (List<ValuationTypeTO>) result[0];
+        return (List<ValuationTypeTO>) result[0];
     }
 
     /**
@@ -1212,6 +1214,58 @@ public class ReferenceData extends AbstractWebService {
         });
 
         return (List<NotifyRelationshipTypeTO>) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getCodeEntityList(java.lang.Class, java.lang.String)
+     * AdministrativeEJB.getCodeEntityList}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetNegotiateStatusTypes")
+    public List<NegotiateStatusTO> GetNegotiateStatusTypes(@WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+        final Object[] params = {languageCode};
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                String languageCode = params[0] == null ? null : params[0].toString();
+                result[0] = GenericTranslator.toTOList(applicationEJB.getCodeEntityList(
+                        NegotiateStatus.class, languageCode), NegotiateStatusTO.class);
+            }
+        });
+
+        return (List<NegotiateStatusTO>) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getCodeEntityList(java.lang.Class, java.lang.String)
+     * AdministrativeEJB.getCodeEntityList}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetNegotiateTypes")
+    public List<NegotiateTypeTO> GetNegotiateTypes(@WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+        final Object[] params = {languageCode};
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                String languageCode = params[0] == null ? null : params[0].toString();
+                result[0] = GenericTranslator.toTOList(applicationEJB.getCodeEntityList(
+                        NegotiateType.class, languageCode), NegotiateTypeTO.class);
+            }
+        });
+
+        return (List<NegotiateTypeTO>) result[0];
     }
 
     /**
@@ -1367,7 +1421,7 @@ public class ReferenceData extends AbstractWebService {
                     codeEntity = applicationEJB.getCodeEntity(PublicDisplayItemStatus.class, refDataTO.getCode());
                     codeEntity = GenericTranslator.fromTO(refDataTO, PublicDisplayItemStatus.class, codeEntity);
                     applicationEJB.saveCodeEntity(codeEntity);
-                }else if (refDataTO instanceof ValuationTypeTO) {
+                } else if (refDataTO instanceof ValuationTypeTO) {
                     codeEntity = administrativeEJB.getCodeEntity(ValuationType.class, refDataTO.getCode());
                     codeEntity = GenericTranslator.fromTO(refDataTO, ValuationType.class, codeEntity);
                     administrativeEJB.saveCodeEntity(codeEntity);

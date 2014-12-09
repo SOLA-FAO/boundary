@@ -52,6 +52,7 @@ import org.sola.services.ejb.application.repository.entities.Service;
 import org.sola.services.ejb.party.businesslogic.PartyEJBLocal;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.faults.SOLAAccessFault;
+import org.sola.services.ejb.application.repository.entities.Negotiate;
 import org.sola.services.ejb.application.repository.entities.Notify;
 import org.sola.services.ejb.application.repository.entities.Objection;
 import org.sola.services.ejb.application.repository.entities.PublicDisplayItem;
@@ -1593,7 +1594,7 @@ public class CaseManagement extends AbstractWebService {
 
         return (List<ObjectionTO>) result[0];
     }
-    
+
     /**
      * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getNotifyParties(java.lang.String)
      * ApplicationEJB.getNotifyParties}
@@ -1650,6 +1651,64 @@ public class CaseManagement extends AbstractWebService {
         });
 
         return (List<NotifyTO>) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getNegotiations(java.lang.String)
+     * ApplicationEJB.getNegotiations}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetNegotiations")
+    public List<NegotiateTO> GetNegotiations(
+            final @WebParam(name = "serviceId") String serviceId)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        applicationEJB.getNegotiations(serviceId), NegotiateTO.class);
+            }
+        });
+        return (List<NegotiateTO>) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#saveNegotiations(java.util.List)
+     * ApplicationEJB.saveNegotiations}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
+    @WebMethod(operationName = "SaveNegotiations")
+    public List<NegotiateTO> SaveNegotiations(
+            final @WebParam(name = "notifications") List<NegotiateTO> negotiations)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault,
+            OptimisticLockingFault, SOLAValidationFault {
+        final Object[] result = {null};
+
+        runUpdateValidation(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                if (negotiations != null && negotiations.size() > 0) {
+                    String serviceId = negotiations.get(0).getServiceId();
+                    List<Negotiate> params = GenericTranslator.fromTOList(negotiations, Negotiate.class,
+                            applicationEJB.getNegotiations(serviceId));
+                    List<Negotiate> tmpNotifications = applicationEJB.saveNegotiations(params);
+                    result[0] = GenericTranslator.toTOList(tmpNotifications, NegotiateTO.class);
+                }
+            }
+        });
+
+        return (List<NegotiateTO>) result[0];
     }
 
 }

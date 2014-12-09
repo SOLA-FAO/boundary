@@ -856,4 +856,44 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
         }
         return result;
     }
+    
+    @Override
+    public List<NegotiateStatusTO> getNegotiateStatusTypes() throws WebServiceClientException {
+        return getNegotiateStatusTypes(getLanguageCode());
+    }
+
+    @Override
+    public List<NegotiateStatusTO> getNegotiateStatusTypes(String lang) throws WebServiceClientException {
+        List<NegotiateStatusTO> result = null;
+        final String methodName = ReferenceDataClient.GET_NEGOTIATE_STATUS_TYPES;
+        try {
+            beforeWebMethod(methodName, lang);
+            result = getPort().getNegotiateStatusTypes(lang);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, lang);
+        }
+        return result;
+    }
+    
+    @Override
+    public List<NegotiateTypeTO> getNegotiateTypes() throws WebServiceClientException {
+        return getNegotiateTypes(getLanguageCode());
+    }
+
+    @Override
+    public List<NegotiateTypeTO> getNegotiateTypes(String lang) throws WebServiceClientException {
+        List<NegotiateTypeTO> result = null;
+        final String methodName = ReferenceDataClient.GET_NEGOTIATE_TYPES;
+        try {
+            beforeWebMethod(methodName, lang);
+            result = getPort().getNegotiateTypes(lang);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, lang);
+        }
+        return result;
+    }
 }
