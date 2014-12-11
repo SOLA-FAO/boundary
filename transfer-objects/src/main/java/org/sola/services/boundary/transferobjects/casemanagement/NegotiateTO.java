@@ -30,6 +30,7 @@
 package org.sola.services.boundary.transferobjects.casemanagement;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import org.sola.services.boundary.transferobjects.administrative.BaUnitBasicTO;
 import org.sola.services.common.contracts.AbstractIdTO;
@@ -38,9 +39,9 @@ public class NegotiateTO extends AbstractIdTO {
 
     private String serviceId;
     private String baUnitId;
-    private BigDecimal valuationAmount;
-    private BigDecimal offerAmount;
-    private BigDecimal agreedAmount;
+    private Date notificationDate;
+    private BigDecimal initialAmount;
+    private BigDecimal finalAmount;
     private String typeCode;
     private String statusCode;
     private String description;
@@ -67,28 +68,28 @@ public class NegotiateTO extends AbstractIdTO {
         this.baUnitId = baUnitId;
     }
 
-    public BigDecimal getValuationAmount() {
-        return valuationAmount;
+    public Date getNotificationDate() {
+        return notificationDate;
     }
 
-    public void setValuationAmount(BigDecimal valuationAmount) {
-        this.valuationAmount = valuationAmount;
+    public void setNotificationDate(Date notificationDate) {
+        this.notificationDate = notificationDate;
     }
 
-    public BigDecimal getOfferAmount() {
-        return offerAmount;
+    public BigDecimal getInitialAmount() {
+        return initialAmount;
     }
 
-    public void setOfferAmount(BigDecimal offerAmount) {
-        this.offerAmount = offerAmount;
+    public void setInitialAmount(BigDecimal initialAmount) {
+        this.initialAmount = initialAmount;
     }
 
-    public BigDecimal getAgreedAmount() {
-        return agreedAmount;
+    public BigDecimal getFinalAmount() {
+        return finalAmount;
     }
 
-    public void setAgreedAmount(BigDecimal agreedAmount) {
-        this.agreedAmount = agreedAmount;
+    public void setFinalAmount(BigDecimal finalAmount) {
+        this.finalAmount = finalAmount;
     }
 
     public String getTypeCode() {
