@@ -207,6 +207,11 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * method
      */
     public static final String GET_CHECKLIST_GROUPS = SERVICE_NAME + "getChecklistGroups";
+    /**
+     * ReferenceData.getChecklistItems - Identifier for the getChecklistItems
+     * method
+     */
+    public static final String GET_CHECKLIST_ITEMS = SERVICE_NAME + "getChecklistItems";
 
     /**
      * ReferenceData.getPublicDisplayTypes - Identifier for the
@@ -249,6 +254,11 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * getNegotiateStatusTypes method
      */
     public static final String GET_NEGOTIATE_STATUS_TYPES = SERVICE_NAME + "getNegotiateStatusTypes";
+    /**
+     * ReferenceData.getRequestDisplayGroups - Identifier for the
+     * getRequestDisplayGroups method
+     */
+    public static final String GET_REQUEST_DISPLAY_GROUPS = SERVICE_NAME + "getRequestDisplayGroups";
 
     /**
      * Retrieves all source.source_type code values using the default locale of
@@ -791,6 +801,22 @@ public interface ReferenceDataClient extends AbstractWSClient {
     List<ChecklistGroupTO> getChecklistGroups(String lang) throws WebServiceClientException;
 
     /**
+     * Retrieves all administrative.checklist_item code values.
+     *
+     * @throws WebServiceClientException
+     */
+    List<ChecklistItemTO> getChecklistItems() throws WebServiceClientException;
+
+    /**
+     * Retrieves all administrative.checklist_item code values.
+     *
+     * @param languageCode The language code to use for localization of display
+     * values.
+     * @throws WebServiceClientException
+     */
+    List<ChecklistItemTO> getChecklistItems(String lang) throws WebServiceClientException;
+
+    /**
      * Retrieves all application.public_display_type code values.
      *
      * @throws WebServiceClientException
@@ -913,4 +939,20 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<NegotiateTypeTO> getNegotiateTypes(String lang) throws WebServiceClientException;
+
+    /**
+     * Retrieves all application.request_display_group code values.
+     *
+     * @throws WebServiceClientException
+     */
+    List<RequestDisplayGroupTO> getRequestDisplayGroups() throws WebServiceClientException;
+
+    /**
+     * Retrieves all application.request_display_group code values.
+     *
+     * @param languageCode The language code to use for localization of display
+     * values.
+     * @throws WebServiceClientException
+     */
+    List<RequestDisplayGroupTO> getRequestDisplayGroups(String lang) throws WebServiceClientException;
 }

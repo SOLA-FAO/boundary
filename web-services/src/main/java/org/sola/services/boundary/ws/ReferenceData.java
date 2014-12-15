@@ -72,6 +72,7 @@ import org.sola.services.ejb.application.repository.entities.ObjectionStatus;
 import org.sola.services.ejb.application.repository.entities.PublicDisplayItemStatus;
 import org.sola.services.ejb.application.repository.entities.PublicDisplayItemType;
 import org.sola.services.ejb.application.repository.entities.RequestCategoryType;
+import org.sola.services.ejb.application.repository.entities.RequestDisplayGroup;
 import org.sola.services.ejb.application.repository.entities.RequestType;
 import org.sola.services.ejb.application.repository.entities.TypeAction;
 import org.sola.services.ejb.application.repository.entities.ServiceActionType;
@@ -1069,6 +1070,32 @@ public class ReferenceData extends AbstractWebService {
      * @throws UnhandledFault
      * @throws SOLAAccessFault
      */
+    @WebMethod(operationName = "GetChecklistItems")
+    public List<ChecklistItemTO> GetChecklistItems(@WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+        final Object[] params = {languageCode};
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                String languageCode = params[0] == null ? null : params[0].toString();
+                result[0] = GenericTranslator.toTOList(applicationEJB.getCodeEntityList(
+                        ChecklistItem.class, languageCode), ChecklistItemTO.class);
+            }
+        });
+
+        return (List<ChecklistItemTO>) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getCodeEntityList(java.lang.Class, java.lang.String)
+     * AdministrativeEJB.getCodeEntityList}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
     @WebMethod(operationName = "GetPublicDisplayItemTypes")
     public List<PublicDisplayItemTypeTO> GetPublicDisplayItemTypes(@WebParam(name = "languageCode") String languageCode)
             throws SOLAFault, UnhandledFault, SOLAAccessFault {
@@ -1269,6 +1296,32 @@ public class ReferenceData extends AbstractWebService {
     }
 
     /**
+     * See {@linkplain org.sola.services.ejb.administrative.businesslogic.AdministrativeEJB#getCodeEntityList(java.lang.Class, java.lang.String)
+     * AdministrativeEJB.getCodeEntityList}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetRequestDisplayGroups")
+    public List<RequestDisplayGroupTO> GetRequestDisplayGroups(@WebParam(name = "languageCode") String languageCode)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+        final Object[] params = {languageCode};
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                String languageCode = params[0] == null ? null : params[0].toString();
+                result[0] = GenericTranslator.toTOList(applicationEJB.getCodeEntityList(
+                        RequestDisplayGroup.class, languageCode), RequestDisplayGroupTO.class);
+            }
+        });
+
+        return (List<RequestDisplayGroupTO>) result[0];
+    }
+
+    /**
      * Supports saving of all SOLA Reference Data types.
      * <p>
      * Requires the {@linkplain RolesConstants#ADMIN_MANAGE_REFDATA} role.</p>
@@ -1406,9 +1459,9 @@ public class ReferenceData extends AbstractWebService {
                     codeEntity = GenericTranslator.fromTO(refDataTO, RrrSubType.class, codeEntity);
                     administrativeEJB.saveCodeEntity(codeEntity);
                 } else if (refDataTO instanceof ChecklistItemTO) {
-                    codeEntity = administrativeEJB.getCodeEntity(ChecklistItem.class, refDataTO.getCode());
+                    codeEntity = applicationEJB.getCodeEntity(ChecklistItem.class, refDataTO.getCode());
                     codeEntity = GenericTranslator.fromTO(refDataTO, ChecklistItem.class, codeEntity);
-                    administrativeEJB.saveCodeEntity(codeEntity);
+                    applicationEJB.saveCodeEntity(codeEntity);
                 } else if (refDataTO instanceof ChecklistGroupTO) {
                     codeEntity = applicationEJB.getCodeEntity(ChecklistGroup.class, refDataTO.getCode());
                     codeEntity = GenericTranslator.fromTO(refDataTO, ChecklistGroup.class, codeEntity);
@@ -1436,6 +1489,18 @@ public class ReferenceData extends AbstractWebService {
                 } else if (refDataTO instanceof NotifyRelationshipTypeTO) {
                     codeEntity = applicationEJB.getCodeEntity(NotifyRelationshipType.class, refDataTO.getCode());
                     codeEntity = GenericTranslator.fromTO(refDataTO, NotifyRelationshipType.class, codeEntity);
+                    applicationEJB.saveCodeEntity(codeEntity);
+                } else if (refDataTO instanceof NegotiateTypeTO) {
+                    codeEntity = applicationEJB.getCodeEntity(NegotiateType.class, refDataTO.getCode());
+                    codeEntity = GenericTranslator.fromTO(refDataTO, NegotiateType.class, codeEntity);
+                    applicationEJB.saveCodeEntity(codeEntity);
+                } else if (refDataTO instanceof NegotiateStatusTO) {
+                    codeEntity = applicationEJB.getCodeEntity(NegotiateStatus.class, refDataTO.getCode());
+                    codeEntity = GenericTranslator.fromTO(refDataTO, NegotiateStatus.class, codeEntity);
+                    applicationEJB.saveCodeEntity(codeEntity);
+                } else if (refDataTO instanceof RequestDisplayGroupTO) {
+                    codeEntity = applicationEJB.getCodeEntity(RequestDisplayGroup.class, refDataTO.getCode());
+                    codeEntity = GenericTranslator.fromTO(refDataTO, RequestDisplayGroup.class, codeEntity);
                     applicationEJB.saveCodeEntity(codeEntity);
                 }
 

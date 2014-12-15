@@ -702,6 +702,23 @@ public class MockReferenceDataPort implements ReferenceData {
     }
 
     /**
+     * Response Key = ReferenceDataClient.GET_CHECKLIST_ITEMS
+     *
+     * @return default = new ArrayList()
+     */
+    @Override
+    public List<ChecklistItemTO> getChecklistItems(String arg0) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<ChecklistItemTO> defaultResponse = new ArrayList<ChecklistItemTO>();
+        try {
+            return getManager().getResponse(ReferenceDataClient.GET_CHECKLIST_ITEMS,
+                    List.class, defaultResponse, arg0);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
+    /**
      * Response Key = ReferenceDataClient.GET_PUBLIC_DISPLAY_TYPES
      *
      * @return default = new ArrayList()
@@ -829,6 +846,23 @@ public class MockReferenceDataPort implements ReferenceData {
         List<NegotiateTypeTO> defaultResponse = new ArrayList<NegotiateTypeTO>();
         try {
             return getManager().getResponse(ReferenceDataClient.GET_NEGOTIATE_TYPES,
+                    List.class, defaultResponse, arg0);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
+    /**
+     * Response Key = ReferenceDataClient.GET_REQUEST_DISPLAY_GROUPS
+     *
+     * @return default = new ArrayList()
+     */
+    @Override
+    public List<RequestDisplayGroupTO> getRequestDisplayGroups(String arg0) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<RequestDisplayGroupTO> defaultResponse = new ArrayList<RequestDisplayGroupTO>();
+        try {
+            return getManager().getResponse(ReferenceDataClient.GET_REQUEST_DISPLAY_GROUPS,
                     List.class, defaultResponse, arg0);
         } catch (Exception ex) {
             processExceptionAccess(ex);

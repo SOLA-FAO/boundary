@@ -37,17 +37,17 @@ import org.sola.services.common.contracts.AbstractCodeTO;
  */
 public class ChecklistItemTO extends AbstractCodeTO {
 
-    private int display_order;
+    private int displayOrder;
 
     public ChecklistItemTO() {
         super();
     }
 
-    public int getDisplay_order() {
-        return display_order;
+    public int getDisplayOrder() {
+        return displayOrder;
     }
 
-    public void setDisplay_order(int display_order) {
-        this.display_order = display_order;
+    public void setDisplayOrder(int displayOrder) {
+        this.displayOrder = displayOrder;
     }
 }

@@ -738,6 +738,26 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
     }
 
     @Override
+    public List<ChecklistItemTO> getChecklistItems() throws WebServiceClientException {
+        return getChecklistItems(getLanguageCode());
+    }
+
+    @Override
+    public List<ChecklistItemTO> getChecklistItems(String lang) throws WebServiceClientException {
+        List<ChecklistItemTO> result = null;
+        final String methodName = ReferenceDataClient.GET_CHECKLIST_ITEMS;
+        try {
+            beforeWebMethod(methodName, lang);
+            result = getPort().getChecklistItems(lang);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, lang);
+        }
+        return result;
+    }
+
+    @Override
     public List<PublicDisplayItemTypeTO> getPublicDisplayTypes() throws WebServiceClientException {
         return getPublicDisplayTypes(getLanguageCode());
     }
@@ -776,8 +796,8 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
         }
         return result;
     }
-    
-     @Override
+
+    @Override
     public List<ValuationTypeTO> getValuationTypes() throws WebServiceClientException {
         return getValuationTypes(getLanguageCode());
     }
@@ -789,7 +809,7 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
         try {
             beforeWebMethod(methodName, lang);
             result = getPort().getValuationTypes(lang);
-                    } catch (Exception e) {
+        } catch (Exception e) {
             processException(methodName, e);
         } finally {
             afterWebMethod(methodName, result, lang);
@@ -816,7 +836,7 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
         }
         return result;
     }
-    
+
     @Override
     public List<ObjectionStatusTO> getObjectionStatusTypes() throws WebServiceClientException {
         return getObjectionStatusTypes(getLanguageCode());
@@ -836,7 +856,7 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
         }
         return result;
     }
-    
+
     @Override
     public List<NotifyRelationshipTypeTO> getNotifyRelationshipTypes() throws WebServiceClientException {
         return getNotifyRelationshipTypes(getLanguageCode());
@@ -856,7 +876,7 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
         }
         return result;
     }
-    
+
     @Override
     public List<NegotiateStatusTO> getNegotiateStatusTypes() throws WebServiceClientException {
         return getNegotiateStatusTypes(getLanguageCode());
@@ -876,7 +896,7 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
         }
         return result;
     }
-    
+
     @Override
     public List<NegotiateTypeTO> getNegotiateTypes() throws WebServiceClientException {
         return getNegotiateTypes(getLanguageCode());
@@ -889,6 +909,26 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
         try {
             beforeWebMethod(methodName, lang);
             result = getPort().getNegotiateTypes(lang);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, lang);
+        }
+        return result;
+    }
+
+    @Override
+    public List<RequestDisplayGroupTO> getRequestDisplayGroups() throws WebServiceClientException {
+        return getRequestDisplayGroups(getLanguageCode());
+    }
+
+    @Override
+    public List<RequestDisplayGroupTO> getRequestDisplayGroups(String lang) throws WebServiceClientException {
+        List<RequestDisplayGroupTO> result = null;
+        final String methodName = ReferenceDataClient.GET_REQUEST_DISPLAY_GROUPS;
+        try {
+            beforeWebMethod(methodName, lang);
+            result = getPort().getRequestDisplayGroups(lang);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
