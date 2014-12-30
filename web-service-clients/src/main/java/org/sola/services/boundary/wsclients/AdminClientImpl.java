@@ -344,12 +344,13 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
     }
 
     @Override
-    public String consolidationExtract(String processName, boolean everything, String password) throws WebServiceClientException {
+    public String consolidationExtract(boolean generateConsolidationSchema, 
+            boolean everything, boolean dumpToFile) throws WebServiceClientException {
         String result = null;
         final String methodName = AdminClient.CONSOLIDATION_EXTRACT;
         try {
             beforeWebMethod(methodName);
-            result = getPort().consolidationExtract(processName, everything, password);
+            result = getPort().consolidationExtract(generateConsolidationSchema, everything, dumpToFile);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
@@ -359,18 +360,20 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
     }
 
     @Override
-    public void consolidationConsolidate(String processName, String pathFileName, String password) throws WebServiceClientException {
+    public String consolidationConsolidate(String extractedFile, boolean mergeConsolidationSchema) 
+            throws WebServiceClientException {
+        String result = null;
 
         final String methodName = AdminClient.CONSOLIDATION_CONSOLIDATE;
         try {
-            beforeWebMethod(methodName, pathFileName);
-            getPort().consolidationConsolidate(processName, getLanguageCode(), pathFileName, password);
+            beforeWebMethod(methodName);
+            result = getPort().consolidationConsolidate(extractedFile, mergeConsolidationSchema);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
-            afterWebMethod(methodName, void.class, pathFileName);
+            afterWebMethod(methodName, result);
         }
-
+        return result;
     }
 
     @Override

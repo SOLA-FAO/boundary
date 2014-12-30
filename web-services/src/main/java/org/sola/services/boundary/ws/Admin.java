@@ -545,9 +545,9 @@ public class Admin extends AbstractWebService {
      */
     @WebMethod(operationName = "ConsolidationExtract")
     public String ConsolidationExtract(
-            @WebParam(name = "processName") final String processName,
+            @WebParam(name = "processName") final boolean generateConsolidationSchema,
             @WebParam(name = "everything") final boolean everything,
-            @WebParam(name = "password") final String password)
+            @WebParam(name = "password") final boolean dumpToFile)
             throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final Object[] result = {null};
@@ -555,7 +555,7 @@ public class Admin extends AbstractWebService {
         runGeneralQuery(wsContext, new Runnable() {
             @Override
             public void run() {
-                result[0] = adminEJB.consolidationExtract(processName, everything, password);
+                result[0] = adminEJB.consolidationExtract(generateConsolidationSchema, everything, dumpToFile);
             }
         });
 
@@ -571,20 +571,21 @@ public class Admin extends AbstractWebService {
      * @throws SOLAAccessFault
      */
     @WebMethod(operationName = "ConsolidationConsolidate")
-    public void ConsolidationConsolidate(
-            @WebParam(name = "processName") final String processName,
-            @WebParam(name = "languageCode") final String languageCode,
-            @WebParam(name = "fileInServer") final String fileInServer,
-            @WebParam(name = "password") final String password)
+    public String ConsolidationConsolidate(
+            @WebParam(name = "processName") final String extractedFile,
+            @WebParam(name = "languageCode") final boolean mergeConsolidationSchema
+            )
             throws SOLAValidationFault, OptimisticLockingFault, SOLAFault, UnhandledFault, SOLAAccessFault {
 
+        final Object[] result = {null};
         runUpdateValidation(wsContext, new Runnable() {
             @Override
             public void run() {
-                adminEJB.consolidationConsolidate(processName, languageCode, fileInServer, password);
+                result[0] = adminEJB.consolidationConsolidate(extractedFile, mergeConsolidationSchema);
             }
         });
 
+        return (String) result[0];
     }
 
     /**

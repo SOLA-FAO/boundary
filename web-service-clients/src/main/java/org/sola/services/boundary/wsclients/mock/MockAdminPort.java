@@ -438,7 +438,8 @@ public class MockAdminPort implements Admin {
     }
 
     @Override
-    public String consolidationExtract(String processName, boolean everything, String password) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+    public String consolidationExtract(boolean generateConsolidationSchema, 
+            boolean everything, boolean dumpToFile) throws SOLAAccessFault, SOLAFault, UnhandledFault {
         String defaultResponse = "";
         try {
             return getManager().getResponse(AdminClient.CONSOLIDATION_EXTRACT, String.class, defaultResponse);
@@ -449,10 +450,13 @@ public class MockAdminPort implements Admin {
     }
 
     @Override
-    public void consolidationConsolidate(String processName, String languageCode, String fileInServer, String password) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+    public String consolidationConsolidate(String extractedFile, boolean mergeConsolidationSchema) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        String defaultResponse = "";
         try {
+            return getManager().getResponse(AdminClient.CONSOLIDATION_CONSOLIDATE, String.class, defaultResponse);
         } catch (Exception ex) {
             processExceptionBasic(ex);
+            return null;
         }
     }
 

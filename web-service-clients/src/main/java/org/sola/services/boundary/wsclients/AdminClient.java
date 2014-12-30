@@ -356,24 +356,24 @@ public interface AdminClient extends AbstractWSClient {
     /**
      * It extracts the records from the database for the consolidation process.
      * 
-     * @param processName
+     * @param generateConsolidationSchema
      * @param everything
-     * @param password
+     * @param dumpToFile
      * @return
      * @throws WebServiceClientException 
      */
-    String consolidationExtract(String processName, boolean everything, String password) throws WebServiceClientException;
+    String consolidationExtract(boolean generateConsolidationSchema, 
+            boolean everything, boolean dumpToFile) throws WebServiceClientException;
 
     /**
      * It consolidate the records extracted from another system.
      * 
-     * @param processName
-     * @param pathFileName
-     * @param password
+     * @param extractedFile 
+     * @param mergeConsolidationSchema 
      * @return
      * @throws WebServiceClientException 
      */
-    void consolidationConsolidate(String processName, String pathFileName, String password) throws WebServiceClientException;
+    String consolidationConsolidate(String extractedFile, boolean mergeConsolidationSchema) throws WebServiceClientException;
     
     /**
      * Returns the configuration information for the PanelLauncher
