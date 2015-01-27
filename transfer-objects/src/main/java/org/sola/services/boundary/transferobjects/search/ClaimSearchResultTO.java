@@ -16,6 +16,7 @@ public class ClaimSearchResultTO extends AbstractTO {
     private String claimantName;
     private String statusCode;
     private String statusName;
+    private Long claimArea;
     private int version;
     
     public ClaimSearchResultTO(){
@@ -108,6 +109,14 @@ public class ClaimSearchResultTO extends AbstractTO {
 
     public void setStatusName(String statusName) {
         this.statusName = statusName;
+    }
+
+    public Long getClaimArea() {
+        return claimArea;
+    }
+
+    public void setClaimArea(Long claimArea) {
+        this.claimArea = claimArea;
     }
 
     public int getVersion() {

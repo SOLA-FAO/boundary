@@ -31,6 +31,7 @@ public class ClaimTO extends AbstractReadWriteTO {
     private String typeCode;
     private String recorderName;
     private int version;
+    private long claimArea;
     private FormPayloadTO dynamicForm;
     
     public ClaimTO(){
@@ -243,6 +244,14 @@ public class ClaimTO extends AbstractReadWriteTO {
 
     public void setVersion(int version) {
         this.version = version;
+    }
+
+    public long getClaimArea() {
+        return claimArea;
+    }
+
+    public void setClaimArea(long claimArea) {
+        this.claimArea = claimArea;
     }
 
     public FormPayloadTO getDynamicForm() {
