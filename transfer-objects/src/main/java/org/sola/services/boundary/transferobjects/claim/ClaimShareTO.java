@@ -8,6 +8,7 @@ public class ClaimShareTO extends AbstractReadWriteTO {
     private String claimId;
     private Short nominator;
     private Short denominator;
+    private double percentage;
     private List<ClaimPartyTO> owners;
     
     public ClaimShareTO(){
@@ -44,6 +45,14 @@ public class ClaimShareTO extends AbstractReadWriteTO {
 
     public void setDenominator(Short denominator) {
         this.denominator = denominator;
+    }
+
+    public double getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(double percentage) {
+        this.percentage = percentage;
     }
 
     public List<ClaimPartyTO> getOwners() {
