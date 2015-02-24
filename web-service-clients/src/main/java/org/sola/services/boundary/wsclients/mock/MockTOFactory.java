@@ -107,6 +107,24 @@ public class MockTOFactory {
         result.add(createCode(GenderTypeTO.class, "male", "Male"));
         return result;
     }
+    
+    
+     /**
+     * Creates a default list of group party types <p> SQL query to generate list
+     * from DB: </p>
+     * <pre>
+     * select 'result.add(createCode(GroupPartyTypeTO.class, "' || code || '", "' || display_value || '"));'
+     * from party.groupParty_type
+     * </pre>
+     */
+    public static List<GroupPartyTypeTO> createGroupPartyTypes() {
+        List<GroupPartyTypeTO> result = new ArrayList<GroupPartyTypeTO>();
+        result.add(createCode(GroupPartyTypeTO.class, "family", "Family"));
+        result.add(createCode(GroupPartyTypeTO.class, "inheritor", "Inheritor"));
+        result.add(createCode(GroupPartyTypeTO.class, "spouse", "Spouse"));
+        result.add(createCode(GroupPartyTypeTO.class, "tribe", "Tribe"));
+        return result;
+    }
 
     /**
      * Creates a RequestTypeTO or a RequestTypeSourceTypesTO

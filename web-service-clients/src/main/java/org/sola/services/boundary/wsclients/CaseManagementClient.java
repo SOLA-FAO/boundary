@@ -84,6 +84,14 @@ public interface CaseManagementClient extends AbstractWSClient {
      */
     public static final String GET_PARTY = SERVICE_NAME + "getParty";
     /**
+     * CaseManagement.getGroupParty - Identifier for the getParty method
+     */
+    public static final String GET_GROUP_PARTY = SERVICE_NAME + "getGroupParty";
+    /**
+     * CaseManagement.getPartyMember - Identifier for the getPartyMember method
+     */
+    public static final String GET_PARTY_MEMBER = SERVICE_NAME + "getPartyMember";
+    /**
      * CaseManagement.saveApplication - Identifier for the saveApplication
      * method
      */
@@ -92,6 +100,13 @@ public interface CaseManagementClient extends AbstractWSClient {
      * CaseManagement.saveParty - Identifier for the saveParty method
      */
     public static final String SAVE_PARTY = SERVICE_NAME + "saveParty";
+    
+    public static final String SAVE_GROUP_PARTY = SERVICE_NAME + "saveGroupParty";
+    
+    public static final String SAVE_PARTY_MEMBER = SERVICE_NAME + "savePartyMember";
+    
+    public static final String SEND_EMAIL = SERVICE_NAME + "sendEmail";
+  
     /**
      * CaseManagement.attachPowerOfAttorneyToTransaction - Identifier for the
      * attachPowerOfAttorneyToTransaction method
@@ -236,6 +251,9 @@ public interface CaseManagementClient extends AbstractWSClient {
      * applicationActionTransfer method
      */
     public static final String APPLICATION_ACTION_TRANSFER = SERVICE_NAME + "applicationActionTransfer";
+    
+    public static final String GET_CANCEL_NOTIFICATION = SERVICE_NAME + "getCancelNotification";
+   
 
     /**
      * Calculates the lodgement fees as well as the expected completions dates
@@ -307,7 +325,27 @@ public interface CaseManagementClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     PartyTO getParty(String id) throws WebServiceClientException;
+    
+    
+    /**
+     * Returns the details for the specified party. <p>No role is required to
+     * execute this method.</p>
+     *
+     * @param id The identifier of the party to retrieve.
+     * @throws WebServiceClientException
+     */
+    GroupPartyTO getGroupParty(String id) throws WebServiceClientException;
 
+    /**
+     * Returns the details for the specified party. <p>No role is required to
+     * execute this method.</p>
+     *
+     * @param id The identifier of the party to retrieve.
+     * @throws WebServiceClientException
+     */
+    PartyMemberTO getPartyMember(String partyId, String groupId) throws WebServiceClientException;
+
+    
     /**
      * Saves changes to the application and child objects. Will also update the
      * completion dates and fees for the application if a new service as been
@@ -334,6 +372,12 @@ public interface CaseManagementClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     PartyTO saveParty(PartyTO party) throws WebServiceClientException;
+    
+    
+    GroupPartyTO saveGroupParty(GroupPartyTO groupParty) throws WebServiceClientException;
+    
+    
+    PartyMemberTO savePartyMember(PartyMemberTO groupParty, String serviceId) throws WebServiceClientException;
 
     /**
      * Associates a source with a transaction and sets the source status to
@@ -778,4 +822,12 @@ public interface CaseManagementClient extends AbstractWSClient {
      */
     List<ValidationResult> applicationActionTransfer(
             String applicationId, int rowVersion) throws WebServiceClientException;
+    
+    
+    void sendEmail(String recipientName, String recipientAddress, String body, String subject)
+            throws WebServiceClientException ;
+    
+    CancelNotificationTO getCancelNotification(String partyId, String targetPartyId,String name, String application, String service)
+            throws WebServiceClientException;
+    
 }

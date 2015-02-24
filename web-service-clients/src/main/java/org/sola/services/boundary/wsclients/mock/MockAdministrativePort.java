@@ -446,4 +446,41 @@ public class MockAdministrativePort implements Administrative {
             return null;
         }
     }
+     
+     
+       /**
+     * Response Key = AdministrativeClient.GET_BA_UNIT_BY_CODE
+     *
+     * @return default = new BaUnitTO()
+     */
+    @Override
+    public NotifiablePartyForBaUnitTO getNotifiableParty(String partyId, String targetPartyId,String name, String application, String service) throws SOLAFault, UnhandledFault {
+        NotifiablePartyForBaUnitTO defaultResponse = new NotifiablePartyForBaUnitTO();
+        try {
+            return getManager().getResponse(AdministrativeClient.GET_NOTIFIABLE_PARTY,
+                    NotifiablePartyForBaUnitTO.class, defaultResponse,partyId, targetPartyId, name, application, service);
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
+            return null;
+        }
+    }
+    
+       /**
+     * Response Key = AdministrativeClient.SAVE_NotifiablePartyForBaUnit
+     *
+     * @return default = NotifiablePartyForBaUnitTO param
+     */
+    @Override
+    public NotifiablePartyForBaUnitTO saveNotifiableParty(NotifiablePartyForBaUnitTO notifiableParty)
+            throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, UnhandledFault {
+        NotifiablePartyForBaUnitTO defaultResponse = new NotifiablePartyForBaUnitTO ();
+        try {
+            return getManager().getResponse(AdministrativeClient.SAVE_NOTIFIABLE_PARTY,
+                    NotifiablePartyForBaUnitTO.class, defaultResponse, notifiableParty);
+        } catch (Exception ex) {
+            processExceptionUpdate(ex);
+            return null;
+        }
+    }
+
 }

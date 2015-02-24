@@ -585,7 +585,25 @@ public class MockReferenceDataPort implements ReferenceData {
             return null;
         }
     }
+    
+    /**
+     * Response Key = ReferenceDataClient.GET_GROUP_PATY_TYPES
+     *
+     * @return default = MockTOFactory.createGroupPartyTypes()
+     */
+    @Override
+    public List<GroupPartyTypeTO> getGroupPartyTypes(String arg0) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<GroupPartyTypeTO> defaultResponse = MockTOFactory.createGroupPartyTypes();
+        try {
+            return getManager().getResponse(ReferenceDataClient.GET_GROUP_PARTY_TYPES,
+                    List.class, defaultResponse, arg0);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
 
+    
     /**
      * Response Key = ReferenceDataClient.GET_COMMUNICATION_TYPES
      *

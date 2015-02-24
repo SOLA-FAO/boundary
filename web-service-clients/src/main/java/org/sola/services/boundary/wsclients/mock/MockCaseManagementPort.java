@@ -30,6 +30,7 @@ package org.sola.services.boundary.wsclients.mock;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.datatype.XMLGregorianCalendar;
+import org.sola.services.boundary.transferobjects.casemanagement.SendEmailTO;
 import org.sola.services.boundary.wsclients.CaseManagementClient;
 import org.sola.webservices.casemanagement.*;
 import org.sola.webservices.transferobjects.ValidationResult;
@@ -61,6 +62,26 @@ public class MockCaseManagementPort implements CaseManagement {
     private MockServiceManager getManager() {
         return MockServiceManager.getInstance();
     }
+    
+
+        /**
+     * Response Key = CaseManagementClient.SEND_EMAIL
+     *
+     * @return default = new ArrayList<ValidationResult>()
+     */
+    @Override
+    public void sendEmail(String recipientName, String recipientAddress, String body, String subject)
+            throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, SOLAValidationFault, UnhandledFault {
+       SendEmailTO defaultResponse = new SendEmailTO();
+        try {
+            getManager().getResponse(CaseManagementClient.SEND_EMAIL,
+                    SendEmailTO.class,defaultResponse, recipientName, recipientAddress, body, subject);
+        } catch (Exception ex) {
+            processExceptionAll(ex);
+            return ;
+        }
+    }
+    
 
     /**
      * Processes the mock response exception and throws the appropriate service
@@ -642,7 +663,32 @@ public class MockCaseManagementPort implements CaseManagement {
             return null;
         }
     }
-
+     
+    
+    @Override
+    public GroupPartyTO saveGroupParty(GroupPartyTO groupParty)
+            throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, SOLAValidationFault, UnhandledFault {
+        GroupPartyTO defaultResponse = groupParty;
+        try {
+            return getManager().getResponse(CaseManagementClient.SAVE_GROUP_PARTY,
+                    GroupPartyTO.class, defaultResponse, groupParty);
+        } catch (Exception ex) {
+            processExceptionAll(ex);
+            return null;
+        }
+    }
+    @Override
+    public PartyMemberTO savePartyMember(PartyMemberTO partyMember, String serviceId)
+            throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, SOLAValidationFault, UnhandledFault {
+        PartyMemberTO defaultResponse = partyMember;
+        try {
+            return getManager().getResponse(CaseManagementClient.SAVE_PARTY_MEMBER,
+                    PartyMemberTO.class, defaultResponse, partyMember);
+        } catch (Exception ex) {
+            processExceptionAll(ex);
+            return null;
+        }
+    }
     /**
      * Response Key = CaseManagementClient.CALCULATE_FEE
      *
@@ -713,7 +759,35 @@ public class MockCaseManagementPort implements CaseManagement {
             return null;
         }
     }
-
+    
+    @Override
+    public GroupPartyTO getGroupParty(String id) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        GroupPartyTO defaultResponse = new GroupPartyTO();
+        defaultResponse.setId(id);
+        try {
+            return getManager().getResponse(CaseManagementClient.GET_GROUP_PARTY,
+                    GroupPartyTO.class, defaultResponse, id);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+    
+    
+    @Override
+    public PartyMemberTO getPartyMember(String partyId, String groupId) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        PartyMemberTO defaultResponse = new PartyMemberTO();
+        defaultResponse.setPartyId(partyId);
+        defaultResponse.setGroupId(groupId);
+        try {
+            return getManager().getResponse(CaseManagementClient.GET_PARTY_MEMBER,
+                    PartyMemberTO.class, defaultResponse, partyId, groupId);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+    
     /**
      * Response Key = CaseManagementClient.SAVE_SOURCE
      *
@@ -854,6 +928,19 @@ public class MockCaseManagementPort implements CaseManagement {
                     List.class, defaultResponse, applicationId, languageCode, rowVersion);
         } catch (Exception ex) {
             processExceptionAll(ex);
+            return null;
+        }
+    }
+  
+    
+    @Override
+    public CancelNotificationTO getCancelNotification(String partyId, String targetPartyId,String name, String application, String service) throws SOLAFault, UnhandledFault {
+        CancelNotificationTO defaultResponse = new CancelNotificationTO();
+        try {
+            return getManager().getResponse(CaseManagementClient.GET_CANCEL_NOTIFICATION,
+                    CancelNotificationTO.class, defaultResponse,partyId, targetPartyId, name, application, service);
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
             return null;
         }
     }

@@ -244,7 +244,72 @@ public class Search extends AbstractWebService {
 
         return (List<PartySearchResultTO>) result[0];
     }
+    
+    
+     /**
+     * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#searchPartiesProperty(org.sola.services.ejb.search.repository.entities.PartySearchParams)
+     * SearchEJB.searchParties}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "SearchPartiesProperty")
+    public List<PartyPropertySearchResultTO> searchPartiesProperty(
+            @WebParam(name = "searchParams") PartySearchParamsTO searchParams,
+            @WebParam(name = "partyId") String partyId)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
+        final PartySearchParamsTO searchParamsTmp = searchParams;
+        final String partyIdTmp = partyId;
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                PartySearchParams params = GenericTranslator.fromTO(searchParamsTmp,
+                        PartySearchParams.class, null);
+                result[0] = GenericTranslator.toTOList(
+                        searchEJB.searchPartiesProperty(params,partyIdTmp), PartyPropertySearchResultTO.class);
+            }
+        });
+
+        return (List<PartyPropertySearchResultTO>) result[0];
+    }
+      /**
+     * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#searchPartiesProperty(org.sola.services.ejb.search.repository.entities.PartySearchParams)
+     * SearchEJB.searchParties}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "SearchNotifiableParties")
+    public List<NotifiablePartySearchResultTO> searchNotifiableParties(
+            @WebParam(name = "searchParams") PartySearchParamsTO searchParams,
+            @WebParam(name = "service") String service)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final PartySearchParamsTO searchParamsTmp = searchParams;
+        final String serviceTmp = service;
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                PartySearchParams params = GenericTranslator.fromTO(searchParamsTmp,
+                        PartySearchParams.class, null);
+                result[0] = GenericTranslator.toTOList(
+                        searchEJB.searchNotifiableParties(params, serviceTmp), NotifiablePartySearchResultTO.class);
+            }
+        });
+
+        return (List<NotifiablePartySearchResultTO>) result[0];
+    }
+
+    
     /**
      * See {@linkplain  org.sola.services.ejb.search.businesslogic.SearchEJB#searchSources(org.sola.services.ejb.search.repository.entities.SourceSearchParams)
      * SearchEJB.searchSources}

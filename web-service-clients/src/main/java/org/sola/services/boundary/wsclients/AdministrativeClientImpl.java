@@ -363,4 +363,37 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
         }
         return result;
     } 
+     
+     
+     @Override
+     public  NotifiablePartyForBaUnitTO getNotifiableParty(String partyId, String targetPartyId,String name, String application, String service)throws WebServiceClientException {
+        NotifiablePartyForBaUnitTO result = null;
+        final String methodName = AdministrativeClient.GET_NOTIFIABLE_PARTY;
+        try {
+            beforeWebMethod(methodName, partyId, targetPartyId, name, application, service);
+            result = getPort().getNotifiableParty(partyId, targetPartyId, name, application,service);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, partyId, targetPartyId, name, application,service);
+        }
+        return result;
+    }
+     
+      @Override
+    public NotifiablePartyForBaUnitTO saveNotifiableParty(NotifiablePartyForBaUnitTO notifiableParty) throws WebServiceClientException {
+        NotifiablePartyForBaUnitTO result = null;
+        final String methodName = AdministrativeClient.SAVE_NOTIFIABLE_PARTY;
+        try {
+            beforeWebMethod(methodName, notifiableParty);
+            result = getPort().saveNotifiableParty(notifiableParty);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, notifiableParty);
+        }
+        return result;
+    }
+
+
 }

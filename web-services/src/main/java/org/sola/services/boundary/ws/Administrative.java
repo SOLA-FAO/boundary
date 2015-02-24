@@ -658,4 +658,86 @@ public class Administrative extends AbstractWebService {
 
         return (List<SysRegProgressTO>) result[0];
     }
+    
+    
+      /**
+     * See {@linkplain AdministrativeEJB#getNotifiableParty(String partyId, String targetPartyId,String name)
+     * AdministrativeEJB.getBaUnitByCode}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     */
+    @WebMethod(operationName = "GetNotifiableParty")
+    public NotifiablePartyForBaUnitTO GetNotifiableParty(
+            @WebParam(name = "partyId") String partyId,
+            @WebParam(name = "targetPartyId") String targetPartyId,
+            @WebParam(name = "name") String name,
+            @WebParam(name = "application") String application,
+            @WebParam(name = "service") String service)
+            throws SOLAFault, UnhandledFault {
+
+        final String partyIdTmp = partyId;
+        final String targetPartyIdTmp = targetPartyId;
+        final String nameTmp = name;
+        final String applicationTmp = application;
+        final String serviceTmp = service;
+        final Object[] result = {null};
+
+        runOpenQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTO(
+                        administrativeEJB.getNotifiableParty(partyIdTmp,
+                        targetPartyIdTmp,
+                        nameTmp, applicationTmp,serviceTmp), NotifiablePartyForBaUnitTO.class);
+            }
+        });
+
+        return (NotifiablePartyForBaUnitTO) result[0];
+    }
+    
+    
+    /**
+     * See {@linkplain AdministrativeEJB#saveNotifiableParty(java.lang.String,
+     * org.sola.services.ejb.administrative.repository.entities.BaUnit)
+     * AdministrativeEJB.saveBaUnit}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     */
+    @WebMethod(operationName = "SaveNotifiableParty")
+    public NotifiablePartyForBaUnitTO SaveNotifiablePartyForBaUnit(
+//            @WebParam(name = "partyId") String partyId,
+//            @WebParam(name = "targetPartyId") String targetPartyId,
+//            @WebParam(name = "baunitName") String baunitName,
+            @WebParam(name = "notifiableParty") NotifiablePartyForBaUnitTO notifiableParty)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault, OptimisticLockingFault {
+
+//        final String partyIdTmp = partyId;
+//        final String targetPartyIdTmp = targetPartyId;
+//        final String baunitNameTmp = baunitName;
+//        final NotifiablePartyForBaUnitTO notifiablePartyTmp = notifiableParty;
+        final Object[] result = {null};
+        final Object[] params = {notifiableParty};
+        
+        runUpdate(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                NotifiablePartyForBaUnitTO notifiableParty = (NotifiablePartyForBaUnitTO) params[0];
+                if (notifiableParty != null) {
+                    NotifiablePartyForBaUnit newNotifiableParty = administrativeEJB.saveNotifiableParty(
+                      GenericTranslator.fromTO(notifiableParty, NotifiablePartyForBaUnit.class,
+                                        administrativeEJB.getNotifiableParty(notifiableParty.getPartyId(), notifiableParty.getTargetPartyId(), notifiableParty.getBaunitName(), notifiableParty.getApplicationId(), notifiableParty.getServiceId())));
+                    result[0] = GenericTranslator.toTO(newNotifiableParty, NotifiablePartyForBaUnitTO.class);
+                }
+            }
+        });
+ return (NotifiablePartyForBaUnitTO) result[0];
+    }
+
+  
 }

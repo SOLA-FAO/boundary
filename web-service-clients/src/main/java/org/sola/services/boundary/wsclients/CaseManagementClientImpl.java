@@ -165,7 +165,39 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         }
         return result;
     }
+    
+    @Override
+    public GroupPartyTO getGroupParty(String id) throws WebServiceClientException {
+        GroupPartyTO result = null;
+        final String methodName = CaseManagementClient.GET_GROUP_PARTY;
+        try {
+            beforeWebMethod(methodName, id);
+            result = getPort().getGroupParty(id);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, id);
+        }
+        return result;
+    }
+    
+    
+     @Override
+    public PartyMemberTO getPartyMember(String partyId, String groupId) throws WebServiceClientException {
+        PartyMemberTO result = null;
+        final String methodName = CaseManagementClient.GET_PARTY_MEMBER;
+        try {
+            beforeWebMethod(methodName, partyId, groupId);
+            result = getPort().getPartyMember(partyId, groupId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, partyId, groupId);
+        }
+        return result;
+    }
 
+    
     @Override
     public List<PartySummaryTO> getAgents() throws WebServiceClientException {
         List<PartySummaryTO> result = null;
@@ -211,7 +243,40 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         }
         return result;
     }
-
+    
+    @Override
+    public GroupPartyTO saveGroupParty(GroupPartyTO groupParty)
+            throws WebServiceClientException {
+        GroupPartyTO result = null;
+        final String methodName = CaseManagementClient.SAVE_GROUP_PARTY;
+        try {
+            beforeWebMethod(methodName, groupParty);
+            result = getPort().saveGroupParty(groupParty);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, groupParty);
+        }
+        return result;
+    }
+    
+    @Override
+    public PartyMemberTO savePartyMember(PartyMemberTO partyMember, String serviceId)
+            throws WebServiceClientException {
+        PartyMemberTO result = null;
+        final String methodName = CaseManagementClient.SAVE_PARTY_MEMBER;
+        try {
+            beforeWebMethod(methodName, partyMember);
+            result = getPort().savePartyMember(partyMember,serviceId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, partyMember);
+        }
+        return result;
+    }
+    
+    
     @Override
     public SourceTO attachSourceToTransaction(String serviceId, String sourceId)
             throws WebServiceClientException {
@@ -716,4 +781,37 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         }
         return result;
     }
+    
+    @Override
+    public void sendEmail(String recipientName, String recipientAddress, String body, String subject)
+            throws WebServiceClientException {
+//        SendEmailTO result = null;
+        final String methodName = CaseManagementClient.SEND_EMAIL;
+        try {
+            beforeWebMethod(methodName, recipientName, recipientAddress,  body, subject);
+//            result = getPort().sendEmail(recipientName, recipientAddress,  body, subject);
+            getPort().sendEmail(recipientName, recipientAddress,  body, subject);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, recipientName, recipientAddress,  body, subject);
+        }
+//        return result;
+    }
+    
+     @Override
+     public  CancelNotificationTO getCancelNotification(String partyId, String targetPartyId,String name, String application, String service)throws WebServiceClientException {
+        CancelNotificationTO result = null;
+        final String methodName = CaseManagementClient.GET_CANCEL_NOTIFICATION;
+        try {
+            beforeWebMethod(methodName, partyId, targetPartyId, name, application, service);
+            result = getPort().getCancelNotification(partyId, targetPartyId, name, application,service);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, partyId, targetPartyId, name, application,service);
+        }
+        return result;
+    }
+    
 }

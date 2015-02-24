@@ -111,7 +111,28 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
         }
         return result;
     }
+    
+    @Override
+    public List<GroupPartyTypeTO> getGroupPartyTypes() throws WebServiceClientException {
+        return getGroupPartyTypes(this.getLanguageCode());
+    }
 
+    @Override
+    public List<GroupPartyTypeTO> getGroupPartyTypes(String lang) throws WebServiceClientException {
+        List<GroupPartyTypeTO> result = null;
+        final String methodName = ReferenceDataClient.GET_GROUP_PARTY_TYPES;
+        try {
+            beforeWebMethod(methodName, lang);
+            result = getPort().getGroupPartyTypes(lang);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, lang);
+        }
+        return result;
+    }
+
+    
     @Override
     public List<RequestTypeTO> getRequestTypes() throws WebServiceClientException {
         return getRequestTypes(this.getLanguageCode());

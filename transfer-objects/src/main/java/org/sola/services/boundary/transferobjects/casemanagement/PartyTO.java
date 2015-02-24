@@ -52,13 +52,31 @@ public class PartyTO extends AbstractIdTO {
     private Date birthDate;
     private List<PartyRoleTO> roleList;
     private boolean rightHolder;
+    private List<GroupPartyTO> groupList;
+    private List<SourceTO> sourceList;
+    
+//    private List<PartyMemberTO> partyMemberList;
     
     private AddressTO address;
 
     public PartyTO() {
         super();
     }
+       public void addSource(SourceTO source) {
+        if (sourceList == null) {
+            sourceList = new ArrayList<SourceTO>();
+        }
+        sourceList.add(source);
+    }
+     
+    public List<SourceTO> getSourceList() {
+        return sourceList;
+    }
 
+    public void setSourceList(List<SourceTO> sourceList) {
+        this.sourceList = sourceList;
+    } 
+    
     public Date getBirthDate() {
         return birthDate;
     }
@@ -217,4 +235,27 @@ public class PartyTO extends AbstractIdTO {
     public void setRightHolder(boolean rightHolder) {
         this.rightHolder = rightHolder;
     }
+
+    public List<GroupPartyTO> getGroupList() {
+        return groupList;
+    }
+
+    public void setGroupList(List<GroupPartyTO> groupList) {
+        this.groupList = groupList;
+    }
+    
+    public void addGroup(GroupPartyTO group) {
+        if (groupList == null) {
+            groupList = new ArrayList<GroupPartyTO>();
+        }
+        groupList.add(group);
+    }
+
+//    public List<PartyMemberTO> getPartyMemberList() {
+//        return partyMemberList;
+//    }
+//
+//    public void setPartyMemberList(List<PartyMemberTO> partyMemberList) {
+//        this.partyMemberList = partyMemberList;
+//    }
 }

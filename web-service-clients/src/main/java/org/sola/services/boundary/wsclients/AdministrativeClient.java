@@ -123,8 +123,11 @@ public interface AdministrativeClient extends AbstractWSClient {
     
     public static final String GET_SYS_REG_PROGRESS = SERVICE_NAME + "getSysRegProgress";
 	
-	public static final String GET_SYS_REG_GENDER = SERVICE_NAME + "getSysRegGender";
+    public static final String GET_SYS_REG_GENDER = SERVICE_NAME + "getSysRegGender";
    
+    public static final String GET_NOTIFIABLE_PARTY = SERVICE_NAME + "getNotifiableParty";
+   
+    public static final String SAVE_NOTIFIABLE_PARTY = SERVICE_NAME + "saveNotifiableParty";
    
      /**
      * Creates a new BA Unit Area for a BaUnitId 
@@ -193,7 +196,8 @@ public interface AdministrativeClient extends AbstractWSClient {
      */
     BaUnitTO getBaUnitByCode(String nameFirstpart, String nameLastpart)
             throws WebServiceClientException;
-
+    
+    
     /**
      * Retrieves the list of BA Unit associated with the specified Service.
      *
@@ -304,6 +308,12 @@ public interface AdministrativeClient extends AbstractWSClient {
             throws WebServiceClientException;
 	
 	List<SysRegGenderTO> getSysRegGender(String params)
+            throws WebServiceClientException;
+        
+    NotifiablePartyForBaUnitTO getNotifiableParty(String partyId, String targetPartyId,String name, String application, String service)
+            throws WebServiceClientException;
+    
+    NotifiablePartyForBaUnitTO saveNotifiableParty(NotifiablePartyForBaUnitTO notifiableParty)
             throws WebServiceClientException;
    
 }

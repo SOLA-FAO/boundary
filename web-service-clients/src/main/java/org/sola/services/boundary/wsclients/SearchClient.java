@@ -77,6 +77,15 @@ public interface SearchClient extends AbstractWSClient {
      */
     public static final String SEARCH_PARTIES = SERVICE_NAME + "searchParties";
     /**
+     * Search.searchPartiesProperty - Identifier for the searchPartiesProperty method
+     */
+    public static final String SEARCH_PARTIES_PROPERTY = SERVICE_NAME + "searchPartiesProperty";
+    
+    /**
+     * Search.searchPartiesProperty - Identifier for the searchPartiesProperty method
+     */
+    public static final String SEARCH_NOTIFIABLE_PARTIES = SERVICE_NAME + "searchNotifiableParties";
+    /**
      * Search.searchSources - Identifier for the searchSources method
      */
     public static final String SEARCH_SOURCES = SERVICE_NAME + "searchSources";
@@ -222,6 +231,29 @@ public interface SearchClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<PartySearchResultTO> searchParties(PartySearchParamsTO searchParams)
+            throws WebServiceClientException;
+    
+    
+     /**
+     * Executes a search across all parties using the search criteria provided. Partial matches are
+     * supported for the party name criteria.
+     *
+     * @param searchParams The criteria to use for the search.
+     * @return A maximum of 101 parties that match the search criteria.
+     * @throws WebServiceClientException
+     */
+    List<PartyPropertySearchResultTO> searchPartiesProperty(PartySearchParamsTO searchParams, String partyId)
+            throws WebServiceClientException;
+
+     /**
+     * Executes a search across all parties using the search criteria provided. Partial matches are
+     * supported for the party name criteria.
+     *
+     * @param searchParams The criteria to use for the search.
+     * @return A maximum of 101 parties that match the search criteria.
+     * @throws WebServiceClientException
+     */
+    List<NotifiablePartySearchResultTO> searchNotifiableParties(PartySearchParamsTO searchParams, String service)
             throws WebServiceClientException;
 
     /**

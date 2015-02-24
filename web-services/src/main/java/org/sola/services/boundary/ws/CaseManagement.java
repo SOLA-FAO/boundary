@@ -51,7 +51,9 @@ import org.sola.services.ejb.party.businesslogic.PartyEJBLocal;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.faults.SOLAAccessFault;
 import org.sola.services.ejb.application.repository.entities.WorkSummary;
+import org.sola.services.ejb.party.repository.entities.GroupParty;
 import org.sola.services.ejb.party.repository.entities.Party;
+import org.sola.services.ejb.party.repository.entities.PartyMember;
 import org.sola.services.ejb.source.businesslogic.SourceEJBLocal;
 import org.sola.services.ejb.source.repository.entities.PowerOfAttorney;
 import org.sola.services.ejb.source.repository.entities.Source;
@@ -232,6 +234,83 @@ public class CaseManagement extends AbstractWebService {
 
         return (PartyTO) result[0];
     }
+    
+    
+    
+    /**
+     * See {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB#saveGroupParty(org.sola.services.ejb.party.repository.entities.GroupParty)
+     * PartyEJB#saveGroupParty}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
+    @WebMethod(operationName = "SaveGroupParty")
+    public GroupPartyTO SaveGroupParty(@WebParam(name = "groupParty") GroupPartyTO groupParty)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault,
+            OptimisticLockingFault, SOLAValidationFault {
+
+        final Object[] params = {groupParty};
+        final Object[] result = {null};
+
+        runUpdateValidation(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                GroupPartyTO groupParty = (GroupPartyTO) params[0];
+                if (groupParty != null) {
+
+                    GroupParty newGroupParty = partyEJB.saveGroupParty(
+                            GenericTranslator.fromTO(groupParty, GroupParty.class,
+                            partyEJB.getGroupParty(groupParty.getId())));
+                    result[0] = GenericTranslator.toTO(newGroupParty, GroupPartyTO.class);
+                }
+            }
+        });
+
+        return (GroupPartyTO) result[0];
+    }
+
+ /**
+     * See {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB#savePartyMember(org.sola.services.ejb.party.repository.entities.PartyMember)
+     * PartyEJB#savePartyMember}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
+    @WebMethod(operationName = "SavePartyMember")
+    public PartyMemberTO SavePartyMember(@WebParam(name = "partyMember") PartyMemberTO partyMember,
+                                         @WebParam(name = "serviceId") String serviceId)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault,
+            OptimisticLockingFault, SOLAValidationFault {
+
+        final Object[] params = {partyMember};
+        final String serviceIdtmp= serviceId;
+        final Object[] result = {null};
+
+        runUpdateValidation(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                PartyMemberTO partyMember = (PartyMemberTO) params[0];
+                if (partyMember != null) {
+
+                    PartyMember newPartyMember = partyEJB.savePartyMember(
+                            GenericTranslator.fromTO(partyMember, PartyMember.class,
+                            partyEJB.getPartyMember(partyMember.getPartyId(),partyMember.getGroupId())),serviceIdtmp);
+                    result[0] = GenericTranslator.toTO(newPartyMember, PartyMemberTO.class);
+                }
+            }
+        });
+
+        return (PartyMemberTO) result[0];
+    }
+
 
     /**
      * See {@linkplain org.sola.services.ejb.address.businesslogic.AddressEJB#getAddress(java.lang.String)
@@ -310,6 +389,60 @@ public class CaseManagement extends AbstractWebService {
         });
 
         return (PartyTO) result[0];
+    }
+    
+    
+      /**
+     * See {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB#getGroupParty(java.lang.String)
+     * PartyEJB.getGroupParty}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetGroupParty")
+    public GroupPartyTO GetGroupParty(@WebParam(name = "id") String id) throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final String idTmp = id;
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTO(partyEJB.getGroupParty(idTmp), GroupPartyTO.class);
+            }
+        });
+
+        return (GroupPartyTO) result[0];
+    }
+    
+      /**
+     * See {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB#getPartyMember(java.lang.String)
+     * PartyEJB.getGroupParty}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetPartyMember")
+    public PartyMemberTO GetPartyMember(
+            @WebParam(name = "partyId") final String partyId,
+            @WebParam(name = "groupId") final String groupId)
+        throws SOLAFault, UnhandledFault, SOLAAccessFault {   
+        final String partyidTmp = partyId;
+        final String groupidTmp = groupId;
+        final Object[] result = {null};
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTO(partyEJB.getPartyMember(partyidTmp,groupidTmp), PartyMemberTO.class);
+            }
+        });
+
+        return (PartyMemberTO) result[0];
     }
 
     /**
@@ -1362,4 +1495,91 @@ public class CaseManagement extends AbstractWebService {
 
         return (List<ValidationResult>) result[0];
     }
+    
+   
+
+/**
+     * See {@linkplain org.sola.services.ejb.system.businesslogic.SystemEJB#sendEmail(String recipientName, String recipientAddress, String body, String subject)
+     * SystemEJB.sendEmail}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
+    @WebMethod(operationName = "SendEmail")
+    public void SendEmail(
+            @WebParam(name = "recipientName") String recipientName,
+            @WebParam(name = "recipientAddress") String recipientAddress,
+            @WebParam(name = "body") String body,
+            @WebParam(name = "subject") String subject
+//            ,
+//            @WebParam(name = "languageCode") String languageCode,
+//            @WebParam(name = "rowVersion") int rowVersion
+            )
+            throws SOLAFault, UnhandledFault, SOLAAccessFault,
+            OptimisticLockingFault, SOLAValidationFault {
+
+        final String recipientNameTmp = recipientName;
+        final String recipientAddressTmp = recipientAddress;
+        final String bodyTmp = body;
+        final String subjectTmp = subject;
+//        final String languageCodeTmp = languageCode;
+//        final int rowVersionTmp = rowVersion;
+//        final Object[] result = {null};
+
+        runUpdateValidation(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+//                result[0] = 
+                        systemEJB.sendEmail(
+                        recipientNameTmp, recipientAddressTmp, bodyTmp, subjectTmp);
+            }
+        });
+
+//        return (List<ValidationResult>) result[0];
+    }
+
+
+          /**
+     * See {@linkplain ApplicationEJB#getCancelNotification(String partyId, String targetPartyId,String name)
+     * ApplicationEJB.getCancelNotification}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     */
+    @WebMethod(operationName = "GetCancelNotification")
+    public CancelNotificationTO GetCancelNotification(
+            @WebParam(name = "partyId") String partyId,
+            @WebParam(name = "targetPartyId") String targetPartyId,
+            @WebParam(name = "name") String name,
+            @WebParam(name = "application") String application,
+            @WebParam(name = "service") String service)
+            throws SOLAFault, UnhandledFault {
+
+        final String partyIdTmp = partyId;
+        final String targetPartyIdTmp = targetPartyId;
+        final String nameTmp = name;
+        final String applicationTmp = application;
+        final String serviceTmp = service;
+        final Object[] result = {null};
+
+        runOpenQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTO(
+                        applicationEJB.getCancelNotification(partyIdTmp,
+                        targetPartyIdTmp,
+                        nameTmp, applicationTmp,serviceTmp), CancelNotificationTO.class);
+            }
+        });
+
+        return (CancelNotificationTO) result[0];
+    }
+
+
+
 }

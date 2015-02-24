@@ -173,7 +173,45 @@ public class SearchClientImpl extends AbstractWSClientImpl implements SearchClie
         }
         return result;
     }
-
+    
+    
+    @Override
+    public List<PartyPropertySearchResultTO> searchPartiesProperty(PartySearchParamsTO searchParams, String partyId)
+            throws WebServiceClientException {
+        List<PartyPropertySearchResultTO> result = null;
+        if (searchParams.getLocale() == null) {
+            searchParams.setLocale(getLanguageCode());
+        }
+        final String methodName = SearchClient.SEARCH_PARTIES;
+        try {
+            beforeWebMethod(methodName, searchParams,partyId);
+            result = getPort().searchPartiesProperty(searchParams, partyId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, searchParams, partyId);
+        }
+        return result;
+    }
+    
+    @Override
+    public List<NotifiablePartySearchResultTO> searchNotifiableParties(PartySearchParamsTO searchParams, String service)
+            throws WebServiceClientException {
+        List<NotifiablePartySearchResultTO> result = null;
+        if (searchParams.getLocale() == null) {
+            searchParams.setLocale(getLanguageCode());
+        }
+        final String methodName = SearchClient.SEARCH_NOTIFIABLE_PARTIES;
+        try {
+            beforeWebMethod(methodName, searchParams, service);
+            result = getPort().searchNotifiableParties(searchParams, service);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, searchParams, service);
+        }
+        return result;
+    }
     @Override
     public List<SourceSearchResultTO> searchSources(SourceSearchParamsTO searchParams) throws WebServiceClientException {
         List<SourceSearchResultTO> result = null;

@@ -186,6 +186,36 @@ public class MockSearchPort implements Search {
             return null;
         }
     }
+    
+     /**
+     * Response Key = SearchClient.SEARCH_PARTIES_PROPERTY
+     *
+     * @return default = new ArrayList<PartyPropeprtySearchResultTO>()
+     */
+    @Override
+    public List<PartyPropertySearchResultTO> searchPartiesProperty(PartySearchParamsTO searchParams, String partyId)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<PartyPropertySearchResultTO> defaultResponse = new ArrayList<PartyPropertySearchResultTO>();
+        try {
+            return getManager().getResponse(SearchClient.SEARCH_PARTIES_PROPERTY,
+                    List.class, defaultResponse, searchParams, partyId);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+     @Override
+    public List<NotifiablePartySearchResultTO> searchNotifiableParties(PartySearchParamsTO searchParams, String service)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<NotifiablePartySearchResultTO> defaultResponse = new ArrayList<NotifiablePartySearchResultTO>();
+        try {
+            return getManager().getResponse(SearchClient.SEARCH_PARTIES_PROPERTY,
+                    List.class, defaultResponse, searchParams, service);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
 
     /**
      * Response Key = SearchClient.SEARCH_SOURCES
