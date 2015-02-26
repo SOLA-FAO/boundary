@@ -35,6 +35,7 @@ import java.util.List;
 import javax.xml.datatype.XMLGregorianCalendar;
 import org.sola.services.boundary.wsclients.AdminClient;
 import org.sola.webservices.admin.*;
+import org.sola.webservices.transferobjects.EntityTable;
 import org.sola.webservices.transferobjects.security.GroupSummaryTO;
 import org.sola.webservices.transferobjects.security.GroupTO;
 import org.sola.webservices.transferobjects.security.RoleTO;
@@ -44,10 +45,8 @@ import org.sola.webservices.transferobjects.security.UserTO;
  * Provides a mock implementation for the
  * {@linkplain org.sola.webservices.admin} interface. Uses the
  * {@linkplain MockServiceManager} to obtain the appropriate mock response for
- * each web method.
- * <p>
- * Each method mocked by this class has a public constant defined that can be
- * used to reference a mock response object from the
+ * each web method. <p> Each method mocked by this class has a public constant
+ * defined that can be used to reference a mock response object from the
  * {@linkplain MockServiceManager}. To set a response object for a web method,
  * use the {@linkplain MockServiceManager#setResponse(String, Object)} method
  * referencing the appropriate web method constant from
@@ -438,7 +437,7 @@ public class MockAdminPort implements Admin {
     }
 
     @Override
-    public String consolidationExtract(boolean generateConsolidationSchema, 
+    public String consolidationExtract(boolean generateConsolidationSchema,
             boolean everything, boolean dumpToFile) throws SOLAAccessFault, SOLAFault, UnhandledFault {
         String defaultResponse = "";
         try {
@@ -536,6 +535,21 @@ public class MockAdminPort implements Admin {
         } catch (Exception ex) {
             processExceptionBasic(ex);
             return null;
+        }
+    }
+
+    /**
+     * Response Key = AdminClient.SAVE_SECURITY_CLASSIFICATIONS
+     *
+     */
+    @Override
+    public boolean saveSecurityClassifications(List<String> entityIds, EntityTable entityTable,
+            String classificationCode, String redactCode) throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, UnhandledFault {
+        try {
+            return getManager().getResponse(AdminClient.SAVE_SECURITY_CLASSIFICATIONS, Boolean.class, false);
+        } catch (Exception ex) {
+            processExceptionUpdate(ex);
+            return false;
         }
     }
 }

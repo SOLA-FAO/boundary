@@ -1,28 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations (FAO).
- * All rights reserved.
+ * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- *    1. Redistributions of source code must retain the above copyright notice,this list
- *       of conditions and the following disclaimer.
- *    2. Redistributions in binary form must reproduce the above copyright notice,this list
- *       of conditions and the following disclaimer in the documentation and/or other
- *       materials provided with the distribution.
- *    3. Neither the name of FAO nor the names of its contributors may be used to endorse or
- *       promote products derived from this software without specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT
- * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.wsclients;
@@ -36,14 +38,15 @@ import org.sola.webservices.admin.ConfigPanelLauncherTO;
 import org.sola.webservices.admin.LanguageTO;
 import org.sola.webservices.admin.PanelLauncherGroupTO;
 import org.sola.webservices.admin.SettingTO;
+import org.sola.webservices.transferobjects.EntityTable;
 import org.sola.webservices.transferobjects.security.GroupSummaryTO;
 import org.sola.webservices.transferobjects.security.GroupTO;
 import org.sola.webservices.transferobjects.security.RoleTO;
 import org.sola.webservices.transferobjects.security.UserTO;
 
 /**
- * Interface for the Admin Service. Implemented by {@linkplain AdminClientImpl}. To obtain a
- * reference to the Admin Service, use {@linkplain WSManager#getAdminService()}
+ * Interface for the Admin Service. Implemented by {@linkplain AdminClientImpl}.
+ * To obtain a reference to the Admin Service, use {@linkplain WSManager#getAdminService()}
  *
  * @see AdminClientImpl
  * @see WSManager#getAdminService()
@@ -127,51 +130,56 @@ public interface AdminClient extends AbstractWSClient {
      */
     public static final String GET_SETTING = SERVICE_NAME + "getSetting";
     /**
-     * Admin.consolidationExtract - Identifier for the consolidationExtract method
+     * Admin.consolidationExtract - Identifier for the consolidationExtract
+     * method
      */
     public static final String CONSOLIDATION_EXTRACT = SERVICE_NAME + "consolidationExtract";
     /**
-     * Admin.consolidationConsolidate - Identifier for the consolidationConsolidate method
+     * Admin.consolidationConsolidate - Identifier for the
+     * consolidationConsolidate method
      */
     public static final String CONSOLIDATION_CONSOLIDATE = SERVICE_NAME + "consolidationConsolidate";
-    
     /**
-     * Admin.getPanelLauncherConfiguration - Identifier for the getPanelLauncherConfiguration method
+     * Admin.getPanelLauncherConfiguration - Identifier for the
+     * getPanelLauncherConfiguration method
      */
-    public static final String GET_PANEL_LAUNCHER_CONFIG = SERVICE_NAME + "getPanelLauncherConfiguration"; 
-    
+    public static final String GET_PANEL_LAUNCHER_CONFIG = SERVICE_NAME + "getPanelLauncherConfiguration";
     /**
-     * Admin.getPanelLauncherGroups - Identifier for the getPanelLauncherGroups method
+     * Admin.getPanelLauncherGroups - Identifier for the getPanelLauncherGroups
+     * method
      */
-    public static final String GET_PANEL_LAUNCHER_GROUPS = SERVICE_NAME + "getPanelLauncherGroups"; 
-
+    public static final String GET_PANEL_LAUNCHER_GROUPS = SERVICE_NAME + "getPanelLauncherGroups";
     /**
-     * Admin.startProcessProgress - Identifier for the startProcessProgress method
+     * Admin.startProcessProgress - Identifier for the startProcessProgress
+     * method
      */
-    public static final String PROCESS_PROGRESS_START = SERVICE_NAME + "startProcessProgress"; 
-
+    public static final String PROCESS_PROGRESS_START = SERVICE_NAME + "startProcessProgress";
     /**
-     * Admin.startProcessProgressUsingBr - Identifier for the startProcessProgressUsingBr method
+     * Admin.startProcessProgressUsingBr - Identifier for the
+     * startProcessProgressUsingBr method
      */
-    public static final String PROCESS_PROGRESS_USING_BR_START = SERVICE_NAME + "startProcessProgressUsingBr"; 
-
+    public static final String PROCESS_PROGRESS_USING_BR_START = SERVICE_NAME + "startProcessProgressUsingBr";
     /**
      * Admin.getProcessProgress - Identifier for the getProcessProgress method
      */
-    public static final String PROCESS_PROGRESS_GET = SERVICE_NAME + "getProcessProgress"; 
-
-        /**
+    public static final String PROCESS_PROGRESS_GET = SERVICE_NAME + "getProcessProgress";
+    /**
      * Admin.setProcessProgress - Identifier for the setProcessProgress method
      */
-    public static final String PROCESS_PROGRESS_SET = SERVICE_NAME + "setProcessProgress"; 
-
+    public static final String PROCESS_PROGRESS_SET = SERVICE_NAME + "setProcessProgress";
     /**
      * Admin.getProcessLog - Identifier for the getProcessLog method
      */
-    public static final String PROCESS_LOG_GET = SERVICE_NAME + "getProcessLog"; 
+    public static final String PROCESS_LOG_GET = SERVICE_NAME + "getProcessLog";
     /**
-     * Returns the details for the currently authenticated user. <p>No role is required to execute
-     * this method.</p>
+     * Admin.saveSecurityClassifications - Identifier for the
+     * saveSecurityClassifications method
+     */
+    public static final String SAVE_SECURITY_CLASSIFICATIONS = SERVICE_NAME + "saveSecurityClassifications";
+
+    /**
+     * Returns the details for the currently authenticated user. <p>No role is
+     * required to execute this method.</p>
      *
      * @throws WebServiceClientException
      */
@@ -186,8 +194,8 @@ public interface AdminClient extends AbstractWSClient {
     List<GroupTO> getGroups() throws WebServiceClientException;
 
     /**
-     * Returns a summary list of all user groups supported by SOLA. <p>Requires the {@linkplain RolesConstants.ADMIN_MANAGE_SECURITY}
-     * role.</p>
+     * Returns a summary list of all user groups supported by SOLA. <p>Requires
+     * the {@linkplain RolesConstants.ADMIN_MANAGE_SECURITY} role.</p>
      *
      * @throws WebServiceClientException
      */
@@ -197,14 +205,15 @@ public interface AdminClient extends AbstractWSClient {
      * Returns the details for the specified group. <p>Requires the {@linkplain RolesConstants.ADMIN_MANAGE_SECURITY}
      * role.</p>
      *
-     * @param groupId The identifier of the group to retrieve from the SOLA database
+     * @param groupId The identifier of the group to retrieve from the SOLA
+     * database
      * @throws WebServiceClientException
      */
     GroupTO getGroup(String groupId) throws WebServiceClientException;
 
     /**
-     * Returns the details of the user with the specified user name. <p>Requires the {@linkplain RolesConstants.ADMIN_MANAGE_SECURITY}
-     * role.</p>
+     * Returns the details of the user with the specified user name. <p>Requires
+     * the {@linkplain RolesConstants.ADMIN_MANAGE_SECURITY} role.</p>
      *
      * @param userName The user name of the user to search for.
      * @throws WebServiceClientException
@@ -212,10 +221,12 @@ public interface AdminClient extends AbstractWSClient {
     UserTO getUser(String userName) throws WebServiceClientException;
 
     /**
-     * Can be used to create a new user or save any updates to the details of an existing user.
-     * Cannot be used to change the users password. This can only be done using
-     * {@linkplain #changePassword(java.lang.String, java.lang.String) changePassword} method. <p>
-     * Requires the {@linkplain RolesConstants.ADMIN_MANAGE_SECURITY} role. </p>
+     * Can be used to create a new user or save any updates to the details of an
+     * existing user. Cannot be used to change the users password. This can only
+     * be done using
+     * {@linkplain #changePassword(java.lang.String, java.lang.String) changePassword}
+     * method. <p> Requires the {@linkplain RolesConstants.ADMIN_MANAGE_SECURITY}
+     * role. </p>
      *
      * @param userTO The details of the user to save
      * @return The user details after the save is completed
@@ -224,8 +235,9 @@ public interface AdminClient extends AbstractWSClient {
     UserTO saveUser(UserTO userTO) throws WebServiceClientException;
 
     /**
-     * Can be used to create a new user group or save any updates to the details of an existing user
-     * group. <p> Requires the {@linkplain RolesConstants.ADMIN_MANAGE_SECURITY} role. </p>
+     * Can be used to create a new user group or save any updates to the details
+     * of an existing user group. <p> Requires the {@linkplain RolesConstants.ADMIN_MANAGE_SECURITY}
+     * role. </p>
      *
      * @param groupTO The details of the user group to save
      * @return The user group after the save is completed
@@ -234,9 +246,10 @@ public interface AdminClient extends AbstractWSClient {
     GroupTO saveGroup(GroupTO groupTO) throws WebServiceClientException;
 
     /**
-     * Can be used to create a new security role or save any updates to the details of an existing
-     * security role. <p> Note that security roles are linked to the SOLA code base. Adding a new
-     * role also requires updating code before SOLA will recognize the role</p> <p> Requires the {@linkplain RolesConstants.ADMIN_MANAGE_SECURITY}
+     * Can be used to create a new security role or save any updates to the
+     * details of an existing security role. <p> Note that security roles are
+     * linked to the SOLA code base. Adding a new role also requires updating
+     * code before SOLA will recognize the role</p> <p> Requires the {@linkplain RolesConstants.ADMIN_MANAGE_SECURITY}
      * role. </p>
      *
      * @param roleTO The details of the security role to save
@@ -254,8 +267,8 @@ public interface AdminClient extends AbstractWSClient {
     List<RoleTO> getRoles() throws WebServiceClientException;
 
     /**
-     * Returns the list of all security roles assigned to the current user. <p>No role is required
-     * to execute this method.</p>
+     * Returns the list of all security roles assigned to the current user.
+     * <p>No role is required to execute this method.</p>
      *
      * @throws WebServiceClientException
      */
@@ -284,9 +297,10 @@ public interface AdminClient extends AbstractWSClient {
     boolean isUserAdmin() throws WebServiceClientException;
 
     /**
-     * Returns the list of languages supported by SOLA for localization in priority order. The
-     * display value for each language is based on the default locale of the client application.
-     * <p>No role is required to execute this method.</p>
+     * Returns the list of languages supported by SOLA for localization in
+     * priority order. The display value for each language is based on the
+     * default locale of the client application. <p>No role is required to
+     * execute this method.</p>
      *
      * @return See description
      * @throws WebServiceClientException
@@ -294,10 +308,11 @@ public interface AdminClient extends AbstractWSClient {
     List<LanguageTO> getLanguages() throws WebServiceClientException;
 
     /**
-     * Returns the list of languages supported by SOLA for localization in priority order. <p>No
-     * role is required to execute this method.</p>
+     * Returns the list of languages supported by SOLA for localization in
+     * priority order. <p>No role is required to execute this method.</p>
      *
-     * @param lang The language code to use to localize the display value for each language.
+     * @param lang The language code to use to localize the display value for
+     * each language.
      * @throws WebServiceClientException
      */
     List<LanguageTO> getLanguages(String lang) throws WebServiceClientException;
@@ -307,14 +322,16 @@ public interface AdminClient extends AbstractWSClient {
      * role.</p>
      *
      * @param id Identifier for the business rule to return
-     * @param lang The language code to use to localize the display value for each Br.
+     * @param lang The language code to use to localize the display value for
+     * each Br.
      * @throws WebServiceClientException
      */
     BrTO getBr(String id, String lang) throws WebServiceClientException;
 
     /**
-     * Returns the SOLA business rule matching the id. The display value for each Br is based on the
-     * default locale for the client application. <p>Requires the {@linkplain RolesConstants.ADMIN_MANAGE_SECURITY}
+     * Returns the SOLA business rule matching the id. The display value for
+     * each Br is based on the default locale for the client application.
+     * <p>Requires the {@linkplain RolesConstants.ADMIN_MANAGE_SECURITY}
      * role.</p>
      *
      * @param id Identifier for the business rule to return
@@ -323,8 +340,9 @@ public interface AdminClient extends AbstractWSClient {
     BrTO getBr(String id) throws WebServiceClientException;
 
     /**
-     * Can be used to create a new business rule or save any updates to the details of an existing
-     * business role. <p> Requires the {@linkplain RolesConstants.ADMIN_MANAGE_SECURITY} role. </p>
+     * Can be used to create a new business rule or save any updates to the
+     * details of an existing business role. <p> Requires the {@linkplain RolesConstants.ADMIN_MANAGE_SECURITY}
+     * role. </p>
      *
      * @param brTO The business rule to save.
      * @return The updated/new business rule.
@@ -333,8 +351,8 @@ public interface AdminClient extends AbstractWSClient {
     BrTO saveBr(BrTO brTO) throws WebServiceClientException;
 
     /**
-     * Returns all configuration settings in the system.setting table.<p>No role is required to
-     * execute this method.</p>
+     * Returns all configuration settings in the system.setting table.<p>No role
+     * is required to execute this method.</p>
      *
      * @return The settings from the system.setting table
      * @throws WebServiceClientException
@@ -342,39 +360,41 @@ public interface AdminClient extends AbstractWSClient {
     List<SettingTO> getAllSettings() throws WebServiceClientException;
 
     /**
-     * Retrieves the value for the named setting. Constants for each setting are available in
-     * {@linkplain  ConfigConstants}. If the setting does not exist, the default value for the
-     * setting is returned. <p>No role is required to execute this method.</p>
+     * Retrieves the value for the named setting. Constants for each setting are
+     * available in
+     * {@linkplain  ConfigConstants}. If the setting does not exist, the default
+     * value for the setting is returned. <p>No role is required to execute this
+     * method.</p>
      *
      * @param name The name of the setting to retrieve
-     * @param defaultValue The default value for the setting if it no override value is recorded in
-     * the system.settings table.
+     * @param defaultValue The default value for the setting if it no override
+     * value is recorded in the system.settings table.
      * @return The override value for the setting or the defaultValue.
      */
     String getSetting(String name, String defaultValue) throws WebServiceClientException;
-    
+
     /**
      * It extracts the records from the database for the consolidation process.
-     * 
+     *
      * @param generateConsolidationSchema
      * @param everything
      * @param dumpToFile
      * @return
-     * @throws WebServiceClientException 
+     * @throws WebServiceClientException
      */
-    String consolidationExtract(boolean generateConsolidationSchema, 
+    String consolidationExtract(boolean generateConsolidationSchema,
             boolean everything, boolean dumpToFile) throws WebServiceClientException;
 
     /**
      * It consolidate the records extracted from another system.
-     * 
-     * @param extractedFile 
-     * @param mergeConsolidationSchema 
+     *
+     * @param extractedFile
+     * @param mergeConsolidationSchema
      * @return
-     * @throws WebServiceClientException 
+     * @throws WebServiceClientException
      */
     String consolidationConsolidate(String extractedFile, boolean mergeConsolidationSchema) throws WebServiceClientException;
-    
+
     /**
      * Returns the configuration information for the PanelLauncher
      *
@@ -382,7 +402,7 @@ public interface AdminClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<ConfigPanelLauncherTO> getPanelLauncherConfiguration() throws WebServiceClientException;
-    
+
     /**
      * Returns the Panel Launcher Groups
      *
@@ -390,63 +410,78 @@ public interface AdminClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<PanelLauncherGroupTO> getPanelLauncherGroups() throws WebServiceClientException;
-    
+
     /**
      * It starts a process progress in the server.
-     * 
-     * @param processName The name of the process to identify. If it is already found it will
-     * be overridden.
+     *
+     * @param processName The name of the process to identify. If it is already
+     * found it will be overridden.
      * @param maximumValue Maximum value the progress can get.
-     * 
-     * @throws WebServiceClientException 
+     *
+     * @throws WebServiceClientException
      */
     void startProcessProgress(String processName, int maximumValue) throws WebServiceClientException;
 
     /**
      * It starts a process progress in the server.
-     * 
-     * @param processName The name of the process to identify. If it is already found it will
-     * be overridden.
-     * @param brNameToGenerateMaximumValue The BR name that will generate the maximum value the progress can get.
-     * 
-     * @throws WebServiceClientException 
+     *
+     * @param processName The name of the process to identify. If it is already
+     * found it will be overridden.
+     * @param brNameToGenerateMaximumValue The BR name that will generate the
+     * maximum value the progress can get.
+     *
+     * @throws WebServiceClientException
      */
     void startProcessProgressUsingBr(String processName, String brNameToGenerateMaximumValue) throws WebServiceClientException;
 
     /**
      * Gets the value of the process progress.
-     * 
+     *
      * @param processName The name of the process.
-     * @param inPercentage True: The value in percentage, otherwise the absolute value.
-     * 
-     * @return 
-     * 
-     * @throws WebServiceClientException 
+     * @param inPercentage True: The value in percentage, otherwise the absolute
+     * value.
+     *
+     * @return
+     *
+     * @throws WebServiceClientException
      */
     Integer getProcessProgress(String processName, Boolean inPercentage) throws WebServiceClientException;
-    
-    
+
     /**
      * Sets the process progress value.
-     * 
+     *
      * @param processName The name of the process.
      * @param progressValue The value to set.
-     * 
-     * @throws WebServiceClientException 
+     *
+     * @throws WebServiceClientException
      */
     void setProcessProgress(String processName, int progressValue) throws WebServiceClientException;
 
     /**
      * Gets the process log.
-     * 
+     *
      * @param processName The name of the process.
      * @param fromTime From the moment the log has to be checked.
-     * @param toTime Until the moment the log has to be checked. 
-     * If not present, the current time is used.
-     * 
-     * @return 
-     * 
-     * @throws WebServiceClientException 
+     * @param toTime Until the moment the log has to be checked. If not present,
+     * the current time is used.
+     *
+     * @return
+     *
+     * @throws WebServiceClientException
      */
     String getProcessLog(String processName) throws WebServiceClientException;
+
+    /**
+     * Updates the security classifications for a list of entities and
+     * identified by the entityTable and entity ids <p> Requires the {@linkplain RolesConstants#CLASSIFICATION_CHANGE_CLASS}
+     * role. </p>
+     *
+     * @param entityIds The ids of the entities to update
+     * @param entityTable Enumeration indicating the entity table to update
+     * @param classificationCode The new classification code to assign to the
+     * entities
+     * @param redactCode The new redactCode to assign to the entities
+     */
+    boolean saveSecurityClassifications(List<String> entityIds, EntityTable entityTable,
+            String classificationCode, String redactCode);
 }

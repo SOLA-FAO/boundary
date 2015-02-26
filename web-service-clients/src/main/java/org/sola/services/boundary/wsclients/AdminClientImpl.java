@@ -34,6 +34,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
 import org.sola.services.boundary.wsclients.exception.WebServiceClientException;
 import org.sola.webservices.admin.*;
+import org.sola.webservices.transferobjects.EntityTable;
 import org.sola.webservices.transferobjects.security.GroupSummaryTO;
 import org.sola.webservices.transferobjects.security.GroupTO;
 import org.sola.webservices.transferobjects.security.UserTO;
@@ -344,7 +345,7 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
     }
 
     @Override
-    public String consolidationExtract(boolean generateConsolidationSchema, 
+    public String consolidationExtract(boolean generateConsolidationSchema,
             boolean everything, boolean dumpToFile) throws WebServiceClientException {
         String result = null;
         final String methodName = AdminClient.CONSOLIDATION_EXTRACT;
@@ -360,7 +361,7 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
     }
 
     @Override
-    public String consolidationConsolidate(String extractedFile, boolean mergeConsolidationSchema) 
+    public String consolidationConsolidate(String extractedFile, boolean mergeConsolidationSchema)
             throws WebServiceClientException {
         String result = null;
 
@@ -471,6 +472,21 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
             processException(methodName, e);
         } finally {
             afterWebMethod(methodName, String.class, processName);
+        }
+        return result;
+    }
+
+    @Override
+    public boolean saveSecurityClassifications(List<String> entityIds, EntityTable entityTable, String classificationCode, String redactCode) {
+        final String methodName = AdminClient.SAVE_SECURITY_CLASSIFICATIONS;
+        boolean result = false;
+        try {
+            beforeWebMethod(methodName, entityIds, entityTable, classificationCode, redactCode);
+            result = getPort().saveSecurityClassifications(entityIds, entityTable, classificationCode, redactCode);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, null, entityIds, entityTable, classificationCode, redactCode);
         }
         return result;
     }
