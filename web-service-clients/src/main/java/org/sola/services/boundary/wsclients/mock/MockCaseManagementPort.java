@@ -30,7 +30,6 @@ package org.sola.services.boundary.wsclients.mock;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.datatype.XMLGregorianCalendar;
-import org.sola.services.boundary.transferobjects.casemanagement.SendEmailTO;
 import org.sola.services.boundary.wsclients.CaseManagementClient;
 import org.sola.webservices.casemanagement.*;
 import org.sola.webservices.transferobjects.ValidationResult;
@@ -72,10 +71,9 @@ public class MockCaseManagementPort implements CaseManagement {
     @Override
     public void sendEmail(String recipientName, String recipientAddress, String body, String subject)
             throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, SOLAValidationFault, UnhandledFault {
-       SendEmailTO defaultResponse = new SendEmailTO();
         try {
             getManager().getResponse(CaseManagementClient.SEND_EMAIL,
-                    SendEmailTO.class,defaultResponse, recipientName, recipientAddress, body, subject);
+                    Void.class, null, recipientName, recipientAddress, body, subject);
         } catch (Exception ex) {
             processExceptionAll(ex);
             return ;

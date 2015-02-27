@@ -40,12 +40,6 @@
             <artifactId>sola-common</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.sola.services.boundary</groupId>
-            <artifactId>sola-transfer-objects</artifactId>
-            <version>1402a-SNAPSHOT</version>
-            <type>jar</type>
-        </dependency>
     </dependencies>
     <build>
         <resources>
