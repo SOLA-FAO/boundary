@@ -758,6 +758,25 @@ public class MockCaseManagementPort implements CaseManagement {
         }
     }
     
+    
+     /**
+     * Response Key = CaseManagementClient.GET_PARTY
+     *
+     * @return default = new PartyTO()
+     */
+    @Override
+    public PartyTO getPartyByServiceId(String serviceId) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        PartyTO defaultResponse = new PartyTO();
+        defaultResponse.setId(serviceId);
+        try {
+            return getManager().getResponse(CaseManagementClient.GET_PARTY_BY_SERVICE,
+                    PartyTO.class, defaultResponse, serviceId);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+    
     @Override
     public GroupPartyTO getGroupParty(String id) throws SOLAAccessFault, SOLAFault, UnhandledFault {
         GroupPartyTO defaultResponse = new GroupPartyTO();

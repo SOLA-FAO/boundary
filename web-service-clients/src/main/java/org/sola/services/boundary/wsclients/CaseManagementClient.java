@@ -84,6 +84,10 @@ public interface CaseManagementClient extends AbstractWSClient {
      */
     public static final String GET_PARTY = SERVICE_NAME + "getParty";
     /**
+     * CaseManagement.getParty - Identifier for the getParty method
+     */
+    public static final String GET_PARTY_BY_SERVICE = SERVICE_NAME + "getPartyByServiceId";
+    /**
      * CaseManagement.getGroupParty - Identifier for the getParty method
      */
     public static final String GET_GROUP_PARTY = SERVICE_NAME + "getGroupParty";
@@ -757,6 +761,19 @@ public interface CaseManagementClient extends AbstractWSClient {
      */
     List<PowerOfAttorneyTO> getPowerOfAttorneyByServiceId(String serviceId) throws WebServiceClientException;
 
+    
+    /**
+     * Retrieves all power of attorney documents associated with the service.
+     * Uses the transaction associated with the service to determine the
+     * documents to return.
+     *
+     * @param serviceId Identifier of the service
+     * @throws WebServiceClientException
+     */
+    PartyTO getPartyByServiceId(String serviceId) throws WebServiceClientException;
+
+    
+    
     /**
      * Returns the details for the specified Power of attorney.
      *
