@@ -176,6 +176,11 @@ public interface AdminClient extends AbstractWSClient {
      * saveSecurityClassifications method
      */
     public static final String SAVE_SECURITY_CLASSIFICATIONS = SERVICE_NAME + "saveSecurityClassifications";
+    
+    /**
+     * Admin.flushCache - Identifier for the flushCache method
+     */
+    public static final String FLUSH_CACHE = SERVICE_NAME + "flushCache";
 
     /**
      * Returns the details for the currently authenticated user. <p>No role is
@@ -484,4 +489,13 @@ public interface AdminClient extends AbstractWSClient {
      */
     boolean saveSecurityClassifications(List<String> entityIds, EntityTable entityTable,
             String classificationCode, String redactCode);
+    
+    /**
+     * Clears / flushes the contents of the Repository Cache. Should be used if
+     * the Administrator updates a reference code, setting or configuration
+     * value directly in the database without using the SOLA Admin application.
+     * <p>
+     * Requires the {@linkplain RolesConstants#ADMIN_MANAGE_REFDATA} role. </p>
+     */
+    boolean flushCache() throws WebServiceClientException; 
 }

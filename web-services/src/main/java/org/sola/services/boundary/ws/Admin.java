@@ -575,7 +575,7 @@ public class Admin extends AbstractWebService {
     public String ConsolidationConsolidate(
             @WebParam(name = "processName") final String extractedFile,
             @WebParam(name = "languageCode") final boolean mergeConsolidationSchema
-            )
+    )
             throws SOLAValidationFault, OptimisticLockingFault, SOLAFault, UnhandledFault, SOLAAccessFault {
 
         final Object[] result = {null};
@@ -612,8 +612,8 @@ public class Admin extends AbstractWebService {
 
         return (List<ConfigPanelLauncherTO>) result[0];
     }
-    
-        /**
+
+    /**
      * Returns the configuration information for the PanelLauncherGroup
      *
      * @throws SOLAFault
@@ -636,7 +636,7 @@ public class Admin extends AbstractWebService {
 
         return (List<PanelLauncherGroupTO>) result[0];
     }
-    
+
     /**
      * See {@linkplain org.sola.services.ejbs.admin.businesslogic.AdminEJB#startProcessProgressUsingBr(String, int)
      * AdminEJB.startProcessProgressUsingBr}
@@ -753,7 +753,8 @@ public class Admin extends AbstractWebService {
 
         return result[0].toString();
     }
-   /**
+
+    /**
      * Updates the security classifications for a list of entities and
      * identified by the entityTable and entity ids
      *
@@ -786,5 +787,23 @@ public class Admin extends AbstractWebService {
 
         return true;
     }
-}
 
+    /**
+     * Clears / flushes the contents of the Repository Cache.
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "FlushCache")
+    public void FlushCache()
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        runGeneralQuery(wsContext, new Runnable() {
+            @Override
+            public void run() {
+                adminEJB.flushCache();
+            }
+        });
+    }
+}
