@@ -490,4 +490,20 @@ public class AdminClientImpl extends AbstractWSClientImpl implements AdminClient
         }
         return result;
     }
+    
+    @Override
+    public boolean flushCache() throws WebServiceClientException {
+        boolean result = true;
+        final String methodName = AdminClient.FLUSH_CACHE;
+        try {
+            beforeWebMethod(methodName);
+            getPort().flushCache();
+        } catch (Exception e) {
+            processException(methodName, e);
+            result = false;
+        } finally {
+            afterWebMethod(methodName, result);
+        }
+        return result;
+    }
 }

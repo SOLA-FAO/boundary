@@ -45,8 +45,10 @@ import org.sola.webservices.transferobjects.security.UserTO;
  * Provides a mock implementation for the
  * {@linkplain org.sola.webservices.admin} interface. Uses the
  * {@linkplain MockServiceManager} to obtain the appropriate mock response for
- * each web method. <p> Each method mocked by this class has a public constant
- * defined that can be used to reference a mock response object from the
+ * each web method.
+ * <p>
+ * Each method mocked by this class has a public constant defined that can be
+ * used to reference a mock response object from the
  * {@linkplain MockServiceManager}. To set a response object for a web method,
  * use the {@linkplain MockServiceManager#setResponse(String, Object)} method
  * referencing the appropriate web method constant from
@@ -550,6 +552,20 @@ public class MockAdminPort implements Admin {
         } catch (Exception ex) {
             processExceptionUpdate(ex);
             return false;
+        }
+    }
+
+    /**
+     * Response Key = AdminClient.FLUSH_CACHE
+     *
+     */
+    @Override
+    public void flushCache() throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        boolean defaultResponse = false;
+        try {
+            getManager().getResponse(AdminClient.FLUSH_CACHE, Boolean.class, defaultResponse);
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
         }
     }
 }
