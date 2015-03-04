@@ -35,6 +35,7 @@ public class LanguageTO extends AbstractTO {
     boolean active;
     boolean isDefault;
     int itemOrder;
+    boolean ltr;
     
     public LanguageTO(){
         super();
@@ -78,5 +79,13 @@ public class LanguageTO extends AbstractTO {
 
     public void setItemOrder(int itemOrder) {
         this.itemOrder = itemOrder;
+    }
+
+    public boolean isLtr() {
+        return ltr;
+    }
+
+    public void setLtr(boolean ltr) {
+        this.ltr = ltr;
     }
 }
