@@ -165,20 +165,7 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         }
         return result;
     }
-    @Override
-    public PartyTO getPartyByServiceId(String serviceId) throws WebServiceClientException {
-        PartyTO result = null;
-        final String methodName = CaseManagementClient.GET_PARTY_BY_SERVICE;
-        try {
-            beforeWebMethod(methodName, serviceId);
-            result = getPort().getPartyByServiceId(serviceId);
-        } catch (Exception e) {
-            processException(methodName, e);
-        } finally {
-            afterWebMethod(methodName, result, serviceId);
-        }
-        return result;
-    }
+
     @Override
     public GroupPartyTO getGroupParty(String id) throws WebServiceClientException {
         GroupPartyTO result = null;

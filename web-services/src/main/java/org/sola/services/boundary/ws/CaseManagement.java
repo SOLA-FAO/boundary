@@ -676,36 +676,6 @@ public class CaseManagement extends AbstractWebService {
         return (List<PowerOfAttorneyTO>) result[0];
     }
     
-    
-     /**
-     * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#getPowerOfAttorneyByServiceId(java.lang.String)
-     * SourceEJB.getPowerOfAttorneyByServiceId}
-     *
-     * @throws SOLAFault
-     * @throws UnhandledFault
-     * @throws SOLAAccessFault
-     */
-    @WebMethod(operationName = "getPartyByServiceId")
-    public PartyTO getPartyByServiceId(
-            @WebParam(name = "serviceId") final String serviceId) throws SOLAFault, UnhandledFault,
-            SOLAAccessFault {
-         
-        final String serviceIdTmp = serviceId;
-        final Object[] result = {null};
-
-        runGeneralQuery(wsContext, new Runnable() {
-
-            @Override
-            public void run() {
-                result[0] = GenericTranslator.toTO(
-                        partyEJB.getPartyByServiceId(serviceIdTmp),
-                        PartyTO.class);
-            }
-        });
-
-        return (PartyTO) result[0];
-    }
-    
     /**
      * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#getSources(java.util.List)
      * SourceEJB.getSources}

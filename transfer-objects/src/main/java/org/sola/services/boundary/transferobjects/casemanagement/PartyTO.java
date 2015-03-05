@@ -56,7 +56,6 @@ public class PartyTO extends AbstractIdTO {
     private boolean rightHolder;
     private List<GroupPartyTO> groupList;
     private List<SourceTO> sourceList;
-    private String serviceId;
 //    private List<PartyMemberTO> partyMemberList;
     private AddressTO address;
 
@@ -251,13 +250,5 @@ public class PartyTO extends AbstractIdTO {
             groupList = new ArrayList<GroupPartyTO>();
         }
         groupList.add(group);
-    }
-
-    public String getServiceId() {
-        return serviceId;
-    }
-
-    public void setServiceId(String serviceId) {
-        this.serviceId = serviceId;
     }
 }
