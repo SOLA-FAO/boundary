@@ -5,11 +5,11 @@
     <parent>
         <artifactId>sola-boundary</artifactId>
         <groupId>org.sola.services</groupId>
-        <version>v1502a</version>
+        <version>sl_v1503a</version>
     </parent>
     <groupId>org.sola.services.boundary</groupId>
     <artifactId>sola-web-service-clients</artifactId>
-    <version>v1502a</version>
+    <version>sl_v1503a</version>
     <name>Boundary Web Service Clients</name>
     <url>http://maven.apache.org</url>
     <properties>

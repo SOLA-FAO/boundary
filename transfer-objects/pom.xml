@@ -4,11 +4,11 @@
     <parent>
         <groupId>org.sola.services</groupId>
         <artifactId>sola-boundary</artifactId>
-        <version>v1502a</version>
+        <version>sl_v1503a</version>
     </parent>
   <groupId>org.sola.services.boundary</groupId>
   <artifactId>sola-transfer-objects</artifactId>
-  <version>v1502a</version>
+  <version>sl_v1503a</version>
   <packaging>jar</packaging>
 
   <name>Boundary Transfer Objects</name>

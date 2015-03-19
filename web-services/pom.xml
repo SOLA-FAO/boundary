@@ -4,12 +4,12 @@
     <parent>
         <groupId>org.sola.services</groupId>
         <artifactId>sola-boundary</artifactId>
-        <version>v1502a</version>
+        <version>sl_v1503a</version>
     </parent>
     <groupId>org.sola.services.boundary</groupId>
     <artifactId>sola-web-services</artifactId>
     <packaging>war</packaging>
-    <version>v1502a</version>
+    <version>sl_v1503a</version>
     <name>Boundary Web Services</name>
     <repositories>
         <repository>
