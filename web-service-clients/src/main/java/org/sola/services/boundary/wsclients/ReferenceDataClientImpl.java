@@ -675,4 +675,24 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
         }
         return result;
     }
+    
+    @Override
+    public List<RequestDisplayGroupTO> getRequestDisplayGroups() throws WebServiceClientException {
+        return getRequestDisplayGroups(getLanguageCode());
+    }
+
+    @Override
+    public List<RequestDisplayGroupTO> getRequestDisplayGroups(String lang) throws WebServiceClientException {
+        List<RequestDisplayGroupTO> result = null;
+        final String methodName = ReferenceDataClient.GET_REQUEST_DISPLAY_GROUPS;
+        try {
+            beforeWebMethod(methodName, lang);
+            result = getPort().getRequestDisplayGroups(lang);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, lang);
+        }
+        return result;
+    }
 }

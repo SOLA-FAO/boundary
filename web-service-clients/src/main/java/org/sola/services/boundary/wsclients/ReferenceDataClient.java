@@ -171,6 +171,11 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * ReferenceData.getHierarchyLevels - Identifier for the getHierarchyLevels method
      */
     public static final String GET_HIERARCHY_LEVELS = SERVICE_NAME + "getHierarchyLevels";
+    /**
+     * ReferenceData.getRequestDisplayGroups - Identifier for the
+     * getRequestDisplayGroups method
+     */
+    public static final String GET_REQUEST_DISPLAY_GROUPS = SERVICE_NAME + "getRequestDisplayGroups";
 
     /**
      * Retrieves all source.source_type code values using the default locale of the client to
@@ -639,4 +644,17 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<HierarchyLevelTO> getHierarchyLevels(String lang) throws WebServiceClientException;
+    /**
+     * Retrieves all application.request_display_group code values.
+     *
+     * @throws WebServiceClientException
+     */
+    List<RequestDisplayGroupTO> getRequestDisplayGroups() throws WebServiceClientException;/**
+     * Retrieves all application.request_display_group code values.
+     *
+     * @param languageCode The language code to use for localization of display
+     * values.
+     * @throws WebServiceClientException
+     */
+    List<RequestDisplayGroupTO> getRequestDisplayGroups(String lang) throws WebServiceClientException;
 }
