@@ -1,6 +1,6 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations
+ * Copyright (C) 2015 - Food and Agriculture Organization of the United Nations
  * (FAO). All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,89 +27,37 @@
  * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
-package org.sola.services.boundary.transferobjects.administrative;
+package org.sola.services.boundary.transferobjects.casemanagement;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
-import org.sola.services.boundary.transferobjects.cadastre.CadastreObjectTO;
-import org.sola.services.boundary.transferobjects.casemanagement.SourceTO;
+import org.sola.services.boundary.transferobjects.administrative.BaUnitBasicTO;
 import org.sola.services.common.contracts.AbstractIdTO;
 
-public class NotifiablePartyForBaUnitTO extends AbstractIdTO {
+public class NotifyPropertyTO extends AbstractIdTO {
 
-    private String partyId;
-    private String targetPartyId;
-    private String baunitName;
-    private String statusParty;
-    private String baunitId;
-    private String applicationId;
-    private String groupId;
-    private String serviceId;
+    private String notifyId;
+    private String baUnitId;
     private String cancelServiceId;
+    private String status;
 
-    public String getApplicationId() {
-        return applicationId;
+    public NotifyPropertyTO() {
+        super();
     }
 
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    public String getBaUnitId() {
+        return baUnitId;
     }
 
-    public String getBaunitId() {
-        return baunitId;
+    public void setBaUnitId(String baUnitId) {
+        this.baUnitId = baUnitId;
     }
 
-    public void setBaunitId(String baunitId) {
-        this.baunitId = baunitId;
+    public String getNotifyId() {
+        return notifyId;
     }
 
-    public String getBaunitName() {
-        return baunitName;
-    }
-
-    public void setBaunitName(String baunitName) {
-        this.baunitName = baunitName;
-    }
-
-    public String getPartyId() {
-        return partyId;
-    }
-
-    public void setPartyId(String partyId) {
-        this.partyId = partyId;
-    }
-
-    public String getStatusParty() {
-        return statusParty;
-    }
-
-    public void setStatusParty(String statusParty) {
-        this.statusParty = statusParty;
-    }
-
-    public String getTargetPartyId() {
-        return targetPartyId;
-    }
-
-    public void setTargetPartyId(String targetPartyId) {
-        this.targetPartyId = targetPartyId;
-    }
-
-    public String getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
-    }
-
-    public String getServiceId() {
-        return serviceId;
-    }
-
-    public void setServiceId(String serviceId) {
-        this.serviceId = serviceId;
+    public void setNotifyId(String notifyId) {
+        this.notifyId = notifyId;
     }
 
     public String getCancelServiceId() {
@@ -118,5 +66,13 @@ public class NotifiablePartyForBaUnitTO extends AbstractIdTO {
 
     public void setCancelServiceId(String cancelServiceId) {
         this.cancelServiceId = cancelServiceId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

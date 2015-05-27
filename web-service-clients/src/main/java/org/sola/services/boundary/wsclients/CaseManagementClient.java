@@ -1,28 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations (FAO).
- * All rights reserved.
+ * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- *    1. Redistributions of source code must retain the above copyright notice,this list
- *       of conditions and the following disclaimer.
- *    2. Redistributions in binary form must reproduce the above copyright notice,this list
- *       of conditions and the following disclaimer in the documentation and/or other
- *       materials provided with the distribution.
- *    3. Neither the name of FAO nor the names of its contributors may be used to endorse or
- *       promote products derived from this software without specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT
- * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.wsclients;
@@ -100,13 +102,9 @@ public interface CaseManagementClient extends AbstractWSClient {
      * CaseManagement.saveParty - Identifier for the saveParty method
      */
     public static final String SAVE_PARTY = SERVICE_NAME + "saveParty";
-    
     public static final String SAVE_GROUP_PARTY = SERVICE_NAME + "saveGroupParty";
-    
     public static final String SAVE_PARTY_MEMBER = SERVICE_NAME + "savePartyMember";
-    
     public static final String SEND_EMAIL = SERVICE_NAME + "sendEmail";
-  
     /**
      * CaseManagement.attachPowerOfAttorneyToTransaction - Identifier for the
      * attachPowerOfAttorneyToTransaction method
@@ -245,15 +243,45 @@ public interface CaseManagementClient extends AbstractWSClient {
      * CaseManagement.getWorkSummary - Identifier for the getWorkSummary method
      */
     public static final String GET_WORK_SUMMARY = SERVICE_NAME + "getWorkSummary";
-
     /**
      * CaseManagement.applicationActionTransfer - Identifier for the
      * applicationActionTransfer method
      */
     public static final String APPLICATION_ACTION_TRANSFER = SERVICE_NAME + "applicationActionTransfer";
-    
     public static final String GET_CANCEL_NOTIFICATION = SERVICE_NAME + "getCancelNotification";
-   
+     /**
+     * CaseManagement.getNotifyParties - Identifier for the getNotifyParties
+     * method
+     */
+    public static final String GET_NOTIFY_PARTIES = SERVICE_NAME + "getNotifyParties";
+    /**
+     * CaseManagement.saveNotifyParties - Identifier for the saveNotifyParties
+     * method
+     */
+    public static final String SAVE_NOTIFY_PARTIES = SERVICE_NAME + "saveNotifyParties";
+    
+     /**
+     * CaseManagement.getNotifyProperty - Identifier for the getNotifyProperty
+     * method
+     */public static final String GET_NOTIFY_PROPERTY = SERVICE_NAME + "getNotifyProperty";
+    /**
+     * CaseManagement.saveNotifyParties - Identifier for the saveNotifyProperty
+     * method
+     */
+    public static final String SAVE_NOTIFY_PROPERTY = SERVICE_NAME + "saveNotifyProperty";
+    
+     /**
+     * CaseManagement.getNotifyParty - Identifier for the getNotifyParty
+     * method
+     */public static final String GET_NOTIFY_PARTY = SERVICE_NAME + "getNotifyParty";
+    /**
+     * CaseManagement.saveNotifyParty - Identifier for the saveNotifyParty
+     * method
+     */
+    public static final String SAVE_NOTIFY_PARTY = SERVICE_NAME + "saveNotifyParty";
+    
+    public static final String GET_NOTIFIABLE_PARTY = SERVICE_NAME + "getNotifiableParty";
+    public static final String SAVE_NOTIFIABLE_PARTY = SERVICE_NAME + "saveNotifiableParty";
 
     /**
      * Calculates the lodgement fees as well as the expected completions dates
@@ -325,8 +353,7 @@ public interface CaseManagementClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     PartyTO getParty(String id) throws WebServiceClientException;
-    
-    
+
     /**
      * Returns the details for the specified party. <p>No role is required to
      * execute this method.</p>
@@ -345,7 +372,6 @@ public interface CaseManagementClient extends AbstractWSClient {
      */
     PartyMemberTO getPartyMember(String partyId, String groupId) throws WebServiceClientException;
 
-    
     /**
      * Saves changes to the application and child objects. Will also update the
      * completion dates and fees for the application if a new service as been
@@ -360,8 +386,8 @@ public interface CaseManagementClient extends AbstractWSClient {
 
     /**
      * Can be used to create a new party or save any updates to the details of
-     * an existing party.
-     * <p>Requires the {@linkplain RolesConstants#PARTY_RIGHTHOLDERS_SAVE} or
+     * an existing party. <p>Requires the {@linkplain RolesConstants#PARTY_RIGHTHOLDERS_SAVE}
+     * or
      * {@linkplain RolesConstants#PARTY_SAVE} role.</p>
      *
      * @param party The party to create/save
@@ -372,11 +398,9 @@ public interface CaseManagementClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     PartyTO saveParty(PartyTO party) throws WebServiceClientException;
-    
-    
+
     GroupPartyTO saveGroupParty(GroupPartyTO groupParty) throws WebServiceClientException;
-    
-    
+
     PartyMemberTO savePartyMember(PartyMemberTO groupParty, String serviceId) throws WebServiceClientException;
 
     /**
@@ -595,8 +619,8 @@ public interface CaseManagementClient extends AbstractWSClient {
      * <code>application.application_action_type</code> table for the
      * <code>approve</code> code. (i.e. approved) if validations are successful.
      * Also updates the status of all services and BA Units and /or Cadastre
-     * Objects linked to those services.
-     * <p>Requires the {@linkplain RolesConstants#APPLICATION_APPROVE} role.</p>
+     * Objects linked to those services. <p>Requires the {@linkplain RolesConstants#APPLICATION_APPROVE}
+     * role.</p>
      *
      * @param applicationId The application to perform the action against
      * @param rowVersion The current row version of the service
@@ -673,9 +697,8 @@ public interface CaseManagementClient extends AbstractWSClient {
 
     /**
      * Sets the assignee id on the application to the id of the user specified
-     * as well as setting the action code on the application to
-     * <cpde>assign</code> to indicate the application has been assigned.
-     * <p>Requires the {@linkplain RolesConstants#APPLICATION_ASSIGN_TO_OTHERS}
+     * as well as setting the action code on the application to <cpde>assign</code>
+     * to indicate the application has been assigned. <p>Requires the {@linkplain RolesConstants#APPLICATION_ASSIGN_TO_OTHERS}
      * or the {@linkplain RolesConstants#APPLICATION_ASSIGN_TO_YOURSELF}
      * role.</p>
      *
@@ -723,8 +746,8 @@ public interface CaseManagementClient extends AbstractWSClient {
 
     /**
      * Can be used to create a new source or save any updates to the details of
-     * an existing source.
-     * <p>Requires the {@linkplain RolesConstants#SOURCE_SAVE} role.</p>
+     * an existing source. <p>Requires the {@linkplain RolesConstants#SOURCE_SAVE}
+     * role.</p>
      *
      * @param source The source to create/save
      * @return The source after the save is completed.
@@ -756,7 +779,7 @@ public interface CaseManagementClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<PowerOfAttorneyTO> getPowerOfAttorneyByServiceId(String serviceId) throws WebServiceClientException;
-    
+
     /**
      * Returns the details for the specified Power of attorney.
      *
@@ -822,12 +845,80 @@ public interface CaseManagementClient extends AbstractWSClient {
      */
     List<ValidationResult> applicationActionTransfer(
             String applicationId, int rowVersion) throws WebServiceClientException;
-    
-    
+
     void sendEmail(String recipientName, String recipientAddress, String body, String subject)
-            throws WebServiceClientException ;
-    
-    CancelNotificationTO getCancelNotification(String partyId, String targetPartyId,String name, String application, String service)
             throws WebServiceClientException;
+
+    CancelNotificationTO getCancelNotification(String partyId, String targetPartyId, String name, String application, String service)
+            throws WebServiceClientException;
+
+    /**
+     * Retrieves all notification parties associated to a service. <p> Requires
+     * the {@linkplain RolesConstants#APPLICATION_VIEW_APPS} role.</p>
+     *
+     * @param serviceId Id of the service to retrieve notification parties for
+     * @return Notify records
+     */
+    List<NotifyTO> getNotifyParties(String serviceId) throws WebServiceClientException;
+
+    /**
+     * Saves changes to all notification parties associated to a service. <p>
+     * Requires the {@linkplain RolesConstants#SERVICE_START_NOTIFY} role.</p>
+     *
+     * @param notifications
+     * @return the list of notification parties for the service after they have
+     * been saved.
+     */
+    List<NotifyTO> saveNotifyParties(List<NotifyTO> notifications) throws WebServiceClientException;
+    
+    
+     /**
+     * Retrieves all notification property associated to a service. <p> Requires
+     * the {@linkplain RolesConstants#APPLICATION_VIEW_APPS} role.</p>
+     *
+     * @param notifyId Id of the notification to retrieve notification property for
+     * @param baunitId Id of the baunit to retrieve notification property for
+     * @return Notify records
+     */
+    NotifyPropertyTO getNotifyProperty(String notifyId, String baUnitId) throws WebServiceClientException;
+
+    /**
+     * Saves changes to all notification property associated to a service. <p>
+     * Requires the {@linkplain RolesConstants#SERVICE_START_NOTIFY} role.</p>
+     *
+     * @param notifyProperty
+     * @return the list of notification parties for the service after they have
+     * been saved.
+     */
+    NotifyPropertyTO saveNotifyProperty(NotifyPropertyTO notifyProperty,String notifyId, String baUnitId) throws WebServiceClientException;
+    
+    
+      /**
+     * Retrieves all notification arty associated to a service. <p> Requires
+     * the {@linkplain RolesConstants#APPLICATION_VIEW_APPS} role.</p>
+     *
+     * @param serviceId Id of the service to retrieve notification for
+     * @param partyId Id of the party to retrieve notification  for
+     * @param relationshipType type of relation with property of the party to retrieve notification for
+     * @return Notify records
+     */
+    NotifyTO getNotifyParty(String serviceId, String partyId, String relationshipType) throws WebServiceClientException;
+
+    /**
+     * Saves changes to all notification property associated to a service. <p>
+     * Requires the {@linkplain RolesConstants#SERVICE_START_NOTIFY} role.</p>
+     *
+     * @param notifyParty
+     * @return the list of notification parties for the service after they have
+     * been saved.
+     */
+    NotifyTO saveNotifyParty(NotifyTO notifyParty) throws WebServiceClientException;
+
+    NotifiablePartyForBaUnitTO getNotifiableParty(String partyId, String targetPartyId,String name, String application, String service)
+            throws WebServiceClientException;
+    
+    NotifiablePartyForBaUnitTO saveNotifiableParty(NotifiablePartyForBaUnitTO notifiableParty)
+            throws WebServiceClientException;
+   
     
 }

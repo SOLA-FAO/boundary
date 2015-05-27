@@ -1,28 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations (FAO).
- * All rights reserved.
+ * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- *    1. Redistributions of source code must retain the above copyright notice,this list
- *       of conditions and the following disclaimer.
- *    2. Redistributions in binary form must reproduce the above copyright notice,this list
- *       of conditions and the following disclaimer in the documentation and/or other
- *       materials provided with the distribution.
- *    3. Neither the name of FAO nor the names of its contributors may be used to endorse or
- *       promote products derived from this software without specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT
- * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.wsclients;
@@ -236,12 +238,12 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
         final String methodName = AdministrativeClient.GET_SYS_REG_REGIST_LISTING;
         String languageCode = getLanguageCode();
         try {
-            beforeWebMethod(methodName, searchString,languageCode);
-            result = getPort().getSysRegPubDisParcelNameByLocation(searchString,languageCode);
+            beforeWebMethod(methodName, searchString, languageCode);
+            result = getPort().getSysRegPubDisParcelNameByLocation(searchString, languageCode);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
-            afterWebMethod(methodName, result, searchString,languageCode);
+            afterWebMethod(methodName, result, searchString, languageCode);
         }
         return result;
     }
@@ -254,11 +256,11 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
         String languageCode = getLanguageCode();
         try {
             beforeWebMethod(methodName, searchString, languageCode);
-            result = getPort().getSysRegPubDisOwnerNameByLocation(searchString,languageCode);
+            result = getPort().getSysRegPubDisOwnerNameByLocation(searchString, languageCode);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
-            afterWebMethod(methodName, result, searchString,languageCode);
+            afterWebMethod(methodName, result, searchString, languageCode);
         }
         return result;
     }
@@ -270,16 +272,16 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
         final String methodName = AdministrativeClient.GET_SYS_REG_STATELAND_LISTING;
         String languageCode = getLanguageCode();
         try {
-            beforeWebMethod(methodName, searchString,languageCode);
-            result = getPort().getSysRegPubDisStateLandByLocation(searchString,languageCode);
+            beforeWebMethod(methodName, searchString, languageCode);
+            result = getPort().getSysRegPubDisStateLandByLocation(searchString, languageCode);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
-            afterWebMethod(methodName, result, searchString,languageCode);
+            afterWebMethod(methodName, result, searchString, languageCode);
         }
         return result;
     }
-    
+
     @Override
     public List<ValidationResult> publicDisplay(String params)
             throws WebServiceClientException {
@@ -296,7 +298,7 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
         }
         return result;
     }
-    
+
     @Override
     public List<SysRegManagementTO> getSysRegManagement(SysRegManagementParamsTO sysRegManagementParamsTO)
             throws WebServiceClientException {
@@ -304,96 +306,64 @@ public class AdministrativeClientImpl extends AbstractWSClientImpl
         final String methodName = AdministrativeClient.GET_SYS_REG_MANAGEMENT;
         String languageCode = getLanguageCode();
         try {
-            beforeWebMethod(methodName, sysRegManagementParamsTO,languageCode);
-            result = getPort().getSysRegManagement(sysRegManagementParamsTO,languageCode);
+            beforeWebMethod(methodName, sysRegManagementParamsTO, languageCode);
+            result = getPort().getSysRegManagement(sysRegManagementParamsTO, languageCode);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
-            afterWebMethod(methodName, result, sysRegManagementParamsTO,languageCode);
+            afterWebMethod(methodName, result, sysRegManagementParamsTO, languageCode);
         }
         return result;
     }
 
-     @Override
+    @Override
     public List<SysRegStatusTO> getSysRegStatus(SysRegManagementParamsTO sysRegManagementParamsTO)
             throws WebServiceClientException {
         List<SysRegStatusTO> result = null;
         final String methodName = AdministrativeClient.GET_SYS_REG_STATUS;
         String languageCode = getLanguageCode();
         try {
-            beforeWebMethod(methodName, sysRegManagementParamsTO,languageCode);
-            result = getPort().getSysRegStatus(sysRegManagementParamsTO,languageCode);
+            beforeWebMethod(methodName, sysRegManagementParamsTO, languageCode);
+            result = getPort().getSysRegStatus(sysRegManagementParamsTO, languageCode);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
-            afterWebMethod(methodName, result, sysRegManagementParamsTO,languageCode);
+            afterWebMethod(methodName, result, sysRegManagementParamsTO, languageCode);
         }
         return result;
     }
-      @Override
+
+    @Override
     public List<SysRegGenderTO> getSysRegGender(String params)
             throws WebServiceClientException {
         List<SysRegGenderTO> result = null;
         final String methodName = AdministrativeClient.GET_SYS_REG_GENDER;
         String languageCode = getLanguageCode();
         try {
-            beforeWebMethod(methodName, params,languageCode);
-            result = getPort().getSysRegGender(params,languageCode);
+            beforeWebMethod(methodName, params, languageCode);
+            result = getPort().getSysRegGender(params, languageCode);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
-            afterWebMethod(methodName, result, params,languageCode);
+            afterWebMethod(methodName, result, params, languageCode);
         }
         return result;
     }
-     
-     @Override
+
+    @Override
     public List<SysRegProgressTO> getSysRegProgress(SysRegManagementParamsTO sysRegManagementParamsTO)
             throws WebServiceClientException {
         List<SysRegProgressTO> result = null;
         final String methodName = AdministrativeClient.GET_SYS_REG_PROGRESS;
         String languageCode = getLanguageCode();
         try {
-            beforeWebMethod(methodName, sysRegManagementParamsTO,languageCode);
-            result = getPort().getSysRegProgress(sysRegManagementParamsTO,languageCode);
+            beforeWebMethod(methodName, sysRegManagementParamsTO, languageCode);
+            result = getPort().getSysRegProgress(sysRegManagementParamsTO, languageCode);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
-            afterWebMethod(methodName, result, sysRegManagementParamsTO,languageCode);
-        }
-        return result;
-    } 
-     
-     
-     @Override
-     public  NotifiablePartyForBaUnitTO getNotifiableParty(String partyId, String targetPartyId,String name, String application, String service)throws WebServiceClientException {
-        NotifiablePartyForBaUnitTO result = null;
-        final String methodName = AdministrativeClient.GET_NOTIFIABLE_PARTY;
-        try {
-            beforeWebMethod(methodName, partyId, targetPartyId, name, application, service);
-            result = getPort().getNotifiableParty(partyId, targetPartyId, name, application,service);
-        } catch (Exception e) {
-            processException(methodName, e);
-        } finally {
-            afterWebMethod(methodName, result, partyId, targetPartyId, name, application,service);
+            afterWebMethod(methodName, result, sysRegManagementParamsTO, languageCode);
         }
         return result;
     }
-     
-      @Override
-    public NotifiablePartyForBaUnitTO saveNotifiableParty(NotifiablePartyForBaUnitTO notifiableParty) throws WebServiceClientException {
-        NotifiablePartyForBaUnitTO result = null;
-        final String methodName = AdministrativeClient.SAVE_NOTIFIABLE_PARTY;
-        try {
-            beforeWebMethod(methodName, notifiableParty);
-            result = getPort().saveNotifiableParty(notifiableParty);
-        } catch (Exception e) {
-            processException(methodName, e);
-        } finally {
-            afterWebMethod(methodName, result, notifiableParty);
-        }
-        return result;
-    }
-
-
 }

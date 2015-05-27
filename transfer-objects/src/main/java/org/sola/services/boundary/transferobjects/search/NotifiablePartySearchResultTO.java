@@ -28,7 +28,7 @@
 package org.sola.services.boundary.transferobjects.search;
 
 import java.math.BigDecimal;
-import org.sola.services.boundary.transferobjects.administrative.NotifiablePartyForBaUnitTO;
+import org.sola.services.boundary.transferobjects.casemanagement.NotifiablePartyForBaUnitTO;
 import org.sola.services.boundary.transferobjects.cadastre.PartySummaryTO;
 
 public class NotifiablePartySearchResultTO extends NotifiablePartyForBaUnitTO {

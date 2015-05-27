@@ -40,10 +40,9 @@ import org.sola.webservices.transferobjects.referencedata.*;
  * Provides a mock implementation for the
  * {@linkplain org.sola.webservices.referencedata.ReferenceData} interface. Uses
  * the {@linkplain MockServiceManager} to obtain the appropriate mock response
- * for each web method.
- * <p>
- * Each method mocked by this class has a public constant defined that can be
- * used to reference a mock response object from the
+ * for each web method. <p> Each method mocked by this class has a public
+ * constant defined that can be used to reference a mock response object from
+ * the
  * {@linkplain MockServiceManager}. To set a response object for a web method,
  * use the {@linkplain MockServiceManager#setResponse(String, Object)} method
  * referencing the appropriate web method constant from
@@ -667,4 +666,20 @@ public class MockReferenceDataPort implements ReferenceData {
         }
     }
 
+    /**
+     * Response Key = ReferenceDataClient.GET_NOTIFY_RELATIONSHIP_TYPES
+     *
+     * @return default = new ArrayList()
+     */
+    @Override
+    public List<NotifyRelationshipTypeTO> getNotifyRelationshipTypes(String arg0) throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<NotifyRelationshipTypeTO> defaultResponse = new ArrayList<NotifyRelationshipTypeTO>();
+        try {
+            return getManager().getResponse(ReferenceDataClient.GET_NOTIFY_RELATIONSHIP_TYPES,
+                    List.class, defaultResponse, arg0);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
 }

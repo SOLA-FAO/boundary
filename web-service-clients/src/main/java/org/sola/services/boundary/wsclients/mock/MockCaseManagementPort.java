@@ -1,28 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations (FAO).
- * All rights reserved.
+ * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- *    1. Redistributions of source code must retain the above copyright notice,this list
- *       of conditions and the following disclaimer.
- *    2. Redistributions in binary form must reproduce the above copyright notice,this list
- *       of conditions and the following disclaimer in the documentation and/or other
- *       materials provided with the distribution.
- *    3. Neither the name of FAO nor the names of its contributors may be used to endorse or
- *       promote products derived from this software without specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT
- * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.wsclients.mock;
@@ -39,9 +41,9 @@ import org.sola.webservices.transferobjects.casemanagement.*;
  * Provides a mock implementation for the
  * {@linkplain org.sola.webservices.casemanagement.CaseManagement} interface.
  * Uses the {@linkplain MockServiceManager} to obtain the appropriate mock
- * response for each web method.
- * <p>Each method mocked by this class has a public constant defined that can be
- * used to reference a mock response object from the
+ * response for each web method. <p>Each method mocked by this class has a
+ * public constant defined that can be used to reference a mock response object
+ * from the
  * {@linkplain MockServiceManager}. To set a response object for a web method,
  * use the {@linkplain MockServiceManager#setResponse(String, Object)} method
  * referencing the appropriate web method constant from
@@ -61,9 +63,8 @@ public class MockCaseManagementPort implements CaseManagement {
     private MockServiceManager getManager() {
         return MockServiceManager.getInstance();
     }
-    
 
-        /**
+    /**
      * Response Key = CaseManagementClient.SEND_EMAIL
      *
      * @return default = new ArrayList<ValidationResult>()
@@ -76,10 +77,9 @@ public class MockCaseManagementPort implements CaseManagement {
                     Void.class, null, recipientName, recipientAddress, body, subject);
         } catch (Exception ex) {
             processExceptionAll(ex);
-            return ;
+            return;
         }
     }
-    
 
     /**
      * Processes the mock response exception and throws the appropriate service
@@ -661,8 +661,7 @@ public class MockCaseManagementPort implements CaseManagement {
             return null;
         }
     }
-     
-    
+
     @Override
     public GroupPartyTO saveGroupParty(GroupPartyTO groupParty)
             throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, SOLAValidationFault, UnhandledFault {
@@ -675,6 +674,7 @@ public class MockCaseManagementPort implements CaseManagement {
             return null;
         }
     }
+
     @Override
     public PartyMemberTO savePartyMember(PartyMemberTO partyMember, String serviceId)
             throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, SOLAValidationFault, UnhandledFault {
@@ -687,6 +687,7 @@ public class MockCaseManagementPort implements CaseManagement {
             return null;
         }
     }
+
     /**
      * Response Key = CaseManagementClient.CALCULATE_FEE
      *
@@ -757,7 +758,7 @@ public class MockCaseManagementPort implements CaseManagement {
             return null;
         }
     }
-    
+
     @Override
     public GroupPartyTO getGroupParty(String id) throws SOLAAccessFault, SOLAFault, UnhandledFault {
         GroupPartyTO defaultResponse = new GroupPartyTO();
@@ -770,8 +771,7 @@ public class MockCaseManagementPort implements CaseManagement {
             return null;
         }
     }
-    
-    
+
     @Override
     public PartyMemberTO getPartyMember(String partyId, String groupId) throws SOLAAccessFault, SOLAFault, UnhandledFault {
         PartyMemberTO defaultResponse = new PartyMemberTO();
@@ -785,7 +785,7 @@ public class MockCaseManagementPort implements CaseManagement {
             return null;
         }
     }
-    
+
     /**
      * Response Key = CaseManagementClient.SAVE_SOURCE
      *
@@ -895,7 +895,7 @@ public class MockCaseManagementPort implements CaseManagement {
         }
     }
 
-     /**
+    /**
      * Response Key = CaseManagementClient.GET_WORK_SUMMARY
      *
      * @return default = new ArrayList<WorkSummaryTO>()
@@ -929,17 +929,160 @@ public class MockCaseManagementPort implements CaseManagement {
             return null;
         }
     }
-  
-    
+
     @Override
-    public CancelNotificationTO getCancelNotification(String partyId, String targetPartyId,String name, String application, String service) throws SOLAFault, UnhandledFault {
+    public CancelNotificationTO getCancelNotification(String partyId, String targetPartyId, String name, String application, String service) throws SOLAFault, UnhandledFault {
         CancelNotificationTO defaultResponse = new CancelNotificationTO();
         try {
             return getManager().getResponse(CaseManagementClient.GET_CANCEL_NOTIFICATION,
-                    CancelNotificationTO.class, defaultResponse,partyId, targetPartyId, name, application, service);
+                    CancelNotificationTO.class, defaultResponse, partyId, targetPartyId, name, application, service);
         } catch (Exception ex) {
             processExceptionBasic(ex);
             return null;
         }
     }
+
+    /**
+     * Response Key = CaseManagementClient.GET_NOTIFY_PARTIES
+     *
+     * @return default = new ArrayList<NotifyTO>()
+     */
+    @Override
+    public List<NotifyTO> getNotifyParties(String serviceId)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault {
+        List<NotifyTO> defaultResponse = new ArrayList<NotifyTO>();
+        try {
+            return getManager().getResponse(CaseManagementClient.GET_NOTIFY_PARTIES,
+                    List.class, defaultResponse, serviceId);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+
+    /**
+     * Response Key = CaseManagementClient.SAVE_NOTIFY_PARTIES
+     *
+     * @return default = new ArrayList<NotifyTO>()
+     */
+    @Override
+    public List<NotifyTO> saveNotifyParties(List<NotifyTO> notifications)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault, OptimisticLockingFault, SOLAValidationFault {
+        List<NotifyTO> defaultResponse = new ArrayList<NotifyTO>();
+        try {
+            return getManager().getResponse(CaseManagementClient.SAVE_NOTIFY_PARTIES,
+                    List.class, defaultResponse, notifications);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+    
+    
+     /**
+     * Response Key = CaseManagementClient.GET_NOTIFY_PROPERTY
+     *
+     * @return default = new NotifyPropertyTO()
+     */
+    @Override
+    public NotifyPropertyTO getNotifyProperty(String notifyId, String baUnitId)
+            throws SOLAFault, UnhandledFault {
+        NotifyPropertyTO defaultResponse = new NotifyPropertyTO();
+        try {
+            return getManager().getResponse(CaseManagementClient.GET_NOTIFY_PROPERTY,
+                    NotifyPropertyTO.class, defaultResponse, notifyId, baUnitId);
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
+            return null;
+        }
+    }
+    
+    /**
+     * Response Key = CaseManagementClient.SAVE_NOTIFY_PROPERTY
+     *
+     * @return default = new NotifyPropertyTO()
+     */
+    @Override
+    public NotifyPropertyTO saveNotifyProperty(NotifyPropertyTO notifyProperty,String notifyId, String baUnitId)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault, OptimisticLockingFault, SOLAValidationFault {
+        NotifyPropertyTO defaultResponse = new NotifyPropertyTO();
+        try {
+            return getManager().getResponse(CaseManagementClient.SAVE_NOTIFY_PROPERTY,
+                    NotifyPropertyTO.class, defaultResponse, notifyProperty, notifyId, baUnitId);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+     /**
+     * Response Key = CaseManagementClient.GET_NOTIFY_PARTY
+     *
+     * @return default = new NotifyTO()
+     */
+    @Override
+    public NotifyTO getNotifyParty(String serviceId, String partyId, String relationshipType)
+            throws SOLAFault, UnhandledFault {
+        NotifyTO defaultResponse = new NotifyTO();
+        try {
+            return getManager().getResponse(CaseManagementClient.GET_NOTIFY_PARTY,
+                    NotifyTO.class, defaultResponse, serviceId, partyId, relationshipType);
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
+            return null;
+        }
+    }
+
+    /**
+     * Response Key = CaseManagementClient.SAVE_NOTIFY_PARTY
+     *
+     * @return default = new NotifyTO()
+     */
+    @Override
+    public NotifyTO saveNotifyParty(NotifyTO notifyParty)
+            throws SOLAAccessFault, SOLAFault, UnhandledFault, OptimisticLockingFault, SOLAValidationFault {
+        NotifyTO defaultResponse = new NotifyTO();
+        try {
+            return getManager().getResponse(CaseManagementClient.SAVE_NOTIFY_PARTY,
+                    NotifyTO.class, defaultResponse, notifyParty);
+        } catch (Exception ex) {
+            processExceptionAccess(ex);
+            return null;
+        }
+    }
+    
+        /**
+     * Response Key = AdministrativeClient.GET_BA_UNIT_BY_CODE
+     *
+     * @return default = new BaUnitTO()
+     */
+    @Override
+    public NotifiablePartyForBaUnitTO getNotifiableParty(String partyId, String targetPartyId,String name, String application, String service) throws SOLAFault, UnhandledFault {
+        NotifiablePartyForBaUnitTO defaultResponse = new NotifiablePartyForBaUnitTO();
+        try {
+            return getManager().getResponse(CaseManagementClient.GET_NOTIFIABLE_PARTY,
+                    NotifiablePartyForBaUnitTO.class, defaultResponse,partyId, targetPartyId, name, application, service);
+        } catch (Exception ex) {
+            processExceptionBasic(ex);
+            return null;
+        }
+    }
+    
+       /**
+     * Response Key = AdministrativeClient.SAVE_NotifiablePartyForBaUnit
+     *
+     * @return default = NotifiablePartyForBaUnitTO param
+     */
+    @Override
+    public NotifiablePartyForBaUnitTO saveNotifiableParty(NotifiablePartyForBaUnitTO notifiableParty)
+            throws OptimisticLockingFault, SOLAAccessFault, SOLAFault, UnhandledFault {
+        NotifiablePartyForBaUnitTO defaultResponse = new NotifiablePartyForBaUnitTO ();
+        try {
+            return getManager().getResponse(CaseManagementClient.SAVE_NOTIFIABLE_PARTY,
+                    NotifiablePartyForBaUnitTO.class, defaultResponse, notifiableParty);
+        } catch (Exception ex) {
+            processExceptionUpdate(ex);
+            return null;
+        }
+    }
+
 }

@@ -1,28 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations (FAO).
- * All rights reserved.
+ * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- *    1. Redistributions of source code must retain the above copyright notice,this list
- *       of conditions and the following disclaimer.
- *    2. Redistributions in binary form must reproduce the above copyright notice,this list
- *       of conditions and the following disclaimer in the documentation and/or other
- *       materials provided with the distribution.
- *    3. Neither the name of FAO nor the names of its contributors may be used to endorse or
- *       promote products derived from this software without specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT
- * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.wsclients;
@@ -180,9 +182,8 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         }
         return result;
     }
-    
-    
-     @Override
+
+    @Override
     public PartyMemberTO getPartyMember(String partyId, String groupId) throws WebServiceClientException {
         PartyMemberTO result = null;
         final String methodName = CaseManagementClient.GET_PARTY_MEMBER;
@@ -197,7 +198,6 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         return result;
     }
 
-    
     @Override
     public List<PartySummaryTO> getAgents() throws WebServiceClientException {
         List<PartySummaryTO> result = null;
@@ -243,7 +243,7 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         }
         return result;
     }
-    
+
     @Override
     public GroupPartyTO saveGroupParty(GroupPartyTO groupParty)
             throws WebServiceClientException {
@@ -259,7 +259,7 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         }
         return result;
     }
-    
+
     @Override
     public PartyMemberTO savePartyMember(PartyMemberTO partyMember, String serviceId)
             throws WebServiceClientException {
@@ -267,7 +267,7 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         final String methodName = CaseManagementClient.SAVE_PARTY_MEMBER;
         try {
             beforeWebMethod(methodName, partyMember);
-            result = getPort().savePartyMember(partyMember,serviceId);
+            result = getPort().savePartyMember(partyMember, serviceId);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
@@ -275,8 +275,7 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         }
         return result;
     }
-    
-    
+
     @Override
     public SourceTO attachSourceToTransaction(String serviceId, String sourceId)
             throws WebServiceClientException {
@@ -781,37 +780,156 @@ public class CaseManagementClientImpl extends AbstractWSClientImpl implements Ca
         }
         return result;
     }
-    
+
     @Override
     public void sendEmail(String recipientName, String recipientAddress, String body, String subject)
             throws WebServiceClientException {
 //        SendEmailTO result = null;
         final String methodName = CaseManagementClient.SEND_EMAIL;
         try {
-            beforeWebMethod(methodName, recipientName, recipientAddress,  body, subject);
+            beforeWebMethod(methodName, recipientName, recipientAddress, body, subject);
 //            result = getPort().sendEmail(recipientName, recipientAddress,  body, subject);
-            getPort().sendEmail(recipientName, recipientAddress,  body, subject);
+            getPort().sendEmail(recipientName, recipientAddress, body, subject);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
-            afterWebMethod(methodName, recipientName, recipientAddress,  body, subject);
+            afterWebMethod(methodName, recipientName, recipientAddress, body, subject);
         }
 //        return result;
     }
-    
-     @Override
-     public  CancelNotificationTO getCancelNotification(String partyId, String targetPartyId,String name, String application, String service)throws WebServiceClientException {
+
+    @Override
+    public CancelNotificationTO getCancelNotification(String partyId, String targetPartyId, String name, String application, String service) throws WebServiceClientException {
         CancelNotificationTO result = null;
         final String methodName = CaseManagementClient.GET_CANCEL_NOTIFICATION;
         try {
             beforeWebMethod(methodName, partyId, targetPartyId, name, application, service);
-            result = getPort().getCancelNotification(partyId, targetPartyId, name, application,service);
+            result = getPort().getCancelNotification(partyId, targetPartyId, name, application, service);
         } catch (Exception e) {
             processException(methodName, e);
         } finally {
-            afterWebMethod(methodName, result, partyId, targetPartyId, name, application,service);
+            afterWebMethod(methodName, result, partyId, targetPartyId, name, application, service);
         }
         return result;
     }
-    
+
+    @Override
+    public List<NotifyTO> getNotifyParties(String serviceId) throws WebServiceClientException {
+        List<NotifyTO> result = null;
+        final String methodName = CaseManagementClient.GET_NOTIFY_PARTIES;
+        try {
+            beforeWebMethod(methodName, serviceId);
+            result = getPort().getNotifyParties(serviceId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, serviceId);
+        }
+        return result;
+    }
+
+    @Override
+    public List<NotifyTO> saveNotifyParties(List<NotifyTO> notifications) throws WebServiceClientException {
+        List<NotifyTO> result = null;
+        final String methodName = CaseManagementClient.SAVE_NOTIFY_PARTIES;
+        try {
+            beforeWebMethod(methodName, notifications);
+            result = getPort().saveNotifyParties(notifications);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, notifications);
+        }
+        return result;
+    }
+
+    @Override
+    public NotifyPropertyTO getNotifyProperty(String notifyId, String baUnitId) throws WebServiceClientException {
+        NotifyPropertyTO result = null;
+        final String methodName = CaseManagementClient.GET_NOTIFY_PROPERTY;
+        try {
+            beforeWebMethod(methodName, notifyId, baUnitId);
+            result = getPort().getNotifyProperty(notifyId, baUnitId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, notifyId, baUnitId);
+        }
+        return result;
+    }
+
+    @Override
+    public NotifyPropertyTO saveNotifyProperty(NotifyPropertyTO notifyProperty, String notifyId, String baUnitId) throws WebServiceClientException {
+        NotifyPropertyTO result = null;
+        final String methodName = CaseManagementClient.SAVE_NOTIFY_PROPERTY;
+        try {
+            beforeWebMethod(methodName, notifyProperty, notifyId, baUnitId);
+            result = getPort().saveNotifyProperty(notifyProperty, notifyId, baUnitId);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, notifyProperty, notifyId, baUnitId);
+        }
+        return result;
+    }
+
+    @Override
+    public NotifyTO getNotifyParty(String serviceId, String partyId, String relationshipType) throws WebServiceClientException {
+        NotifyTO result = null;
+        final String methodName = CaseManagementClient.GET_NOTIFY_PARTY;
+        try {
+            beforeWebMethod(methodName, serviceId, partyId, relationshipType);
+            result = getPort().getNotifyParty(serviceId, partyId, relationshipType);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, serviceId, partyId, relationshipType);
+        }
+        return result;
+    }
+
+    @Override
+    public NotifyTO saveNotifyParty(NotifyTO notifyParty) throws WebServiceClientException {
+        NotifyTO result = null;
+        final String methodName = CaseManagementClient.SAVE_NOTIFY_PARTY;
+        try {
+            beforeWebMethod(methodName, notifyParty);
+            result = getPort().saveNotifyParty(notifyParty);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, notifyParty);
+        }
+        return result;
+    }
+
+    @Override
+    public NotifiablePartyForBaUnitTO getNotifiableParty(String partyId, String targetPartyId, String name, String application, String service) throws WebServiceClientException {
+        NotifiablePartyForBaUnitTO result = null;
+        final String methodName = CaseManagementClient.GET_NOTIFIABLE_PARTY;
+        try {
+            beforeWebMethod(methodName, partyId, targetPartyId, name, application, service);
+            result = getPort().getNotifiableParty(partyId, targetPartyId, name, application, service);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, partyId, targetPartyId, name, application, service);
+        }
+        return result;
+    }
+
+    @Override
+    public NotifiablePartyForBaUnitTO saveNotifiableParty(NotifiablePartyForBaUnitTO notifiableParty) throws WebServiceClientException {
+        NotifiablePartyForBaUnitTO result = null;
+        final String methodName = CaseManagementClient.SAVE_NOTIFIABLE_PARTY;
+        try {
+            beforeWebMethod(methodName, notifiableParty);
+            result = getPort().saveNotifiableParty(notifiableParty);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, notifiableParty);
+        }
+        return result;
+    }
 }

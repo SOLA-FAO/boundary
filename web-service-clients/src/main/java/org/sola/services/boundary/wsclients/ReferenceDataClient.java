@@ -176,7 +176,12 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * getRequestDisplayGroups method
      */
     public static final String GET_REQUEST_DISPLAY_GROUPS = SERVICE_NAME + "getRequestDisplayGroups";
-
+      /**
+     * ReferenceData.getNotifyRelationshipTypes - Identifier for the
+     * getNotifyRelationshipTypes method
+     */
+    public static final String GET_NOTIFY_RELATIONSHIP_TYPES = SERVICE_NAME + "getNotifyRelationshipTypes";
+ 
     /**
      * Retrieves all source.source_type code values using the default locale of the client to
      * localize the display values.
@@ -657,4 +662,22 @@ public interface ReferenceDataClient extends AbstractWSClient {
      * @throws WebServiceClientException
      */
     List<RequestDisplayGroupTO> getRequestDisplayGroups(String lang) throws WebServiceClientException;
+
+     /**
+     * Retrieves all application.notify_relationship_type code values.
+     *
+     * @throws WebServiceClientException
+     */
+    List<NotifyRelationshipTypeTO> getNotifyRelationshipTypes() throws WebServiceClientException;
+
+    /**
+     * Retrieves all application.notify_relationship_type code values.
+     *
+     * @param languageCode The language code to use for localization of display
+     * values.
+     * @throws WebServiceClientException
+     */
+    List<NotifyRelationshipTypeTO> getNotifyRelationshipTypes(String lang) throws WebServiceClientException;
+
+
 }

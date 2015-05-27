@@ -695,4 +695,24 @@ public class ReferenceDataClientImpl extends AbstractWSClientImpl implements Ref
         }
         return result;
     }
+    
+      @Override
+    public List<NotifyRelationshipTypeTO> getNotifyRelationshipTypes() throws WebServiceClientException {
+        return getNotifyRelationshipTypes(getLanguageCode());
+    }
+
+    @Override
+    public List<NotifyRelationshipTypeTO> getNotifyRelationshipTypes(String lang) throws WebServiceClientException {
+        List<NotifyRelationshipTypeTO> result = null;
+        final String methodName = ReferenceDataClient.GET_NOTIFY_RELATIONSHIP_TYPES;
+        try {
+            beforeWebMethod(methodName, lang);
+            result = getPort().getNotifyRelationshipTypes(lang);
+        } catch (Exception e) {
+            processException(methodName, e);
+        } finally {
+            afterWebMethod(methodName, result, lang);
+        }
+        return result;
+    }
 }

@@ -1,28 +1,30 @@
 /**
  * ******************************************************************************************
- * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations (FAO).
- * All rights reserved.
+ * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations
+ * (FAO). All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- *    1. Redistributions of source code must retain the above copyright notice,this list
- *       of conditions and the following disclaimer.
- *    2. Redistributions in binary form must reproduce the above copyright notice,this list
- *       of conditions and the following disclaimer in the documentation and/or other
- *       materials provided with the distribution.
- *    3. Neither the name of FAO nor the names of its contributors may be used to endorse or
- *       promote products derived from this software without specific prior written permission.
+ * 1. Redistributions of source code must retain the above copyright notice,this
+ * list of conditions and the following disclaimer. 2. Redistributions in binary
+ * form must reproduce the above copyright notice,this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. Neither the name of FAO nor the names of its
+ * contributors may be used to endorse or promote products derived from this
+ * software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
- * SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT
- * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,STRICT LIABILITY,OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT,STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
 package org.sola.services.boundary.ws;
@@ -50,7 +52,7 @@ import org.sola.services.ejb.application.repository.entities.Service;
 import org.sola.services.ejb.party.businesslogic.PartyEJBLocal;
 import org.sola.services.common.ServiceConstants;
 import org.sola.services.common.faults.SOLAAccessFault;
-import org.sola.services.ejb.application.repository.entities.WorkSummary;
+import org.sola.services.ejb.application.repository.entities.*;
 import org.sola.services.ejb.party.repository.entities.GroupParty;
 import org.sola.services.ejb.party.repository.entities.Party;
 import org.sola.services.ejb.party.repository.entities.PartyMember;
@@ -60,11 +62,12 @@ import org.sola.services.ejb.source.repository.entities.Source;
 import org.sola.services.ejb.system.businesslogic.SystemEJBLocal;
 
 /**
- * Web Service Boundary class to expose Case Management functionality available on  
- * {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB}, 
- * {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB}, 
+ * Web Service Boundary class to expose Case Management functionality available
+ * on
+ * {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB},
+ * {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB},
  * {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB} and
- * {@linkplain org.sola.services.ejb.address.businesslogic.AddressEJB}. 
+ * {@linkplain org.sola.services.ejb.address.businesslogic.AddressEJB}.
  */
 @WebService(serviceName = "casemanagement-service", targetNamespace = ServiceConstants.CASE_MAN_WS_NAMESPACE)
 public class CaseManagement extends AbstractWebService {
@@ -234,9 +237,7 @@ public class CaseManagement extends AbstractWebService {
 
         return (PartyTO) result[0];
     }
-    
-    
-    
+
     /**
      * See {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB#saveGroupParty(org.sola.services.ejb.party.repository.entities.GroupParty)
      * PartyEJB#saveGroupParty}
@@ -273,7 +274,7 @@ public class CaseManagement extends AbstractWebService {
         return (GroupPartyTO) result[0];
     }
 
- /**
+    /**
      * See {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB#savePartyMember(org.sola.services.ejb.party.repository.entities.PartyMember)
      * PartyEJB#savePartyMember}
      *
@@ -285,12 +286,12 @@ public class CaseManagement extends AbstractWebService {
      */
     @WebMethod(operationName = "SavePartyMember")
     public PartyMemberTO SavePartyMember(@WebParam(name = "partyMember") PartyMemberTO partyMember,
-                                         @WebParam(name = "serviceId") String serviceId)
+            @WebParam(name = "serviceId") String serviceId)
             throws SOLAFault, UnhandledFault, SOLAAccessFault,
             OptimisticLockingFault, SOLAValidationFault {
 
         final Object[] params = {partyMember};
-        final String serviceIdtmp= serviceId;
+        final String serviceIdtmp = serviceId;
         final Object[] result = {null};
 
         runUpdateValidation(wsContext, new Runnable() {
@@ -302,7 +303,7 @@ public class CaseManagement extends AbstractWebService {
 
                     PartyMember newPartyMember = partyEJB.savePartyMember(
                             GenericTranslator.fromTO(partyMember, PartyMember.class,
-                            partyEJB.getPartyMember(partyMember.getPartyId(),partyMember.getGroupId())),serviceIdtmp);
+                            partyEJB.getPartyMember(partyMember.getPartyId(), partyMember.getGroupId())), serviceIdtmp);
                     result[0] = GenericTranslator.toTO(newPartyMember, PartyMemberTO.class);
                 }
             }
@@ -310,7 +311,6 @@ public class CaseManagement extends AbstractWebService {
 
         return (PartyMemberTO) result[0];
     }
-
 
     /**
      * See {@linkplain org.sola.services.ejb.address.businesslogic.AddressEJB#getAddress(java.lang.String)
@@ -390,9 +390,8 @@ public class CaseManagement extends AbstractWebService {
 
         return (PartyTO) result[0];
     }
-    
-    
-      /**
+
+    /**
      * See {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB#getGroupParty(java.lang.String)
      * PartyEJB.getGroupParty}
      *
@@ -416,8 +415,8 @@ public class CaseManagement extends AbstractWebService {
 
         return (GroupPartyTO) result[0];
     }
-    
-      /**
+
+    /**
      * See {@linkplain org.sola.services.ejb.party.businesslogic.PartyEJB#getPartyMember(java.lang.String)
      * PartyEJB.getGroupParty}
      *
@@ -429,7 +428,7 @@ public class CaseManagement extends AbstractWebService {
     public PartyMemberTO GetPartyMember(
             @WebParam(name = "partyId") final String partyId,
             @WebParam(name = "groupId") final String groupId)
-        throws SOLAFault, UnhandledFault, SOLAAccessFault {   
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
         final String partyidTmp = partyId;
         final String groupidTmp = groupId;
         final Object[] result = {null};
@@ -438,7 +437,7 @@ public class CaseManagement extends AbstractWebService {
 
             @Override
             public void run() {
-                result[0] = GenericTranslator.toTO(partyEJB.getPartyMember(partyidTmp,groupidTmp), PartyMemberTO.class);
+                result[0] = GenericTranslator.toTO(partyEJB.getPartyMember(partyidTmp, groupidTmp), PartyMemberTO.class);
             }
         });
 
@@ -573,7 +572,7 @@ public class CaseManagement extends AbstractWebService {
             @WebParam(name = "powerOfAttorney") final PowerOfAttorneyTO powerOfAttorney,
             @WebParam(name = "languageCode") final String languageCode)
             throws SOLAValidationFault, OptimisticLockingFault, SOLAFault, UnhandledFault, SOLAAccessFault {
-        
+
         final Object[] result = {null};
 
         runUpdateValidation(wsContext, new Runnable() {
@@ -582,14 +581,14 @@ public class CaseManagement extends AbstractWebService {
             public void run() {
                 result[0] = GenericTranslator.toTO(
                         sourceEJB.attachPowerOfAttorneyToTransaction(
-                        serviceId, GenericTranslator.fromTO(powerOfAttorney, 
+                        serviceId, GenericTranslator.fromTO(powerOfAttorney,
                         PowerOfAttorney.class, null), languageCode), PowerOfAttorneyTO.class);
             }
         });
 
         return (PowerOfAttorneyTO) result[0];
     }
-    
+
     /**
      * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#dettachSourceFromTransaction(java.lang.String)
      * SourceEJB.dettachSourceFromTransaction}
@@ -676,7 +675,7 @@ public class CaseManagement extends AbstractWebService {
 
         return (List<PowerOfAttorneyTO>) result[0];
     }
-    
+
     /**
      * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#getSources(java.util.List)
      * SourceEJB.getSources}
@@ -732,7 +731,7 @@ public class CaseManagement extends AbstractWebService {
 
         return (SourceTO) result[0];
     }
-    
+
     /**
      * See {@linkplain org.sola.services.ejb.source.businesslogic.SourceEJB#getSourceById(java.lang.String)
      * SourceEJB.getSourceById}
@@ -760,7 +759,9 @@ public class CaseManagement extends AbstractWebService {
         return (PowerOfAttorneyTO) result[0];
     }
 
-    /** Returns {@link ApplicationTO} by the given transaction ID. */
+    /**
+     * Returns {@link ApplicationTO} by the given transaction ID.
+     */
     @WebMethod(operationName = "getApplicationByTransactionId")
     public ApplicationTO getApplicationByTransactionId(
             @WebParam(name = "transactionId") final String transactionId) throws SOLAFault, UnhandledFault,
@@ -779,7 +780,7 @@ public class CaseManagement extends AbstractWebService {
 
         return (ApplicationTO) result[0];
     }
-            
+
     /**
      * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#serviceActionComplete(java.lang.String, java.lang.String, int)
      * ApplicationEJB.serviceActionComplete}
@@ -1370,8 +1371,8 @@ public class CaseManagement extends AbstractWebService {
 
         return (ServiceTO) result[0];
     }
-    
-     /**
+
+    /**
      * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getSysRegCertificatesByLocation(java.lang.String)
      * CadastreEJB.getSysRegPubDisParcelNameByLocation}
      *
@@ -1399,8 +1400,8 @@ public class CaseManagement extends AbstractWebService {
 
         return (List<SysRegCertificatesTO>) result[0];
     }
-    
-      /**
+
+    /**
      * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getSysRegCertificatesByApplication(java.lang.String)
      * CadastreEJB.getSysRegCertificatesByApplication}
      *
@@ -1430,8 +1431,8 @@ public class CaseManagement extends AbstractWebService {
 
         return (List<SysRegCertificatesTO>) result[0];
     }
-    
-   /**
+
+    /**
      * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getWorkSummary(java.util.Date, java.util.Date)
      * ApplicationEJB.getWorkSummary}
      *
@@ -1460,8 +1461,8 @@ public class CaseManagement extends AbstractWebService {
             });
         }
         return (List<WorkSummaryTO>) result[0];
-    }  
-    
+    }
+
     /**
      * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#applicationActionTransfer(java.lang.String, java.lang.String, int)
      * ApplicationEJB.applicationActionTransfer}
@@ -1496,10 +1497,8 @@ public class CaseManagement extends AbstractWebService {
 
         return (List<ValidationResult>) result[0];
     }
-    
-   
 
-/**
+    /**
      * See {@linkplain org.sola.services.ejb.system.businesslogic.SystemEJB#sendEmail(String recipientName, String recipientAddress, String body, String subject)
      * SystemEJB.sendEmail}
      *
@@ -1514,10 +1513,9 @@ public class CaseManagement extends AbstractWebService {
             @WebParam(name = "recipientName") String recipientName,
             @WebParam(name = "recipientAddress") String recipientAddress,
             @WebParam(name = "body") String body,
-            @WebParam(name = "subject") String subject
-//            ,
-//            @WebParam(name = "languageCode") String languageCode,
-//            @WebParam(name = "rowVersion") int rowVersion
+            @WebParam(name = "subject") String subject //            ,
+            //            @WebParam(name = "languageCode") String languageCode,
+            //            @WebParam(name = "rowVersion") int rowVersion
             )
             throws SOLAFault, UnhandledFault, SOLAAccessFault,
             OptimisticLockingFault, SOLAValidationFault {
@@ -1535,7 +1533,7 @@ public class CaseManagement extends AbstractWebService {
             @Override
             public void run() {
 //                result[0] = 
-                        systemEJB.sendEmail(
+                systemEJB.sendEmail(
                         recipientNameTmp, recipientAddressTmp, bodyTmp, subjectTmp);
             }
         });
@@ -1543,8 +1541,7 @@ public class CaseManagement extends AbstractWebService {
 //        return (List<ValidationResult>) result[0];
     }
 
-
-          /**
+    /**
      * See {@linkplain ApplicationEJB#getCancelNotification(String partyId, String targetPartyId,String name)
      * ApplicationEJB.getCancelNotification}
      *
@@ -1574,13 +1571,285 @@ public class CaseManagement extends AbstractWebService {
                 result[0] = GenericTranslator.toTO(
                         applicationEJB.getCancelNotification(partyIdTmp,
                         targetPartyIdTmp,
-                        nameTmp, applicationTmp,serviceTmp), CancelNotificationTO.class);
+                        nameTmp, applicationTmp, serviceTmp), CancelNotificationTO.class);
             }
         });
 
         return (CancelNotificationTO) result[0];
     }
 
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getNotifyParties(java.lang.String)
+     * ApplicationEJB.getNotifyParties}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetNotifyParties")
+    public List<NotifyTO> GetNotifyParties(
+            final @WebParam(name = "serviceId") String serviceId)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
 
+        final Object[] result = {null};
 
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTOList(
+                        applicationEJB.getNotifyParties(serviceId, true), NotifyTO.class);
+            }
+        });
+        return (List<NotifyTO>) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#saveNotifyParties(java.util.List)
+     * ApplicationEJB.saveNotifyParties}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
+    @WebMethod(operationName = "SaveNotifyParties")
+    public List<NotifyTO> SaveNotifyParties(
+            final @WebParam(name = "notifications") List<NotifyTO> notifications)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault,
+            OptimisticLockingFault, SOLAValidationFault {
+        final Object[] result = {null};
+
+        runUpdateValidation(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                if (notifications != null && notifications.size() > 0) {
+                    String serviceId = notifications.get(0).getServiceId();
+                    List<Notify> params = GenericTranslator.fromTOList(notifications, Notify.class,
+                            applicationEJB.getNotifyParties(serviceId, false));
+                    List<Notify> tmpNotifications = applicationEJB.saveNotifyParties(params);
+                    result[0] = GenericTranslator.toTOList(tmpNotifications, NotifyTO.class);
+                }
+            }
+        });
+
+        return (List<NotifyTO>) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.party.businesslogic.ApplicationEJB#saveNotifyProperty(org.sola.services.ejb.application.repository.entities.NotifyProperty)
+     * ApplicationEJB#saveNotifyProperty}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
+    @WebMethod(operationName = "SaveNotifyProperty")
+    public NotifyPropertyTO SaveNotifyProperty(@WebParam(name = "notifyProperty") NotifyPropertyTO notifyProperty,
+            @WebParam(name = "notifyId") String notifyId,
+            @WebParam(name = "baUnitId") String baUnitId)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault,
+            OptimisticLockingFault, SOLAValidationFault {
+
+        final Object[] params = {notifyProperty};
+        final String notifyIdtmp = notifyId;
+        final String baUnitIdtmp = baUnitId;
+        final Object[] result = {null};
+
+        runUpdateValidation(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                NotifyPropertyTO notifyProperty = (NotifyPropertyTO) params[0];
+                if (notifyProperty != null) {
+                    NotifyProperty params = GenericTranslator.fromTO(notifyProperty, NotifyProperty.class,
+                            applicationEJB.getNotifyProperty(notifyIdtmp, baUnitIdtmp));
+                    NotifyProperty tmpNotifyProperty = applicationEJB.saveNotifyProperty(params);
+                    result[0] = GenericTranslator.toTO(tmpNotifyProperty, NotifyPropertyTO.class);
+                }
+            }
+        });
+
+        return (NotifyPropertyTO) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getNotifyProperty(java.lang.String)
+     * ApplicationEJB.getNotifyProperty}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetNotifyProperty")
+    public NotifyPropertyTO GetNotifyProperty(
+            @WebParam(name = "notifyId") String notifyId,
+            @WebParam(name = "baUnitId") String baUnitId)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+        final String notifyIdtmp = notifyId;
+        final String baUnitIdtmp = baUnitId;
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTO(
+                        applicationEJB.getNotifyProperty(notifyIdtmp, baUnitIdtmp), NotifyPropertyTO.class);
+            }
+        });
+        return (NotifyPropertyTO) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.party.businesslogic.ApplicationEJB#saveNotifyProperty(org.sola.services.ejb.application.repository.entities.NotifyProperty)
+     * ApplicationEJB#saveNotifyProperty}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     * @throws SOLAValidationFault
+     */
+    @WebMethod(operationName = "SaveNotifyParty")
+    public NotifyTO SaveNotifyParty(@WebParam(name = "notifyParty") NotifyTO notifyParty)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault,
+            OptimisticLockingFault, SOLAValidationFault {
+
+        final Object[] params = {notifyParty};
+        final String serviceIdtmp = notifyParty.getServiceId();
+        final String partyIdtmp = notifyParty.getPartyId();
+        final String relationshipTypetmp = notifyParty.getRelationshipTypeCode();
+        final Object[] result = {null};
+
+        runUpdateValidation(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                NotifyTO notify = (NotifyTO) params[0];
+                if (notify != null) {
+                    Notify params = GenericTranslator.fromTO(notify, Notify.class,
+                            applicationEJB.getNotifyParty(serviceIdtmp, partyIdtmp, relationshipTypetmp));
+                    Notify tmpNotifyParty = applicationEJB.saveNotifyParty(params);
+                    result[0] = GenericTranslator.toTO(tmpNotifyParty, NotifyTO.class);
+                }
+            }
+        });
+
+        return (NotifyTO) result[0];
+    }
+
+    /**
+     * See {@linkplain org.sola.services.ejb.application.businesslogic.ApplicationEJB#getNotifyProperty(java.lang.String)
+     * ApplicationEJB.getNotifyProperty}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     */
+    @WebMethod(operationName = "GetNotifyParty")
+    public NotifyTO GetNotifyParty(
+            @WebParam(name = "serviceId") String serviceId,
+            @WebParam(name = "partyId") String partyId,
+            @WebParam(name = "relationshipType") String relationshipType)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault {
+
+        final Object[] result = {null};
+        final String serviceIdtmp = serviceId;
+        final String partyIdtmp = partyId;
+        final String relationshipTypetmp = relationshipType;
+
+        runGeneralQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTO(
+                        applicationEJB.getNotifyParty(serviceIdtmp, partyIdtmp, relationshipTypetmp), NotifyTO.class);
+            }
+        });
+        return (NotifyTO) result[0];
+    }
+
+    /**
+     * See {@linkplain AdministrativeEJB#getNotifiableParty(String partyId, String targetPartyId,String name)
+     * AdministrativeEJB.getBaUnitByCode}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     */
+    @WebMethod(operationName = "GetNotifiableParty")
+    public NotifiablePartyForBaUnitTO GetNotifiableParty(
+            @WebParam(name = "partyId") String partyId,
+            @WebParam(name = "targetPartyId") String targetPartyId,
+            @WebParam(name = "name") String name,
+            @WebParam(name = "application") String application,
+            @WebParam(name = "service") String service)
+            throws SOLAFault, UnhandledFault {
+
+        final String partyIdTmp = partyId;
+        final String targetPartyIdTmp = targetPartyId;
+        final String nameTmp = name;
+        final String applicationTmp = application;
+        final String serviceTmp = service;
+        final Object[] result = {null};
+
+        runOpenQuery(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                result[0] = GenericTranslator.toTO(
+                        applicationEJB.getNotifiableParty(partyIdTmp,
+                        targetPartyIdTmp,
+                        nameTmp, applicationTmp, serviceTmp), NotifiablePartyForBaUnitTO.class);
+            }
+        });
+
+        return (NotifiablePartyForBaUnitTO) result[0];
+    }
+
+    /**
+     * See {@linkplain AdministrativeEJB#saveNotifiableParty(java.lang.String,
+     * org.sola.services.ejb.administrative.repository.entities.BaUnit)
+     * AdministrativeEJB.saveBaUnit}
+     *
+     * @throws SOLAFault
+     * @throws UnhandledFault
+     * @throws SOLAAccessFault
+     * @throws OptimisticLockingFault
+     */
+    @WebMethod(operationName = "SaveNotifiableParty")
+    public NotifiablePartyForBaUnitTO SaveNotifiablePartyForBaUnit(
+            //            @WebParam(name = "partyId") String partyId,
+            //            @WebParam(name = "targetPartyId") String targetPartyId,
+            //            @WebParam(name = "baunitName") String baunitName,
+            @WebParam(name = "notifiableParty") NotifiablePartyForBaUnitTO notifiableParty)
+            throws SOLAFault, UnhandledFault, SOLAAccessFault, OptimisticLockingFault {
+
+//        final String partyIdTmp = partyId;
+//        final String targetPartyIdTmp = targetPartyId;
+//        final String baunitNameTmp = baunitName;
+//        final NotifiablePartyForBaUnitTO notifiablePartyTmp = notifiableParty;
+        final Object[] result = {null};
+        final Object[] params = {notifiableParty};
+
+        runUpdate(wsContext, new Runnable() {
+
+            @Override
+            public void run() {
+                NotifiablePartyForBaUnitTO notifiableParty = (NotifiablePartyForBaUnitTO) params[0];
+                if (notifiableParty != null) {
+                    NotifiablePartyForBaUnit newNotifiableParty = applicationEJB.saveNotifiableParty(
+                            GenericTranslator.fromTO(notifiableParty, NotifiablePartyForBaUnit.class,
+                            applicationEJB.getNotifiableParty(notifiableParty.getPartyId(), notifiableParty.getTargetPartyId(), notifiableParty.getBaunitName(), notifiableParty.getApplicationId(), notifiableParty.getServiceId())));
+                    result[0] = GenericTranslator.toTO(newNotifiableParty, NotifiablePartyForBaUnitTO.class);
+                }
+            }
+        });
+        return (NotifiablePartyForBaUnitTO) result[0];
+    }
 }
