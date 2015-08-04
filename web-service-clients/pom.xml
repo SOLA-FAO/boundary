@@ -70,7 +70,7 @@
                 by Netbeans and the project will display without the Web Service Reference folder.
                 To access the Web Service Reference folder in Netbeans, see the commented out 
                 section below. -->
-                <groupId>org.jvnet.jax-ws-commons</groupId>
+                 <groupId>org.jvnet.jax-ws-commons</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
                 <version>2.3</version>
                 <configuration>   
@@ -80,7 +80,10 @@
                     <extension>true</extension>       
                     <catalog>${basedir}/src/jax-ws-catalog.xml</catalog>
                     <verbose>true</verbose>
-                    <xdebug>true</xdebug>    
+                    <xdebug>true</xdebug>  
+                    <vmArgs>
+                        <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
+                    </vmArgs>  
                 </configuration>
                 <executions>
                     <execution>
